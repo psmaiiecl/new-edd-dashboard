@@ -1,0 +1,19 @@
+.dashboard-header {
+  background-color: rgb(41, 12, 41);
+  display: flex;
+  padding: 15px 5%;
+  width: 100%;
+  align-items: center;
+  gap: 30px;
+}
+
+.dashboard-header span {
+  color: white;
+  font-size: 16px;
+}
+
+.dashboard-module {
+  background-color: rgb(233, 233, 233);
+  padding: 10px 5%;
+  flex-grow: 1;
+}

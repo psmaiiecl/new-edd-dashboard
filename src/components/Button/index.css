@@ -1,0 +1,38 @@
+.button {
+  width: 100%;
+  height: 100%;
+  transition-duration: 150ms;
+  text-align: center;
+  font-size: 14px;
+  border-radius: 4px;
+  padding: 4px 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+
+.button span {
+  margin: auto;
+}
+
+.enabled-button {
+  background-color: var(--blue-100);
+  cursor: pointer;
+  color: white;
+}
+
+.disabled-button {
+  background-color: var(--disabled);
+  cursor: default;
+  color: var(--neutral);
+}
+
+.enabled-button:hover {
+  background-color: var(--blue-80);
+}
+
+@media (max-width: 650px) {
+  .button-container span {
+    font-size: 12px;
+  }
+}

@@ -1,0 +1,26 @@
+.notification-card {
+  position: fixed;
+  max-width: 150px;
+  max-height: 75px;
+  border-radius: 4px;
+  right: 30px;
+  top: 30px;
+  padding: 20px 30px;
+}
+
+.notification-card.success {
+  background-color: rgb(13, 110, 13);
+  color: white;
+}
+
+.notification-card.error {
+  background-color: rgb(153, 15, 15);
+  color: white;
+}
+
+.notification-close {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  cursor: pointer;
+}
