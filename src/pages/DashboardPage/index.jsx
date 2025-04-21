@@ -23,7 +23,7 @@ export function DashboardPage() {
             navigate(`/dashboard/${option.value}`);
           }}
           options={moduleOptions}
-          isSearchable
+          isSearchable = {false}
           noOptionsMessage={() => "Ningún módulo"}
           placeholder="Seleccione una módulo"
           styles={{
