@@ -22,7 +22,7 @@ export function EDD2024Module() {
         <hr />
       </div>
       <div className="module-menu">
-        <ModuleCard title={"Inscripción"}>
+        <ModuleCard title={"Inscripción"} action={() => window.open( import.meta.env.VITE_BASE_URL + "/front_2024/inscripcion.html", "_blank")}>
           <HighchartsReact options={inscriptionChart} highcharts={Highcharts} />
         </ModuleCard>
         <ModuleCard title={"Validación"}>

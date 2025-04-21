@@ -1,23 +1,33 @@
-import { useState } from "react";
-import Select from "react-select";
 import "./index.css";
-import { EDD2024Module } from "../../modules/EDD2024Module";
-import { EDD2025Module } from "../../modules/EDD2025Module";
+import Select from "react-select";
+import { Outlet, useNavigate } from "react-router";
+import { useState } from "react";
 
 export function DashboardPage() {
-  const [module, setModule] = useState({ label: "2024", value: "2024" });
+  const navigate = useNavigate();
+
+  const moduleOptions = [
+    { label: "2024", value: 2024 },
+    { label: "2025", value: 2025 },
+  ];
+
+  const [selectedModule, setSelectedModule] = useState(
+    moduleOptions.find((m) => m.value === new Date().getFullYear()) ||
+      moduleOptions[0]
+  );
+
   return (
     <>
       <nav className="dashboard-header">
         <span className="roboto-bold">Evaluación del Desempeño Docente</span>
         <Select
           className="roboto-regular"
-          value={module}
-          onChange={(option) => setModule(option)}
-          options={[
-            { label: "2024", value: "2024" },
-            { label: "2025", value: "2025" },
-          ]}
+          value={selectedModule}
+          onChange={(option) => {
+            setSelectedModule(option);
+            navigate(`/dashboard/${option.value}`);
+          }}
+          options={moduleOptions}
           isSearchable
           noOptionsMessage={() => "Ningún módulo"}
           placeholder="Seleccione una módulo"
@@ -36,8 +46,7 @@ export function DashboardPage() {
         />
       </nav>
       <article className="dashboard-module">
-        {module.value === "2024" && <EDD2024Module />}
-        {module.value === "2025" && <EDD2025Module />}
+        <Outlet />
       </article>
     </>
   );

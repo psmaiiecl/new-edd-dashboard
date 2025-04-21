@@ -1,6 +1,8 @@
+import { BASE_API_URL_2024 } from "../data/BASE_API_URL";
+
 export async function getResultsData(token) {
   const URL =
-    import.meta.env.VITE_BASE_URL + "/public/api2024/2024-informes-resultados";
+    import.meta.env.VITE_BASE_URL + BASE_API_URL_2024  + "/2024-informes-resultados";
   const response = await fetch(URL, {
     method: "POST",
     headers: {

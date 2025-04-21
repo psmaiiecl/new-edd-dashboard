@@ -28,7 +28,7 @@ export function AuthProvider({ children }) {
     }
     const data = await response.json();
     localStorage.token = data.token;
-    navigate("/dashboard");
+    navigate("/dashboard/" + new Date().getFullYear());
   };
 
   const logout = async (navigate) => {
