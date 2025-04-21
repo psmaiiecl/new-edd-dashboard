@@ -5,6 +5,7 @@
   width: 100%;
   align-items: center;
   gap: 20px;
+  box-sizing: border-box;
 }
 
 .dashboard-header span {
@@ -12,10 +13,14 @@
   font-size: 16px;
 }
 
+.dashboard-logout {
+  margin-left: auto;
+}
+
 .dashboard-module {
   padding: 10px 5%;
   flex-grow: 1;
-  background-image:url(../../assets/backgrounds/bg-modules.svg);  
+  background-image: url(../../assets/backgrounds/bg-modules.svg);
   background-repeat: repeat;
   background-size: contain;
   background-color: #f9f9f9;

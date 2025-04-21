@@ -12,12 +12,13 @@ function App() {
       <BrowserRouter basename="/front">
         <Routes>
           <Route path="/" element={<LoginPage />} />
-          <Route path="/dashboard/2024" element={<DashboardPage />}>
+          <Route path="/dashboard/:year/*" element={<DashboardPage />} />
+          {/* <Route path="/dashboard/2024" element={<DashboardPage />}>
             <Route index element={<EDD2024Module/>} />
           </Route>
           <Route path="/dashboard/2025" element={<DashboardPage />}>
             <Route index element={<EDD2025Module />} />
-          </Route>
+          </Route> */}
         </Routes>
       </BrowserRouter>
     </AuthProvider>

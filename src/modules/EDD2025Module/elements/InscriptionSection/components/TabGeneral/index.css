@@ -1,0 +1,16 @@
+.tab-general {
+  max-width: 100%;
+}
+
+.tab-general-upper {
+  display: flex;
+  width: 90%;
+  justify-content: space-around;
+  padding: 20px 10px;
+  flex-wrap: wrap;
+  margin: 0 auto;
+}
+
+.general-pie-chart-container {
+  width: 45%;
+}

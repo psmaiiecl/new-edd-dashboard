@@ -1,11 +1,11 @@
 import "./index.css";
-import MineducIcon from '../../../../assets/icons/logo_mineduc.png'
-import DocenteMasIcon from '../../../../assets/icons/logo.png'
-import FBIcon from '../../../../assets/icons/ico__facebook.svg'
-import FlickrIcon from '../../../../assets/icons/ico__flickr.svg'
-import InstagramIcon from '../../../../assets/icons/ico__instagram.svg'
-import XIcon from '../../../../assets/icons/ico__twitter.svg'
-import YoutubeIcon from '../../../../assets/icons/ico__youtube.svg'
+import MineducIcon from "../../../../assets/icons/logo_mineduc.png";
+import DocenteMasIcon from "../../../../assets/icons/logo.png";
+import FBIcon from "../../../../assets/icons/ico__facebook.svg";
+import FlickrIcon from "../../../../assets/icons/ico__flickr.svg";
+import InstagramIcon from "../../../../assets/icons/ico__instagram.svg";
+import XIcon from "../../../../assets/icons/ico__twitter.svg";
+import YoutubeIcon from "../../../../assets/icons/ico__youtube.svg";
 
 export function LoginHeader() {
   return (

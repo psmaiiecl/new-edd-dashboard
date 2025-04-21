@@ -18,7 +18,8 @@ export function EDD2024Module() {
   } = useModules();
 
   const handleRedirection = (module) => {
-    window.location.href = import.meta.env.VITE_BASE_URL + `/front_2024/${module}.html`;
+    window.location.href =
+      import.meta.env.VITE_BASE_URL + `/front_2024/${module}.html`;
   };
 
   return (

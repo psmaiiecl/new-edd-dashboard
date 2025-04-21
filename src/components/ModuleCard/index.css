@@ -9,8 +9,8 @@
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
-.module-card.active{
-  cursor:pointer;
+.module-card.active {
+  cursor: pointer;
 }
 
 .module-card.active:hover {
@@ -36,10 +36,9 @@
   align-items: center;
   width: 100%;
   flex: 1;
-  
 }
 
-.module-card__lock{
+.module-card__lock {
   min-height: 260px;
   background-color: #e1e1e1;
 }

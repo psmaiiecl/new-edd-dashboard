@@ -12,7 +12,6 @@ export function useModules() {
         buildInscripcionModuleChart(data.inscripcion_general.docentes)
       );
     });
-    
   }, [getToken]);
   return {
     inscriptionChart,

@@ -1,4 +1,4 @@
-import { NF } from "../../../utils/NumberFormatter";
+import { numberFormatter } from "../../../utils/NumberFormatter";
 
 export function buildCallModuleInfo(data) {
   let porcentaje = 0;
@@ -12,6 +12,6 @@ export function buildCallModuleInfo(data) {
       ? data.llamadas_entrantes_habiles
       : 0,
     atendidas: data.llamadas_atendidas ? data.llamadas_atendidas : 0,
-    respondidas: NF(porcentaje.toFixed(1)),
+    respondidas: numberFormatter(porcentaje.toFixed(1)),
   };
 }
