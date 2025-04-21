@@ -17,10 +17,7 @@ export function EDD2024Module() {
   } = useModules();
 
   const handleRedirection = (module) => {
-    window.open(
-      import.meta.env.VITE_BASE_URL + `/front_2024/${module}.html`,
-      "_blank"
-    );
+    window.open(import.meta.env.VITE_BASE_URL + `/front_2024/${module}.html`);
   };
 
   return (
@@ -68,7 +65,7 @@ export function EDD2024Module() {
         </ModuleCard>
         <ModuleCard title={"Mesa de Ayuda - Tickets"}>
           <div className="mesa-ayuda-content">
-            <img src="/img/support.svg" />
+            <img src="img/support.svg" />
           </div>
         </ModuleCard>
         <ModuleCard

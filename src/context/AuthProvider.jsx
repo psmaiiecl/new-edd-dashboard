@@ -28,6 +28,7 @@ export function AuthProvider({ children }) {
     }
     const data = await response.json();
     localStorage.token = data.token;
+    localStorage.user = data;
     navigate("/dashboard/" + new Date().getFullYear());
   };
 

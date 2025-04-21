@@ -15,7 +15,7 @@
 .dashboard-module {
   padding: 10px 5%;
   flex-grow: 1;
-  background-image:url(/backgrounds/bg-modules.svg);  
+  background-image:url(backgrounds/bg-modules.svg);  
   background-repeat: repeat;
   background-size: contain;
   background-color: #f9f9f9;
