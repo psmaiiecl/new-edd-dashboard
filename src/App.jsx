@@ -9,7 +9,7 @@ import { EDD2025Module } from "./modules/EDD2025Module";
 function App() {
   return (
     <AuthProvider>
-      <BrowserRouter>
+      <BrowserRouter basename="/front">
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route path="/dashboard/2024" element={<DashboardPage />}>

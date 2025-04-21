@@ -11,7 +11,7 @@ export function AuthProvider({ children }) {
     queueLoading,
     dequeueLoading
   ) => {
-    const URL = import.meta.env.VITE_BASE_URL + "/public/api/login";
+    const URL = import.meta.env.VITE_BASE_URL + "/back/public/api/login";
     const body = { usuario: email, contrasena: password };
     if (queueLoading) queueLoading();
     const response = await fetch(URL, {
