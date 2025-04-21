@@ -9,7 +9,7 @@ export function DashboardPage() {
   return (
     <>
       <nav className="dashboard-header">
-        <span className="roboto-bold">Dashboard EDD - Año:</span>
+        <span className="roboto-bold">Evaluación del Desempeño Docente</span>
         <Select
           className="roboto-regular"
           value={module}
