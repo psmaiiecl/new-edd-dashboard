@@ -1,5 +1,6 @@
 import { jwtDecode } from "jwt-decode";
 import { AuthContext } from "./AuthContext";
+import { useCallback } from "react";
 
 export function AuthProvider({ children }) {
   const login = async (
@@ -43,11 +44,11 @@ export function AuthProvider({ children }) {
     navigate("/");
   };
 
-  const getToken = () => {
+  const getToken = useCallback(() => {
     const token = localStorage.getItem("token");
     if (!token) return null;
     return token;
-  };
+  }, []);
 
   const getUsuario = () => {
     const token = localStorage.getItem("token");

@@ -1,15 +1,13 @@
-export async function getResultsData(token){
-    const URL = import.meta.env.VITE_BASE_URL + '/public/api2024/2024-informes-resultados';
-    const response = await fetch(
-        URL,
-        {
-            method: 'POST',
-            headers: {
-                't': token
-             }
-        }
-    )
+export async function getResultsData(token) {
+  const URL =
+    import.meta.env.VITE_BASE_URL + "/public/api2024/2024-informes-resultados";
+  const response = await fetch(URL, {
+    method: "POST",
+    headers: {
+      t: token,
+    },
+  });
 
-    const data = await response.json()
-    return data;
+  const data = await response.json();
+  return data;
 }

@@ -25,7 +25,7 @@ export function buildInscripcionModuleChart(data) {
           },
           {
             name: "En revisión",
-            y:inReview,
+            y: inReview,
             color: "#c3ffb0",
             drilldown: {
               categories: ["En revisión"],
@@ -47,7 +47,7 @@ export function buildInscripcionModuleChart(data) {
             color: "#b3b8ff",
             drilldown: {
               categories: ["Pendientes"],
-              data: [ (pending / total) * 100],
+              data: [(pending / total) * 100],
             },
           },
           {
