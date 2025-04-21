@@ -1,9 +1,10 @@
 import "./index.css";
-import { ModuleCard } from "./components/ModuleCard";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
+import { ModuleCard } from "./components/ModuleCard";
 import { useModules } from "./hooks/useModules";
 import { getCurrentDate } from "../../utils/DateUtils";
+import supportIMG from "../../assets/images/support.svg";
 
 export function EDD2024Module() {
   const {
@@ -17,7 +18,7 @@ export function EDD2024Module() {
   } = useModules();
 
   const handleRedirection = (module) => {
-    window.open(import.meta.env.VITE_BASE_URL + `/front_2024/${module}.html`);
+    window.location.href = import.meta.env.VITE_BASE_URL + `/front_2024/${module}.html`;
   };
 
   return (
@@ -65,7 +66,7 @@ export function EDD2024Module() {
         </ModuleCard>
         <ModuleCard title={"Mesa de Ayuda - Tickets"}>
           <div className="mesa-ayuda-content">
-            <img src="img/support.svg" />
+            <img src={supportIMG} />
           </div>
         </ModuleCard>
         <ModuleCard

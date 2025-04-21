@@ -1,6 +1,6 @@
 .login-layout {
   position: relative;
-  background: url(backgrounds/bg-image-login_fix.svg);
+  background: url(../../assets/backgrounds/bg-image-login_fix.svg);
   background-size: contain;
   background-position: 1% 80%;
   background-repeat: no-repeat;
@@ -20,7 +20,7 @@
   height: 100%;
   inset: 0;
   background: linear-gradient(to top, #0a132d, rgba(0, 111, 179, 0.1)),
-    url(backgrounds/bg_image.jpg);
+    url(../../assets/backgrounds/bg_image.jpg);
   background-size: cover;
 }
 

@@ -1,30 +1,38 @@
 import "./index.css";
+import MineducIcon from '../../../../assets/icons/logo_mineduc.png'
+import DocenteMasIcon from '../../../../assets/icons/logo.png'
+import FBIcon from '../../../../assets/icons/ico__facebook.svg'
+import FlickrIcon from '../../../../assets/icons/ico__flickr.svg'
+import InstagramIcon from '../../../../assets/icons/ico__instagram.svg'
+import XIcon from '../../../../assets/icons/ico__twitter.svg'
+import YoutubeIcon from '../../../../assets/icons/ico__youtube.svg'
+
 export function LoginHeader() {
   return (
     <nav className="login-header">
       <div className="login-logos">
         <a href="https://www.mineduc.cl/" target="_blank">
-          <img src="icons/logo_mineduc.png" alt="MINISTERIO DE EDUCACION" />
+          <img src={MineducIcon} alt="MINISTERIO DE EDUCACION" />
         </a>
         <a href="https://www.docentemas.cl/" target="_blank">
-          <img src="icons/logo.png" alt="Docente MÁS" />
+          <img src={DocenteMasIcon} alt="Docente MÁS" />
         </a>
       </div>
       <div className="login-social">
         <div className="icon-button--transparent">
-          <img src="icons/ico__facebook.svg" alt="FB" />
+          <img src={FBIcon} alt="FB" />
         </div>
         <div className="icon-button--transparent">
-          <img src="icons/ico__flickr.svg" alt="FL" />
+          <img src={FlickrIcon} alt="FL" />
         </div>
         <div className="icon-button--transparent">
-          <img src="icons/ico__instagram.svg" alt="INST" />
+          <img src={InstagramIcon} alt="INST" />
         </div>
         <div className="icon-button--transparent">
-          <img src="icons/ico__twitter.svg" alt="TWIT" />
+          <img src={XIcon} alt="TWIT" />
         </div>
         <div className="icon-button--transparent">
-          <img src="icons/ico__youtube.svg" alt="YT" />
+          <img src={YoutubeIcon} alt="YT" />
         </div>
       </div>
     </nav>
