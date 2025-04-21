@@ -6,13 +6,10 @@ import { useState } from "react";
 export function DashboardPage() {
   const navigate = useNavigate();
   const moduleOptions = [
-    { label: "2024", value: 2024 },
     { label: "2025", value: 2025 },
+    { label: "2024", value: 2024 },
   ];
-  const [selectedModule, setSelectedModule] = useState(
-    moduleOptions.find((m) => m.value === new Date().getFullYear()) ||
-      moduleOptions[0]
-  );
+  const [selectedModule, setSelectedModule] = useState(moduleOptions[0]);
 
   return (
     <>

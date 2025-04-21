@@ -1,7 +1,7 @@
 import "./index.css";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
-import { ModuleCard } from "./components/ModuleCard";
+import { ModuleCard } from "../../components/ModuleCard";
 import { useModules } from "./hooks/useModules";
 import { getCurrentDate } from "../../utils/DateUtils";
 import supportIMG from "../../assets/images/support.svg";
