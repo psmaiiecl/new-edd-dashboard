@@ -13,70 +13,16 @@ import {
   buildSostenedoresParticipantes,
 } from "../../utils/generalTabUtils";
 import { BasicLegend } from "../BasicLegend";
+import { BASIC_PIE } from "../../data/BASIC_PIE";
 
 export function TabGeneral() {
   const [docenteSugeridoChart, setDocenteSugeridoChart] = useState({
-    chart: {
-      plotBackgroundColor: null,
-      plotBorderWidth: null,
-      plotShadow: false,
-      type: "pie",
-      marginTop: 120,
-      marginBottom: 80,
-      height: 510,
-    },
-    legend: {
-      enabled: true,
-      verticalAlign: "top",
-      x: 0,
-      y: 380,
-      itemMarginBottom: 20,
-      itemStyle: {
-        fontSize: "13px",
-      },
-    },
-    title: {
-      text: "Total",
-      align: "center",
-      style: {
-        fontWeight: "bold",
-        color: "#5157FF",
-        fontSize: "35px",
-      },
-    },
+    ...BASIC_PIE,
     subtitle: {
       text: " DOCENTES <b>SUGERIDOS</b>",
       align: "center",
       style: {
         fontSize: "15px",
-      },
-    },
-    tooltip: {
-      pointFormat: "<b>{point.y}</b> ({point.percentage:.0f}%)<br/>",
-      style: {
-        fontSize: "13px",
-        color: "#666666",
-      },
-    },
-    accessibility: {
-      point: {
-        valueSuffix: "%",
-      },
-    },
-    plotOptions: {
-      pie: {
-        allowPointSelect: true,
-        cursor: "pointer",
-        dataLabels: {
-          enabled: true,
-          format:
-            "<b>{point.name}</b>: <b>{point.y:.,.0f} </b> ({point.percentage:.0f}%)<br/>",
-          style: {
-            fontSize: "13px",
-            color: "#666666",
-          },
-        },
-        showInLegend: true,
       },
     },
     series: [
@@ -106,67 +52,12 @@ export function TabGeneral() {
     ],
   });
   const [docenteAgregadoChart, setDocenteAgregadoChart] = useState({
-    chart: {
-      plotBackgroundColor: null,
-      plotBorderWidth: null,
-      plotShadow: false,
-      type: "pie",
-      marginTop: 120,
-      marginBottom: 80,
-      height: 510,
-    },
-    legend: {
-      enabled: true,
-      verticalAlign: "top",
-      x: 0,
-      y: 380,
-      itemMarginBottom: 20,
-      itemStyle: {
-        fontSize: "13px",
-      },
-    },
-    title: {
-      text: "Total",
-      align: "center",
-      style: {
-        fontWeight: "bold",
-        color: "#5157FF",
-        fontSize: "35px",
-      },
-    },
+    ...BASIC_PIE,
     subtitle: {
       text: " DOCENTES AGREGADOS POR SOSTENEDORES",
       align: "center",
       style: {
         fontSize: "15px",
-      },
-    },
-    tooltip: {
-      pointFormat: "<b>{point.y}</b> ({point.percentage:.0f}%)<br/>",
-      style: {
-        fontSize: "13px",
-        color: "#666666",
-      },
-    },
-    accessibility: {
-      point: {
-        valueSuffix: "%",
-      },
-    },
-    plotOptions: {
-      pie: {
-        allowPointSelect: true,
-        cursor: "pointer",
-        dataLabels: {
-          enabled: true,
-          format:
-            "<b>{point.name}</b>: <b>{point.y:.,.0f} </b> ({point.percentage:.0f}%)<br/>",
-          style: {
-            fontSize: "13px",
-            color: "#666666",
-          },
-        },
-        showInLegend: true,
       },
     },
     series: [
@@ -196,67 +87,12 @@ export function TabGeneral() {
     ],
   });
   const [docenteInscritoChart, setDocenteInscritoChart] = useState({
-    chart: {
-      plotBackgroundColor: null,
-      plotBorderWidth: null,
-      plotShadow: false,
-      type: "pie",
-      marginTop: 120,
-      marginBottom: 80,
-      height: 510,
-    },
-    legend: {
-      enabled: true,
-      verticalAlign: "top",
-      x: 0,
-      y: 380,
-      itemMarginBottom: 20,
-      itemStyle: {
-        fontSize: "13px",
-      },
-    },
-    title: {
-      text: "Total",
-      align: "center",
-      style: {
-        fontWeight: "bold",
-        color: "#5157FF",
-        fontSize: "35px",
-      },
-    },
+    ...BASIC_PIE,
     subtitle: {
       text: " TOTAL DOCENTES INSCRITOS",
       align: "center",
       style: {
         fontSize: "15px",
-      },
-    },
-    tooltip: {
-      pointFormat: "<b>{point.y}</b> ({point.percentage:.0f}%)<br/>",
-      style: {
-        fontSize: "13px",
-        color: "#666666",
-      },
-    },
-    accessibility: {
-      point: {
-        valueSuffix: "%",
-      },
-    },
-    plotOptions: {
-      pie: {
-        allowPointSelect: true,
-        cursor: "pointer",
-        dataLabels: {
-          enabled: true,
-          format:
-            "<b>{point.name}</b>: <b>{point.y:.,.0f} </b> ({point.percentage:.0f}%)<br/>",
-          style: {
-            fontSize: "13px",
-            color: "#666666",
-          },
-        },
-        showInLegend: true,
       },
     },
     series: [
@@ -281,72 +117,20 @@ export function TabGeneral() {
     ],
   });
   const [entidadSostenedorChart, setEntidadSostenedorChart] = useState({
-    chart: {
-      plotBackgroundColor: null,
-      plotBorderWidth: null,
-      plotShadow: false,
-      type: "pie",
-      marginTop: 120,
-      marginBottom: 80,
-      height: 510,
-    },
+    ...BASIC_PIE,
     legend: {
-      enabled: true,
-      verticalAlign: "top",
-      x: 0,
-      y: 380,
-      itemMarginBottom: 20,
-      itemStyle: {
-        fontSize: "13px",
-      },
+      ...BASIC_PIE.legend,
       layout: "horizontal",
       itemDistance: 10,
       alignColumns: false,
       width: "100%",
       itemMarginTop: 2,
     },
-    title: {
-      text: "Total",
-      align: "center",
-      style: {
-        fontWeight: "bold",
-        color: "#5157FF",
-        fontSize: "35px",
-      },
-    },
     subtitle: {
       text: "TOTAL ENTIDADES SOSTENEDORAS",
       align: "center",
       style: {
         fontSize: "15px",
-      },
-    },
-    tooltip: {
-      pointFormat: "<b>{point.y}</b> ({point.percentage:.0f}%)<br/>",
-      style: {
-        fontSize: "13px",
-        color: "#666666",
-      },
-    },
-    accessibility: {
-      point: {
-        valueSuffix: "%",
-      },
-    },
-    plotOptions: {
-      pie: {
-        allowPointSelect: true,
-        cursor: "pointer",
-        dataLabels: {
-          enabled: true,
-          format:
-            "<b>{point.name}</b>: <b>{point.y:.,.0f} </b> ({point.percentage:.0f}%)<br/>",
-          style: {
-            fontSize: "13px",
-            color: "#666666",
-          },
-        },
-        showInLegend: true,
       },
     },
     series: [
@@ -362,7 +146,7 @@ export function TabGeneral() {
             color: "#FF5880",
           },
           {
-            name: "Con Representante Legal registrado",
+            name: "Sin Representante Legal registrado",
             y: 0,
             color: "#FF8E53",
           },
@@ -371,72 +155,20 @@ export function TabGeneral() {
     ],
   });
   const [sostenedorChart, setSostenedorChart] = useState({
-    chart: {
-      plotBackgroundColor: null,
-      plotBorderWidth: null,
-      plotShadow: false,
-      type: "pie",
-      marginTop: 120,
-      marginBottom: 80,
-      height: 510,
-    },
+    ...BASIC_PIE,
     legend: {
-      enabled: true,
-      verticalAlign: "top",
-      x: 0,
-      y: 380,
-      itemMarginBottom: 20,
-      itemStyle: {
-        fontSize: "13px",
-      },
+      ...BASIC_PIE.legend,
       layout: "horizontal",
       itemDistance: 10,
       alignColumns: false,
       width: "100%",
       itemMarginTop: 2,
     },
-    title: {
-      text: "Total",
-      align: "center",
-      style: {
-        fontWeight: "bold",
-        color: "#5157FF",
-        fontSize: "35px",
-      },
-    },
     subtitle: {
       text: " SOSTENEDORES <b>PARTICIPANTES</b>",
       align: "center",
       style: {
         fontSize: "15px",
-      },
-    },
-    tooltip: {
-      pointFormat: "<b>{point.y}</b> ({point.percentage:.0f}%)<br/>",
-      style: {
-        fontSize: "13px",
-        color: "#666666",
-      },
-    },
-    accessibility: {
-      point: {
-        valueSuffix: "%",
-      },
-    },
-    plotOptions: {
-      pie: {
-        allowPointSelect: true,
-        cursor: "pointer",
-        dataLabels: {
-          enabled: true,
-          format:
-            "<b>{point.name}</b>: <b>{point.y:.,.0f} </b> ({point.percentage:.0f}%)<br/>",
-          style: {
-            fontSize: "13px",
-            color: "#666666",
-          },
-        },
-        showInLegend: true,
       },
     },
     series: [

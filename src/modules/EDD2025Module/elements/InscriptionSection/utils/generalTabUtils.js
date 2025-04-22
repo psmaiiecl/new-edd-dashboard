@@ -10,26 +10,20 @@ export function buildDocentesSugeridos(setup, data) {
     },
     series: [
       {
-        name: "Docentes en nómina",
-        colorByPoint: true,
+        ...setup.series[0],
         data: [
           {
-            name: "Inscritos",
+            ...setup.series[0].data[0],
             y: parseInt(data.docentes.inscritos),
-            sliced: true,
-            selected: true,
-            color: "#65D9AB",
           },
-
+          
           {
-            name: "Desinscritos",
+            ...setup.series[0].data[1],
             y: parseInt(data.docentes.desinscritos),
-            color: "#C1D9CA",
           },
           {
-            name: "Pendientes",
+            ...setup.series[0].data[2],
             y: parseInt(data.docentes.pendientes),
-            color: "#FFD153",
           },
         ],
       },
@@ -48,26 +42,20 @@ export function buildDocentesAgregados(setup, data) {
     },
     series: [
       {
-        name: "Docentes agregados por sostenedores",
-        colorByPoint: true,
+        ...setup.series[0],
         data: [
           {
-            name: "Inscritos",
+            ...setup.series[0].data[0],
             y: parseInt(data.docentes.inscritos),
-            sliced: true,
-            selected: true,
-            color: "#65D9AB",
           },
-
+          
           {
-            name: "En Revisión",
+            ...setup.series[0].data[1],
             y: parseInt(data.docentes["en_revision"]),
-            color: "#FF8E53",
           },
           {
-            name: "No Inscritos",
-            y: 0,
-            color: "#FF5880",
+            ...setup.series[0].data[2],
+            y: parseInt(data.docentes["no_inscritos"]),
           },
         ],
       },
@@ -85,21 +73,15 @@ export function buildDocentesInscritos(setup, data) {
     },
     series: [
       {
-        name: "Total docentes inscritos",
-        colorByPoint: true,
+        ...setup.series[0],
         data: [
           {
-            name: "Inscritos",
+            ...setup.series[0].data[0],
             y: parseInt(data.docentes.inscritos),
-            sliced: true,
-            selected: true,
-            color: "#65D9AB",
           },
-
           {
-            name: "En Revisión",
+            ...setup.series[0].data[1],
             y: parseInt(data.docentes.cancelados),
-            color: "#FF5880",
           },
         ],
       },
