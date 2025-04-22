@@ -4,7 +4,7 @@ export async function getResultsData(token) {
   const URL =
     import.meta.env.VITE_BASE_URL +
     BASE_API_URL_2024 +
-    "/2024-informes-resultados";
+    "/datos-json?etiqueta=2024-informes-resultados";
   const response = await fetch(URL, {
     method: "POST",
     headers: {

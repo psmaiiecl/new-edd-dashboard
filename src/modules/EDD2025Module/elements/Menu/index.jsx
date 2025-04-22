@@ -6,7 +6,7 @@ import { ModuleCard } from "../../../../components/ModuleCard";
 import { useNavigate } from "react-router";
 
 export function Menu() {
-  const { inscriptionChart } = useModules();
+  const { inscriptionChart, loadingStatus } = useModules();
   const navigate = useNavigate();
 
   return (
@@ -19,6 +19,7 @@ export function Menu() {
         <ModuleCard
           title={"Inscripción"}
           action={() => navigate("inscripcion")}
+          loading={loadingStatus.inscription}
         >
           <HighchartsReact options={inscriptionChart} highcharts={Highcharts} />
         </ModuleCard>

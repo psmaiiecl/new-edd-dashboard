@@ -4,7 +4,7 @@ export async function getCallData(token) {
   const URL =
     import.meta.env.VITE_BASE_URL +
     BASE_API_URL_2024 +
-    "/2024-llamadas-resumen-reporte";
+    "/datos-json?etiqueta=2024-llamadas-resumen-reporte";
   const response = await fetch(URL, {
     method: "POST",
     headers: {

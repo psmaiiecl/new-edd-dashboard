@@ -15,6 +15,7 @@ export function EDD2024Module() {
     correctionChart,
     resultsChart,
     callInfo,
+    loadingStatus,
   } = useModules();
 
   const handleRedirection = (module) => {
@@ -32,36 +33,42 @@ export function EDD2024Module() {
         <ModuleCard
           title={"Inscripción"}
           action={() => handleRedirection("inscripcion")}
+          loading={loadingStatus.inscription}
         >
           <HighchartsReact options={inscriptionChart} highcharts={Highcharts} />
         </ModuleCard>
         <ModuleCard
           title={"Validación"}
           action={() => handleRedirection("validacion")}
+          loading={loadingStatus.validation}
         >
           <HighchartsReact options={validationChart} highcharts={Highcharts} />
         </ModuleCard>
         <ModuleCard
           title={"Grabaciones"}
           action={() => handleRedirection("grabaciones")}
+          loading={loadingStatus.recording}
         >
           <HighchartsReact options={recordChart} highcharts={Highcharts} />
         </ModuleCard>
         <ModuleCard
           title={"Portafolio"}
           action={() => handleRedirection("portafolio")}
+          loading={loadingStatus.portfolio}
         >
           <HighchartsReact options={portfolioChart} highcharts={Highcharts} />
         </ModuleCard>
         <ModuleCard
           title={"Corrección Portafolios"}
           action={() => handleRedirection("correccionPortafolios")}
+          loading={loadingStatus.correction}
         >
           <HighchartsReact options={correctionChart} highcharts={Highcharts} />
         </ModuleCard>
         <ModuleCard
           title={"Entrega de Resultados"}
           action={() => handleRedirection("entrega_resultados")}
+          loading={loadingStatus.results}
         >
           <HighchartsReact options={resultsChart} highcharts={Highcharts} />
         </ModuleCard>
@@ -73,6 +80,7 @@ export function EDD2024Module() {
         <ModuleCard
           title={"Llamadas"}
           action={() => handleRedirection("llamadas")}
+          loading={loadingStatus.call}
         >
           <div className="llamadas-content roboto-bold">
             <span>Fecha: {getCurrentDate()}</span>

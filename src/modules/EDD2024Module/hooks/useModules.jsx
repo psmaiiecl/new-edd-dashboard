@@ -24,30 +24,52 @@ export function useModules() {
   const [correctionChart, setCorrectionChart] = useState(MODULE_CHART_SETUP);
   const [resultsChart, setResultsChart] = useState(MODULE_CHART_SETUP);
   const [callInfo, setCallInfo] = useState({});
+  const [loadingStatus, setLoadingStatus] = useState({});
+
+  const changeLoadingStatus = (field, state) => {
+    setLoadingStatus((prev) => ({
+      ...prev,
+      [field]: state,
+    }));
+  };
   useEffect(() => {
+    changeLoadingStatus("inscription", true);
     getInscriptionData(getToken()).then((data) => {
       setInscriptionChart(
         buildInscripcionModuleChart(data.inscripcion_general.docentes)
       );
+      changeLoadingStatus("inscription", false);
     });
+    changeLoadingStatus("validation", true);
     getValidationData(getToken()).then((data) => {
       setValidationChart(buildValidationModuleChart(data.validacion));
+      changeLoadingStatus("validation", false);
     });
-    getRecordingData(getToken()).then((data) =>
-      setRecordChart(buildRecordingModuleChart(data.docentes_a_grabar))
-    );
-    getPortfolioData(getToken()).then((data) =>
-      setPortfolioChart(buildPortfolioModuleChart(data.docentes))
-    );
-    getCorrectionData(getToken()).then((data) =>
-      setCorrectionChart(buildCorrectionModuleChart(data))
-    );
-    getResultsData(getToken()).then((data) =>
-      setResultsChart(buildResultsModuleChart(data.ratios))
-    );
-    getCallData(getToken()).then((data) =>
-      setCallInfo(buildCallModuleInfo(data))
-    );
+    changeLoadingStatus("recording", true);
+    getRecordingData(getToken()).then((data) => {
+      setRecordChart(buildRecordingModuleChart(data.docentes_a_grabar));
+      changeLoadingStatus("recording", false);
+    });
+    changeLoadingStatus("portfolio", true);
+    getPortfolioData(getToken()).then((data) => {
+      setPortfolioChart(buildPortfolioModuleChart(data.docentes));
+      changeLoadingStatus("portfolio", false);
+    });
+    changeLoadingStatus("correction", true);
+    getCorrectionData(getToken()).then((data) => {
+      setCorrectionChart(buildCorrectionModuleChart(data));
+      changeLoadingStatus("correction", false);
+    });
+    changeLoadingStatus("results", true);
+    getResultsData(getToken()).then((data) => {
+      changeLoadingStatus("results", false);
+      setResultsChart(buildResultsModuleChart(data.ratios));
+    });
+    changeLoadingStatus("call", true);
+    getCallData(getToken()).then((data) => {
+      setCallInfo(buildCallModuleInfo(data));
+      changeLoadingStatus("call", false);
+    });
   }, [getToken]);
   return {
     inscriptionChart,
@@ -57,5 +79,6 @@ export function useModules() {
     correctionChart,
     resultsChart,
     callInfo,
+    loadingStatus,
   };
 }
