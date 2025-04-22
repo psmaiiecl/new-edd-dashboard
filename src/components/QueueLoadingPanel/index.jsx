@@ -1,6 +1,6 @@
+import "./index.css";
 import { useContext } from "react";
 import { LoadingContext } from "../../context/LoadingContext";
-import "../StandardLoadingPanel/index.css";
 
 export function QueueLoadingPanel() {
   const { isLoading } = useContext(LoadingContext);
