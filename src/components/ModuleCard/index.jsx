@@ -6,7 +6,7 @@ export function ModuleCard({ title, action, children, locked = false, loading=fa
   return (
     <div
       className={`roboto-regular module-card ${locked ? "" : "active"}`}
-      onClick={action}
+      onClick={()=>{if (!locked)action()}}
     >
       <div className="module-card__title">
         <span>{title}</span>

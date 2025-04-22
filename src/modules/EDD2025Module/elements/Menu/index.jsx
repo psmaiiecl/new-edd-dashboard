@@ -20,6 +20,7 @@ export function Menu() {
           title={"Inscripción"}
           action={() => navigate("inscripcion")}
           loading={loadingStatus.inscription}
+          locked
         >
           <HighchartsReact options={inscriptionChart} highcharts={Highcharts} />
         </ModuleCard>
