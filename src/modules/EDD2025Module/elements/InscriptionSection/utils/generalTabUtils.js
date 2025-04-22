@@ -16,7 +16,7 @@ export function buildDocentesSugeridos(setup, data) {
             ...setup.series[0].data[0],
             y: parseInt(data.docentes.inscritos),
           },
-          
+
           {
             ...setup.series[0].data[1],
             y: parseInt(data.docentes.desinscritos),
@@ -31,14 +31,17 @@ export function buildDocentesSugeridos(setup, data) {
   };
   return res;
 }
-
 export function buildDocentesAgregados(setup, data) {
+  const total =
+    parseInt(data.docentes.inscritos) +
+    parseInt(data.docentes["en_revision"]) +
+    parseInt(data.docentes["no_inscritos"]);
   const res = {
     ...setup,
     title: {
       ...setup.title,
-      number: data.total.docentes,
-      text: numberFormatter(data.total.docentes),
+      number: total,
+      text: numberFormatter(total),
     },
     series: [
       {
@@ -48,7 +51,7 @@ export function buildDocentesAgregados(setup, data) {
             ...setup.series[0].data[0],
             y: parseInt(data.docentes.inscritos),
           },
-          
+
           {
             ...setup.series[0].data[1],
             y: parseInt(data.docentes["en_revision"]),
@@ -64,12 +67,14 @@ export function buildDocentesAgregados(setup, data) {
   return res;
 }
 export function buildDocentesInscritos(setup, data) {
+  const total =
+    parseInt(data.docentes.inscritos) + parseInt(data.docentes.cancelados);
   const res = {
     ...setup,
     title: {
       ...setup.title,
-      number: data.total.docentes,
-      text: numberFormatter(data.total.docentes),
+      number: total,
+      text: numberFormatter(total),
     },
     series: [
       {
@@ -89,7 +94,6 @@ export function buildDocentesInscritos(setup, data) {
   };
   return res;
 }
-
 export function buildSostenedoresParticipantes(setup, data) {
   const res = {
     ...setup,
@@ -131,7 +135,6 @@ export function buildSostenedoresParticipantes(setup, data) {
   };
   return res;
 }
-
 export function buildAvanceDiario(setup, data, data2023) {
   const arrFechas = [];
   const arrAcumulado = [];
