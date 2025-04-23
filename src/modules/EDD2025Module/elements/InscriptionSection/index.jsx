@@ -11,7 +11,7 @@ export function InscriptionSection2025() {
   return (
     <section className="pagina-inscripcion roboto-regular">
       <article className="inscripcion-content">
-        {/* <Tabs setActive={setActiveTab} active={activeTab} /> */}
+        <Tabs setActive={setActiveTab} active={activeTab} />
         <div style={{ display: activeTab === "tab1" ? "block" : "none" }}>
           <TabGeneral />
         </div>

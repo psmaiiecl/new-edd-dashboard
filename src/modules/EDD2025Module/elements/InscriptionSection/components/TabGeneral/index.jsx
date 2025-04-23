@@ -363,9 +363,9 @@ export function TabGeneral() {
           </div>
         </div>
       </div>
-      {/* <div className="general-point-chart-container">
+      <div className="general-point-chart-container">
         <HighchartsReact options={avancePointChart} highcharts={Highcharts} />
-      </div> */}
+      </div>
     </div>
   );
 }
