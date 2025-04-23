@@ -12,10 +12,10 @@ export function BasicLegend({ data, total }) {
 }
 
 function LegendItem({ item, total }) {
-  const percentage = ((item.y / total) * 100).toFixed(1) + "%";
+  const percentage = ((item.y / total) * 100).toFixed(1);
   return (
-    <div className="pie-chart-legend__item">
-      <h5>{item.name}</h5>
+    <div className="pie-chart-legend__item roboto-light">
+      <span className="legend__item__title">{item.name}</span>
       <div
         style={{
           alignItems: "center",
@@ -25,11 +25,12 @@ function LegendItem({ item, total }) {
           textAlign: "center",
           padding: "2px",
           fontWeight: "500",
+          margin: "5px 0",
         }}
       >
         <span>{numberFormatter(item.y)}</span>
       </div>
-      <span>{percentage}</span>
+      <span>{isNaN(percentage) ? 0 : percentage}%</span>
     </div>
   );
 }

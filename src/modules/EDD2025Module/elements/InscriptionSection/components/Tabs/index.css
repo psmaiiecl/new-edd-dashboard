@@ -5,10 +5,11 @@
   overflow-x: hidden;
   justify-content: space-between;
   align-items: center;
+  padding: 0 25px;
+  box-sizing: border-box;
 }
 
 .tabs {
-  width: 40%;
   display: flex;
   align-items: center;
   font-size: 14px;
@@ -27,6 +28,7 @@
   justify-content: center;
   cursor: pointer;
   transition-duration: 150ms;
+  white-space: nowrap;
   color: #484646;
 }
 
@@ -37,4 +39,9 @@
 
 .tabs__tab:hover {
   color: #0f69b5;
+}
+
+.inscription-excel {
+  width: 120px;
+  height: fit-content;
 }

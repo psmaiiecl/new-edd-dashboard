@@ -94,13 +94,44 @@ export function buildDocentesInscritos(setup, data) {
   };
   return res;
 }
-export function buildSostenedoresParticipantes(setup, data) {
+export function buildEntidadesSostenedoras(setup, data) {
   const res = {
     ...setup,
     title: {
       ...setup.title,
       number: data.total.sostenedores,
       text: numberFormatter(data.total.sostenedores),
+    },
+    series: [
+      {
+        ...setup.series[0],
+        data: [
+          {
+            ...setup.series[0].data[0],
+            y: parseInt(data.total.sostenedores_con_representante),
+          },
+          {
+            ...setup.series[0].data[1],
+            y: parseInt(data.total.sostenedores_sin_representante),
+          },
+        ],
+      },
+    ],
+  };
+  return res;
+}
+export function buildSostenedoresParticipantes(setup, data) {
+  const total =
+    parseInt(data.sostenedores.sin_ingreso) +
+    parseInt(data.sostenedores.con_ingreso_sin_docentes) +
+    parseInt(data.sostenedores.inscripcion_iniciada) +
+    parseInt(data.sostenedores.sin_docentes_pendientes);
+  const res = {
+    ...setup,
+    title: {
+      ...setup.title,
+      number: total,
+      text: numberFormatter(total),
     },
     series: [
       {

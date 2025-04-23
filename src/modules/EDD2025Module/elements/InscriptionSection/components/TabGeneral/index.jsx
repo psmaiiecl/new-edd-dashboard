@@ -10,10 +10,12 @@ import {
   buildDocentesAgregados,
   buildDocentesInscritos,
   buildDocentesSugeridos,
+  buildEntidadesSostenedoras,
   buildSostenedoresParticipantes,
 } from "../../utils/generalTabUtils";
 import { BasicLegend } from "../BasicLegend";
 import { BASIC_PIE } from "../../data/BASIC_PIE";
+import Select from "react-select/base";
 
 export function TabGeneral() {
   const [docenteSugeridoChart, setDocenteSugeridoChart] = useState({
@@ -54,7 +56,7 @@ export function TabGeneral() {
   const [docenteAgregadoChart, setDocenteAgregadoChart] = useState({
     ...BASIC_PIE,
     subtitle: {
-      text: " DOCENTES AGREGADOS POR SOSTENEDORES",
+      text: " DOCENTES <b>AGREGADOS POR SOSTENEDORES</b>",
       align: "center",
       style: {
         fontSize: "15px",
@@ -89,7 +91,7 @@ export function TabGeneral() {
   const [docenteInscritoChart, setDocenteInscritoChart] = useState({
     ...BASIC_PIE,
     subtitle: {
-      text: " TOTAL DOCENTES INSCRITOS",
+      text: " TOTAL <b>DOCENTES INSCRITOS</b>",
       align: "center",
       style: {
         fontSize: "15px",
@@ -118,16 +120,8 @@ export function TabGeneral() {
   });
   const [entidadSostenedorChart, setEntidadSostenedorChart] = useState({
     ...BASIC_PIE,
-    legend: {
-      ...BASIC_PIE.legend,
-      layout: "horizontal",
-      itemDistance: 10,
-      alignColumns: false,
-      width: "100%",
-      itemMarginTop: 2,
-    },
     subtitle: {
-      text: "TOTAL ENTIDADES SOSTENEDORAS",
+      text: "TOTAL <b>ENTIDADES SOSTENEDORAS</b>",
       align: "center",
       style: {
         fontSize: "15px",
@@ -139,14 +133,14 @@ export function TabGeneral() {
         colorByPoint: true,
         data: [
           {
-            name: "Con Representante Legal registrado",
+            name: "Con Rep. Legal registrado",
             y: 0,
             sliced: true,
             selected: true,
             color: "#FF5880",
           },
           {
-            name: "Sin Representante Legal registrado",
+            name: "Sin Rep. Legal registrado",
             y: 0,
             color: "#FF8E53",
           },
@@ -277,17 +271,23 @@ export function TabGeneral() {
       setDocenteSugeridoChart(
         buildDocentesSugeridos(docenteSugeridoChart, data.inscripcion_general)
       );
-      setSostenedorChart(
-        buildSostenedoresParticipantes(
-          sostenedorChart,
-          data.inscripcion_general
-        )
-      );
       setDocenteAgregadoChart(
         buildDocentesAgregados(docenteAgregadoChart, data.inscripcion_general)
       );
       setDocenteInscritoChart(
         buildDocentesInscritos(docenteInscritoChart, data.inscripcion_general)
+      );
+      setEntidadSostenedorChart(
+        buildEntidadesSostenedoras(
+          entidadSostenedorChart,
+          data.inscripcion_general
+        )
+      );
+      setSostenedorChart(
+        buildSostenedoresParticipantes(
+          sostenedorChart,
+          data.inscripcion_general
+        )
       );
       setAvancePointChart(
         buildAvanceDiario(
@@ -303,62 +303,69 @@ export function TabGeneral() {
   return (
     <div className="tab-general">
       <div className="tab-general-upper">
-        <div className="general-pie-chart-container">
-          <HighchartsReact
-            options={docenteSugeridoChart}
-            highcharts={Highcharts}
-          />
-          <hr />
-          <BasicLegend
-            data={docenteSugeridoChart.series}
-            total={+docenteSugeridoChart.title.number}
-          />
+        <div className="tab-general-docente">
+          <div className="general-pie-chart-container">
+            <HighchartsReact
+              options={docenteSugeridoChart}
+              highcharts={Highcharts}
+            />
+            <hr />
+            <BasicLegend
+              data={docenteSugeridoChart.series}
+              total={+docenteSugeridoChart.title.number}
+            />
+          </div>
+          <div className="general-pie-chart-container">
+            <HighchartsReact
+              options={docenteAgregadoChart}
+              highcharts={Highcharts}
+            />
+            <hr />
+            <BasicLegend
+              data={docenteAgregadoChart.series}
+              total={+docenteAgregadoChart.title.number}
+            />
+          </div>
+          <div className="general-pie-chart-container">
+            <HighchartsReact
+              options={docenteInscritoChart}
+              highcharts={Highcharts}
+            />
+            <hr />
+            <BasicLegend
+              data={docenteInscritoChart.series}
+              total={+docenteInscritoChart.title.number}
+            />
+          </div>
         </div>
-        <div className="general-pie-chart-container">
-          <HighchartsReact
-            options={docenteAgregadoChart}
-            highcharts={Highcharts}
-          />
-          <hr />
-          <BasicLegend
-            data={docenteAgregadoChart.series}
-            total={+docenteAgregadoChart.title.number}
-          />
-        </div>
-        <div className="general-pie-chart-container">
-          <HighchartsReact
-            options={docenteInscritoChart}
-            highcharts={Highcharts}
-          />
-          <hr />
-          <BasicLegend
-            data={docenteInscritoChart.series}
-            total={+docenteInscritoChart.title.number}
-          />
-        </div>
-        <div className="general-pie-chart-container">
-          <HighchartsReact
-            options={entidadSostenedorChart}
-            highcharts={Highcharts}
-          />
-          <hr />
-          <BasicLegend
-            data={entidadSostenedorChart.series}
-            total={+entidadSostenedorChart.title.number}
-          />
-        </div>
-        <div className="general-pie-chart-container">
-          <HighchartsReact options={sostenedorChart} highcharts={Highcharts} />
-          <hr />
-          <BasicLegend
-            data={sostenedorChart.series}
-            total={+sostenedorChart.title.number}
-          />
+        <div className="tab-general-docente">
+          <div className="general-pie-chart-container">
+            <HighchartsReact
+              options={entidadSostenedorChart}
+              highcharts={Highcharts}
+            />
+            <hr />
+            <BasicLegend
+              data={entidadSostenedorChart.series}
+              total={+entidadSostenedorChart.title.number}
+            />
+          </div>
+          <div className="general-pie-chart-container">
+            <HighchartsReact
+              options={sostenedorChart}
+              highcharts={Highcharts}
+            />
+            <hr />
+            <BasicLegend
+              data={sostenedorChart.series}
+              total={+sostenedorChart.title.number}
+            />
+          </div>
         </div>
       </div>
-      <div className="general-point-chart-container">
+      {/* <div className="general-point-chart-container">
         <HighchartsReact options={avancePointChart} highcharts={Highcharts} />
-      </div>
+      </div> */}
     </div>
   );
 }

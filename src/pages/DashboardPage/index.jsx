@@ -1,14 +1,12 @@
 import "./index.css";
-import Select from "react-select";
-import { Route, Routes, useNavigate, useParams } from "react-router";
+import { Route, Routes, useParams } from "react-router";
 import { useState } from "react";
 import { EDD2024Module } from "../../modules/EDD2024Module";
 import { EDD2025Module } from "../../modules/EDD2025Module";
 import { InscriptionSection2025 } from "../../modules/EDD2025Module/elements/InscriptionSection";
-import { Button } from "../../components/Button";
+import { DashboardHeader } from "./components/DashboardHeader";
 
 export function DashboardPage() {
-  const navigate = useNavigate();
   const { year } = useParams();
 
   const moduleOptions = [
@@ -21,41 +19,11 @@ export function DashboardPage() {
 
   return (
     <>
-      <nav className="dashboard-header">
-        <span className="roboto-bold">Evaluación del Desempeño Docente</span>
-        <Select
-          className="roboto-regular"
-          value={selectedModule}
-          onChange={(option) => {
-            setSelectedModule(option);
-            navigate(`/dashboard/${option.value}`);
-          }}
-          options={moduleOptions}
-          isSearchable={false}
-          noOptionsMessage={() => "Ningún módulo"}
-          placeholder="Seleccione una módulo"
-          styles={{
-            control: (base) => ({
-              ...base,
-              fontSize: "13px",
-              padding: "0px 10px ",
-            }),
-            option: (base) => ({
-              ...base,
-              fontSize: "13px",
-              color: "black",
-            }),
-          }}
-        />
-        <div className="dashboard-logout">
-          <Button
-            text={"Cerrar Sesión"}
-            action={() => {
-              navigate("/");
-            }}
-          />
-        </div>
-      </nav>
+      <DashboardHeader
+        selectedModule={selectedModule}
+        setSelectedModule={setSelectedModule}
+        moduleOptions={moduleOptions}
+      />
       <article className="dashboard-module">
         <Routes>
           {selectedModule.value === "2024" && (

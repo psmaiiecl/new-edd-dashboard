@@ -24,6 +24,6 @@ export function useModules() {
   }, [getToken]);
   return {
     inscriptionChart,
-    loadingStatus
+    loadingStatus,
   };
 }

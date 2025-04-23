@@ -4,7 +4,7 @@ export const BASIC_PIE = {
     plotBorderWidth: null,
     plotShadow: false,
     type: "pie",
-    marginTop: 120,
+    marginTop: 100,
     marginBottom: 80,
     height: 510,
   },
@@ -13,7 +13,7 @@ export const BASIC_PIE = {
     align: "center",
     style: {
       fontWeight: "bold",
-      color: "#5157FF",
+      color: "var(--blue-100)",
       fontSize: "35px",
     },
   },
@@ -39,6 +39,7 @@ export const BASIC_PIE = {
           "<b>{point.name}</b>: <b>{point.y:.,.0f} </b> ({point.percentage:.0f}%)<br/>",
         style: {
           fontSize: "13px",
+          fontWeight: "400",
           color: "#666666",
         },
       },
@@ -52,6 +53,9 @@ export const BASIC_PIE = {
     y: 350,
     itemStyle: {
       fontSize: "13px",
+    },
+    navigation: {
+      enabled: true,
     },
   },
   credits: {

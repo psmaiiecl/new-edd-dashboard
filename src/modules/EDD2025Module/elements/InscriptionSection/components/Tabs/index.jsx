@@ -1,5 +1,6 @@
+import "./index.css";
+import { Button } from "../../../../../../components/Button";
 import { tabList } from "../../Data/TabList";
-import "./Tabs.css";
 
 export function Tabs({ setActive, active }) {
   return (
@@ -13,6 +14,9 @@ export function Tabs({ setActive, active }) {
             setAsActive={() => setActive(tab.index)}
           />
         ))}
+      </div>
+      <div className="inscription-excel">
+        <Button text={"Descargar Excel"} action={() => {}} />
       </div>
     </div>
   );
