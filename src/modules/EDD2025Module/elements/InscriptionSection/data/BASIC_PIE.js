@@ -6,7 +6,7 @@ export const BASIC_PIE = {
     type: "pie",
     marginTop: 100,
     marginBottom: 80,
-    height: 510,
+    //height: 510,
   },
   title: {
     text: "Total",
@@ -61,4 +61,26 @@ export const BASIC_PIE = {
   credits: {
     enabled: false,
   },
+
+  responsive: {
+    rules: [
+      {
+        condition: { maxWidth: 500 },
+        chartOptions: {
+          plotOptions: {
+            // pie: {
+            //   dataLabels: {
+            //     enabled: false  
+            //   }
+            // }
+          },
+          legend: {
+            align: 'center',
+            verticalAlign: 'bottom',
+            layout: 'horizontal'
+          }
+        }
+      }
+    ]
+  }
 };

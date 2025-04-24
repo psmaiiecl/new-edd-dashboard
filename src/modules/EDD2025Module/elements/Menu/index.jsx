@@ -6,8 +6,8 @@ import { ModuleCard } from "../../../../components/ModuleCard";
 import { useNavigate } from "react-router";
 
 export function Menu() {
-  const { inscriptionChart, loadingStatus } = useModules();
   const navigate = useNavigate();
+  const { inscriptionChart, helpChart, loadingStatus } = useModules();
 
   return (
     <>
@@ -28,7 +28,18 @@ export function Menu() {
         <ModuleCard title={"Portafolio"} locked />
         <ModuleCard title={"Corrección Portafolios"} locked />
         <ModuleCard title={"Entrega de Resultados"} locked />
-        <ModuleCard title={"Mesa de Ayuda - Tickets"} locked />
+        <ModuleCard
+          title={"Mesa de Ayuda - Tickets"}
+          loading={loadingStatus.help}
+          action={() =>
+            window.open(
+              "https://analytics.zoho.com/open-view/2835166000003030282",
+              "_blank"
+            )
+          }
+        >
+          <HighchartsReact options={helpChart} highcharts={Highcharts} />
+        </ModuleCard>
       </div>
     </>
   );

@@ -121,11 +121,12 @@ export function buildEntidadesSostenedoras(setup, data) {
   return res;
 }
 export function buildSostenedoresParticipantes(setup, data) {
-  const total =
+  let total =
     parseInt(data.sostenedores.sin_ingreso) +
     parseInt(data.sostenedores.con_ingreso_sin_docentes) +
     parseInt(data.sostenedores.inscripcion_iniciada) +
     parseInt(data.sostenedores.sin_docentes_pendientes);
+  total = data.sostenedores.habilitados;
   const res = {
     ...setup,
     title: {
