@@ -246,7 +246,7 @@ export function buildAvanceDiario(setup, data, data2023) {
       },
       {
         color: "#28a745",
-        name: "Porcentaje avance 2023",
+        name: "Porcentaje avance 2024",
         data: arrAcumulado2023,
         // data: arrAcumulado2,
         tooltip: {

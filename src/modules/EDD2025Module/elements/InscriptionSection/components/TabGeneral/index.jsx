@@ -1,5 +1,5 @@
 import "./index.css";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 // eslint-disable-next-line no-unused-vars
@@ -15,9 +15,14 @@ import {
 } from "../../utils/generalTabUtils";
 import { BasicLegend } from "../BasicLegend";
 import { BASIC_PIE } from "../../data/BASIC_PIE";
-import Select from "react-select/base";
+import Select from "react-select";
+import { DEPENDENCY_LIST } from "../../data/DependencyList";
+import { LoadingContext } from "../../../../../../context/LoadingContext";
+import { AVANCE_DIARIO_2024 } from "../../data/AVANCE_DIARIO_2024";
 
 export function TabGeneral() {
+  const {queueLoading, dequeueLoading} = useContext(LoadingContext);
+  const [selectedFilter, setSelectedFilter] = useState(DEPENDENCY_LIST[0]);
   const [docenteSugeridoChart, setDocenteSugeridoChart] = useState({
     ...BASIC_PIE,
     subtitle: {
@@ -207,7 +212,7 @@ export function TabGeneral() {
       },
     },
     title: {
-      text: "Avance Diario Proceso de Inscripción 2024 por Docente",
+      text: "Avance Diario Proceso de Inscripción 2025 por Docente",
       align: "center",
       style: {
         fontWeight: "bold",
@@ -256,7 +261,7 @@ export function TabGeneral() {
       },
       {
         color: "#28a745",
-        name: "Porcentaje avance 2023",
+        name: "Porcentaje avance 2024",
         data: [],
         tooltip: {
           valueSuffix: "%",
@@ -267,7 +272,8 @@ export function TabGeneral() {
   });
 
   useEffect(() => {
-    getDatosInscripcion().then((data) => {
+    queueLoading();
+    getDatosInscripcion(selectedFilter.value).then((data) => {
       setDocenteSugeridoChart(
         buildDocentesSugeridos(docenteSugeridoChart, data.inscripcion_general)
       );
@@ -293,15 +299,42 @@ export function TabGeneral() {
         buildAvanceDiario(
           avancePointChart,
           data.avance_diario,
-          data.avance_diario2023
+          AVANCE_DIARIO_2024
         )
       );
+      dequeueLoading();
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [selectedFilter]);
 
   return (
     <div className="tab-general">
+      <div className="tab-general-filtro">
+        <span>Dependencia: </span>
+        <Select
+          className="roboto-regular tab-general-filtro-container"
+          value={selectedFilter}
+          onChange={(option) =>
+            setSelectedFilter(option)
+          }
+          options={DEPENDENCY_LIST}
+          isSearchable
+          noOptionsMessage={() => "Ninguna dependencia"}
+          placeholder="Seleccione una dependencia"
+          styles={{
+            control: (base) => ({
+              ...base,
+              fontSize: "13px",
+              padding: "0px 10px ",
+            }),
+            option: (base) => ({
+              ...base,
+              fontSize: "13px",
+              color: "black",
+            }),
+          }}
+        />
+      </div>
       <div className="tab-general-upper">
         <div className="tab-general-docente">
           <div className="general-pie-chart-container">
