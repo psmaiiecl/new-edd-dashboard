@@ -11,6 +11,7 @@ import {
   extraerSumaTotal,
 } from "../../utils/regionTabUtils";
 import { numberFormatter } from "../../../../../../utils/NumberFormatter";
+import { BASIC_BAR } from "../../data/BASIC_BAR";
 
 export function TabRegion() {
   const [docentesData, setDocentesData] = useState({});
@@ -23,31 +24,7 @@ export function TabRegion() {
     total: 0,
   });
   const [docentesChart, setDocentesChart] = useState({
-    chart: {
-      type: "bar",
-      plotBorderWidth: null,
-      plotShadow: false,
-      plotBackgroundColor: null,
-      marginTop: 120,
-      height: 600,
-      width: 1000,
-    },
-    title: {
-      text: 0,
-      align: "center",
-      style: {
-        fontWeight: "bold",
-        color: "#5157FF",
-        fontSize: "35px",
-      },
-    },
-    legend: {
-      itemStyle: {
-        fontSize: "13px",
-      },
-      y: 20,
-      margin: 40,
-    },
+    ...BASIC_BAR,
     subtitle: {
       text: "<b>ESTADO DE DOCENTES</b> DISTRIBUIDOS <b>POR DEPENDENCIA</b>",
       align: "center",
@@ -61,45 +38,6 @@ export function TabRegion() {
         style: {
           fontSize: "13px",
         },
-      },
-    },
-    yAxis: {
-      min: 0,
-      max: 100,
-      allowOverlap: true,
-      title: {
-        enabled: false,
-      },
-      labels: {
-        format: "{value}%",
-        style: {
-          fontSize: "13px",
-        },
-      },
-      tickInterval: 10,
-    },
-    tooltip: {
-      pointFormat:
-        '<span style="font-size:13px;"><span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)</span><br/>',
-      shared: true,
-    },
-    plotOptions: {
-      bar: {
-        stacking: "percent",
-        allowPointSelect: false,
-        cursor: "pointer",
-        dataLabels: {
-          enabled: false,
-          format: "<b>{point.y:.,.0f} </b> ({point.percentage:.0f}%)<br/>",
-          color: "#000000",
-          style: {
-            fontSize: "13px",
-            textOutline: "none",
-            color: "#666666",
-          },
-        },
-
-        //showInLegend: true
       },
     },
     series: [
@@ -140,31 +78,7 @@ export function TabRegion() {
     sin_docentes_pendientes: 0,
   });
   const [sostenedoresChart, setSostenedoresChart] = useState({
-    chart: {
-      type: "bar",
-      plotBorderWidth: null,
-      plotShadow: false,
-      plotBackgroundColor: null,
-      marginTop: 120,
-      height: 600,
-      width: 1000,
-    },
-    title: {
-      text: 0,
-      align: "center",
-      style: {
-        fontWeight: "bold",
-        color: "#5157FF",
-        fontSize: "35px",
-      },
-    },
-    legend: {
-      itemStyle: {
-        fontSize: "13px",
-      },
-      y: 20,
-      margin: 40,
-    },
+    ...BASIC_BAR,
     subtitle: {
       text: "<b>SOSTENEDORES</b> DISTRIBUIDOS POR DEPENDENCIA",
       align: "center",
@@ -177,43 +91,6 @@ export function TabRegion() {
       labels: {
         style: {
           fontSize: "13px",
-        },
-      },
-    },
-    yAxis: {
-      min: 0,
-      max: 100,
-      allowOverlap: true,
-      title: {
-        enabled: false,
-      },
-      labels: {
-        format: "{value}%",
-        style: {
-          fontSize: "13px",
-        },
-      },
-      tickInterval: 10,
-    },
-    tooltip: {
-      pointFormat:
-        '<span style="font-size:13px;"><span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)</span><br/>',
-      shared: true,
-    },
-    plotOptions: {
-      bar: {
-        stacking: "percent",
-        allowPointSelect: false,
-        cursor: "pointer",
-        dataLabels: {
-          enabled: false,
-          format: "<b>{point.y:.,.0f} </b> ({point.percentage:.0f}%)<br/>",
-          color: "#000000",
-          style: {
-            fontSize: "13px",
-            textOutline: "none",
-            color: "#666666",
-          },
         },
       },
     },
@@ -337,7 +214,8 @@ export function TabRegion() {
                     <td key={index}>
                       {numberFormatter(
                         (
-                          (docentesStatus[key] / docentesStatus.total) *
+
+                          (isNaN(docentesStatus[key] / docentesStatus.total) ? 0 : (docentesStatus[key] / docentesStatus.total)) *
                           100
                         ).toFixed(1)
                       ) + "%"}
@@ -348,6 +226,7 @@ export function TabRegion() {
           </table>
         </div>
       </div>
+      <hr className="section-separator" />
       <div className="tab-dependencia-grupo">
         <HighchartsReact options={sostenedoresChart} highcharts={Highcharts} />
         <div className="tab-dependencia-table-container">
@@ -419,7 +298,8 @@ export function TabRegion() {
                     <td key={index}>
                       {numberFormatter(
                         (
-                          (sostenedoresStatus[key] / sostenedoresStatus.total) *
+
+                          (isNaN(sostenedoresStatus[key] / sostenedoresStatus.total) ? 0 : (sostenedoresStatus[key] / sostenedoresStatus.total)) *
                           100
                         ).toFixed(1)
                       ) + "%"}

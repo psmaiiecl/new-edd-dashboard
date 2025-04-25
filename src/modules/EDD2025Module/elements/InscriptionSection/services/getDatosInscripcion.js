@@ -4,7 +4,8 @@ export async function getDatosInscripcion(dependency) {
   const url =
     import.meta.env.VITE_BASE_URL +
     BASE_API_URL_2025 +
-    "/2025-datos-inscripcion?dependencia="+dependency;
+    "/2025-datos-inscripcion?dependencia=" +
+    dependency;
   const res = await fetch(url, {
     method: "POST",
     headers: {

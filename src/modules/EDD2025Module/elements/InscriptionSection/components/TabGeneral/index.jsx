@@ -21,7 +21,7 @@ import { LoadingContext } from "../../../../../../context/LoadingContext";
 import { AVANCE_DIARIO_2024 } from "../../data/AVANCE_DIARIO_2024";
 
 export function TabGeneral() {
-  const {queueLoading, dequeueLoading} = useContext(LoadingContext);
+  const { queueLoading, dequeueLoading } = useContext(LoadingContext);
   const [selectedFilter, setSelectedFilter] = useState(DEPENDENCY_LIST[0]);
   const [docenteSugeridoChart, setDocenteSugeridoChart] = useState({
     ...BASIC_PIE,

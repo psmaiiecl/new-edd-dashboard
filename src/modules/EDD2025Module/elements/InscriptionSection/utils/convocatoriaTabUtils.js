@@ -43,7 +43,7 @@ export function buildDocentesDependenciaChart(setup, data, total) {
     (dep) => +data[dep]["En Revisión"].count || 0
   );
   const arrDesinscritos = dependencias.map(
-    (dep) => +data[dep].Desinscrito?.count || 0
+    (dep) => +data[dep].Retirado?.count || 0
   );
   const arrPendiente = dependencias.map(
     (dep) => +data[dep].Pendiente.count || 0

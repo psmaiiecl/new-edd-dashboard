@@ -2,7 +2,7 @@ import { MODULE_CHART_SETUP } from "../data/ModuleChartBase";
 
 export function buildHelpModuleChart(data) {
   const attended = data.Atendida ? +data.Atendida : 0;
-  const notAttended = data['No atendida'] ? +data['No atendida'] : 0;
+  const notAttended = data["No atendida"] ? +data["No atendida"] : 0;
   const total = attended + notAttended;
 
   return {
@@ -29,7 +29,6 @@ export function buildHelpModuleChart(data) {
               data: [(notAttended / total) * 100],
             },
           },
-          
         ],
       },
     ],

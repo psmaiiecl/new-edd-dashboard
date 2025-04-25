@@ -25,7 +25,7 @@ export function useModules() {
       changeLoadingStatus("inscription", false);
     });
     changeLoadingStatus("help", true);
-    getZohoCalls(getToken()).then((data)=>{
+    getZohoCalls(getToken()).then((data) => {
       console.log(data);
       setHelpChart(buildHelpModuleChart(data))
       changeLoadingStatus("help", false);

@@ -17,8 +17,8 @@ export function Tabs({ setActive, active }) {
         ))}
       </div>
       <div className="inscription-excel">
-        <Button text={"Excel Docente"} action={() => {getExcelDocente()}} />
-        <Button text={"Excel Sostenedor"} action={() => {getExcelSostenedor()}} />
+        <Button text={"Excel Docente"} action={() => { getExcelDocente() }} />
+        <Button text={"Excel Sostenedor"} action={() => { getExcelSostenedor() }} />
       </div>
     </div>
   );

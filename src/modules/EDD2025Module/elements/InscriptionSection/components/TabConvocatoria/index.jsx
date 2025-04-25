@@ -9,43 +9,20 @@ import {
   extraerSumaTotal,
 } from "../../utils/convocatoriaTabUtils";
 import { numberFormatter } from "../../../../../../utils/NumberFormatter";
+import { BASIC_BAR } from "../../data/BASIC_BAR";
 
 export function TabConvocatoria() {
   const [docentesConvocatoriaData, setDocentesConvocatoriaData] = useState({});
   const [docentesStatus, setDocentesStatus] = useState({
     Inscrito: 0,
     "En Revisión": 0,
-    Desinscrito: 0,
+    Retirado: 0,
     Pendiente: 0,
     Cancelado: 0,
     total: 0,
   });
   const [docentesConvocatoria, setDocentesConvocatoria] = useState({
-    chart: {
-      type: "bar",
-      plotBorderWidth: null,
-      plotShadow: false,
-      plotBackgroundColor: null,
-      marginTop: 120,
-      height: 400,
-      width: 600,
-    },
-    title: {
-      text: 0,
-      align: "center",
-      style: {
-        fontWeight: "bold",
-        color: "#5157FF",
-        fontSize: "35px",
-      },
-    },
-    legend: {
-      itemStyle: {
-        fontSize: "13px",
-      },
-      y: 20,
-      margin: 40,
-    },
+    ...BASIC_BAR,
     subtitle: {
       text: "<b>ESTADO DE DOCENTES</b> DISTRIBUIDOS POR CONVOCATORIA",
       align: "center",
@@ -63,31 +40,6 @@ export function TabConvocatoria() {
         style: {
           fontSize: "13px",
         },
-      },
-    },
-    yAxis: {
-      min: 0,
-      max: 100,
-      allowOverlap: true,
-      title: {
-        enabled: false,
-      },
-      labels: {
-        format: "{value}%",
-        style: {
-          fontSize: "13px",
-        },
-      },
-      tickInterval: 10,
-    },
-    tooltip: {
-      pointFormat:
-        '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
-      shared: true,
-    },
-    plotOptions: {
-      bar: {
-        stacking: "percent",
       },
     },
     series: [
@@ -200,7 +152,9 @@ export function TabConvocatoria() {
                         docentesConvocatoriaData[key]["En Revisión"]?.count
                       )}
                     </td>
-                    <td>{}</td>
+                    <td>{numberFormatter(
+                      docentesConvocatoriaData[key]?.Retirado.count
+                    )}</td>
                     <td>
                       {numberFormatter(
                         docentesConvocatoriaData[key]?.Pendiente.count
@@ -222,7 +176,7 @@ export function TabConvocatoria() {
                     <td key={index}>
                       {numberFormatter(
                         (
-                          (docentesStatus[key] / docentesStatus.total) *
+                          (isNaN(docentesStatus[key] / docentesStatus.total) ? 0 : (docentesStatus[key] / docentesStatus.total)) *
                           100
                         ).toFixed(1)
                       ) + "%"}

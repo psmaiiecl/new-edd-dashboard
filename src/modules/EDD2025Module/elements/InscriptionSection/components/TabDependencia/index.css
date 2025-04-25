@@ -2,21 +2,28 @@
   width: 100%;
 }
 
+.section-separator {
+  margin: 50px 0;
+  border: 1px solid #dcdcdc;
+}
+
 .tab-dependencia-grupo {
-  display: flex;
-  width: 100%;
-  flex-direction: column;
+  width: 90%;
+  margin: 30px auto;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   align-items: center;
-  padding: 20px 10px;
-  gap: 30px;
+  justify-content: center;
 }
 
 .tab-dependencia-table-container {
-  width: 50%;
+  width: 80%;
+  justify-self: end;
 }
 
 .legend-table {
-  border-collapse: separate;
+  border-collapse: collapse;
   width: 100%;
   border: 1px solid #dcdcdc;
 }
@@ -24,13 +31,13 @@
 .legend-table th,
 .legend-table td {
   border: 1px solid #dcdcdc;
-  padding: 2px 3px;
-  font-size: 14px;
+  padding: 2px 1px;
+  font-size: 13px;
 }
 
 .legend-table__head th {
   background-color: #f9f9f9;
-  font-weight: 600;
+  font-weight: 400;
   text-align: center;
 }
 
@@ -40,6 +47,8 @@
 
 .legend-table__body tr td:first-child {
   text-align: right;
-  font-weight: 500;
+  font-weight: 300;
   padding-right: 5px;
+  font-size: 13px;
+
 }

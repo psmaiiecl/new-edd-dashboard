@@ -70,17 +70,17 @@ export const BASIC_PIE = {
           plotOptions: {
             // pie: {
             //   dataLabels: {
-            //     enabled: false  
+            //     enabled: false
             //   }
             // }
           },
           legend: {
-            align: 'center',
-            verticalAlign: 'bottom',
-            layout: 'horizontal'
-          }
-        }
-      }
-    ]
-  }
+            align: "center",
+            verticalAlign: "bottom",
+            layout: "horizontal",
+          },
+        },
+      },
+    ],
+  },
 };
