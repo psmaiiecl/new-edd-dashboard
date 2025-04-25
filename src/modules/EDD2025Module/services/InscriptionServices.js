@@ -38,7 +38,7 @@ export async function getExcelDocente() {
 
   const a = document.createElement("a");
   a.href = urlBlob;
-  a.download = "inscripcion-docentes.xlsx";
+  a.download = "inscripcion-docentes.csv";
   document.body.appendChild(a);
   a.click();
   a.remove();
@@ -67,7 +67,7 @@ export async function getExcelSostenedor() {
 
   const a = document.createElement("a");
   a.href = urlBlob;
-  a.download = "inscripcion-sostenedores.xlsx";
+  a.download = "inscripcion-sostenedores.csv";
   document.body.appendChild(a);
   a.click();
   a.remove();
