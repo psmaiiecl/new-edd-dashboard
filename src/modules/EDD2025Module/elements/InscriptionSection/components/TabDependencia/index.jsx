@@ -163,6 +163,7 @@ export function TabDependencia() {
                             padding: "2px",
                             fontWeight: "500",
                             placeSelf: "center",
+                            margin: "0 auto"
                           }}
                         >
                           <span>{numberFormatter(item)}</span>
