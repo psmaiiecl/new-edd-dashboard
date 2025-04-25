@@ -33,14 +33,6 @@ export function TabDependencia() {
         fontSize: "15px",
       },
     },
-    xAxis: {
-      categories: [],
-      labels: {
-        style: {
-          fontSize: "13px",
-        },
-      },
-    },
     series: [
       {
         name: "Inscritos en nómina",
@@ -85,14 +77,6 @@ export function TabDependencia() {
       align: "center",
       style: {
         fontSize: "15px",
-      },
-    },
-    xAxis: {
-      categories: [],
-      labels: {
-        style: {
-          fontSize: "13px",
-        },
       },
     },
     series: [

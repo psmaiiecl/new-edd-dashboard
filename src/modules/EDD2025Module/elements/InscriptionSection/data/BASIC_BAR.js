@@ -35,10 +35,18 @@ export const BASIC_BAR = {
     labels: {
       format: "{value}%",
       style: {
-        fontSize: "13px",
+        fontSize: "11px",
       },
     },
     tickInterval: 10,
+  },
+  xAxis: {
+    categories: [],
+    labels: {
+      style: {
+        fontSize: "11px",
+      },
+    },
   },
   tooltip: {
     pointFormat:

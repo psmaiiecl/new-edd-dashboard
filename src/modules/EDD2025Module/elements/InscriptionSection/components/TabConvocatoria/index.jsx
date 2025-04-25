@@ -23,6 +23,10 @@ export function TabConvocatoria() {
   });
   const [docentesConvocatoria, setDocentesConvocatoria] = useState({
     ...BASIC_BAR,
+    chart:{
+      ...BASIC_BAR.chart,
+      height: 450
+    },
     subtitle: {
       text: "<b>ESTADO DE DOCENTES</b> DISTRIBUIDOS POR CONVOCATORIA",
       align: "center",
@@ -31,16 +35,13 @@ export function TabConvocatoria() {
       },
     },
     xAxis: {
+      ...BASIC_BAR.xAxis,
       categories: [
         "Participación voluntaria",
         "Participación obligatoria",
         "No Habilitado",
       ],
-      labels: {
-        style: {
-          fontSize: "13px",
-        },
-      },
+
     },
     series: [
       {

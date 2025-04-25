@@ -47,12 +47,8 @@ export function buildDocentesRegionChart(setup, data, total) {
       text: numberFormatter(total),
     },
     xAxis: {
+      ...setup.xAxis,
       categories: dependencias,
-      labels: {
-        style: {
-          fontSize: "13px",
-        },
-      },
     },
     series: [
       {
@@ -129,12 +125,8 @@ export function buildSostenedoresRegionChart(setup, data, total) {
       text: numberFormatter(total),
     },
     xAxis: {
+      ...setup.xAxis,
       categories: dependencias,
-      labels: {
-        style: {
-          fontSize: "13px",
-        },
-      },
     },
     series: [
       {

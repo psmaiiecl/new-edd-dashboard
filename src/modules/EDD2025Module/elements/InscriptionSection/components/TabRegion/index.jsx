@@ -32,14 +32,6 @@ export function TabRegion() {
         fontSize: "15px",
       },
     },
-    xAxis: {
-      categories: [],
-      labels: {
-        style: {
-          fontSize: "13px",
-        },
-      },
-    },
     series: [
       {
         name: "Inscritos en nómina",
@@ -84,14 +76,6 @@ export function TabRegion() {
       align: "center",
       style: {
         fontSize: "15px",
-      },
-    },
-    xAxis: {
-      categories: [],
-      labels: {
-        style: {
-          fontSize: "13px",
-        },
       },
     },
     series: [
