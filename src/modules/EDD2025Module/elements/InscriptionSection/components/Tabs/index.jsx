@@ -1,6 +1,6 @@
 import "./index.css";
 import { Button } from "../../../../../../components/Button";
-import { tabList } from "../../Data/TabList";
+import { tabList } from "../../data/TabList";
 import { getExcelDocente, getExcelSostenedor } from "../../../../services/InscriptionServices";
 
 export function Tabs({ setActive, active }) {
