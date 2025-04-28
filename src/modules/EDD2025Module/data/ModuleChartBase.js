@@ -2,7 +2,7 @@ export const MODULE_CHART_SETUP = {
   chart: {
     type: "pie",
     height: 260,
-    backgroundColor: "transparent",
+    backgroundColor: "transparent"
   },
   title: {
     text: "",
