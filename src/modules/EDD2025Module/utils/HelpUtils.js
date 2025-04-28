@@ -14,7 +14,7 @@ export function buildHelpModuleChart(data) {
           {
             name: "Atendidas",
             y: attended,
-            color: "#76767b",
+            color: "#c3ffb0",
             drilldown: {
               categories: ["Atendidas"],
               data: [(attended / total) * 100],
@@ -23,7 +23,7 @@ export function buildHelpModuleChart(data) {
           {
             name: "No atendidas",
             y: notAttended,
-            color: "#c3ffb0",
+            color: "#76767b",
             drilldown: {
               categories: ["No atendidas"],
               data: [(notAttended / total) * 100],
