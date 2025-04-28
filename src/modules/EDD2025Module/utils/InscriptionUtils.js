@@ -16,8 +16,8 @@ export function buildInscripcionModuleChart(data) {
         data: [
           {
             name: "Inscritos",
+            color: "#b3b8ff",
             y: enrolled,
-            color: "#76767b",
             drilldown: {
               categories: ["Inscritos"],
               data: [(enrolled / total) * 100],
@@ -44,7 +44,7 @@ export function buildInscripcionModuleChart(data) {
           {
             name: "Pendientes",
             y: pending,
-            color: "#b3b8ff",
+            color: "#76767b",
             drilldown: {
               categories: ["Pendientes"],
               data: [(pending / total) * 100],
