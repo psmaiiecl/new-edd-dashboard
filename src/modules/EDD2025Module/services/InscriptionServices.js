@@ -74,3 +74,50 @@ export async function getExcelSostenedor() {
 
   window.URL.revokeObjectURL(urlBlob);
 }
+
+export async function getInscriptionDependency(token) {
+  const url =
+    import.meta.env.VITE_BASE_URL +
+    BASE_API_URL_2025 +
+    "/2025-inscripcion-dependencia";
+  const res = await fetch(url, {
+    method: "POST",
+    headers: {
+      t: token,
+    },
+  });
+  const data = await res.json();
+  return data;
+}
+
+export async function getInscriptionConvocatoria(token) {
+  const url =
+    import.meta.env.VITE_BASE_URL +
+    BASE_API_URL_2025 +
+    "/2025-inscripcion-convocatoria";
+  const res = await fetch(url, {
+    method: "POST",
+    headers: {
+      t: localStorage.getItem("token"),
+      "Cross-Domain": "true",
+    },
+  });
+  const data = await res.json();
+  return data;
+}
+
+export async function getInscriptionRegion(token) {
+  const url =
+    import.meta.env.VITE_BASE_URL +
+    BASE_API_URL_2025 +
+    "/2025-inscripcion-region";
+  const res = await fetch(url, {
+    method: "POST",
+    headers: {
+      t: localStorage.getItem("token"),
+      "Cross-Domain": "true",
+    },
+  });
+  const data = await res.json();
+  return data;
+}
