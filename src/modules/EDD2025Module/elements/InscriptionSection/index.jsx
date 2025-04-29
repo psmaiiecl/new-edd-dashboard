@@ -1,10 +1,10 @@
 import "./index.css";
 import { useState } from "react";
 import { Tabs } from "./components/Tabs";
-import { TabGeneral } from "./components/TabGeneral";
-import { TabConvocatoria } from "./components/TabConvocatoria";
-import { TabDependencia } from "./components/TabDependencia";
 import { TabRegion } from "./components/TabRegion";
+import { TabGeneral } from "./components/TabGeneral";
+import { TabDependencia } from "./components/TabDependencia";
+import { TabConvocatoria } from "./components/TabConvocatoria";
 
 export function InscriptionSection2025() {
   const [activeTab, setActiveTab] = useState("tab1");

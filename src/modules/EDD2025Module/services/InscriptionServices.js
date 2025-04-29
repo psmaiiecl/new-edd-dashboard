@@ -16,6 +16,22 @@ export async function getInscriptionData(token) {
   return data;
 }
 
+export async function getFilteredInscriptionData(token, dependency) {
+  const url =
+    import.meta.env.VITE_BASE_URL +
+    BASE_API_URL_2025 +
+    "/2025-datos-inscripcion?dependencia=" +
+    dependency;
+  const res = await fetch(url, {
+    method: "POST",
+    headers: {
+      t: token,
+    },
+  });
+  const data = await res.json();
+  return data;
+}
+
 export async function getExcelDocente() {
   const url =
     import.meta.env.VITE_BASE_URL +
@@ -73,4 +89,49 @@ export async function getExcelSostenedor() {
   a.remove();
 
   window.URL.revokeObjectURL(urlBlob);
+}
+
+export async function getInscriptionDependency(token) {
+  const url =
+    import.meta.env.VITE_BASE_URL +
+    BASE_API_URL_2025 +
+    "/2025-inscripcion-dependencia";
+  const res = await fetch(url, {
+    method: "POST",
+    headers: {
+      t: token,
+    },
+  });
+  const data = await res.json();
+  return data;
+}
+
+export async function getInscriptionConvocatoria(token) {
+  const url =
+    import.meta.env.VITE_BASE_URL +
+    BASE_API_URL_2025 +
+    "/2025-inscripcion-convocatoria";
+  const res = await fetch(url, {
+    method: "POST",
+    headers: {
+      t: token,
+    },
+  });
+  const data = await res.json();
+  return data;
+}
+
+export async function getInscriptionRegion(token) {
+  const url =
+    import.meta.env.VITE_BASE_URL +
+    BASE_API_URL_2025 +
+    "/2025-inscripcion-region";
+  const res = await fetch(url, {
+    method: "POST",
+    headers: {
+      t: token,
+    },
+  });
+  const data = await res.json();
+  return data;
 }

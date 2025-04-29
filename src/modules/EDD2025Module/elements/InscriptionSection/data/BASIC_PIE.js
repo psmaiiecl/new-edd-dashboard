@@ -6,7 +6,20 @@ export const BASIC_PIE = {
     type: "pie",
     marginTop: 100,
     marginBottom: 80,
-    //height: 510,
+    height: 510,
+  },
+  legend: {
+    enabled: true,
+    verticalAlign: "top",
+    x: 0,
+    y: 350,
+    
+    itemStyle: {
+      fontSize: "13px",
+    },
+    navigation: {
+      enabled: true,
+    },
   },
   title: {
     text: "Total",
@@ -35,8 +48,7 @@ export const BASIC_PIE = {
       cursor: "pointer",
       dataLabels: {
         enabled: true,
-        format:
-          "<b>{point.name}</b>: <b>{point.y:.,.0f} </b> ({point.percentage:.0f}%)<br/>",
+        format:"<b>{point.name}</b>: <b>{point.y:.,.0f} </b> ({point.percentage:.0f}%)<br/>",
         style: {
           fontSize: "13px",
           fontWeight: "400",
@@ -46,41 +58,29 @@ export const BASIC_PIE = {
       showInLegend: true,
     },
   },
-  legend: {
-    enabled: true,
-    verticalAlign: "top",
-    x: 0,
-    y: 350,
-    itemStyle: {
-      fontSize: "13px",
-    },
-    navigation: {
-      enabled: true,
-    },
-  },
   credits: {
     enabled: false,
   },
 
-  responsive: {
-    rules: [
-      {
-        condition: { maxWidth: 500 },
-        chartOptions: {
-          plotOptions: {
-            // pie: {
-            //   dataLabels: {
-            //     enabled: false
-            //   }
-            // }
-          },
-          legend: {
-            align: "center",
-            verticalAlign: "bottom",
-            layout: "horizontal",
-          },
-        },
-      },
-    ],
-  },
+  // responsive: {
+  //   rules: [
+  //     {
+  //       condition: { maxWidth: 500 },
+  //       chartOptions: {
+  //         plotOptions: {
+  //           // pie: {
+  //           //   dataLabels: {
+  //           //     enabled: false
+  //           //   }
+  //           // }
+  //         },
+  //         legend: {
+  //           align: "center",
+  //           verticalAlign: "bottom",
+  //           layout: "horizontal",
+  //         },
+  //       },
+  //     },
+  //   ],
+  // },
 };
