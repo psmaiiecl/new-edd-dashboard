@@ -16,6 +16,22 @@ export async function getInscriptionData(token) {
   return data;
 }
 
+export async function getFilteredInscriptionData(token, dependency) {
+  const url =
+    import.meta.env.VITE_BASE_URL +
+    BASE_API_URL_2025 +
+    "/2025-datos-inscripcion?dependencia=" +
+    dependency;
+  const res = await fetch(url, {
+    method: "POST",
+    headers: {
+      t: token,
+    },
+  });
+  const data = await res.json();
+  return data;
+}
+
 export async function getExcelDocente() {
   const url =
     import.meta.env.VITE_BASE_URL +
@@ -98,8 +114,7 @@ export async function getInscriptionConvocatoria(token) {
   const res = await fetch(url, {
     method: "POST",
     headers: {
-      t: localStorage.getItem("token"),
-      "Cross-Domain": "true",
+      t: token,
     },
   });
   const data = await res.json();
@@ -114,8 +129,7 @@ export async function getInscriptionRegion(token) {
   const res = await fetch(url, {
     method: "POST",
     headers: {
-      t: localStorage.getItem("token"),
-      "Cross-Domain": "true",
+      t: token,
     },
   });
   const data = await res.json();

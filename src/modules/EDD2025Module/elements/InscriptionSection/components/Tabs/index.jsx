@@ -1,7 +1,10 @@
 import "./index.css";
-import { Button } from "../../../../../../components/Button";
 import { tabList } from "../../data/TabList";
-import { getExcelDocente, getExcelSostenedor } from "../../../../services/InscriptionServices";
+import { Button } from "../../../../../../components/Button";
+import {
+  getExcelDocente,
+  getExcelSostenedor,
+} from "../../../../services/InscriptionServices";
 
 export function Tabs({ setActive, active }) {
   return (
@@ -17,8 +20,18 @@ export function Tabs({ setActive, active }) {
         ))}
       </div>
       <div className="inscription-excel">
-        <Button text={"Excel Docente"} action={() => { getExcelDocente() }} />
-        <Button text={"Excel Sostenedor"} action={() => { getExcelSostenedor() }} />
+        <Button
+          text={"Excel Docente"}
+          action={() => {
+            getExcelDocente();
+          }}
+        />
+        <Button
+          text={"Excel Sostenedor"}
+          action={() => {
+            getExcelSostenedor();
+          }}
+        />
       </div>
     </div>
   );

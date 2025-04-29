@@ -1,3 +1,1 @@
-export function TabBar (){
-    
-}
+export function TabBar() {}

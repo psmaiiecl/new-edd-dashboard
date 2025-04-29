@@ -1,132 +1,18 @@
 import "./index.css";
-import { useEffect, useState } from "react";
-
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
-import { getInscripcionDependencia } from "../../services/getInscripcionDependencia";
-import {
-  buildDocentesDependenciaChart,
-  buildSostenedoresDependenciaChart,
-  extraerSumatoriasDocentes,
-  extraerSumatoriaSostenedores,
-  extraerSumaTotal,
-} from "../../utils/dependenciaTabUtils";
 import { numberFormatter } from "../../../../../../utils/NumberFormatter";
-import { BASIC_BAR } from "../../data/BASIC_BAR";
+import { useTabDependencia } from "./hooks/useTabDependencia";
 
 export function TabDependencia() {
-  const [docentesData, setDocentesData] = useState({});
-  const [docentesStatus, setDocentesStatus] = useState({
-    Inscrito: 0,
-    "En Revisión": 0,
-    Desinscrito: 0,
-    Pendiente: 0,
-    Cancelado: 0,
-    total: 0,
-  });
-  const [docentesChart, setDocentesChart] = useState({
-    ...BASIC_BAR,
-    subtitle: {
-      text: "<b>ESTADO DE DOCENTES</b> DISTRIBUIDOS <b>POR DEPENDENCIA</b>",
-      align: "center",
-      style: {
-        fontSize: "15px",
-      },
-    },
-    series: [
-      {
-        name: "Inscritos en nómina",
-        data: [],
-        sliced: true,
-        selected: true,
-        color: "#65D9AB",
-      },
-      {
-        name: "En Revisión",
-        data: [],
-        color: "#FF8E53",
-      },
-      {
-        name: "Desinscritos",
-        data: [],
-        color: "#C1D9CA",
-      },
-      {
-        name: "Pendientes",
-        data: [],
-        color: "#FFD153",
-      },
-      {
-        name: "Cancelados",
-        data: [],
-        color: "#FF5880",
-      },
-    ],
-  });
-  const [sostenedoresData, setSostenedoresData] = useState({});
-  const [sostenedoresStatus, setSostenedoresStatus] = useState({
-    sin_ingreso: 0,
-    con_ingreso_sin_docentes: 0,
-    inscripcion_iniciada: 0,
-    sin_docentes_pendientes: 0,
-  });
-  const [sostenedoresChart, setSostenedoresChart] = useState({
-    ...BASIC_BAR,
-    subtitle: {
-      text: "<b>SOSTENEDORES</b> DISTRIBUIDOS POR DEPENDENCIA",
-      align: "center",
-      style: {
-        fontSize: "15px",
-      },
-    },
-    series: [
-      {
-        name: "Sin Ingreso",
-        data: [],
-        color: "#FF5880",
-      },
-      {
-        name: "Con ingreso pero sin docentes inscritos",
-        data: [],
-        color: "#FF8E53",
-      },
-      {
-        name: "Con inscripción iniciada",
-        data: [],
-        color: "#65D9AB",
-      },
-      {
-        name: "Con inscripción terminada",
-        data: [],
-        color: "#8FB8FF",
-      },
-    ],
-  });
-
-  useEffect(() => {
-    getInscripcionDependencia().then((data) => {
-      const dStatus = extraerSumatoriasDocentes(data.docentes);
-      const dTotal = extraerSumaTotal(dStatus);
-      setDocentesData(data.docentes);
-      setDocentesStatus({ ...dStatus, total: dTotal });
-      setDocentesChart(
-        buildDocentesDependenciaChart(docentesChart, data.docentes, dTotal)
-      );
-
-      const sStatus = extraerSumatoriaSostenedores(data.sostenedores);
-      const sTotal = extraerSumaTotal(sStatus);
-      setSostenedoresData(data.sostenedores);
-      setSostenedoresStatus({ ...sStatus, total: sTotal });
-      setSostenedoresChart(
-        buildSostenedoresDependenciaChart(
-          sostenedoresChart,
-          data.sostenedores,
-          sTotal
-        )
-      );
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const {
+    docentesChart,
+    docentesStatus,
+    docentesData,
+    sostenedoresChart,
+    sostenedoresStatus,
+    sostenedoresData,
+  } = useTabDependencia();
   return (
     <div className="tab-dependencia">
       <div className="tab-dependencia-grupo">
@@ -163,7 +49,7 @@ export function TabDependencia() {
                             padding: "2px",
                             fontWeight: "500",
                             placeSelf: "center",
-                            margin: "0 auto"
+                            margin: "0 auto",
                           }}
                         >
                           <span>{numberFormatter(item)}</span>
@@ -200,8 +86,9 @@ export function TabDependencia() {
                     <td key={index}>
                       {numberFormatter(
                         (
-                          (isNaN(docentesStatus[key] / +docentesStatus.total) ? 0 : (docentesStatus[key] / +docentesStatus.total)) *
-                          100
+                          (isNaN(docentesStatus[key] / +docentesStatus.total)
+                            ? 0
+                            : docentesStatus[key] / +docentesStatus.total) * 100
                         ).toFixed(1)
                       ) + "%"}
                     </td>
@@ -283,8 +170,12 @@ export function TabDependencia() {
                     <td key={index}>
                       {numberFormatter(
                         (
-                          (isNaN(sostenedoresStatus[key] / sostenedoresStatus.total) ? 0 : (sostenedoresStatus[key] / sostenedoresStatus.total)) *
-                          100
+                          (isNaN(
+                            sostenedoresStatus[key] / sostenedoresStatus.total
+                          )
+                            ? 0
+                            : sostenedoresStatus[key] /
+                              sostenedoresStatus.total) * 100
                         ).toFixed(1)
                       ) + "%"}
                     </td>

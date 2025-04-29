@@ -5,6 +5,7 @@ import { EDD2024Module } from "../../modules/EDD2024Module";
 import { EDD2025Module } from "../../modules/EDD2025Module";
 import { InscriptionSection2025 } from "../../modules/EDD2025Module/elements/InscriptionSection";
 import { DashboardHeader } from "./components/DashboardHeader";
+import { ValidationSection2025 } from "../../modules/EDD2025Module/elements/ValidationSection";
 
 export function DashboardPage() {
   const { year } = useParams();
@@ -32,6 +33,7 @@ export function DashboardPage() {
           {selectedModule.value === "2025" && (
             <Route path="/" element={<EDD2025Module />}>
               <Route path="inscripcion" element={<InscriptionSection2025 />} />
+              <Route path="validacion" element={<ValidationSection2025 />} />
             </Route>
           )}
         </Routes>

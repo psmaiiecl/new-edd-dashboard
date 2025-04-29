@@ -1,6 +1,5 @@
 import "./index.css";
 import { useEffect, useState } from "react";
-import { getDatosInscripcion } from "../../Servicios/getDatosInscripcion";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 // eslint-disable-next-line no-unused-vars
@@ -10,8 +9,9 @@ import {
   buildAvanceDiario,
   buildDocentesEnNomina,
   buildSostenedoresParticipantes,
-} from "../../Utils/generalTabUtils";
+} from "../../utils/generalTabUtils";
 import { LeyendaBasica } from "../LeyendaBasica";
+import { getInscriptionData } from "../../../../services/InscriptionServices";
 
 const TabGeneral = () => {
   const [nominaChart, setNominaChart] = useState({
@@ -285,7 +285,7 @@ const TabGeneral = () => {
   });
 
   useEffect(() => {
-    getDatosInscripcion().then((data) => {
+    getInscriptionData(localStorage.getItem("t")).then((data) => {
       setNominaChart(
         buildDocentesEnNomina(nominaChart, data.inscripcion_general)
       );

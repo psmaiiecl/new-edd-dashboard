@@ -1,10 +1,10 @@
-import { buildInscripcionModuleChart } from "../utils/InscriptionUtils";
-import { MODULE_CHART_SETUP } from "../data/ModuleChartBase";
 import { useContext, useEffect, useState } from "react";
+import { MODULE_CHART_SETUP } from "../data/ModuleChartBase";
 import { AuthContext } from "../../../context/AuthContext";
-import { getInscriptionData } from "../services/InscriptionServices";
 import { getZohoCalls } from "../services/HelpServices";
+import { getInscriptionData } from "../services/InscriptionServices";
 import { buildHelpModuleChart } from "../utils/HelpUtils";
+import { buildInscripcionModuleChart } from "../utils/InscriptionUtils";
 export function useModules() {
   const { getToken } = useContext(AuthContext);
   const [inscriptionChart, setInscriptionChart] = useState(MODULE_CHART_SETUP);
@@ -27,9 +27,9 @@ export function useModules() {
     changeLoadingStatus("help", true);
     getZohoCalls(getToken()).then((data) => {
       console.log(data);
-      setHelpChart(buildHelpModuleChart(data))
+      setHelpChart(buildHelpModuleChart(data));
       changeLoadingStatus("help", false);
-    })
+    });
   }, [getToken]);
   return {
     inscriptionChart,
