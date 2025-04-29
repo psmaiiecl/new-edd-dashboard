@@ -1,12 +1,11 @@
 import { BASE_API_URL_2025 } from "../data/BASE_API_URL";
 
 export async function getGeneralValidation(token, filters) {
-  const body = {
-    convocatoria: filters.convocatoria.value,
-    estado: filters.estado.value,
-    nivel: filters.cambio.value,
-    suspension: filters.suspension.value,
-  };
+  const body = new FormData();
+  body.append("convocatoria", filters.convocatoria.value);
+  body.append("estado", filters.estado.value);
+  body.append("nivel", filters.cambio.value);
+  body.append("suspension", filters.suspension.value);
   const URL =
     import.meta.env.VITE_BASE_URL +
     BASE_API_URL_2025 +
@@ -16,7 +15,7 @@ export async function getGeneralValidation(token, filters) {
     headers: {
       t: token,
     },
-    body: JSON.stringify(body),
+    body: body,
   });
 
   const data = await response.json();
