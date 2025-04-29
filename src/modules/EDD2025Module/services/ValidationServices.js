@@ -26,7 +26,7 @@ export async function getValidationParticipationStatus(token) {
   const URL =
     import.meta.env.VITE_BASE_URL +
     BASE_API_URL_2025 +
-    "/2025-validacion-estado-participacion";
+    "/2025-validacion?endpoint=estado-participacion";
   const response = await fetch(URL, {
     method: "POST",
     headers: {
@@ -42,7 +42,7 @@ export async function getValidacionVistaDependencia(token) {
   const URL =
     import.meta.env.VITE_BASE_URL +
     BASE_API_URL_2025 +
-    "/2025-validacion-vista-dependencia";
+    "/2025-validacion?endpoint=vista-dependencia";
   const response = await fetch(URL, {
     method: "POST",
     headers: {
@@ -58,7 +58,7 @@ export async function getValidacionCambioNivelVistaDependencia(token) {
   const URL =
     import.meta.env.VITE_BASE_URL +
     BASE_API_URL_2025 +
-    "/2025-validacion-cambio-nivel-vista-dependencia";
+    "/2025-validacion?endpoint=cambio-nivel-vista-dependencia";
   const response = await fetch(URL, {
     method: "POST",
     headers: {
@@ -74,7 +74,7 @@ export async function getValidacionSolicitaSuspenderVistaDependencia(token) {
   const URL =
     import.meta.env.VITE_BASE_URL +
     BASE_API_URL_2025 +
-    "/2025-validacion-solicita-suspender-vista-dependencia";
+    "/2025-validacion?endpoint=solicita-suspender-vista-dependencia";
   const response = await fetch(URL, {
     method: "POST",
     headers: {
@@ -90,7 +90,7 @@ export async function getValidacionVistaRegion(token) {
   const URL =
     import.meta.env.VITE_BASE_URL +
     BASE_API_URL_2025 +
-    "/2025-validacion-vista-region";
+    "/2025-validacion?endpoint=vista-region";
   const response = await fetch(URL, {
     method: "POST",
     headers: {
@@ -106,7 +106,7 @@ export async function getValidacionCambioNivelVistaRegion(token) {
   const URL =
     import.meta.env.VITE_BASE_URL +
     BASE_API_URL_2025 +
-    "/2025-validacion-cambio-nivel-vista-region";
+    "/2025-validacion?endpoint=cambio-nivel-vista-region";
   const response = await fetch(URL, {
     method: "POST",
     headers: {
@@ -122,7 +122,7 @@ export async function getValidacionSolicitaSuspenderVistaRegion(token) {
   const URL =
     import.meta.env.VITE_BASE_URL +
     BASE_API_URL_2025 +
-    "/2025-validacion-solicita-suspender-vista-region";
+    "/2025-validacion?endpoint=solicita-suspender-vista-region";
   const response = await fetch(URL, {
     method: "POST",
     headers: {
@@ -138,7 +138,7 @@ export async function getValidacionVistaConvocatoria(token) {
   const URL =
     import.meta.env.VITE_BASE_URL +
     BASE_API_URL_2025 +
-    "/2025-validacion-vista-convocatoria";
+    "/2025-validacion?endpoint=vista-convocatoria";
   const response = await fetch(URL, {
     method: "POST",
     headers: {
@@ -154,7 +154,7 @@ export async function getValidacionCambioNivelVistaConvocatoria(token) {
   const URL =
     import.meta.env.VITE_BASE_URL +
     BASE_API_URL_2025 +
-    "/2025-validacion-cambio-nivel-vista-convocatoria";
+    "/2025-validacion?endpoint=cambio-nivel-vista-convocatoria";
   const response = await fetch(URL, {
     method: "POST",
     headers: {
@@ -170,7 +170,7 @@ export async function getValidacionSolicitaSuspenderVistaConvocatoria(token) {
   const URL =
     import.meta.env.VITE_BASE_URL +
     BASE_API_URL_2025 +
-    "/2025-validacion-solicita-suspender-vista-convocatoria";
+    "/2025-validacion?endpoint=solicita-suspender-vista-convocatoria";
   const response = await fetch(URL, {
     method: "POST",
     headers: {
