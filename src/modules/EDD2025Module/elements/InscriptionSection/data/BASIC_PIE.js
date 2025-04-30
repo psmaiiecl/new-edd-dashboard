@@ -13,7 +13,7 @@ export const BASIC_PIE = {
     verticalAlign: "top",
     x: 0,
     y: 350,
-    
+
     itemStyle: {
       fontSize: "13px",
     },
@@ -48,7 +48,8 @@ export const BASIC_PIE = {
       cursor: "pointer",
       dataLabels: {
         enabled: true,
-        format:"<b>{point.name}</b>: <b>{point.y:.,.0f} </b> ({point.percentage:.0f}%)<br/>",
+        format:
+          "<b>{point.name}</b>: <b>{point.y:.,.0f} </b> ({point.percentage:.0f}%)<br/>",
         style: {
           fontSize: "13px",
           fontWeight: "400",
