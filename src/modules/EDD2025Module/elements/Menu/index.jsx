@@ -24,6 +24,7 @@ export function Menu() {
           <HighchartsReact options={inscriptionChart} highcharts={Highcharts} />
         </ModuleCard>
         <ModuleCard
+          locked
           title={"Validación"}
           loading={loadingStatus.validation}
           action={() => navigate("validacion")}
