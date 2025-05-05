@@ -5,8 +5,11 @@ import {
   getExcelDocente,
   getExcelSostenedor,
 } from "../../../../services/InscriptionServices";
+import { useContext } from "react";
+import { LoadingContext } from "../../../../../../context/LoadingContext";
 
 export function Tabs({ setActive, active }) {
+  const {queueLoading, dequeueLoading} = useContext(LoadingContext);
   return (
     <div className="tab-container">
       <div className="tabs">
@@ -23,13 +26,15 @@ export function Tabs({ setActive, active }) {
         <Button
           text={"Excel Docente"}
           action={() => {
-            getExcelDocente();
+            queueLoading();
+            getExcelDocente(dequeueLoading);
           }}
-        />
+          />
         <Button
           text={"Excel Sostenedor"}
           action={() => {
-            getExcelSostenedor();
+            queueLoading();
+            getExcelSostenedor(dequeueLoading);
           }}
         />
       </div>
