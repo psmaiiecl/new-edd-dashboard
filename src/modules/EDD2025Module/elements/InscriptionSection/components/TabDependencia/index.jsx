@@ -67,7 +67,7 @@ export function TabDependencia() {
                       {numberFormatter(docentesData[key]["En Revisión"].count)}
                     </td>
                     <td>
-                      {numberFormatter(docentesData[key].Retirado.count)}
+                      {numberFormatter(docentesData[key].Desinscrito.count)}
                     </td>
                     <td>
                       {numberFormatter(docentesData[key].Pendiente.count)}

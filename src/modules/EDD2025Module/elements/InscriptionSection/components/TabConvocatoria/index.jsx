@@ -71,7 +71,7 @@ export function TabConvocatoria() {
                     </td>
                     <td>
                       {numberFormatter(
-                        docentesConvocatoriaData[key]?.Retirado.count
+                        docentesConvocatoriaData[key]?.Desinscrito?.count || 0
                       )}
                     </td>
                     <td>
