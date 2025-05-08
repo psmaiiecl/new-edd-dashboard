@@ -4,7 +4,7 @@ export function extraerSumatoriasDocentes(data) {
   let sumas = {
     Inscrito: 0,
     "En Revisión": 0,
-    Desinscrito: 0,
+    Retirado: 0,
     Pendiente: 0,
     Cancelado: 0,
   };
@@ -19,6 +19,8 @@ export function extraerSumatoriasDocentes(data) {
       };
     }
   }
+  console.log("sumas", sumas);
+  
   return sumas;
 }
 
@@ -32,7 +34,7 @@ export function buildDocentesDependenciaChart(setup, data, total) {
     (dep) => data[dep]["En Revisión"].count || 0
   );
   const arrDesinscritos = dependencias.map(
-    (dep) => data[dep].Desinscrito.count || 0
+    (dep) => data[dep].Retirado.count || 0
   );
   const arrPendiente = dependencias.map(
     (dep) => data[dep].Pendiente.count || 0

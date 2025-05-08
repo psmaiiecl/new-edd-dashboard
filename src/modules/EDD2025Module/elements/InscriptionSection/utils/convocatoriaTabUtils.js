@@ -13,7 +13,7 @@ export function extraerSumatoriasDocentes(data) {
   let sumas = {
     Inscrito: 0,
     "En Revisión": 0,
-    Desinscrito: 0,
+    Retirado: 0,
     Pendiente: 0,
     Cancelado: 0,
     total: 0,
