@@ -197,6 +197,10 @@ export function useTabGeneral() {
     ],
   });
   const [avancePointChart, setAvancePointChart] = useState({
+    lang: {
+      decimalPoint: ",",
+      thousandsSep: ".",
+    },
     chart: {
       align: "left",
       renderTo: "container_avance",

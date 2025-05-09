@@ -1,4 +1,8 @@
 export const BASIC_BAR = {
+  lang: {
+    decimalPoint: ',',
+    thousandsSep: '.'
+  },
   chart: {
     type: "bar",
     plotBorderWidth: null,

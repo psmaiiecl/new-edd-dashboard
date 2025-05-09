@@ -1,7 +1,10 @@
 import { numberFormatter } from "../../../../../utils/NumberFormatter";
 
 export function buildDocentesSugeridos(setup, data) {
-  const total = parseInt(data.docentes.inscritos) + parseInt(data.docentes.desinscritos) + parseInt(data.docentes.pendientes)
+  const total =
+    parseInt(data.docentes.inscritos) +
+    parseInt(data.docentes.desinscritos) +
+    parseInt(data.docentes.pendientes);
   const res = {
     ...setup,
     title: {
@@ -33,7 +36,8 @@ export function buildDocentesSugeridos(setup, data) {
   return res;
 }
 export function buildDocentesAgregados(setup, data) {
-  const total = 0 +
+  const total =
+    0 +
     // parseInt(data.docentes.agregados_inscritos) +
     parseInt(data.docentes["en_revision"]) +
     parseInt(data.docentes["no_inscritos"]);
@@ -77,7 +81,7 @@ export function buildDocentesInscritos(setup, data) {
     title: {
       ...setup.title,
       number: total,
-      text: numberFormatter(total),
+      text: numberFormatter(data.docentes.inscritos),
     },
     series: [
       {
@@ -231,7 +235,7 @@ export function buildAvanceDiario(setup, data, data2023) {
             series.name
           }</span>: <b>${y.toFixed(1)}%</b><br><span style="color:${
             series.color
-          }">Total: </span> <b>${arrTotal[index]}</b>`;
+          }">Total: </span> <b>${numberFormatter(arrTotal[index])}</b>`;
         }
       },
       valueDecimals: 2,

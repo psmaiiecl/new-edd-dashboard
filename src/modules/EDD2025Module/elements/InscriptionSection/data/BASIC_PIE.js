@@ -1,4 +1,8 @@
 export const BASIC_PIE = {
+   lang: {
+    decimalPoint: ',',
+    thousandsSep: '.'
+  },
   chart: {
     plotBackgroundColor: null,
     plotBorderWidth: null,
