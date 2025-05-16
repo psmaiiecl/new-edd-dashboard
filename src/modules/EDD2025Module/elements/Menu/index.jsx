@@ -7,7 +7,7 @@ import { useNavigate } from "react-router";
 
 export function Menu() {
   const navigate = useNavigate();
-  const { inscriptionChart, helpChart, loadingStatus } = useModules();
+  const { portfolioChart, inscriptionChart, helpChart, loadingStatus } = useModules();
 
   return (
     <>
@@ -24,12 +24,18 @@ export function Menu() {
           <HighchartsReact options={inscriptionChart} highcharts={Highcharts} />
         </ModuleCard>
         <ModuleCard title={"Validación"}
-        loading={loadingStatus.validation}
-        action={()=>navigate("validacion")}>
+          loading={loadingStatus.validation}
+          action={() => navigate("validacion")}>
           <div>Gráfico Validación</div>
         </ModuleCard>
         <ModuleCard title={"Grabaciones"} locked />
-        <ModuleCard title={"Portafolio"} locked />
+        <ModuleCard
+          title={"Portafolio"}
+          action={() => navigate("portafolio")}
+          loading={loadingStatus.docentesValidadosChart}
+        >
+         <HighchartsReact options={portfolioChart} highcharts={Highcharts} />
+        </ModuleCard>
         <ModuleCard title={"Corrección Portafolios"} locked />
         <ModuleCard title={"Entrega de Resultados"} locked />
         <ModuleCard

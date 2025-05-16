@@ -1,0 +1,40 @@
+.pie-chart-legend {
+  display: flex;
+  gap: 10px;
+}
+
+.pie-chart-legend__item {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 500;
+  
+}
+
+.pie-chart-legend__label {
+  align-items: center;
+  gap: 6px;
+  font-size: 12px ;
+  color: #333;
+  
+}
+
+.general-pie-chart-container {
+  width:93%;
+  border:1px solid #c3c3c3;
+  border-radius:10px; 
+}
+
+.pie-chart-legend__value {
+  border-radius: 4px;
+  min-width: 60px;
+  color: #fff;
+  text-align: center;
+  font-weight: bold;
+}
+
+.pie-chart-legend__percentage {
+  min-width: 50px;
+  text-align: center;
+  color: #666;
+}
