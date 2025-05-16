@@ -1,5 +1,5 @@
 import { tabList } from "../../data/TabList";
-import "./Tabs.css";
+//import "./Tabs.css";
 
 export function TabsPortafolio({ setActive, active }) {
   return (

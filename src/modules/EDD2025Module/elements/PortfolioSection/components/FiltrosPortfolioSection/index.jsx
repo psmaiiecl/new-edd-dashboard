@@ -6,8 +6,9 @@ function FiltrosPortfolioSection({ onChange }) {
   return (
     <div className="filtros-content-portafolio" id="filtros-content-portafolio">
       <div className="filtros-content filtro">
-          Estado de avance del portafolio
-        <select className="custom-select"
+        Estado de avance del portafolio
+        <select
+          className="custom-select"
           name="estado"
           onChange={(e) => onChange("estado", e.target.value)}
         >
@@ -19,7 +20,7 @@ function FiltrosPortfolioSection({ onChange }) {
       </div>
 
       <div className="filtros-content filtro">
-          Dependencia
+        Dependencia
         <select
           className="custom-select"
           name="dependencia"

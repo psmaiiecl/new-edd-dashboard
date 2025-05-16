@@ -4,7 +4,6 @@ import { AuthContext } from "../../../../../../context/AuthContext"; // para man
 import PointChart from "./PointChart";
 
 const GenericPointChart = ({
-  
   title,
   serviceUrl,
   keyPath,
@@ -14,37 +13,38 @@ const GenericPointChart = ({
 }) => {
   const { getToken } = useContext(AuthContext);
   const [chartData, setChartData] = useState({});
- 
-useEffect(() => {
-  async function fetchData() {
-    try {
-      const token = await getToken();
 
-      const body = new FormData();
-      body.append("convocatoria", "2025");
-      body.append("estado", "activo");
-      body.append("nivel", "básico");
-      body.append("suspension", "no");
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const token = await getToken();
 
-      const response = await axios.post(serviceUrl, body, {
-        headers: { t: token },
-      });
+        const body = new FormData();
+        body.append("convocatoria", "2025");
+        body.append("estado", "activo");
+        body.append("nivel", "básico");
+        body.append("suspension", "no");
 
-      const data = response.data;
-      const nested = keyPath ? keyPath.split(".").reduce((obj, key) => obj?.[key], data) : data;
+        const response = await axios.post(serviceUrl, body, {
+          headers: { t: token },
+        });
 
-      // 🔧 Aquí se usa el dataMapper que viene por props
-      const mapped = dataMapper(nested);
+        const data = response.data;
+        const nested = keyPath
+          ? keyPath.split(".").reduce((obj, key) => obj?.[key], data)
+          : data;
 
-      setChartData({ series: mapped });
-    } catch (error) {
-      console.error(`Error fetching data from ${serviceUrl}`, error);
+        // 🔧 Aquí se usa el dataMapper que viene por props
+        const mapped = dataMapper(nested);
+
+        setChartData({ series: mapped });
+      } catch (error) {
+        console.error(`Error fetching data from ${serviceUrl}`, error);
+      }
     }
-  }
 
-  fetchData();
-}, [serviceUrl, keyPath, dataMapper]);
-
+    fetchData();
+  }, [serviceUrl, keyPath, dataMapper]);
 
   return (
     <PointChart

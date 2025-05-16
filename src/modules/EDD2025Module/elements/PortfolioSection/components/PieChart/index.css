@@ -8,21 +8,19 @@
   align-items: center;
   font-size: 13px;
   font-weight: 500;
-  
 }
 
 .pie-chart-legend__label {
   align-items: center;
   gap: 6px;
-  font-size: 12px ;
+  font-size: 12px;
   color: #333;
-  
 }
 
 .general-pie-chart-container {
-  width:93%;
-  border:1px solid #c3c3c3;
-  border-radius:10px; 
+  width: 93%;
+  border: 1px solid #c3c3c3;
+  border-radius: 10px;
 }
 
 .pie-chart-legend__value {

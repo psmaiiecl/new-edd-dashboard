@@ -3,14 +3,13 @@ import axios from "../../../../../EDD2025Module/services/axiosInstance";
 import BarChart from "./BarChart";
 import { AuthContext } from "../../../../../../context/AuthContext";
 
-
 const GenericBarChart = ({
   title,
   subtitle,
   serviceUrl,
   keyPath,
   dataMapper,
-  filters = {},           // ✅ Filtros dinámicos desde props
+  filters = {}, // ✅ Filtros dinámicos desde props
   colors = [],
   height = 400,
   showLegend = true,
@@ -20,7 +19,7 @@ const GenericBarChart = ({
 
   useEffect(() => {
     console.log("efecto barras");
-    
+
     async function fetchData() {
       try {
         const token = await getToken();
@@ -38,7 +37,9 @@ const GenericBarChart = ({
         });
 
         const data = response.data;
-        const nested = keyPath.split(".").reduce((obj, key) => obj?.[key], data);
+        const nested = keyPath
+          .split(".")
+          .reduce((obj, key) => obj?.[key], data);
         const mapped = dataMapper(nested);
 
         setChartData(mapped);
@@ -48,7 +49,7 @@ const GenericBarChart = ({
     }
 
     fetchData();
-  //}, [serviceUrl, keyPath, dataMapper, filters, getToken]); ---> los filtros estan funcionando incorrectamente
+    //}, [serviceUrl, keyPath, dataMapper, filters, getToken]); ---> los filtros estan funcionando incorrectamente
   }, []);
 
   return (

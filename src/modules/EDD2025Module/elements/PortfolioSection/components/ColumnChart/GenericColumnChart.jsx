@@ -3,7 +3,6 @@ import axios from "../../../../../EDD2025Module/services/axiosInstance";
 import ColumnChart from "./ColumnChart";
 import { AuthContext } from "../../../../../../context/AuthContext";
 
-
 const GenericColumnChart = ({
   title,
   subtitle,
@@ -41,7 +40,9 @@ const GenericColumnChart = ({
         });
 
         const data = response.data;
-        const nested = keyPath.split(".").reduce((obj, key) => obj?.[key], data);
+        const nested = keyPath
+          .split(".")
+          .reduce((obj, key) => obj?.[key], data);
         const mapped = dataMapper(nested);
 
         setChartData(mapped);

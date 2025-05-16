@@ -28,14 +28,12 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   font-size: 12px;
-
 }
 
 .tab-dependencia-lower {
   margin-top: 30px;
   /* espacio entre filas */
 }
-
 
 .legend-table {
   border-collapse: separate;

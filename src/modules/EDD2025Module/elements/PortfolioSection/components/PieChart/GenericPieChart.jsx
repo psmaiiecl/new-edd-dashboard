@@ -1,10 +1,9 @@
-import React, { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import axios from "../../../../../EDD2025Module/services/axiosInstance";
 import PieChart from "./PieChart";
 import { AuthContext } from "../../../../../../context/AuthContext"; //para manejar el token
-import "./index.css"
+//import "./index.css";
 const GenericPieChart = ({
-  
   subtitle,
   serviceUrl,
   keyPath,
@@ -18,7 +17,7 @@ const GenericPieChart = ({
 
   useEffect(() => {
     console.log("usando efecto");
-    
+
     async function fetchData() {
       try {
         const token = await getToken(); // Obtener el token
@@ -40,26 +39,25 @@ const GenericPieChart = ({
         // const URL = `${import.meta.env.VITE_BASE_URL}${serviceUrl}`;
 
         const response = await axios.post(serviceUrl, body, {
-            headers: { t: token },
-          });
-          
-          
+          headers: { t: token },
+        });
 
         // Procesar los datos recibidos ("Respuesta completa:", data) ("Datos anidados keyPath:", nested) ('Datos recibidos:', data);
         const data = response.data;
-        const nested = keyPath.split(".").reduce((obj, key) => obj?.[key], data);
+        const nested = keyPath
+          .split(".")
+          .reduce((obj, key) => obj?.[key], data);
         const mapped = dataMapper(nested);
         //console.log("mapper", mapped);
-        
 
         setChartData(mapped);
-
       } catch (error) {
         console.error(`Error fetching data from ${serviceUrl}`, error);
       }
     }
 
     fetchData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

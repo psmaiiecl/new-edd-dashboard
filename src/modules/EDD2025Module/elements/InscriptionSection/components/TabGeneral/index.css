@@ -25,6 +25,14 @@
   row-gap: 60px;
 }
 
+.tab-general-docente {
+  display: flex;
+  width: 100%;
+  overflow-x: hidden;
+  justify-content: space-between;
+  gap: 5px;
+}
+
 .tab-general-portafolio {
   display: flex;
   width: 100%;

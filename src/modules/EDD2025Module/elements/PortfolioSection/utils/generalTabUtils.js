@@ -1,6 +1,6 @@
 import { numberFormatter } from "../../../../../utils/NumberFormatter";
 
-export function  buildDocentesValidados(setup, data) {
+export function buildDocentesValidados(setup, data) {
   const res = {
     ...setup,
     title: {

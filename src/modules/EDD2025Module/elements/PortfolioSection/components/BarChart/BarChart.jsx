@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import Highcharts from 'highcharts';
-import HighchartsReact from 'highcharts-react-official';
+import React, { useEffect, useState } from "react";
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
 import { BasicLegend } from "../BasicLegend";
 
 const BarChart = ({
@@ -23,74 +23,74 @@ const BarChart = ({
 
   const options = {
     chart: {
-      type: 'bar',
+      type: "bar",
       backgroundColor: null,
       height: null,
       width: null,
     },
     title: {
       text: total?.data,
-      align: 'center',
+      align: "center",
       style: {
-        fontWeight: 'bold',
-        color: '#5157FF',
-        fontSize: '35px',
+        fontWeight: "bold",
+        color: "#5157FF",
+        fontSize: "35px",
       },
     },
     subtitle: {
-      text: total?.subtitulo || '',
-      align: 'center',
+      text: total?.subtitulo || "",
+      align: "center",
       style: {
-        fontWeight: 'bold',
-        color: 'rgb(102, 102, 102)',
-        fontSize: '14px',
+        fontWeight: "bold",
+        color: "rgb(102, 102, 102)",
+        fontSize: "14px",
       },
     },
     xAxis: {
-      type: 'category',
+      type: "category",
       title: { text: null },
       labels: {
-        style: { fontSize: '12px' },
+        style: { fontSize: "12px" },
       },
     },
     yAxis: {
       min: 0,
       title: {
-        text: 'Cantidad',
-        align: 'high',
+        text: "Cantidad",
+        align: "high",
       },
       labels: {
-        overflow: 'justify',
+        overflow: "justify",
       },
     },
     tooltip: {
-      valueSuffix: '',
-      pointFormat: '<b>{point.y}</b><br/>',
+      valueSuffix: "",
+      pointFormat: "<b>{point.y}</b><br/>",
       style: {
-        fontSize: '13px',
-        color: '#666666',
+        fontSize: "13px",
+        color: "#666666",
       },
     },
     plotOptions: {
       bar: {
         dataLabels: {
           enabled: true,
-          format: '{point.name}: <b>{point.y:,.0f}</b>',
+          format: "{point.name}: <b>{point.y:,.0f}</b>",
           style: {
-            fontSize: '12px',
-            color: '#666666',
+            fontSize: "12px",
+            color: "#666666",
           },
         },
       },
     },
     legend: {
       enabled: showLegend,
-      verticalAlign: 'bottom',
-      layout: 'horizontal',
+      verticalAlign: "bottom",
+      layout: "horizontal",
       itemDistance: 1,
       itemStyle: {
-        fontSize: '9px',
-        fontWeight: 'bold',
+        fontSize: "9px",
+        fontWeight: "bold",
       },
     },
     credits: {
@@ -98,7 +98,7 @@ const BarChart = ({
     },
     series: [
       {
-        name: 'Cantidad',
+        name: "Cantidad",
         data: mappedData.series || [],
         colorByPoint: true,
       },
@@ -111,9 +111,9 @@ const BarChart = ({
           },
           chartOptions: {
             legend: {
-              align: 'center',
-              verticalAlign: 'bottom',
-              layout: 'horizontal',
+              align: "center",
+              verticalAlign: "bottom",
+              layout: "horizontal",
             },
           },
         },

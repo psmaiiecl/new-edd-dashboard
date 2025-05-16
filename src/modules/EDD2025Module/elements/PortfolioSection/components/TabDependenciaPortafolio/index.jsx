@@ -3,27 +3,28 @@ import React from "react";
 import GenericColumnChart from "../../components/ColumnChart/GenericColumnChart";
 
 export function TabDependenciaPortafolio() {
-  const baseURL = "http://api-docentemas-dev.3htp.cloud:8095/back/public/api2025";
+  const baseURL =
+    "http://api-docentemas-dev.3htp.cloud:8095/back/public/api2025";
 
   const avanceDependenciaMapper = (data) =>
     data
       ? {
           total: {
-            subtitulo: 'AVANCE POR DEPENDENCIA',
-            data: data.total_dependencia
+            subtitulo: "AVANCE POR DEPENDENCIA",
+            data: data.total_dependencia,
           },
           series: [
             { name: "Dependencia A", y: data.dependencia_a, color: "#65d9ab" },
             { name: "Dependencia B", y: data.dependencia_b, color: "#ff8e53" },
             { name: "Dependencia C", y: data.dependencia_c, color: "#ffd153" },
-          ]
+          ],
         }
       : {
           total: {
-            subtitulo: '',
-            data: 0
+            subtitulo: "",
+            data: 0,
           },
-          series: []
+          series: [],
         };
 
   return (

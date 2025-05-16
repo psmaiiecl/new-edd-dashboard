@@ -35,9 +35,7 @@ export function useModules() {
     });
     changeLoadingStatus("portfolio", true);
     getPortafolioData(getToken()).then((data) => {
-      setPortfolioChart(
-      buildPortfolioModuleChart(data.docentes)
-      );
+      setPortfolioChart(buildPortfolioModuleChart(data.docentes));
       changeLoadingStatus("portfolio", false);
     });
   }, [getToken]);

@@ -19,16 +19,13 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   font-size: 12px;
-
 }
 
 .tab-general-point-upper {
-
   width: 100%;
   display: inline-block;
   grid-template-columns: 1;
   font-size: 12px;
-
 }
 
 .general-pie-chart-container {
@@ -37,7 +34,6 @@
   border-radius: 10px;
   font-size: 12px;
 }
-
 
 .tab-general-lower {
   margin-top: 30px;

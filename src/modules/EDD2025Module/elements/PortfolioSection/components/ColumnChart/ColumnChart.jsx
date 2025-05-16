@@ -19,7 +19,8 @@ const ColumnChart = ({
       setTotal(chartData.total);
       setMappedData(newData);
     }
-  }, [chartData, dataMapper, color, subtitle]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [chartData]);
 
   const options = {
     chart: {

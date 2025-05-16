@@ -1,25 +1,25 @@
-import React from 'react';
-import Highcharts from 'highcharts';
-import HighchartsReact from 'highcharts-react-official';
+import React from "react";
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
 const PointChart = ({ title, chartData, showLegend = true }) => {
   const options = {
     chart: {
-      type: 'line',
-      zoomType: 'xy',
+      type: "line",
+      zoomType: "xy",
       backgroundColor: null,
     },
     title: {
       text: title,
-      align: 'center',
+      align: "center",
       style: {
-        fontWeight: 'bold',
-        color: '#5157FF',
-        fontSize: '18px',
+        fontWeight: "bold",
+        color: "#5157FF",
+        fontSize: "18px",
       },
     },
     xAxis: {
       type: "category",
-     
+
       title: {
         text: "Fecha",
         style: {
@@ -29,14 +29,14 @@ const PointChart = ({ title, chartData, showLegend = true }) => {
         },
       },
     },
-    
+
     yAxis: {
-      title: { text: '' },
+      title: { text: "" },
     },
     tooltip: {
-    shared: true,
-    valueDecimals: 0
-  },
+      shared: true,
+      valueDecimals: 0,
+    },
     plotOptions: {
       series: {
         color: "#FFA500",
@@ -48,12 +48,12 @@ const PointChart = ({ title, chartData, showLegend = true }) => {
     credits: { enabled: false },
     legend: {
       enabled: showLegend,
-      verticalAlign: 'bottom',
-      layout: 'horizontal',
+      verticalAlign: "bottom",
+      layout: "horizontal",
       itemDistance: 1,
       itemStyle: {
-        fontSize: '9px',
-        fontWeight: 'bold',
+        fontSize: "9px",
+        fontWeight: "bold",
       },
     },
     series: chartData.series ?? [],
@@ -63,9 +63,9 @@ const PointChart = ({ title, chartData, showLegend = true }) => {
           condition: { maxWidth: 500 },
           chartOptions: {
             legend: {
-              align: 'center',
-              verticalAlign: 'bottom',
-              layout: 'horizontal',
+              align: "center",
+              verticalAlign: "bottom",
+              layout: "horizontal",
             },
           },
         },
@@ -74,11 +74,10 @@ const PointChart = ({ title, chartData, showLegend = true }) => {
   };
 
   return (
-    <div className='general-point-chart-container'>
+    <div className="general-point-chart-container">
       <HighchartsReact highcharts={Highcharts} options={options} />
     </div>
   );
 };
-
 
 export default PointChart;

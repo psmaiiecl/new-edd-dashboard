@@ -16,7 +16,7 @@
   padding: 0.5rem;
   border-radius: 8px;
   background: #f9f9f9;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .pie-chart-legend__label {

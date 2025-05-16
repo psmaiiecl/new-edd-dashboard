@@ -35,7 +35,7 @@ export function Menu() {
         <ModuleCard
           title={"Portafolio"}
           action={() => navigate("portafolio")}
-          loading={loadingStatus.docentesValidadosChart}
+          loading={loadingStatus.portfolio}
         >
          <HighchartsReact options={portfolioChart} highcharts={Highcharts} />
         </ModuleCard>

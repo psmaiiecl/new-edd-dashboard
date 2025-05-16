@@ -14,18 +14,3 @@
   background-color: white;
   margin: 0 auto;
 }
-
-.go-back {
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  top: 0-30;
-  left: 0;
-  cursor: pointer;
-}
-
-.go-back img {
-  width: 100%;
-  height: auto;
-  color: #ffff;
-}

@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import Highcharts from 'highcharts';
-import HighchartsReact from 'highcharts-react-official';
+import React, { useEffect, useState } from "react";
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
 import { BasicLegend } from "../BasicLegend";
-import "./index.css";
+//import "./index.css";
 import { numberFormatter } from "../../../../../../utils/NumberFormatter";
 
 const PieChart = ({
-  
   subtitle = [],
   color = [],
   dataMapper = (data) => data,
@@ -21,7 +20,6 @@ const PieChart = ({
       const newData = dataMapper(chartData, color, subtitle);
       setTotal(chartData.total);
       setMappedData(newData);
-
     }
   }, [chartData, dataMapper, color, subtitle]);
 
@@ -33,7 +31,7 @@ const PieChart = ({
       width: null,
     },
     title: {
-      text:numberFormatter(total?.data),
+      text: numberFormatter(total?.data),
       align: "center",
       style: {
         fontWeight: "bold",
@@ -75,7 +73,6 @@ const PieChart = ({
           style: {
             fontSize: "12px",
             color: "#666666",
-            
           },
         },
         showInLegend: showLegend,
@@ -87,7 +84,7 @@ const PieChart = ({
     legend: {
       enabled: showLegend,
       verticalAlign: "bottom",
-      
+
       layout: "horizontal",
       itemDistance: 1,
       itemStyle: {
@@ -126,8 +123,7 @@ const PieChart = ({
       <HighchartsReact highcharts={Highcharts} options={options} />
       <hr />
       {mappedData.series && mappedData?.series.length > 0 && (
-        <BasicLegend data={chartData.series} total ={total.data}
-         />
+        <BasicLegend data={chartData.series} total={total.data} />
       )}
     </>
   );

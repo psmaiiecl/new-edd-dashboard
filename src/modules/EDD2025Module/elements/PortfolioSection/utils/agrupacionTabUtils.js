@@ -94,4 +94,3 @@ export function buildSostenedoresPortfolio(setup, data) {
   };
   return res;
 }
-
