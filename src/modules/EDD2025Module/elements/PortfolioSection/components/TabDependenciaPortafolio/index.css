@@ -1,0 +1,67 @@
+.tab-dependencia-portafolio {
+  max-width: 100%;
+  padding-top: 15px;
+  border-radius: 10px;
+  color: #333;
+  font-size: 12px;
+}
+
+.tab-dependencia-grupo {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 10px;
+  gap: 30px;
+}
+
+.general-column-chart-container {
+  width: 98%;
+  border: 1px solid #c3c3c3;
+  border-radius: 10px;
+  margin: 10px;
+}
+
+.tab-dependencia-upper {
+  display: flex;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  font-size: 12px;
+
+}
+
+.tab-dependencia-lower {
+  margin-top: 30px;
+  /* espacio entre filas */
+}
+
+
+.legend-table {
+  border-collapse: separate;
+  width: 100%;
+  border: 1px solid #dcdcdc;
+}
+
+.legend-table th,
+.legend-table td {
+  border: 1px solid #dcdcdc;
+  padding: 2px 3px;
+  font-size: 14px;
+}
+
+.legend-table__head th {
+  background-color: #f9f9f9;
+  font-weight: 600;
+  text-align: center;
+}
+
+.legend-table__body td {
+  text-align: center;
+}
+
+.legend-table__body tr td:first-child {
+  text-align: right;
+  font-weight: 500;
+  padding-right: 5px;
+}
