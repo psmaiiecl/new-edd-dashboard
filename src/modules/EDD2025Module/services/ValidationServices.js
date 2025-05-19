@@ -1,6 +1,14 @@
 import { BASE_API_URL_2025 } from "../data/BASE_API_URL";
 
-export async function getGeneralValidation(token, filters) {
+export async function getGeneralValidation(
+  token,
+  filters = {
+    convocatoria: {value: ""},
+    estado: {value: ""},
+    cambio: {value: ""},
+    suspension: {value: ""},
+  }
+) {
   const body = new FormData();
   body.append("convocatoria", filters.convocatoria.value);
   body.append("estado", filters.estado.value);

@@ -31,15 +31,7 @@ export function useTabGeneral() {
   });
   const [docentesChart, setDocentesChart] = useState({
     ...BASIC_PIE,
-    plotOptions: {
-      ...BASIC_PIE.plotOptions,
-      pie: {
-        ...BASIC_PIE.plotOptions.pie,
-        dataLabels: {
-          enabled: false,
-        },
-      },
-    },
+   
     subtitle: {
       text: " DOCENTES <b>INSCRITOS</b>",
       align: "center",
@@ -60,7 +52,7 @@ export function useTabGeneral() {
             color: "#65D9AB",
           },
           {
-            name: "Actualizados",
+            name: "No Validados - Con Ingreso",
             y: 0,
             color: "#ffd153",
           },

@@ -10,20 +10,29 @@ export function ModuleCard({
   loading = false,
 }) {
   return (
-    <div
-      className={`roboto-regular module-card ${locked ? "" : "active"}`}
-      onClick={() => {
-        if (!locked) action();
-      }}
-    >
-      <div className={`module-card__title${locked ? " module-card__title-locked" : ""}`}>
+    <div className={`roboto-regular module-card ${locked ? "" : "active"}`}>
+      <div
+        className={`module-card__title${
+          locked ? " module-card__title-locked" : ""
+        }`}
+        onClick={() => {
+          if (!locked) action();
+        }}
+      >
         <span>{title}</span>
       </div>
       <div
         className={`module-card__content${locked ? " module-card__lock" : ""}`}
       >
         {loading ? <StandardLoadingPanel /> : <></>}
-        {locked ? <><img src={ConeIcon} /><span className="roboto-regular">Módulo en construcción</span></> : children}
+        {locked ? (
+          <>
+            <img src={ConeIcon} />
+            <span className="roboto-regular">Módulo en construcción</span>
+          </>
+        ) : (
+          children
+        )}
       </div>
     </div>
   );

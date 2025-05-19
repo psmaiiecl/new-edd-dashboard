@@ -7,9 +7,12 @@ import { getPortafolioData } from "../services/PortfolioServices";
 import { buildHelpModuleChart } from "../utils/HelpUtils";
 import { buildInscripcionModuleChart } from "../utils/InscriptionUtils";
 import { buildPortfolioModuleChart } from "../utils/PortfolioUtils";
+import { getGeneralValidation } from "../services/ValidationServices";
+import { buildValidationModuleChart } from "../utils/ValidationUtils";
 export function useModules() {
   const { getToken } = useContext(AuthContext);
   const [inscriptionChart, setInscriptionChart] = useState(MODULE_CHART_SETUP);
+  const [validationChart, setValidationChart] = useState(MODULE_CHART_SETUP);
   const [portfolioChart, setPortfolioChart] = useState(MODULE_CHART_SETUP);
   const [helpChart, setHelpChart] = useState(MODULE_CHART_SETUP);
   const [loadingStatus, setLoadingStatus] = useState({});
@@ -27,6 +30,13 @@ export function useModules() {
       );
       changeLoadingStatus("inscription", false);
     });
+    changeLoadingStatus("validation", true);
+    getGeneralValidation(getToken()).then((data) => {
+      setValidationChart(
+        buildValidationModuleChart(data.validacion)
+      );
+      changeLoadingStatus("validation", false);
+    });
     changeLoadingStatus("help", true);
     getZohoCalls(getToken()).then((data) => {
       console.log(data);
@@ -41,6 +51,7 @@ export function useModules() {
   }, [getToken]);
   return {
     inscriptionChart,
+    validationChart,
     portfolioChart,
     helpChart,
     loadingStatus,
