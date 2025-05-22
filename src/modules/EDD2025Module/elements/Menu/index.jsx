@@ -39,8 +39,8 @@ export function Menu() {
         <ModuleCard title={"Agendamiento de Grabaciones"} locked />
         <ModuleCard title={"Grabaciones"} locked />
         <ModuleCard
+          
           title={"Recuperación de SD's"}
-          locked
           action={() => navigate("recuperacion-sd")}
           loading={loadingStatus.recuperacion}
         >

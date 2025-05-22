@@ -4,9 +4,9 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 // eslint-disable-next-line no-unused-vars
 import exporting from "highcharts/modules/exporting";
-import { BasicLegend } from "../BasicLegend";
 import { useTabGeneral } from "./hooks/useTabGeneral";
 import { DEPENDENCY_LIST } from "../../data/DependencyList";
+import { CustomPieChart } from "../../../../../../components/CustomPieChart";
 
 export function TabGeneral() {
   const {
@@ -48,63 +48,13 @@ export function TabGeneral() {
       </div>
       <div className="tab-general-upper">
         <div className="pie-grid-3">
-          <div className="general-pie-chart-container">
-            <HighchartsReact
-              options={docenteSugeridoChart}
-              highcharts={Highcharts}
-            />
-            <hr />
-            <BasicLegend
-              data={docenteSugeridoChart.series}
-              total={+docenteSugeridoChart.title.number}
-            />
-          </div>
-          <div className="general-pie-chart-container">
-            <HighchartsReact
-              options={docenteAgregadoChart}
-              highcharts={Highcharts}
-            />
-            <hr />
-            <BasicLegend
-              data={docenteAgregadoChart.series}
-              total={+docenteAgregadoChart.title.number}
-            />
-          </div>
-          <div className="general-pie-chart-container">
-            <HighchartsReact
-              options={docenteInscritoChart}
-              highcharts={Highcharts}
-            />
-            <hr />
-            <BasicLegend
-              data={docenteInscritoChart.series}
-              total={+docenteInscritoChart.title.number}
-            />
-          </div>
+          <CustomPieChart setup={docenteSugeridoChart} />
+          <CustomPieChart setup={docenteAgregadoChart} />
+          <CustomPieChart setup={docenteInscritoChart} />
         </div>
         <div className="pie-grid-2">
-          <div className="general-pie-chart-container">
-            <HighchartsReact
-              options={entidadSostenedorChart}
-              highcharts={Highcharts}
-            />
-            <hr />
-            <BasicLegend
-              data={entidadSostenedorChart.series}
-              total={+entidadSostenedorChart.title.number}
-            />
-          </div>
-          <div className="general-pie-chart-container">
-            <HighchartsReact
-              options={sostenedorChart}
-              highcharts={Highcharts}
-            />
-            <hr />
-            <BasicLegend
-              data={sostenedorChart.series}
-              total={+sostenedorChart.title.number}
-            />
-          </div>
+          <CustomPieChart setup={entidadSostenedorChart} />
+          <CustomPieChart setup={sostenedorChart} />
         </div>
       </div>
       <div className="general-point-chart-container">

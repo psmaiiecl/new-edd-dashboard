@@ -1,18 +1,14 @@
 import "./index.css";
-import Highcharts from "highcharts";
-import HighchartsReact from "highcharts-react-official";
-// eslint-disable-next-line no-unused-vars
-import exporting from "highcharts/modules/exporting";
-import { BasicLegend } from "../InscriptionSection/components/BasicLegend";
-import { BASIC_PIE } from "../InscriptionSection/data/BASIC_PIE";
 import { useEffect, useState } from "react";
 import { useCustomFetch } from "../../../../hooks/useCustomFetch";
 import { BASE_API_URL_2024 } from "../../data/BASE_API_URL";
 import { buildSDRecoveryChart } from "./utils/utils";
+import { CustomPieChart } from "../../../../components/CustomPieChart";
+import { PIE_CONFIG } from "../../../../constants/CHART_CONFIGS";
 
 export function SDRecoverySection2025() {
   const [estadoRecuperacionChart, setEstadoRecuperacionChart] = useState({
-    ...BASIC_PIE,
+    ...PIE_CONFIG,
     subtitle: {
       text: " Estado de Recuperación de Tarjetas SD respecto a Grabaciones Realizadas",
       align: "center",
@@ -85,17 +81,7 @@ export function SDRecoverySection2025() {
       <article className="recuperacion-content">
         <div className="normal-container">
           <div className="pie-grid-1">
-            <div className="general-pie-chart-container">
-              <HighchartsReact
-                options={estadoRecuperacionChart}
-                highcharts={Highcharts}
-              />
-              <hr />
-              <BasicLegend
-                data={estadoRecuperacionChart.series}
-                total={+estadoRecuperacionChart.title.number}
-              />
-            </div>
+            <CustomPieChart setup={estadoRecuperacionChart} />
           </div>
         </div>
       </article>

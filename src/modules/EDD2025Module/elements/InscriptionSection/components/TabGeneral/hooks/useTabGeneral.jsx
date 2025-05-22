@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../../../../../context/AuthContext";
 import { LoadingContext } from "../../../../../../../context/LoadingContext";
 import { DEPENDENCY_LIST } from "../../../data/DependencyList";
-import { BASIC_PIE } from "../../../data/BASIC_PIE";
 import { getFilteredInscriptionData } from "../../../../../services/InscriptionServices";
 import {
   buildAvanceDiario,
@@ -13,13 +12,14 @@ import {
   buildSostenedoresParticipantes,
 } from "../../../utils/generalTabUtils";
 import { AVANCE_DIARIO_2024 } from "../../../data/AVANCE_DIARIO_2024";
+import { PIE_CONFIG } from "../../../../../../../constants/CHART_CONFIGS";
 
 export function useTabGeneral() {
   const { getToken } = useContext(AuthContext);
   const { queueLoading, dequeueLoading } = useContext(LoadingContext);
   const [selectedFilter, setSelectedFilter] = useState(DEPENDENCY_LIST[0]);
   const [docenteSugeridoChart, setDocenteSugeridoChart] = useState({
-    ...BASIC_PIE,
+    ...PIE_CONFIG,
     subtitle: {
       text: " DOCENTES <b>SUGERIDOS</b>",
       align: "center",
@@ -54,7 +54,7 @@ export function useTabGeneral() {
     ],
   });
   const [docenteAgregadoChart, setDocenteAgregadoChart] = useState({
-    ...BASIC_PIE,
+    ...PIE_CONFIG,
     subtitle: {
       text: " DOCENTES <b>AGREGADOS POR SOSTENEDORES</b>",
       align: "center",
@@ -89,7 +89,7 @@ export function useTabGeneral() {
     ],
   });
   const [docenteInscritoChart, setDocenteInscritoChart] = useState({
-    ...BASIC_PIE,
+    ...PIE_CONFIG,
     subtitle: {
       text: " TOTAL <b>DOCENTES INSCRITOS</b>",
       align: "center",
@@ -119,7 +119,7 @@ export function useTabGeneral() {
     ],
   });
   const [entidadSostenedorChart, setEntidadSostenedorChart] = useState({
-    ...BASIC_PIE,
+    ...PIE_CONFIG,
     subtitle: {
       text: "TOTAL <b>ENTIDADES SOSTENEDORAS</b>",
       align: "center",
@@ -149,9 +149,9 @@ export function useTabGeneral() {
     ],
   });
   const [sostenedorChart, setSostenedorChart] = useState({
-    ...BASIC_PIE,
+    ...PIE_CONFIG,
     legend: {
-      ...BASIC_PIE.legend,
+      ...PIE_CONFIG.legend,
       layout: "horizontal",
       itemDistance: 10,
       alignColumns: false,
