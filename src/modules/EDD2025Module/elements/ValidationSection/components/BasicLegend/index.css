@@ -5,7 +5,9 @@
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 .pie-chart-legend__item {
@@ -14,6 +16,7 @@
   align-items: center;
   justify-content: space-evenly;
   gap: 5px;
+  max-width: 100px;
 }
 
 .legend__item__title {

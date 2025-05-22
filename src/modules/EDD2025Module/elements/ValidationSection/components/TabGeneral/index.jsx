@@ -124,8 +124,8 @@ export function TabGeneral() {
         </div>
       </div>
       <div className="tab-general-upper">
-        <div className="tab-general-docente">
-          <div className="general-pie-chart-container pie-33">
+        <div className="pie-grid-3">
+          <div className="general-pie-chart-container">
             <HighchartsReact options={docentesChart} highcharts={Highcharts} />
             <hr />
             <BasicLegend
@@ -133,7 +133,7 @@ export function TabGeneral() {
               total={+docentesChart.title.number}
             />
           </div>
-          <div className="general-pie-chart-container pie-33">
+          <div className="general-pie-chart-container">
             <HighchartsReact
               options={solicitudesCambioChart}
               highcharts={Highcharts}
@@ -144,7 +144,7 @@ export function TabGeneral() {
               total={+solicitudesCambioChart.title.number}
             />
           </div>
-          <div className="general-pie-chart-container pie-33">
+          <div className="general-pie-chart-container">
             <HighchartsReact
               options={solicitudesSuspensionChart}
               highcharts={Highcharts}
@@ -156,8 +156,8 @@ export function TabGeneral() {
             />
           </div>
         </div>
-        <div className="tab-general-docente">
-          <div className="general-pie-chart-container pie-50">
+        <div className="pie-grid-2">
+          <div className="general-pie-chart-container">
             <HighchartsReact options={estadoChart} highcharts={Highcharts} />
             <hr />
             <BasicLegend
@@ -165,7 +165,7 @@ export function TabGeneral() {
               total={+estadoChart.title.number}
             />
           </div>
-          <div className="general-pie-chart-container pie-50">
+          <div className="general-pie-chart-container">
             <HighchartsReact options={causalesChart} highcharts={Highcharts} />
             <hr />
             <BasicLegend

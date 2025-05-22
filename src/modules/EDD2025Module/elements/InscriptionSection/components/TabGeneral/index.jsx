@@ -47,7 +47,7 @@ export function TabGeneral() {
         />
       </div>
       <div className="tab-general-upper">
-        <div className="tab-general-docente">
+        <div className="pie-grid-3">
           <div className="general-pie-chart-container">
             <HighchartsReact
               options={docenteSugeridoChart}
@@ -82,7 +82,7 @@ export function TabGeneral() {
             />
           </div>
         </div>
-        <div className="tab-general-docente">
+        <div className="pie-grid-2">
           <div className="general-pie-chart-container">
             <HighchartsReact
               options={entidadSostenedorChart}

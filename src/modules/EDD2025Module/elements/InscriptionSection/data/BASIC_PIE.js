@@ -10,7 +10,7 @@ export const BASIC_PIE = {
     type: "pie",
     marginTop: 100,
     marginBottom: 80,
-    // height: 510,
+    height: 510,
   },
   legend: {
     enabled: true,
@@ -50,7 +50,7 @@ export const BASIC_PIE = {
     pie: {
       allowPointSelect: true,
       cursor: "pointer",
-      size: '90%',
+      size: '70%',
       dataLabels: {
         enabled: true,
         distance: 20,
