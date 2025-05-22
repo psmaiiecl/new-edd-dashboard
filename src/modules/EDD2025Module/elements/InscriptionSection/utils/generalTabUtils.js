@@ -37,8 +37,7 @@ export function buildDocentesSugeridos(setup, data) {
 }
 export function buildDocentesAgregados(setup, data) {
   const total =
-    0 +
-    // parseInt(data.docentes.agregados_inscritos) +
+    parseInt(data.docentes["inscritos_agregados_por_sostenedor"]) +
     parseInt(data.docentes["en_revision"]) +
     parseInt(data.docentes["no_inscritos"]);
   const res = {
@@ -54,8 +53,7 @@ export function buildDocentesAgregados(setup, data) {
         data: [
           {
             ...setup.series[0].data[0],
-            y: 0,
-            // y: parseInt(data.docentes.agregados_inscritos),
+            y: parseInt(data.docentes.inscritos_agregados_por_sostenedor),
           },
 
           {
@@ -73,15 +71,17 @@ export function buildDocentesAgregados(setup, data) {
   return res;
 }
 export function buildDocentesInscritos(setup, data) {
-  //TODO: El total de inscritos debe ser los inscritos sugeridos + inscritos agregados
+  const totalInscritos =
+    parseInt(data.docentes.inscritos) +
+    parseInt(data.docentes.inscritos_agregados_por_sostenedor);
   const total =
-    parseInt(data.docentes.inscritos) + parseInt(data.docentes.cancelados);
+    totalInscritos + parseInt(data.docentes.cancelados);
   const res = {
     ...setup,
     title: {
       ...setup.title,
       number: total,
-      text: numberFormatter(data.docentes.inscritos),
+      text: numberFormatter(totalInscritos),
     },
     series: [
       {
@@ -89,7 +89,7 @@ export function buildDocentesInscritos(setup, data) {
         data: [
           {
             ...setup.series[0].data[0],
-            y: parseInt(data.docentes.inscritos),
+            y: totalInscritos,
           },
           {
             ...setup.series[0].data[1],
