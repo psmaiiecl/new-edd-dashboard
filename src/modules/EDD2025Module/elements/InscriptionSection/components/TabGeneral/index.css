@@ -47,6 +47,12 @@
   width: 100%;
 }
 
+.pie-grid-1{
+  display: grid;
+  grid-template-columns: 1fr;
+  width: 100%;
+}
+
 .tab-general-portafolio {
   display: flex;
   width: 100%;

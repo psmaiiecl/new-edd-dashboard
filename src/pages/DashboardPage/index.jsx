@@ -7,6 +7,7 @@ import { InscriptionSection2025 } from "../../modules/EDD2025Module/elements/Ins
 import { PortfolioSection2025 } from "../../modules/EDD2025Module/elements/PortfolioSection";
 import { DashboardHeader } from "./components/DashboardHeader";
 import { ValidationSection2025 } from "../../modules/EDD2025Module/elements/ValidationSection";
+import { SDRecoverySection2025 } from "../../modules/EDD2025Module/elements/SDRecoverySection";
 
 export function DashboardPage() {
   const { year } = useParams();
@@ -36,6 +37,7 @@ export function DashboardPage() {
               <Route path="inscripcion" element={<InscriptionSection2025 />} />
               <Route path="validacion" element={<ValidationSection2025 />} />
               <Route path="portafolio" element={<PortfolioSection2025 />} />
+              <Route path="recuperacion-sd" element={<SDRecoverySection2025 />} />
             </Route>
           )}
         </Routes>
