@@ -1,31 +1,12 @@
-// src/modules/EDD2025Module/elements/FiltrosPortfolioSection.jsx
 import React from "react";
-import "./index.css"; // Opcional si necesitas estilos extra
 
-function FiltrosPortfolioSection({ onChange }) {
+export default function FiltrosPortfolioSection({ filtros = {}, onFiltroChange }) {
   return (
-    <div className="filtros-content-portafolio" id="filtros-content-portafolio">
-      <div className="filtros-content filtro">
-        Estado de avance del portafolio
-        <select
-          className="custom-select"
-          name="estado"
-          onChange={(e) => onChange("estado", e.target.value)}
-        >
-          <option value="">Todos</option>
-          <option value="completado">Completado</option>
-          <option value="iniciado">Iniciado</option>
-          <option value="no_iniciado">No Iniciado</option>
-        </select>
-      </div>
-
-      <div className="filtros-content filtro">
+    <div className="filtros-content-portafolio">
+      <div className="general-tab">
         Dependencia
-        <select
-          className="custom-select"
-          name="dependencia"
-          onChange={(e) => onChange("dependencia", e.target.value)}
-        >
+        <select value={filtros.dependencia || ""} onChange={(e) => onFiltroChange("dependencia", e.target.value)}>
+
           <option value="">Todas</option>
           <option value="3">AD</option>
           <option value="10">CAD</option>
@@ -42,11 +23,7 @@ function FiltrosPortfolioSection({ onChange }) {
 
       <div className="filtros-content filtro">
         Región
-        <select
-          className="custom-select"
-          name="region"
-          onChange={(e) => onChange("region", e.target.value)}
-        >
+       <select value={filtros.region || ""} onChange={(e) => onFiltroChange("region", e.target.value)}>
           <option value="">Todas</option>
           <option value="15">Arica y Parinacota</option>
           <option value="1">Tarapacá</option>
@@ -66,19 +43,8 @@ function FiltrosPortfolioSection({ onChange }) {
           <option value="12">Magallanes</option>
         </select>
       </div>
-      <div className="filtros-content filtro">
-        Convocatoria
-        <select
-          className="custom-select"
-          name="convocatoria"
-          onChange={(e) => onChange("convocatoria", e.target.value)}
-        >
-          <option value="">Todos</option>
-          <option value="1">Participación Obligatoria</option>
-          <option value="2">Participación Voluntaria</option>
-        </select>
-      </div>
     </div>
   );
 }
-export default FiltrosPortfolioSection;
+
+

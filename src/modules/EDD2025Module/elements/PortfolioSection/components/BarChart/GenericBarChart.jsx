@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "../../../../../EDD2025Module/services/axiosInstance";
-import BarChart from "./BarChart";
+import BarChart from "./BarChart"; // ← Usa tu componente BarChart aquí
 import { AuthContext } from "../../../../../../context/AuthContext";
 
 const GenericBarChart = ({
@@ -9,56 +9,57 @@ const GenericBarChart = ({
   serviceUrl,
   keyPath,
   dataMapper,
-  filters = {}, // ✅ Filtros dinámicos desde props
   colors = [],
-  height = 400,
+  height = 600,
   showLegend = true,
 }) => {
   const { getToken } = useContext(AuthContext);
   const [chartData, setChartData] = useState({});
+  const [total, setTotal] = useState({});
 
   useEffect(() => {
-    console.log("efecto barras");
-
     async function fetchData() {
       try {
         const token = await getToken();
-        const body = new FormData();
 
-        // ✅ Agrega dinámicamente todos los filtros que llegan por props
-        Object.entries(filters).forEach(([key, obj]) => {
-          if (obj?.value !== undefined) {
-            body.append(key, obj.value);
-          }
-        });
+        const filters = {
+          convocatoria: "2025",
+          estado: "activo",
+          nivel: "básico",
+          suspension: "no",
+        };
+        const body = new FormData();
+        Object.entries(filters).forEach(([key, value]) =>
+          body.append(key, value)
+        );
 
         const response = await axios.post(serviceUrl, body, {
           headers: { t: token },
         });
 
-        const data = response.data;
-        const nested = keyPath
-          .split(".")
-          .reduce((obj, key) => obj?.[key], data);
-        const mapped = dataMapper(nested);
 
+        const data = response.data;
+
+        const mapped = dataMapper(data, { keyPath }, total); // ← Aquí está el cambio
         setChartData(mapped);
-      } catch (error) {
-        console.error(`Error fetching data from ${serviceUrl}`, error);
       }
-    }
+      catch (error) {
+        console.error('Error fetching data from ${serviceUrl}', error);
+      }
+    };
 
     fetchData();
-    //}, [serviceUrl, keyPath, dataMapper, filters, getToken]); ---> los filtros estan funcionando incorrectamente
   }, []);
 
   return (
     <BarChart
-      title={title}
+      title={total}
       subtitle={subtitle}
       chartData={chartData}
-      color={{ data: colors }}
+      dataMapper={dataMapper}
+      color={colors}
       showLegend={showLegend}
+      height={height}
     />
   );
 };

@@ -6,29 +6,59 @@ import { TabDependenciaPortafolio } from "./components/TabDependenciaPortafolio"
 // import { TabRegionPortafolio } from "./components/TabRegionPortafolio";
 // import { TabAgrupacionPortafolio } from "./components/TabAgrupacionPortafolio";
 import { TabsPortafolio } from "../PortfolioSection/components/TabsPortafolio/Tabs";
+import FiltrosPortfolioSection from "./components/FiltrosPortfolioSection";
 
 export function PortfolioSection2025() {
   const [activeTab, setActiveTab] = useState("tab1");
+
+  const [filtros, setFiltros] = useState({
+    dependencia: "",
+    region: ""
+  });
+
+  const handleFiltroChange = (filtroNombre, valor) => {
+    setFiltros((prev) => ({
+      ...prev,
+      [filtroNombre]: valor
+    }));
+  };
 
   return (
     <section className="pagina-portafolio roboto-regular">
       <article className="portafolio-content">
         <TabsPortafolio setActive={setActiveTab} active={activeTab} />
+
+        {/* TAB 1 - General */}
         <div style={{ display: activeTab === "tab1" ? "block" : "none" }}>
-          <TabGeneralPortafolio />
-          {/* </div> */}
-          {/* <div style={{ display: activeTab === "tab2" ? "block" : "none" }}>
-          <TabDependenciaPortafolio />
-        </div> */}
-          {/* <div style={{ display: activeTab === "tab3" ? "block" : "none" }}>
+          <FiltrosPortfolioSection
+            filtros={filtros}
+            onFiltroChange={handleFiltroChange}
+          />
+          <TabGeneralPortafolio
+            filtros={filtros}
+            onFiltroChange={handleFiltroChange}
+          />
+        </div>
+
+        {/* TAB 2 - Dependencia */}
+        <div style={{ display: activeTab === "tab2" ? "block" : "none" }}>
+          <TabDependenciaPortafolio isActive={activeTab === "tab2"} />
+        </div>
+
+        {/* TAB 3 - Convocatoria */}
+        {/* <div style={{ display: activeTab === "tab3" ? "block" : "none" }}>
           <TabConvocatoriaPortafolio />
         </div> */}
-          {/* <div style={{ display: activeTab === "tab4" ? "block" : "none" }}>
+
+        {/* TAB 4 - Región */}
+        {/* <div style={{ display: activeTab === "tab4" ? "block" : "none" }}>
           <TabRegionPortafolio />
         </div> */}
-          {/* <div style={{ display: activeTab === "tab5" ? "block" : "none" }}>
-          <TabAgrupacionPortafolio /> {/* NUEVO COMPONENTE */}
-        </div>
+
+        {/* TAB 5 - Agrupación */}
+        {/* <div style={{ display: activeTab === "tab5" ? "block" : "none" }}>
+          <TabAgrupacionPortafolio />
+        </div> */}
       </article>
     </section>
   );

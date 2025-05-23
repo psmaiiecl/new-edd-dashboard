@@ -2,31 +2,28 @@ import React, { useEffect, useState } from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { BasicLegend } from "../BasicLegend";
-
-const BarChart = ({
-  subtitle = [],
-  color = [],
-  dataMapper = (data) => data,
+const nf = new Intl.NumberFormat("es-CL");
+export const BarChart = ({
+  
+  subtitle,
   chartData,
-  showLegend = true,
+
 }) => {
   const [total, setTotal] = useState(0);
-  const [mappedData, setMappedData] = useState([]);
-
+  const [mappedData, setMappedData] = useState({});
+  
+  
   useEffect(() => {
-    if (chartData) {
-      const newData = dataMapper(chartData, color, subtitle);
-      setTotal(chartData.total);
-      setMappedData(newData);
-    }
-  }, [chartData, dataMapper, color, subtitle]);
+  if (chartData && Object.keys(chartData).length > 0) {
+    setTotal(chartData.total);
+    setMappedData(chartData);
+  }
+}, [chartData]);
 
   const options = {
     chart: {
       type: "bar",
       backgroundColor: null,
-      height: null,
-      width: null,
     },
     title: {
       text: total?.data,
@@ -34,11 +31,11 @@ const BarChart = ({
       style: {
         fontWeight: "bold",
         color: "#5157FF",
-        fontSize: "35px",
+        fontSize: "24px",
       },
     },
     subtitle: {
-      text: total?.subtitulo || "",
+      text: subtitle,
       align: "center",
       style: {
         fontWeight: "bold",
@@ -46,36 +43,46 @@ const BarChart = ({
         fontSize: "14px",
       },
     },
-    xAxis: {
-      type: "category",
-      title: { text: null },
-      labels: {
-        style: { fontSize: "12px" },
+     xAxis: {
+       title: { text: null },
+        categories: mappedData.categories || [],
+        labels: {
+        enabled:true,
+        style: {
+          fontSize: "11px",
+        },
       },
-    },
+      
+     }, 
     yAxis: {
-      min: 0,
-      title: {
-        text: "Cantidad",
-        align: "high",
-      },
+            min: 0,
+            title: {
+                enabled: false
+            },
       labels: {
-        overflow: "justify",
+        style: {
+          fontSize: "11px",
+        },
       },
-    },
+			tickInterval: 10,			
+        },
     tooltip: {
-      valueSuffix: "",
-      pointFormat: "<b>{point.y}</b><br/>",
-      style: {
-        fontSize: "13px",
-        color: "#666666",
+      shared: true,
+      formatter: function () {
+        let s = `<b>${this.key}</b><br/>`;
+        this.points.forEach(function (point) {
+        s += `<span style="color:${point.color}">\u25CF</span> ${point.series.name}: <b>${nf.format(point.point.valor)}</b> (${point.y}%)<br/>`;
+        });
+        return s;
       },
     },
-    plotOptions: {
+     plotOptions: {
       bar: {
+        stacking: "percent",
+        borderWidth: 0,
         dataLabels: {
           enabled: true,
-          format: "{point.name}: <b>{point.y:,.0f}</b>",
+          format: "{point.y:.1f}%",
           style: {
             fontSize: "12px",
             color: "#666666",
@@ -84,25 +91,17 @@ const BarChart = ({
       },
     },
     legend: {
-      enabled: showLegend,
-      verticalAlign: "bottom",
-      layout: "horizontal",
-      itemDistance: 1,
       itemStyle: {
-        fontSize: "9px",
-        fontWeight: "bold",
-      },
+				"fontSize": "13px",
+			},
+			y: 20,
+			margin: 40
     },
     credits: {
       enabled: false,
     },
-    series: [
-      {
-        name: "Cantidad",
-        data: mappedData.series || [],
-        colorByPoint: true,
-      },
-    ],
+    
+    series: mappedData?.series ?? [],
     responsive: {
       rules: [
         {
@@ -120,15 +119,46 @@ const BarChart = ({
       ],
     },
   };
+const renderTablaValores = () => {
+  if (!mappedData.series || mappedData.series.length === 0) return null;
+
+  const categorias = mappedData.categories || [];
 
   return (
-    <div className="bar-chart-wrapper">
-      <HighchartsReact highcharts={Highcharts} options={options} />
-      <hr />
-      {mappedData.series && mappedData.series.length > 0 && (
-        <BasicLegend data={mappedData.series} total={total.data} />
-      )}
+    <div className="table-responsive mt-3">
+      <table className="table table-bordered table-sm">
+        <thead className="table-light">
+          <tr>
+            <th>Dependencia</th>
+            {mappedData.series.map((serie, i) => (
+              <th key={i} style={{ borderRadius: '5px', backgroundColor: serie.color }}>{serie.name}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {categorias.map((cat, i) => (
+            <tr key={i}>
+              <td>{cat}</td>
+              {mappedData.series.map((serie, j) => (
+                <td key={j}>
+                  {serie.data[i]?.valor ?? 0}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
+  );
+};
+  return (
+    <>
+      <HighchartsReact highcharts={Highcharts} options={options} />
+            <hr />
+            <div className="pie-chart-legend">
+            {renderTablaValores()}</div>
+         
+    </>
   );
 };
 
