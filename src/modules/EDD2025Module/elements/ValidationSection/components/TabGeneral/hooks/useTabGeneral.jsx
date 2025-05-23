@@ -10,7 +10,6 @@ import {
   getValidationParticipationStatus,
 } from "../../../../../services/ValidationServices";
 import { AuthContext } from "../../../../../../../context/AuthContext";
-import { BASIC_PIE } from "../../../../InscriptionSection/data/BASIC_PIE";
 import {
   buildAvanceDiario,
   buildCausales,
@@ -20,9 +19,12 @@ import {
   buildEvoSuspensionEximicion,
   buildSolicitudes,
 } from "../../../utils/generalTabUtils";
+import { PIE_CONFIG } from "../../../../../../../constants/CHART_CONFIGS";
+import { LoadingContext } from "../../../../../../../context/LoadingContext";
 
 export function useTabGeneral() {
   const { getToken } = useContext(AuthContext);
+  const { queueLoading, dequeueLoading } = useContext(LoadingContext);
   const [selectedFilter, setSelectedFilter] = useState({
     convocatoria: CONVOCATORIA_LIST[0],
     estado: ESTADO_LIST[0],
@@ -30,8 +32,47 @@ export function useTabGeneral() {
     suspension: SUSPENSION_LIST[0],
   });
   const [docentesChart, setDocentesChart] = useState({
-    ...BASIC_PIE,
-   
+    ...PIE_CONFIG,
+    chart: {
+      ...PIE_CONFIG.chart,
+      //marginRight: 500,
+    },
+    plotOptions: {
+      ...PIE_CONFIG.plotOptions,
+      pie: {
+        ...PIE_CONFIG.plotOptions.pie,
+        size: "80%",
+      },
+    },
+    legend: {
+      layout: "vertical",
+      align: "right",
+      verticalAlign: "middle",
+      itemMarginBottom: 8,
+      itemStyle: {
+        fontSize: "12px",
+        whiteSpace: "normal",
+      },
+      x: -100,
+    },
+    responsive: {
+      rules: [
+        {
+          condition: {
+            maxWidth: 1000,
+          },
+          chartOptions: {
+            legend: {
+              layout: "horizontal",
+              align: "center",
+              verticalAlign: "bottom",
+              x: 0,
+              y: 0,
+            },
+          },
+        },
+      ],
+    },
     subtitle: {
       text: " DOCENTES <b>INSCRITOS</b>",
       align: "center",
@@ -76,7 +117,7 @@ export function useTabGeneral() {
     ],
   });
   const [solicitudesCambioChart, setSolicitudesCambioChart] = useState({
-    ...BASIC_PIE,
+    ...PIE_CONFIG,
     subtitle: {
       text: " SOLICITUDES DE CAMBIO <b>DE AGRUPACIÓN Y/O ASIGNATURA</b>",
       align: "center",
@@ -111,7 +152,7 @@ export function useTabGeneral() {
     ],
   });
   const [solicitudesSuspensionChart, setSolicitudesSuspensionChart] = useState({
-    ...BASIC_PIE,
+    ...PIE_CONFIG,
     subtitle: {
       text: " SOLICITUDES DE <b>SUSPENSIÓN Y/O EXIMICIÓN</b>",
       align: "center",
@@ -146,7 +187,7 @@ export function useTabGeneral() {
     ],
   });
   const [estadoChart, setEstadoChart] = useState({
-    ...BASIC_PIE,
+    ...PIE_CONFIG,
     subtitle: {
       text: " ESTADO DE <b>PARTICIPACIÓN</b> DE DOCENTES VALIDADOS",
       align: "center",
@@ -176,7 +217,7 @@ export function useTabGeneral() {
     ],
   });
   const [causalesChart, setCausalesChart] = useState({
-    ...BASIC_PIE,
+    ...PIE_CONFIG,
     subtitle: {
       text: " CAUSALES DE <b>NO EVALUACIÓN</b> DE DOCENTES VALIDADOS",
       align: "center",
@@ -422,6 +463,7 @@ export function useTabGeneral() {
   };
 
   useEffect(() => {
+    queueLoading();
     getGeneralValidation(getToken(), selectedFilter).then((data) => {
       setDocentesChart(buildDocentesInscritos(docentesChart, data.validacion));
       setSolicitudesCambioChart(
@@ -448,13 +490,19 @@ export function useTabGeneral() {
       setAvanceDocentePointChart(
         buildAvanceDiario(avanceDocentePointChart, data.avance_diario)
       );
+      dequeueLoading();
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedFilter]);
+  useEffect(() => {
+    queueLoading();
     getValidationParticipationStatus(getToken()).then((data) => {
       setEstadoChart(buildEstadoParticipacion(estadoChart, data.participacion));
       setCausalesChart(buildCausales(causalesChart, data.causales));
+      dequeueLoading();
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getToken, selectedFilter]);
+  }, []);
 
   return {
     selectedFilter,

@@ -8,18 +8,22 @@ export const BASIC_PIE = {
     plotBorderWidth: null,
     plotShadow: false,
     type: "pie",
-    marginTop: 100,
-    marginBottom: 80,
+    //marginTop: 60,
+    //marginBottom: 80,
     height: 510,
   },
   legend: {
+    layout: 'horizontal',
+    align: 'center',
+    verticalAlign: 'bottom',
+    itemWidth: 150,
     enabled: true,
-    verticalAlign: "top",
-    x: 0,
-    y: 350,
+    //verticalAlign: "top",
+    //x: 0,
+    //y: 300,
 
     itemStyle: {
-      fontSize: "13px",
+      fontSize: "12px",
     },
     navigation: {
       enabled: true,
@@ -50,10 +54,10 @@ export const BASIC_PIE = {
     pie: {
       allowPointSelect: true,
       cursor: "pointer",
-      size: '70%',
+      size: '60%',
       dataLabels: {
         enabled: true,
-        distance: 20,
+        distance: 15,
         format:
           "<b>{point.name}</b>: <b>{point.y:.,.0f} </b> ({point.percentage:.0f}%)<br/>",
         style: {
@@ -70,25 +74,4 @@ export const BASIC_PIE = {
     enabled: false,
   },
 
-  // responsive: {
-  //   rules: [
-  //     {
-  //       condition: { maxWidth: 500 },
-  //       chartOptions: {
-  //         plotOptions: {
-  //           // pie: {
-  //           //   dataLabels: {
-  //           //     enabled: false
-  //           //   }
-  //           // }
-  //         },
-  //         legend: {
-  //           align: "center",
-  //           verticalAlign: "bottom",
-  //           layout: "horizontal",
-  //         },
-  //       },
-  //     },
-  //   ],
-  // },
 };

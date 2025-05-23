@@ -11,7 +11,7 @@ import {
   SUSPENSION_LIST,
 } from "../../data/FilterList";
 import { useTabGeneral } from "./hooks/useTabGeneral";
-import { BasicLegend } from "../BasicLegend";
+import { CustomPieChart } from "../../../../../../components/CustomPieChart";
 
 export function TabGeneral() {
   const {
@@ -123,56 +123,17 @@ export function TabGeneral() {
           />
         </div>
       </div>
-      <div className="tab-general-upper">
-        <div className="pie-grid-3">
-          <div className="general-pie-chart-container">
-            <HighchartsReact options={docentesChart} highcharts={Highcharts} />
-            <hr />
-            <BasicLegend
-              data={docentesChart.series}
-              total={+docentesChart.title.number}
-            />
-          </div>
-          <div className="general-pie-chart-container">
-            <HighchartsReact
-              options={solicitudesCambioChart}
-              highcharts={Highcharts}
-            />
-            <hr />
-            <BasicLegend
-              data={solicitudesCambioChart.series}
-              total={+solicitudesCambioChart.title.number}
-            />
-          </div>
-          <div className="general-pie-chart-container">
-            <HighchartsReact
-              options={solicitudesSuspensionChart}
-              highcharts={Highcharts}
-            />
-            <hr />
-            <BasicLegend
-              data={solicitudesSuspensionChart.series}
-              total={+solicitudesSuspensionChart.title.number}
-            />
-          </div>
+      <div className="normal-container">
+        <div className="pie-grid-1">
+          <CustomPieChart setup={docentesChart} />
         </div>
         <div className="pie-grid-2">
-          <div className="general-pie-chart-container">
-            <HighchartsReact options={estadoChart} highcharts={Highcharts} />
-            <hr />
-            <BasicLegend
-              data={estadoChart.series}
-              total={+estadoChart.title.number}
-            />
-          </div>
-          <div className="general-pie-chart-container">
-            <HighchartsReact options={causalesChart} highcharts={Highcharts} />
-            <hr />
-            <BasicLegend
-              data={causalesChart.series}
-              total={+causalesChart.title.number}
-            />
-          </div>
+          <CustomPieChart setup={solicitudesCambioChart} />
+          <CustomPieChart setup={solicitudesSuspensionChart} />
+        </div>
+        <div className="pie-grid-2">
+          <CustomPieChart setup={estadoChart} />
+          <CustomPieChart setup={causalesChart} />
         </div>
       </div>
       <div className="general-point-chart-container">

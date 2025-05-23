@@ -13,13 +13,16 @@ export const PIE_CONFIG = {
     height: 510,
   },
   legend: {
+    layout: 'horizontal',
+    //itemWidth: 120,
+    align: 'center',
     enabled: true,
     verticalAlign: "top",
     x: 0,
     y: 350,
 
     itemStyle: {
-      fontSize: "13px",
+      fontSize: "12px",
     },
     navigation: {
       enabled: true,

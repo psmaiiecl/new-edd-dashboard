@@ -59,6 +59,7 @@ function LegendItem({ item, total }) {
           borderRadius: "5px",
           width: "60px",
           textAlign: "center",
+          fontSize: "15px",
           padding: "2px",
           fontWeight: "500",
           margin: "5px 0",
