@@ -24,7 +24,7 @@ export function extraerSumatoriasDocentes(data) {
 
 export function buildDocentesRegionChart(setup, data, total) {
   const dependencias = Object.keys(data || {}).filter(
-    (d) => d !== "Sin Información" && d!== "Retirado"
+    (d) => d !== "Sin Información" && d !== "Retirado"
   );
 
   const arrInscritos = dependencias.map((dep) => data[dep].Inscrito.count || 0);

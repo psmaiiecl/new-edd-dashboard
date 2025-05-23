@@ -1,7 +1,9 @@
+import { numberFormatter } from "../utils/NumberFormatter";
+
 export const PIE_CONFIG = {
-   lang: {
-    decimalPoint: ',',
-    thousandsSep: '.'
+  lang: {
+    decimalPoint: ",",
+    thousandsSep: ".",
   },
   chart: {
     plotBackgroundColor: null,
@@ -13,9 +15,9 @@ export const PIE_CONFIG = {
     height: 510,
   },
   legend: {
-    layout: 'horizontal',
+    layout: "horizontal",
     //itemWidth: 120,
-    align: 'center',
+    align: "center",
     enabled: true,
     verticalAlign: "top",
     x: 0,
@@ -53,7 +55,7 @@ export const PIE_CONFIG = {
     pie: {
       allowPointSelect: true,
       cursor: "pointer",
-      size: '70%',
+      size: "70%",
       dataLabels: {
         enabled: true,
         distance: 20,
@@ -64,7 +66,7 @@ export const PIE_CONFIG = {
           fontWeight: "400",
           color: "#666666",
         },
-        overflow:'allow'
+        overflow: "allow",
       },
       showInLegend: true,
     },
@@ -74,7 +76,76 @@ export const PIE_CONFIG = {
   },
 };
 
-export const BAR_CONFIG = {};
+export const STACK_BAR_CONFIG = {
+  lang: {
+    decimalPoint: ",",
+    thousandsSep: ".",
+  },
+  chart: {
+    type: "column",
+    height: 500,
+    // style: {
+    //   color: "#333333",
+    //   fontSize: "15px",
+    //   fontWeight: "bold",
+    // },
+  },
+  colors: [
+    "#165e84",
+    "#e87131",
+    "#196b23",
+    "#0e9ed7",
+    "#9e2b96",
+    "#ff3f3f",
+    "#ff3f3f",
+  ],
+  title: {
+    //text: "AGENDAMIENTO PARA CADA SEMANA",
+    align: "center",
+    style: {
+      fontWeight: "bold",
+      fontSize: "18px",
+      color: "#666666",
+    },
+  },
+  yAxis: {
+    min: 0,
+    title: {
+      text: "",
+    },
+    labels: {
+      formatter: function () {
+        return numberFormatter(this.value);
+      },
+    },
+    stackLabels: {
+      enabled: true,
+      style: {
+        fontWeight: "bold",
+        fontSize: "13px",
+        color: "#333333",
+        textOutline: "none",
+      },
+
+      formatter: function () {
+        return numberFormatter(this.total);
+      },
+    },
+  },
+  legend: {},
+  tooltip: {
+    valueSuffix: "",
+  },
+  plotOptions: {
+    column: {
+      stacking: "normal",
+      dataLabels: {
+        enabled: false,
+      },
+    },
+  },
+  series: [],
+};
 
 export const LINE_CONFIG = {};
 

@@ -11,7 +11,6 @@ export function BasicLegend({ data = [], total, color = [] }) {
   );
 }
 
-
 function LegendItem({ item, total }) {
   const percentage = ((item.y / total) * 100).toFixed(1);
   return (

@@ -1,12 +1,24 @@
 import { MODULE_CHART_SETUP } from "../data/ModuleChartBase";
 
 export function buildPortfolioModuleChart(docentes) {
-  const portafolio_completado = docentes.portafolio_completado ? docentes.portafolio_completado : 0;
-  const portafolio_iniciado = docentes.portafolio_iniciado ? docentes.portafolio_iniciado : 0;
-  const portafolio_no_iniciado = docentes.portafolio_no_iniciado ? docentes.portafolio_no_iniciado : 0;
-  const portafolio_no_iniciado_se_pend = docentes.portafolio_no_iniciado_se_pend ? docentes.portafolio_no_iniciado_se_pend : 0;
+  const portafolio_completado = docentes.portafolio_completado
+    ? docentes.portafolio_completado
+    : 0;
+  const portafolio_iniciado = docentes.portafolio_iniciado
+    ? docentes.portafolio_iniciado
+    : 0;
+  const portafolio_no_iniciado = docentes.portafolio_no_iniciado
+    ? docentes.portafolio_no_iniciado
+    : 0;
+  const portafolio_no_iniciado_se_pend = docentes.portafolio_no_iniciado_se_pend
+    ? docentes.portafolio_no_iniciado_se_pend
+    : 0;
 
-  const total = portafolio_completado + portafolio_iniciado + portafolio_no_iniciado + portafolio_no_iniciado_se_pend;
+  const total =
+    portafolio_completado +
+    portafolio_iniciado +
+    portafolio_no_iniciado +
+    portafolio_no_iniciado_se_pend;
 
   return {
     ...MODULE_CHART_SETUP,

@@ -1,0 +1,16 @@
+.pagina-agendamiento {
+  min-height: 100%;
+  width: 100%;
+  margin: auto;
+  position: relative;
+}
+
+.agendamiento-content {
+  display: flex;
+  box-shadow: 0 7px 10px 0 rgba(0, 0, 0, 0.1);
+  max-width: 1366px;
+  width: 100%;
+  flex-direction: column;
+  background-color: white;
+  margin: 0 auto;
+}

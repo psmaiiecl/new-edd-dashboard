@@ -23,7 +23,6 @@ export function buildEstadoChart(setup, data, total) {
   const dependencias = Object.keys(data || {}).filter(
     (d) => d !== "Sin Información"
   );
-  console.log("Dependencias estado convocatoria", dependencias);
 
   const arrValidados = dependencias.map((dep) => data[dep].validados || 0);
   const arrNoValidados = dependencias.map((dep) => data[dep].no_validados || 0);

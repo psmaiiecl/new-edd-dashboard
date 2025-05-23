@@ -20,13 +20,13 @@ export function extraerSumatoriasDocentes(data) {
     }
   }
   console.log("sumas", sumas);
-  
+
   return sumas;
 }
 
 export function buildDocentesDependenciaChart(setup, data, total) {
   const dependencias = Object.keys(data || {}).filter(
-    (d) => d !== "Sin Información" && d!== "Retirado"
+    (d) => d !== "Sin Información" && d !== "Retirado"
   );
 
   const arrInscritos = dependencias.map((dep) => data[dep].Inscrito.count || 0);

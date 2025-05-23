@@ -65,12 +65,12 @@ export function TabRegion() {
                 return (
                   <tr key={index}>
                     <td>{key}</td>
-                    <td>{numberFormatter(estadoData[key].validados.count)}</td>
+                    <td>{numberFormatter(estadoData[key]?.validados.count)}</td>
                     <td>
-                      {numberFormatter(estadoData[key].no_validados.count)}
+                      {numberFormatter(estadoData[key]?.no_validados.count)}
                     </td>
                     <td>
-                      {numberFormatter(estadoData[key].sin_ingreso.count)}
+                      {numberFormatter(estadoData[key]?.sin_ingreso.count)}
                     </td>
                   </tr>
                 );
@@ -144,9 +144,9 @@ export function TabRegion() {
                 return (
                   <tr key={index}>
                     <td>{key}</td>
-                    <td>{numberFormatter(cambioData[key].aprobadas)}</td>
-                    <td>{numberFormatter(cambioData[key].no_procesadas)}</td>
-                    <td>{numberFormatter(cambioData[key].rechazadas)}</td>
+                    <td>{numberFormatter(cambioData[key]?.aprobadas)}</td>
+                    <td>{numberFormatter(cambioData[key]?.no_procesadas)}</td>
+                    <td>{numberFormatter(cambioData[key]?.rechazadas)}</td>
                   </tr>
                 );
               })}
@@ -219,11 +219,11 @@ export function TabRegion() {
                 return (
                   <tr key={index}>
                     <td>{key}</td>
-                    <td>{numberFormatter(suspensionData[key].aprobadas)}</td>
+                    <td>{numberFormatter(suspensionData[key]?.aprobadas)}</td>
                     <td>
-                      {numberFormatter(suspensionData[key].no_procesadas)}
+                      {numberFormatter(suspensionData[key]?.no_procesadas)}
                     </td>
-                    <td>{numberFormatter(suspensionData[key].rechazadas)}</td>
+                    <td>{numberFormatter(suspensionData[key]?.rechazadas)}</td>
                   </tr>
                 );
               })}

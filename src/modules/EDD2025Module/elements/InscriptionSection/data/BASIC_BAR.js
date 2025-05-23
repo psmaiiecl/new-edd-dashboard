@@ -1,7 +1,7 @@
 export const BASIC_BAR = {
   lang: {
-    decimalPoint: ',',
-    thousandsSep: '.'
+    decimalPoint: ",",
+    thousandsSep: ".",
   },
   chart: {
     type: "bar",

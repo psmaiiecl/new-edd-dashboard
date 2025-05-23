@@ -74,8 +74,7 @@ export function buildDocentesInscritos(setup, data) {
   const totalInscritos =
     parseInt(data.docentes.inscritos) +
     parseInt(data.docentes.inscritos_agregados_por_sostenedor);
-  const total =
-    totalInscritos + parseInt(data.docentes.cancelados);
+  const total = totalInscritos + parseInt(data.docentes.cancelados);
   const res = {
     ...setup,
     title: {

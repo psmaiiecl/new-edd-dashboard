@@ -1,7 +1,7 @@
 export const BASIC_PIE = {
-   lang: {
-    decimalPoint: ',',
-    thousandsSep: '.'
+  lang: {
+    decimalPoint: ",",
+    thousandsSep: ".",
   },
   chart: {
     plotBackgroundColor: null,
@@ -13,9 +13,9 @@ export const BASIC_PIE = {
     height: 510,
   },
   legend: {
-    layout: 'horizontal',
-    align: 'center',
-    verticalAlign: 'bottom',
+    layout: "horizontal",
+    align: "center",
+    verticalAlign: "bottom",
     itemWidth: 150,
     enabled: true,
     //verticalAlign: "top",
@@ -54,7 +54,7 @@ export const BASIC_PIE = {
     pie: {
       allowPointSelect: true,
       cursor: "pointer",
-      size: '60%',
+      size: "60%",
       dataLabels: {
         enabled: true,
         distance: 15,
@@ -65,7 +65,7 @@ export const BASIC_PIE = {
           fontWeight: "400",
           color: "#666666",
         },
-        overflow:'allow'
+        overflow: "allow",
       },
       showInLegend: true,
     },
@@ -73,5 +73,4 @@ export const BASIC_PIE = {
   credits: {
     enabled: false,
   },
-
 };

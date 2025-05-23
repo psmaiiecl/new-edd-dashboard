@@ -36,7 +36,12 @@ export function Menu() {
         >
           <HighchartsReact options={validationChart} highcharts={Highcharts} />
         </ModuleCard>
-        <ModuleCard title={"Agendamiento de Grabaciones"} locked />
+        <ModuleCard
+          locked
+          title={"Agendamiento de Grabaciones"}
+          action={() => navigate("agendamiento-grabaciones")}
+          loading={loadingStatus.agendamiento}
+        />
         <ModuleCard title={"Grabaciones"} locked />
         <ModuleCard
           locked

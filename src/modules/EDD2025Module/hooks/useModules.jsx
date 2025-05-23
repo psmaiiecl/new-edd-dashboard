@@ -32,14 +32,11 @@ export function useModules() {
     });
     changeLoadingStatus("validation", true);
     getGeneralValidation(getToken()).then((data) => {
-      setValidationChart(
-        buildValidationModuleChart(data.validacion)
-      );
+      setValidationChart(buildValidationModuleChart(data.validacion));
       changeLoadingStatus("validation", false);
     });
     changeLoadingStatus("help", true);
     getZohoCalls(getToken()).then((data) => {
-      console.log(data);
       setHelpChart(buildHelpModuleChart(data));
       changeLoadingStatus("help", false);
     });

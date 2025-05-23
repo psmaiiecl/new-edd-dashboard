@@ -8,6 +8,7 @@ import { PortfolioSection2025 } from "../../modules/EDD2025Module/elements/Portf
 import { DashboardHeader } from "./components/DashboardHeader";
 import { ValidationSection2025 } from "../../modules/EDD2025Module/elements/ValidationSection";
 import { SDRecoverySection2025 } from "../../modules/EDD2025Module/elements/SDRecoverySection";
+import { RecordSchedulingSection2025 } from "../../modules/EDD2025Module/elements/RecordSchedulingSection";
 
 export function DashboardPage() {
   const { year } = useParams();
@@ -37,7 +38,14 @@ export function DashboardPage() {
               <Route path="inscripcion" element={<InscriptionSection2025 />} />
               <Route path="validacion" element={<ValidationSection2025 />} />
               <Route path="portafolio" element={<PortfolioSection2025 />} />
-              <Route path="recuperacion-sd" element={<SDRecoverySection2025 />} />
+              <Route
+                path="agendamiento-grabaciones"
+                element={<RecordSchedulingSection2025 />}
+              />
+              <Route
+                path="recuperacion-sd"
+                element={<SDRecoverySection2025 />}
+              />
             </Route>
           )}
         </Routes>

@@ -65,9 +65,9 @@ export async function getExcelDocente(finishLoading) {
 
 export async function getExcelSostenedor(finishLoading) {
   const url =
-  import.meta.env.VITE_BASE_URL +
-  BASE_API_URL_2025 +
-  "/2025-inscripcion-sostenedor-descarga-excel";
+    import.meta.env.VITE_BASE_URL +
+    BASE_API_URL_2025 +
+    "/2025-inscripcion-sostenedor-descarga-excel";
   const res = await fetch(url, {
     method: "POST",
     headers: {
@@ -78,17 +78,17 @@ export async function getExcelSostenedor(finishLoading) {
   if (!res.ok) {
     throw new Error("Error al descargar el archivo");
   }
-  
+
   const blob = await res.blob();
   const urlBlob = window.URL.createObjectURL(blob);
-  
+
   const a = document.createElement("a");
   a.href = urlBlob;
   a.download = "inscripcion-sostenedores.csv";
   document.body.appendChild(a);
   a.click();
   a.remove();
-  
+
   window.URL.revokeObjectURL(urlBlob);
   finishLoading();
 }

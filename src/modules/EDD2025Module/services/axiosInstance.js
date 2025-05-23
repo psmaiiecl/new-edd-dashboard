@@ -12,7 +12,7 @@ instance.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token"); // Guarda el token al iniciar sesión
     if (token) {
-      config.headers["t"] = token; // Usamos 't' para enviar el token 
+      config.headers["t"] = token; // Usamos 't' para enviar el token
     }
     return config;
   },

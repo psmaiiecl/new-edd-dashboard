@@ -32,7 +32,7 @@ export function TabConvocatoria() {
                 {Object.keys(docentesStatus)
                   .slice(0, -1)
                   .map((key, index) => {
-                    const item = docentesStatus[key];                    
+                    const item = docentesStatus[key];
                     const color = docentesConvocatoria.series[index]?.color;
                     return (
                       <td key={index}>

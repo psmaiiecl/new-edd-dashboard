@@ -39,7 +39,6 @@ export function buildValidationModuleChart(data) {
               data: [(notIn / total) * 100],
             },
           },
-          
         ],
       },
     ],

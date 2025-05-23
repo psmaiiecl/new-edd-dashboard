@@ -65,9 +65,9 @@ export function TabDependencia() {
                 return (
                   <tr key={index}>
                     <td>{key}</td>
-                    <td>{numberFormatter(estadoData[key].validados)}</td>
-                    <td>{numberFormatter(estadoData[key].no_validados)}</td>
-                    <td>{numberFormatter(estadoData[key].sin_ingreso)}</td>
+                    <td>{numberFormatter(estadoData[key]?.validados)}</td>
+                    <td>{numberFormatter(estadoData[key]?.no_validados)}</td>
+                    <td>{numberFormatter(estadoData[key]?.sin_ingreso)}</td>
                   </tr>
                 );
               })}
@@ -140,9 +140,9 @@ export function TabDependencia() {
                 return (
                   <tr key={index}>
                     <td>{key}</td>
-                    <td>{numberFormatter(cambioData[key].aprobadas)}</td>
-                    <td>{numberFormatter(cambioData[key].no_procesadas)}</td>
-                    <td>{numberFormatter(cambioData[key].rechazadas)}</td>
+                    <td>{numberFormatter(cambioData[key]?.aprobadas)}</td>
+                    <td>{numberFormatter(cambioData[key]?.no_procesadas)}</td>
+                    <td>{numberFormatter(cambioData[key]?.rechazadas)}</td>
                   </tr>
                 );
               })}
@@ -215,11 +215,11 @@ export function TabDependencia() {
                 return (
                   <tr key={index}>
                     <td>{key}</td>
-                    <td>{numberFormatter(suspensionData[key].aprobadas)}</td>
+                    <td>{numberFormatter(suspensionData[key]?.aprobadas)}</td>
                     <td>
-                      {numberFormatter(suspensionData[key].no_procesadas)}
+                      {numberFormatter(suspensionData[key]?.no_procesadas)}
                     </td>
-                    <td>{numberFormatter(suspensionData[key].rechazadas)}</td>
+                    <td>{numberFormatter(suspensionData[key]?.rechazadas)}</td>
                   </tr>
                 );
               })}

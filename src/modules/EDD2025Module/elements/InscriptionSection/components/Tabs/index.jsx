@@ -9,7 +9,7 @@ import { useContext } from "react";
 import { LoadingContext } from "../../../../../../context/LoadingContext";
 
 export function Tabs({ setActive, active }) {
-  const {queueLoading, dequeueLoading} = useContext(LoadingContext);
+  const { queueLoading, dequeueLoading } = useContext(LoadingContext);
   return (
     <div className="tab-container">
       <div className="tabs">
@@ -29,7 +29,7 @@ export function Tabs({ setActive, active }) {
             queueLoading();
             getExcelDocente(dequeueLoading);
           }}
-          />
+        />
         <Button
           text={"Excel Sostenedor"}
           action={() => {
