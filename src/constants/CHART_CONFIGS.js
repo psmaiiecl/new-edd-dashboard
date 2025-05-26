@@ -83,7 +83,7 @@ export const STACK_BAR_CONFIG = {
   },
   chart: {
     type: "column",
-    height: 500,
+    //height: 500,
     // style: {
     //   color: "#333333",
     //   fontSize: "15px",
@@ -108,6 +108,7 @@ export const STACK_BAR_CONFIG = {
       color: "#666666",
     },
   },
+  xAxis: {},
   yAxis: {
     min: 0,
     title: {
@@ -147,8 +148,80 @@ export const STACK_BAR_CONFIG = {
   series: [],
 };
 
-export const LINE_CONFIG = {};
+export const MULTIPLE_BAR_CONFIG = {
+  lang: {
+    decimalPoint: ",",
+    thousandsSep: ".",
+  },
+  chart: {
+    type: "column",
+  },
+  legend: {
+    itemMarginTop: 3,
+    align: "right",
+    verticalAlign: "top",
+    layout: "vertical",
+    x: 5,
+    y: 100,
+  },
+  title: {
+    //text: 'AGENDAMIENTO SEMANAL',
+    align: "center",
+    style: {
+      fontWeight: "bold",
+      fontSize: "18px",
+      color: "#666666",
+    },
+  },
+  subtitle: {
+    text: "",
+  },
+  xAxis: {
+    crosshair: true,
+  },
+  tooltip: {
+    valueSuffix: "",
+  },
+  plotOptions: {
+    column: {
+      pointPadding: 0,
+      borderWidth: 0,
+    },
+  },
+};
 
-export const POINT_CONFIG = {};
+export const POINT_CONFIG = {
+  chart: {
+    type: "line",
+  },
+  legend: {
+    itemMarginTop: 3,
+    align: "right",
+    verticalAlign: "top",
+    layout: "vertical",
+    x: 5,
+    y: 100,
+  },
+  title: {
+    //text: 'AGENDAMIENTO ACUMULADO',
+    align: "center",
+    style: {
+      fontWeight: "bold",
+      fontSize: "18px",
+      color: "#666666",
+    },
+  },
+  tooltip: {
+    valueSuffix: "",
+  },
+  plotOptions: {
+    column: {
+      pointPadding: 0,
+      borderWidth: 0,
+    },
+  },
+};
+
+export const LINE_CONFIG = {};
 
 export const AREA_CONFIG = {};
