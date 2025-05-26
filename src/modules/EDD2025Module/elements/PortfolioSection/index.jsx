@@ -2,9 +2,9 @@ import "./index.css";
 import { useState } from "react";
 import { TabGeneralPortafolio } from "./components/TabGeneralPortafolio";
 import { TabDependenciaPortafolio } from "./components/TabDependenciaPortafolio";
-// import { TabConvocatoriaPortafolio } from "./components/TabConvocatoriaPortafolio";
-// import { TabRegionPortafolio } from "./components/TabRegionPortafolio";
-// import { TabAgrupacionPortafolio } from "./components/TabAgrupacionPortafolio";
+import { TabConvocatoriaPortafolio } from "./components/TabConvocatoriaPortafolio";
+import { TabRegionPortafolio } from "./components/TabRegionPortafolio";
+import { TabAgrupacionPortafolio } from "./components/TabAgrupacionPortafolio";
 import { TabsPortafolio } from "../PortfolioSection/components/TabsPortafolio/Tabs";
 import FiltrosPortfolioSection from "./components/FiltrosPortfolioSection";
 
@@ -46,19 +46,19 @@ export function PortfolioSection2025() {
         </div>
 
         {/* TAB 3 - Convocatoria */}
-        {/* <div style={{ display: activeTab === "tab3" ? "block" : "none" }}>
-          <TabConvocatoriaPortafolio />
-        </div> */}
+        <div style={{ display: activeTab === "tab3" ? "block" : "none" }}>
+          <TabConvocatoriaPortafolio  isActive={activeTab === "tab3"} />
+        </div>
 
         {/* TAB 4 - Región */}
-        {/* <div style={{ display: activeTab === "tab4" ? "block" : "none" }}>
-          <TabRegionPortafolio />
-        </div> */}
+        <div style={{ display: activeTab === "tab4" ? "block" : "none" }}>
+          <TabRegionPortafolio isActive={activeTab === "tab4"}/>
+        </div>
 
         {/* TAB 5 - Agrupación */}
-        {/* <div style={{ display: activeTab === "tab5" ? "block" : "none" }}>
-          <TabAgrupacionPortafolio />
-        </div> */}
+        <div style={{ display: activeTab === "tab5" ? "block" : "none" }}>
+          <TabAgrupacionPortafolio isActive={activeTab === "tab5"}/>
+        </div>
       </article>
     </section>
   );

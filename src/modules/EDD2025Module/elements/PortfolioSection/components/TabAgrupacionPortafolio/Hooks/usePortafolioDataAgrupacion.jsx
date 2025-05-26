@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "../../../../../services/axiosInstance";
 
-export function usePortafolioDataDependencia(filtros = {}) {
+export function usePortafolioDataAgrupacion(filtros = {}) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -23,19 +23,19 @@ export function usePortafolioDataDependencia(filtros = {}) {
 
     const body = new FormData();
     axios
-      .post(`${baseURL}/2025-portafolio-tab-dependencia`, body)
+      .post(`${baseURL}/2025-portafolio-tab-agrupacion`, body)
       .then((res) => {
-        //console.log("pulento", res.data);
+        //console.log("Agrupacion", res.data);
 		setData(res.data);
       })
       .catch((err) => {
-        console.error("Error al obtener datos de portafolio por agrupacion:", err);
+        console.error("Error al obtener datos de portafolio por Agrupacion:", err);
         setError(err);
       })
       .finally(() => {
         setLoading(false);
       });
-  }, [JSON.stringify(filtros)]);
+  }, [JSON.stringify()]);
 
   return {
     //general: data?.general || null,
