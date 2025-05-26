@@ -1,3 +1,4 @@
+const nf = new Intl.NumberFormat("es-CL");
 import React, { useEffect, useState } from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
@@ -6,7 +7,6 @@ import { BasicLegend } from "../BasicLegend";
 const ColumnChart = ({
   subtitle = [],
   color = {},
-  dataMapper = (data) => data,
   chartData,
   showLegend = true,
 }) => {
@@ -14,12 +14,10 @@ const ColumnChart = ({
   const [mappedData, setMappedData] = useState({});
 
   useEffect(() => {
-    if (chartData) {
-      const newData = dataMapper(chartData, color, subtitle);
+    if (chartData && Object.keys(chartData).length > 0) {
       setTotal(chartData.total);
-      setMappedData(newData);
+      setMappedData(chartData);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chartData]);
 
   const options = {
@@ -37,7 +35,7 @@ const ColumnChart = ({
       },
     },
     subtitle: {
-      text: total?.subtitulo,
+      text: subtitle,
       align: "center",
       style: {
         fontWeight: "bold",
@@ -46,7 +44,7 @@ const ColumnChart = ({
       },
     },
     xAxis: {
-      type: "category",
+      categories: mappedData.categories || [],
       title: { text: null },
       labels: {
         style: {
@@ -55,24 +53,32 @@ const ColumnChart = ({
       },
     },
     yAxis: {
-      title: {
-        text: null,
+      min: 0,
+      max: 100,
+      title: { text: "Porcentaje (%)" },
+      stackLabels: {
+        enabled: false,
       },
     },
     tooltip: {
-      pointFormat: "<b>{point.name}</b><br/>Valor: {point.y}",
-      style: {
-        fontSize: "13px",
-        color: "#666666",
+      shared: true,
+      formatter: function () {
+        let s = `<b>${this.key}</b><br/>`;
+        this.points.forEach(function (point) {
+          s += `<span style="color:${point.color}">\u25CF</span> ${point.series.name}: <b>${nf.format(point.point.valor)}</b> (${point.y}%)<br/>`;
+        });
+        return s;
       },
     },
     plotOptions: {
       column: {
-        colorByPoint: true,
+        stacking: "percent",
         borderWidth: 0,
         dataLabels: {
           enabled: true,
-          format: "{point.y}",
+          formatter: function () {
+            return this.y ? `${this.y.toFixed(1)}%` : null;
+          },
         },
       },
     },
@@ -89,22 +95,49 @@ const ColumnChart = ({
     credits: {
       enabled: false,
     },
-    series: [
-      {
-        name: "Categorías",
-        colorByPoint: true,
-        data: mappedData?.series ?? [],
-      },
-    ],
+    series: mappedData?.series ?? [],
+  };
+  const renderTablaValores = () => {
+    if (!mappedData.series || mappedData.series.length === 0) return null;
+
+    const categorias = mappedData.categories || [];
+
+    return (
+      <div className="table-responsive mt-3">
+        <table className="table table-bordered table-sm">
+          <thead className="table-light">
+            <tr>
+              <th>Dependencia</th>
+              {mappedData.series.map((serie, i) => (
+                <th key={i} style={{ borderRadius: '5px', backgroundColor: serie.color }}>{serie.name}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {categorias.map((cat, i) => (
+              <tr key={i}>
+                <td>{cat}</td>
+                {mappedData.series.map((serie, j) => (
+                  <td key={j}>
+                    {nf.format(serie.data[i]?.valor ?? 0)}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
   };
 
   return (
     <div className="column-chart-wrapper">
       <HighchartsReact highcharts={Highcharts} options={options} />
       <hr />
-      {mappedData.series && mappedData.series.length > 0 && (
-        <BasicLegend data={mappedData.series} total={total?.data} />
-      )}
+      <div className="pie-chart-legend">
+        {renderTablaValores()}
+        {showLegend && <BasicLegend series={mappedData.series} />}
+      </div>
     </div>
   );
 };

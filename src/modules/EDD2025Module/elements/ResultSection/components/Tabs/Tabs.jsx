@@ -1,29 +1,18 @@
-import { tabList } from "../../data/TabList";
-import React, { useState } from "react";
+import { tabList } from "../../Data/TabList";
+import "./Tabs.css";
 
-import { Button } from "../../../../../../components/Button";
-
-export function TabsPortafolio({ setActive, active }) {
-
+export function Tabs({ setActive, active }) {
   return (
-    
     <div className="tab-container">
-      
       <div className="tabs">
         {tabList.map((tab) => (
           <TabItem
-
             key={tab.index}
             isActive={tab.index === active}
             text={tab.label}
             setAsActive={() => setActive(tab.index)}
           />
         ))}
-      
-          <Button text={"Excel Docente"} action={() => { }} />
-          <Button text={"Excel Sostenedor"} action={() => { }} />
-       
-        
       </div>
     </div>
   );
@@ -32,8 +21,7 @@ export function TabsPortafolio({ setActive, active }) {
 function TabItem({ isActive, text, setAsActive }) {
   return (
     <div
-      className={`tabs__tab ${isActive ? "active" : ""}`}
-
+      className={`${isActive === true && "active"} tabs__tab`}
       onClick={setAsActive}
     >
       <span>{text}</span>

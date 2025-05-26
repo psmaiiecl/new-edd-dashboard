@@ -1,0 +1,59 @@
+.tab-general {
+  max-width: 100%;
+}
+
+.tab-general-filtro {
+  width: 90%;
+  margin: 0 auto;
+  padding: 20px 10px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.tab-general-filtro-container {
+  width: 25%;
+}
+
+.tab-general-upper {
+  display: flex;
+  width: 90%;
+  padding: 20px 10px;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  justify-content: space-evenly;
+  row-gap: 60px;
+}
+
+.tab-general-docente {
+  display: flex;
+  width: 100%;
+  overflow-x: hidden;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+.tab-general-portafolio {
+  display: flex;
+  width: 100%;
+  overflow-x: hidden;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+.general-pie-chart-container {
+  width: 100%;
+  border: 1px solid #e0dddd;
+  padding: 15px 0;
+}
+
+.general-point-chart-container {
+  width: 90%;
+  margin: 30px auto;
+}
+
+@media (max-width: 1100px) {
+  .tab-general-docente {
+    flex-wrap: wrap;
+  }
+}

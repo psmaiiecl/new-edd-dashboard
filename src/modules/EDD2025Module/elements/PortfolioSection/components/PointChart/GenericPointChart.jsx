@@ -10,6 +10,7 @@ const GenericPointChart = ({
   dataMapper,
   color = { data: "#007bff" },
   showLegend = true,
+  filtros = {}
 }) => {
   const { getToken } = useContext(AuthContext);
   const [chartData, setChartData] = useState({});
@@ -19,11 +20,12 @@ const GenericPointChart = ({
       try {
         const token = await getToken();
 
+        
         const body = new FormData();
-        body.append("convocatoria", "2025");
-        body.append("estado", "activo");
-        body.append("nivel", "básico");
-        body.append("suspension", "no");
+        if (!filtros || Object.keys(filtros).length === 0) return;
+        Object.entries(filtros).forEach(([key, value]) => {
+          body.append(key, value);
+        });
 
         const response = await axios.post(serviceUrl, body, {
           headers: { t: token },
@@ -45,6 +47,7 @@ const GenericPointChart = ({
 
     fetchData();
   }, [serviceUrl, keyPath, dataMapper]);
+
 
   return (
     <PointChart

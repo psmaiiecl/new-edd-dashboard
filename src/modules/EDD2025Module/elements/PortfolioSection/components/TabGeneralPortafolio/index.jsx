@@ -1,326 +1,157 @@
-//import "./index.css";
+import React, { memo } from "react";
 import GenericPieChart from "../../components/PieChart/GenericPieChart";
-import GenericPointChart from "../../components/PointChart/GenericPointChart";
-import GenericScatterChart from "../../components/ScatterChart/GenericScatterChart";
+import { usePortafolioDataGeneral } from "./hooks/usePortafolioDataGeneral";
 
-export function TabGeneralPortafolio() {
-  const baseURL =
-    "http://api-docentemas-dev.3htp.cloud:8095/back/public/api2025";
+// Función genérica para crear mapeadores
+const createMapper = (subtitle, totalKey, seriesConfig) => (data) =>
+  data
+    ? {
+      total: { subtitle, data: data[totalKey] },
+      series: seriesConfig.map(({ name, key, color }) => ({
+        name,
+        y: data[key],
+        color,
+      })),
+    }
+    : { total: { subtitle: "", data: 0 }, series: [] };
 
-  const dMapper = (mapped) => {
-    return {
-      series: {
-        name: data.nombre,
-        x: data.valorX,
-        y: data.valorY,
-      },
-    };
-  };
-  const docentesEvaluadosMapper = (data) =>
-    data
-      ? {
-          total: {
-            subtitle: "TOTAL VALIDADOS",
-            data: data.total_validados,
-          },
-          series: [
-            {
-              name: "RINDEN PORTAFOLIO",
-              y: data.rinden_portafolio,
-              color: "#65d9ab",
-            },
-            {
-              name: "NO RINDEN PORTAFOLIO",
-              y: data.no_rinden_portafolio,
-              color: "#ff5880",
-            },
-            { name: "NO SE EVALUAN", y: data.suspendidos, color: "#ff8e53" },
-          ],
-        }
-      : {
-          total: {
-            subtitle: "",
-            data: 0,
-          },
-          series: [],
-        };
-  const avancePortafolioMapper = (data) =>
-    data
-      ? {
-          total: {
-            subtitle: "AVANCE PORTAFOLIO",
-            data: data.total,
-          },
-          series: [
-            {
-              name: "PORTAFOLIO COMPLETADO",
-              y: data.portafolio_completado,
-              color: "#65d9ab",
-            },
-            {
-              name: "PORTAFOLIO INICIADO",
-              y: data.portafolio_iniciado,
-              color: "#ff8e53",
-            },
-            {
-              name: "PORTAFOLIO NO INICIADO",
-              y: data.portafolio_no_iniciado,
-              color: "#ffd153",
-            },
-            {
-              name: "PORTAFOLIO NO INICIADO con SUSP/EXIM PENDIENTE",
-              y: data.portafolio_no_iniciado_se_pend,
-              color: "#ff5880",
-            },
-          ],
-        }
-      : {
-          total: {
-            subtitle: "",
-            data: 0,
-          },
-          series: [],
-        };
-  const avanceModuloUnoMapper = (data) =>
-    data
-      ? {
-          total: {
-            subtitle: "AVANCE MÓDULO 1",
-            data: data.total_m1,
-          },
-          series: [
-            { name: "M1 COMPLETADO", y: data.m1_completado, color: "#65d9ab" },
-            { name: "M1 INICIADO", y: data.m1_iniciado, color: "#ff8e53" },
-            {
-              name: "M1 NO INICIADO",
-              y: data.m1_no_iniciado,
-              color: "#ff5880",
-            },
-          ],
-        }
-      : {
-          total: {
-            subtitle: "",
-            data: 0,
-          },
-          series: [],
-        };
-  const avanceModuloDosMapper = (data) =>
-    data
-      ? {
-          total: {
-            subtitle: "AVANCE MÓDULO 2",
-            data: data.total_m2,
-          },
-          series: [
-            { name: "M2 COMPLETADO", y: data.m2_completado, color: "#65d9ab" },
-            { name: "M2 INICIADO", y: data.m2_iniciado, color: "#ff8e53" },
-            {
-              name: "M2 NO INICIADO",
-              y: data.m2_no_iniciado,
-              color: "#ff5880",
-            },
-          ],
-        }
-      : {
-          total: {
-            subtitle: "",
-            data: 0,
-          },
-          series: [],
-        };
-  const avanceModuloTresMapper = (data) =>
-    data
-      ? {
-          total: {
-            subtitle: "AVANCE MÓDULO 3",
-            data: data.total_m3,
-          },
-          series: [
-            { name: "M3 COMPLETADO", y: data.m3_completado, color: "#65d9ab" },
-            { name: "M3 INICIADO", y: data.m3_iniciado, color: "#ff8e53" },
-            {
-              name: "M3 NO INICIADO",
-              y: data.m3_no_iniciado,
-              color: "#ff5880",
-            },
-          ],
-        }
-      : {
-          total: {
-            subtitle: "",
-            data: 0,
-          },
-          series: [],
-        };
-  const avanceReporteDirectoresMapper = (data) =>
-    data
-      ? {
-          total: {
-            subtitle: "AVANCE M3 DIRECTORES",
-            data: data.total,
-          },
-          series: [
-            { name: "M3 COMPLETADO", y: data.completado, color: "#65d9ab" },
-            { name: "M3 INICIADO", y: data.iniciado, color: "#ff8e53" },
-            { name: "M3 NO INICIADO", y: data.no_iniciado, color: "#ff5880" },
-          ],
-        }
-      : {
-          total: {
-            subtitle: "",
-            data: 0,
-          },
-          series: [],
-        };
+// Mapeadores para cada tipo de gráfico
+const mappers = {
+  docentesEvaluados: createMapper("TOTAL VALIDADOS", "total_validados", [
+    { name: "RINDEN PORTAFOLIO", key: "rinden_portafolio", color: "#65d9ab" },
+    { name: "NO RINDEN PORTAFOLIO", key: "no_rinden_portafolio", color: "#ff5880" },
+    { name: "NO SE EVALUAN", key: "suspendidos", color: "#ff8e53" },
+  ]),
+  avancePortafolio: createMapper("AVANCE PORTAFOLIO", "total", [
+    { name: "PORTAFOLIO COMPLETADO", key: "portafolio_completado", color: "#65d9ab" },
+    { name: "PORTAFOLIO INICIADO", key: "portafolio_iniciado", color: "#ff8e53" },
+    { name: "PORTAFOLIO NO INICIADO", key: "portafolio_no_iniciado", color: "#ffd153" },
+    { name: "NO INICIADO (SUSP/EXIM PEND)", key: "portafolio_no_iniciado_se_pend", color: "#ff5880" },
+  ]),
+  avanceModuloUno: createMapper("AVANCE MÓDULO 1", "total_m1", [
+    { name: "M1 COMPLETADO", key: "m1_completado", color: "#65d9ab" },
+    { name: "M1 INICIADO", key: "m1_iniciado", color: "#ff8e53" },
+    { name: "M1 NO INICIADO", key: "m1_no_iniciado", color: "#ff5880" },
+  ]),
+  avanceModuloDos: createMapper("AVANCE MÓDULO 2", "total_m2", [
+    { name: "M2 COMPLETADO", key: "m2_completado", color: "#65d9ab" },
+    { name: "M2 INICIADO", key: "m2_iniciado", color: "#ff8e53" },
+    { name: "M2 NO INICIADO", key: "m2_no_iniciado", color: "#ff5880" },
+  ]),
+  avanceModuloDosFicha: createMapper("AVANCE MÓDULO 2 FICHA", "total", [
+    { name: "FICHA COMPLETADA", key: "m2_completado", color: "#65d9ab" },
+    { name: "FICHA INICIADA", key: "m2_iniciado", color: "#ff8e53" },
+    { name: "FICHA NO INICIADA", key: "m2_no_iniciado", color: "#ff5880" },
+  ]),
+  avanceModuloDosClase: createMapper("AVANCE CLASE GRABADA", "total", [
+    { name: "CLASE GRABADA", key: "m2_completado", color: "#65d9ab" },
+    { name: "GRABACIÓN INICIADA", key: "m2_iniciado", color: "#ff8e53" },
+    { name: "CLASE NO GRABADA", key: "m2_no_iniciado", color: "#ff5880" },
+  ]),
+  avanceModuloTres: createMapper("AVANCE MÓDULO 3", "total_m3", [
+    { name: "M3 COMPLETADO", key: "m3_completado", color: "#65d9ab" },
+    { name: "M3 INICIADO", key: "m3_iniciado", color: "#ff8e53" },
+    { name: "M3 NO INICIADO", key: "m3_no_iniciado", color: "#ff5880" },
+  ]),
+  avanceReporteDirectores: createMapper("AVANCE M3 DIRECTORES", "total", [
+    { name: "M3 COMPLETADO", key: "completado", color: "#65d9ab" },
+    { name: "M3 INICIADO", key: "iniciado", color: "#ff8e53" },
+    { name: "M3 NO INICIADO", key: "no_iniciado", color: "#ff5880" },
+  ]),
+  avanceDescargaPortafolio: createMapper("DESCARGA DE PORTAFOLIO", "total", [
+    { name: "DESCARGADO", key: "descargado", color: "#65d9ab" },
+    { name: "NO DESCARGADO", key: "no_descargado", color: "#ff5880" },
+  ]),
+  avanceVisualizacion: createMapper("VISUALIZACIÓN CLASE GRABADA", "total", [
+    { name: "VISUALIZADA", key: "visualizado", color: "#65d9ab" },
+    { name: "INCOMPLETA", key: "iniciado", color: "#ff8e53" },
+    { name: "NO VISUALIZADA", key: "no_visualizado", color: "#ff5880" },
+  ]),
+  avanceDescargaClase: createMapper("DESCARGA CLASE GRABADA", "total", [
+    { name: "DESCARGADA", key: "descarga_clase", color: "#65d9ab" },
+    { name: "NO DESCARGADA", key: "no_descarga_clase", color: "#ff5880" },
+  ]),
+};
 
-  const avanceDiarioMapper = (data) => {
-    return [
-      {
-        name: "Portafolios",
-        color: "#007bff",
-        data: data.fechas.map((fecha, index) => ({
-          name: fecha,
-          x: data.index, // usa el índice como valor x
-          y: data.pfEvaluacionDiaria[index],
-        })),
-      },
-    ];
-  };
-  const avanceIniciadosMapper = (data) => {
-    const fechas = data.map((d) => d.fecha);
+// Componente reutilizable para cada gráfico de pastel
+const PieChartContainer = memo(({ subtitle, dataKey, mapper }) => (
+  <div className="general-pie-chart-container">
+    <GenericPieChart subtitle={subtitle} keyPath="docentes" rawData={mapper(dataKey)} />
+  </div>
+));
 
-    return {
-      fechas,
-      series: [
-        {
-          name: "PORTAFOLIOS COMPLETADOS",
-          data: data.fechas.map((d, i) => ({
-            x: i,
-            y: d.completado,
-            name: d.fecha,
-          })),
-          color: "#65d9ab",
-        },
-        {
-          name: "PORTAFOLIOS INICIADOS",
-          data: data.fechas.map((d, i) => ({
-            x: i,
-            y: d.iniciado,
-            name: d.fecha,
-          })),
-          color: "#ff5880",
-        },
-        {
-          name: "MÓDULO 1 INICIADO",
-          data: data.fechas.map((d, i) => ({
-            x: i,
-            y: d.m1_iniciado,
-            name: d.fecha,
-          })),
-          color: "#ff8e53",
-        },
-        {
-          name: "MÓDULO 2 INICIADO",
-          data: data.fechas.map((d, i) => ({
-            x: i,
-            y: d.m2_iniciado,
-            name: d.fecha,
-          })),
-          color: "#ff8e53",
-        },
-        {
-          name: "MÓDULO 3 INICIADO",
-          data: data.fechas.map((d, i) => ({
-            x: i,
-            y: d.m3_iniciado,
-            name: d.fecha,
-          })),
-          color: "#ff8e53",
-        },
-      ],
-    };
-  };
-
+// Componente principal
+export function TabGeneralPortafolio({ filtros }) {
+  const { data } = usePortafolioDataGeneral(filtros);
   return (
     <div className="tab-general">
       <div className="tab-general-upper">
         <div className="tab-general-docente">
-          <div className="general-pie-chart-container">
-            <GenericPieChart
+            <PieChartContainer
               subtitle="TOTAL VALIDADOS"
-              serviceUrl={`${baseURL}/2025-portafolio-docentes-validados`}
-              keyPath="docentes"
-              dataMapper={docentesEvaluadosMapper}
+              dataKey={data?.["portafolio-docentes-validados"]?.docentes}
+              mapper={mappers.docentesEvaluados}
             />
-          </div>
-
-          <div className="general-pie-chart-container">
-            <GenericPieChart
-              subtitle="AVANCE GENERAL DEL PORTAFOLIO"
-              serviceUrl={`${baseURL}/2025-portafolio-avance-portafolio`}
-              keyPath="docentes"
-              dataMapper={avancePortafolioMapper}
+            <PieChartContainer
+              subtitle="AVANCE PORTAFOLIO"
+              dataKey={data?.["portafolio-avance-portafolio"]?.docentes}
+              mapper={mappers.avancePortafolio}
             />
-          </div>
-
-          <div className="general-pie-chart-container">
-            <GenericPieChart
-              subtitle="AVANCE MÓDULO 1"
-              serviceUrl={`${baseURL}/2025-portafolio-avance-modulo-uno`}
-              keyPath="docentes"
-              dataMapper={avanceModuloUnoMapper}
+            <PieChartContainer
+              subtitle="MÓDULO 1"
+              dataKey={data?.["portafolio-avance-modulo-uno"]?.docentes}
+              mapper={mappers.avanceModuloUno}
             />
-          </div>
         </div>
         <div className="tab-general-docente">
-          <div className="general-pie-chart-container">
-            <GenericPieChart
-              subtitle="AVANCE MÓDULO 2"
-              serviceUrl={`${baseURL}/2025-portafolio-avance-modulo-dos`}
-              keyPath="docentes"
-              dataMapper={avanceModuloDosMapper}
+            <PieChartContainer
+              subtitle="MÓDULO 2"
+              dataKey={data?.["portafolio-avance-modulo-dos"]?.docentes}
+              mapper={mappers.avanceModuloDos}
             />
-          </div>
-
-          <div className="general-pie-chart-container">
-            <GenericPieChart
-              subtitle="AVANCE MÓDULO 3"
-              serviceUrl={`${baseURL}/2025-portafolio-avance-modulo-tres`}
-              keyPath="docentes"
-              dataMapper={avanceModuloTresMapper}
+            <PieChartContainer
+              subtitle="M2 FICHA"
+              dataKey={data?.["portafolio-avance-modulo-dos-ficha"]?.docentes}
+              mapper={mappers.avanceModuloDosFicha}
             />
-          </div>
-
-          <div className="general-pie-chart-container">
-            <GenericPieChart
-              subtitle="AVANCE REPORTE M3 DIRECTORES"
-              serviceUrl={`${baseURL}/2025-portafolio-reporte-directores`}
-              keyPath="docentes"
-              dataMapper={avanceReporteDirectoresMapper}
+            <PieChartContainer
+              subtitle="M2 CLASE GRABADA"
+              dataKey={data?.["portafolio-avance-modulo-dos-grabada"]?.docentes}
+              mapper={mappers.avanceModuloDosClase}
             />
-          </div>
+        </div>
+        <div className="tab-general-docente">
+            <PieChartContainer
+              subtitle="MÓDULO 3"
+              dataKey={data?.["portafolio-avance-modulo-tres"]?.docentes}
+              mapper={mappers.avanceModuloTres}
+            />
+            <PieChartContainer
+              subtitle="M3 DIRECTORES"
+              dataKey={data?.["portafolio-reporte-directores"]?.docentes}
+              mapper={mappers.avanceReporteDirectores}
+            />
+        </div>
+        <div className="tab-general-docente">
+            <PieChartContainer
+              subtitle="DESCARGA PORTAFOLIO"
+              dataKey={data?.["portafolio-avance-descarga-portafolio"]?.docentes}
+              mapper={mappers.avanceDescargaPortafolio}
+            />
+            <PieChartContainer
+              subtitle="VISUALIZACIÓN CLASE"
+              dataKey={data?.["portafolio-avance-visualizacion"]?.docentes}
+              mapper={mappers.avanceVisualizacion}
+            />
+            <PieChartContainer
+              subtitle="DESCARGA CLASE"
+              dataKey={data?.["portafolio-avance-descarga-clase"]?.docentes}
+              mapper={mappers.avanceDescargaClase}
+            />
         </div>
       </div>
-      <div className="tab-general-lower">
-        <div className="highchart-container">
-          <GenericPointChart
-            serviceUrl={`${baseURL}/2025-portafolio-evaluacion-diaria`}
-            title="AVANCE DIARIO PORTAFOLIOS"
-            keyPath=""
-            dataMapper={avanceDiarioMapper}
-          />
-        </div>
 
-        <div className="highchart-container">
-          <GenericPointChart
-            serviceUrl={`${baseURL}/2025-portafolio-evaluacion-diaria`}
-            title="AVANCE DIARIO PORTAFOLIOS INICIADOS"
-            keyPath=""
-            dataMapper={avanceIniciadosMapper}
-          />
-        </div>
-      </div>
+      
     </div>
   );
 }
