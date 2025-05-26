@@ -1,5 +1,3 @@
-
-import axios from "../../../../../EDD2025Module/services/axiosInstance";
 import GenericBarChart from "../../components/BarChart/GenericBarChart";
 
 import { usePortafolioDataConvocatoria } from "../TabConvocatoriaPortafolio/Hooks/usePortafolioDataConvocatoria";
@@ -53,47 +51,31 @@ export function TabConvocatoriaPortafolio() {
   };
 
   return (
-    <div className="tab-general-upper">
-
-      <div className="tab-general-docente">
-        <div className="general-pie-chart-container">
-
-          {
-            data &&
-            <GenericBarChart
-              subtitle="ESTADO DE AVANCE DEL PORTAFOLIO POR CONVOCATORIA"
-              rawData={() => avanceConvocatoriaMapper(data['portafolio-avance-convocatoria'])}
-            />
-          }
-        </div>
-        <div className="general-pie-chart-container">
-          {
-            data &&
-            <GenericBarChart
-              subtitle="ESTADO DE AVANCE DEL MÓDULO 1 POR CONVOCATORIA"
-              rawData={() => avanceConvocatoriaMapper(data['portafolio-avance-convocatoria-m1'])}
-            />
-          }
-        </div>
-        <div className="general-pie-chart-container">
-          {
-            data &&
-            <GenericBarChart
-              subtitle="ESTADO DE AVANCE DEL MÓDULO 2 POR CONVOCATORIA"
-              rawData={() => avanceConvocatoriaMapper(data['portafolio-avance-convocatoria-m2'])}
-            />
-          }
-        </div>
-        <div className="general-pie-chart-container">
-          {
-            data &&
-            <GenericBarChart
-              subtitle="ESTADO DE AVANCE DEL MÓDULO 3 POR CONVOCATORIA"
-              rawData={() => avanceConvocatoriaMapper(data['portafolio-avance-convocatoria-m3'])}
-            />
-          }
-        </div>
-      </div>
+    <div className="tab-convocatoria">
+      {
+        data &&
+        <>
+          <GenericBarChart
+            subtitle="ESTADO DE AVANCE DEL PORTAFOLIO POR CONVOCATORIA"
+            rawData={() => avanceConvocatoriaMapper(data['portafolio-avance-convocatoria'])}
+          />
+          <hr className="section-separator" />
+          <GenericBarChart
+            subtitle="ESTADO DE AVANCE DEL MÓDULO 1 POR CONVOCATORIA"
+            rawData={() => avanceConvocatoriaMapper(data['portafolio-avance-convocatoria-m1'])}
+          />
+          <hr className="section-separator" />
+          <GenericBarChart
+            subtitle="ESTADO DE AVANCE DEL MÓDULO 2 POR CONVOCATORIA"
+            rawData={() => avanceConvocatoriaMapper(data['portafolio-avance-convocatoria-m2'])}
+          />
+          <hr className="section-separator" />
+          <GenericBarChart
+            subtitle="ESTADO DE AVANCE DEL MÓDULO 3 POR CONVOCATORIA"
+            rawData={() => avanceConvocatoriaMapper(data['portafolio-avance-convocatoria-m3'])}
+          />
+        </>
+      }
     </div>
   );
 

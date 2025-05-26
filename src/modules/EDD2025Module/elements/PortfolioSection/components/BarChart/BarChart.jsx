@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 const nf = new Intl.NumberFormat("es-CL");
 
-import { BasicLegend } from "../BasicLegend";
-
 export const BarChart = ({
   subtitle = [],
-  color = {},
   chartData,
   showLegend = true,
 }) => {
@@ -19,7 +16,7 @@ export const BarChart = ({
       setTotal(chartData.total);
       setMappedData(chartData);
     }
-}, [chartData]);
+  }, [chartData]);
 
   const options = {
     chart: {
@@ -44,40 +41,40 @@ export const BarChart = ({
         fontSize: "14px",
       },
     },
-     xAxis: {
-       title: { text: null },
-        categories: mappedData.categories || [],
-        labels: {
-        enabled:true,
+    xAxis: {
+      title: { text: null },
+      categories: mappedData.categories || [],
+      labels: {
+        enabled: true,
         style: {
           fontSize: "11px",
         },
       },
-      
-     }, 
+
+    },
     yAxis: {
-            min: 0,
-            title: {
-                enabled: false
-            },
+      min: 0,
+      title: {
+        enabled: false
+      },
       labels: {
         style: {
           fontSize: "11px",
         },
       },
-			tickInterval: 10,			
-        },
+      tickInterval: 10,
+    },
     tooltip: {
       shared: true,
       formatter: function () {
         let s = `<b>${this.key}</b><br/>`;
         this.points.forEach(function (point) {
-        s += `<span style="color:${point.color}">\u25CF</span> ${point.series.name}: <b>${nf.format(point.point.valor)}</b> (${point.y}%)<br/>`;
+          s += `<span style="color:${point.color}">\u25CF</span> ${point.series.name}: <b>${nf.format(point.point.valor)}</b> (${point.y}%)<br/>`;
         });
         return s;
       },
     },
-     plotOptions: {
+    plotOptions: {
       bar: {
         stacking: "percent",
         borderWidth: 0,
@@ -91,76 +88,75 @@ export const BarChart = ({
         },
       },
     },
+
     legend: {
+      enabled: showLegend,
+      layout: "horizontal",
+      align: "center",
+      verticalAlign: "bottom",
       itemStyle: {
-				"fontSize": "13px",
-			},
-			y: 20,
-			margin: 40
+        fontSize: "10px",
+        fontWeight: "bold",
+      },
     },
     credits: {
       enabled: false,
     },
-    
     series: mappedData?.series ?? [],
-    legend: {
-          enabled: showLegend,
-          layout: "horizontal",
-          align: "center",
-          verticalAlign: "bottom",
-          itemStyle: {
-            fontSize: "10px",
-            fontWeight: "bold",
-          },
-        },
-        credits: {
-          enabled: false,
-        },
-        series: mappedData?.series ?? [],
-      };
-      const renderTablaValores = () => {
-        if (!mappedData.series || mappedData.series.length === 0) return null;
-    
-        const categorias = mappedData.categories || [];
-    
-        return (
-          <div className="table-responsive mt-3">
-            <table className="table table-bordered table-sm">
-              <thead className="table-light">
-                <tr>
-                  <th>Dependencia</th>
-                  {mappedData.series.map((serie, i) => (
-                    <th key={i} style={{ borderRadius: '5px', backgroundColor: serie.color }}>{serie.name}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {categorias.map((cat, i) => (
-                  <tr key={i}>
-                    <td>{cat}</td>
-                    {mappedData.series.map((serie, j) => (
-                      <td key={j}>
-                        {nf.format(serie.data[i]?.valor ?? 0)}
-                      </td>
-                    ))}
-                  </tr>
+  };
+  const renderTablaValores = () => {
+    if (!mappedData.series || mappedData.series.length === 0) return null;
+
+    const categorias = mappedData.categories || [];
+
+    return (
+      <div className="tab-dependencia-table-container">
+        <table className="legend-table">
+          <thead className="legend-table__head">
+            <tr>
+              <th>Dependencia</th>
+              {mappedData.series.map((serie, i) => (
+                <th key={i} ><div style={{
+                  alignItems: "center",
+                  backgroundColor: serie.color,
+                  borderRadius: "5px",
+                  width: "70px",
+                  textAlign: "center",
+                  padding: "2px",
+                  fontWeight: "500",
+                  placeSelf: "center",
+                  margin: "0 auto",
+                }}><span>{serie.name}</span></div></th>
+              ))}
+            </tr>
+          </thead>
+          <tbody className="legend-table__body">
+            {categorias.map((cat, i) => (
+              <tr key={i}>
+                <td className="centered-cell">{cat}</td>
+                {mappedData.series.map((serie, j) => (
+                  <td key={j}>
+                    {nf.format(serie.data[i]?.valor ?? 0)}
+                  </td>
                 ))}
-              </tbody>
-            </table>
-          </div>
-        );
-      };
-    
-      return (
-        <>
-          <HighchartsReact highcharts={Highcharts} options={options} />
-          <hr />
-          <div className="pie-chart-legend">
-            {renderTablaValores()}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
+  };
+
+  return (
+    <div className="tab-dependencia-grupo">
+
+      <HighchartsReact highcharts={Highcharts} options={options} />
+      {renderTablaValores()}
+      {/* <div className="pie-chart-legend">
             {showLegend && <BasicLegend series={mappedData.series} />}
-          </div>
-        </>
-      );
-    };
-    
-    export default BarChart;
+          </div> */}
+    </div>
+  );
+};
+
+export default BarChart;

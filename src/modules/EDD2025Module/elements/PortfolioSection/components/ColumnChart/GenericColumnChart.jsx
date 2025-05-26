@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import axios from "../../../../../EDD2025Module/services/axiosInstance";
 import ColumnChart from "./ColumnChart";
 import { AuthContext } from "../../../../../../context/AuthContext";
@@ -6,14 +6,14 @@ import { AuthContext } from "../../../../../../context/AuthContext";
 const GenericColumnChart = ({
   title,
   subtitle,
-  chartData,        
+  chartData,
   serviceUrl,
   keyPath,
   dataMapper,
-  
+
   //(modificado por Roberto) se agregó está variable (modificado por Roberto)
   rawData = null,
-  
+
   colors = [],
   height = 400,
   showLegend = true,
@@ -27,19 +27,19 @@ const GenericColumnChart = ({
   //const shouldFetch = !chartData && serviceUrl && dataMapper;
 
   useEffect(() => {
-	
-	//(modificado por Roberto) se comentó esta línea porque no se está usando, sino que se usa el rawData de la línea 15  
-	//if (!shouldFetch) return;
+
+    //(modificado por Roberto) se comentó esta línea porque no se está usando, sino que se usa el rawData de la línea 15  
+    //if (!shouldFetch) return;
 
     async function fetchData() {
       try {
-		  
-		//(modificado por Roberto) se agregó esta conción para dejarlo como el GerencPueChart.jsx
-        if(rawData) {
+
+        //(modificado por Roberto) se agregó esta conción para dejarlo como el GerencPueChart.jsx
+        if (rawData) {
           setInternalData(rawData);
           return;
         }
-		  
+
         const token = await getToken();
 
         const body = new FormData();
@@ -63,11 +63,12 @@ const GenericColumnChart = ({
     }
 
     fetchData();
-	
-	//(modificado por Roberto) se comentó esta línea porque no se está usando, sino que se usa el rawData de la línea 15
-  //}, [shouldFetch, serviceUrl, dataMapper, JSON.stringify(filtros)]);
-  
-  }, [serviceUrl, dataMapper, JSON.stringify(filtros)]);  
+
+    //(modificado por Roberto) se comentó esta línea porque no se está usando, sino que se usa el rawData de la línea 15
+    //}, [shouldFetch, serviceUrl, dataMapper, JSON.stringify(filtros)]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [serviceUrl, dataMapper, JSON.stringify(filtros)]);
 
   const resolvedChartData = chartData || internalData;
 

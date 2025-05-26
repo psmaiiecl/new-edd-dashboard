@@ -20,7 +20,7 @@ const GenericPointChart = ({
       try {
         const token = await getToken();
 
-        
+
         const body = new FormData();
         if (!filtros || Object.keys(filtros).length === 0) return;
         Object.entries(filtros).forEach(([key, value]) => {

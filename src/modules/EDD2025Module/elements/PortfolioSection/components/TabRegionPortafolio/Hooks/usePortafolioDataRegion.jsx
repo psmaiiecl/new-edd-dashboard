@@ -9,20 +9,20 @@ export function usePortafolioDataRegion(filtros = {}) {
   const baseURL = "http://api-docentemas-dev.3htp.cloud:8095/back/public/api2025";
 
   useEffect(() => {
-	  
+
     //if (!filtros || Object.keys(filtros).length === 0) {
-	//	console.log("entra acá");
-	//	return;
-	//}
+    //	console.log("entra acá");
+    //	return;
+    //}
 
     setLoading(true);
     setError(null);
-	
+
     axios
       .post(`${baseURL}/2025-portafolio-tab-region`)
       .then((res) => {
         //console.log("Region", res.data);
-		setData(res.data);
+        setData(res.data);
       })
       .catch((err) => {
         console.error("Error al obtener datos de portafolio por Region:", err);
@@ -40,6 +40,6 @@ export function usePortafolioDataRegion(filtros = {}) {
     //modulo3: data?.modulo3 || null,
     loading,
     error,
-	data
+    data
   };
 }

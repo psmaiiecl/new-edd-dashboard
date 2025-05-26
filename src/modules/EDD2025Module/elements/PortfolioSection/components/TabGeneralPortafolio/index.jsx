@@ -87,71 +87,71 @@ export function TabGeneralPortafolio({ filtros }) {
     <div className="tab-general">
       <div className="tab-general-upper">
         <div className="tab-general-docente">
-            <PieChartContainer
-              subtitle="TOTAL VALIDADOS"
-              dataKey={data?.["portafolio-docentes-validados"]?.docentes}
-              mapper={mappers.docentesEvaluados}
-            />
-            <PieChartContainer
-              subtitle="AVANCE PORTAFOLIO"
-              dataKey={data?.["portafolio-avance-portafolio"]?.docentes}
-              mapper={mappers.avancePortafolio}
-            />
-            <PieChartContainer
-              subtitle="MÓDULO 1"
-              dataKey={data?.["portafolio-avance-modulo-uno"]?.docentes}
-              mapper={mappers.avanceModuloUno}
-            />
+          <PieChartContainer
+            subtitle="TOTAL VALIDADOS"
+            dataKey={data?.["portafolio-docentes-validados"]?.docentes}
+            mapper={mappers.docentesEvaluados}
+          />
+          <PieChartContainer
+            subtitle="AVANCE PORTAFOLIO"
+            dataKey={data?.["portafolio-avance-portafolio"]?.docentes}
+            mapper={mappers.avancePortafolio}
+          />
+          <PieChartContainer
+            subtitle="MÓDULO 1"
+            dataKey={data?.["portafolio-avance-modulo-uno"]?.docentes}
+            mapper={mappers.avanceModuloUno}
+          />
         </div>
         <div className="tab-general-docente">
-            <PieChartContainer
-              subtitle="MÓDULO 2"
-              dataKey={data?.["portafolio-avance-modulo-dos"]?.docentes}
-              mapper={mappers.avanceModuloDos}
-            />
-            <PieChartContainer
-              subtitle="M2 FICHA"
-              dataKey={data?.["portafolio-avance-modulo-dos-ficha"]?.docentes}
-              mapper={mappers.avanceModuloDosFicha}
-            />
-            <PieChartContainer
-              subtitle="M2 CLASE GRABADA"
-              dataKey={data?.["portafolio-avance-modulo-dos-grabada"]?.docentes}
-              mapper={mappers.avanceModuloDosClase}
-            />
+          <PieChartContainer
+            subtitle="MÓDULO 2"
+            dataKey={data?.["portafolio-avance-modulo-dos"]?.docentes}
+            mapper={mappers.avanceModuloDos}
+          />
+          <PieChartContainer
+            subtitle="M2 FICHA"
+            dataKey={data?.["portafolio-avance-modulo-dos-ficha"]?.docentes}
+            mapper={mappers.avanceModuloDosFicha}
+          />
+          <PieChartContainer
+            subtitle="M2 CLASE GRABADA"
+            dataKey={data?.["portafolio-avance-modulo-dos-grabada"]?.docentes}
+            mapper={mappers.avanceModuloDosClase}
+          />
         </div>
         <div className="tab-general-docente">
-            <PieChartContainer
-              subtitle="MÓDULO 3"
-              dataKey={data?.["portafolio-avance-modulo-tres"]?.docentes}
-              mapper={mappers.avanceModuloTres}
-            />
-            <PieChartContainer
-              subtitle="M3 DIRECTORES"
-              dataKey={data?.["portafolio-reporte-directores"]?.docentes}
-              mapper={mappers.avanceReporteDirectores}
-            />
+          <PieChartContainer
+            subtitle="MÓDULO 3"
+            dataKey={data?.["portafolio-avance-modulo-tres"]?.docentes}
+            mapper={mappers.avanceModuloTres}
+          />
+          <PieChartContainer
+            subtitle="M3 DIRECTORES"
+            dataKey={data?.["portafolio-reporte-directores"]?.docentes}
+            mapper={mappers.avanceReporteDirectores}
+          />
         </div>
         <div className="tab-general-docente">
-            <PieChartContainer
-              subtitle="DESCARGA PORTAFOLIO"
-              dataKey={data?.["portafolio-avance-descarga-portafolio"]?.docentes}
-              mapper={mappers.avanceDescargaPortafolio}
-            />
-            <PieChartContainer
-              subtitle="VISUALIZACIÓN CLASE"
-              dataKey={data?.["portafolio-avance-visualizacion"]?.docentes}
-              mapper={mappers.avanceVisualizacion}
-            />
-            <PieChartContainer
-              subtitle="DESCARGA CLASE"
-              dataKey={data?.["portafolio-avance-descarga-clase"]?.docentes}
-              mapper={mappers.avanceDescargaClase}
-            />
+          <PieChartContainer
+            subtitle="DESCARGA PORTAFOLIO"
+            dataKey={data?.["portafolio-avance-descarga-portafolio"]?.docentes}
+            mapper={mappers.avanceDescargaPortafolio}
+          />
+          <PieChartContainer
+            subtitle="VISUALIZACIÓN CLASE"
+            dataKey={data?.["portafolio-avance-visualizacion"]?.docentes}
+            mapper={mappers.avanceVisualizacion}
+          />
+          <PieChartContainer
+            subtitle="DESCARGA CLASE"
+            dataKey={data?.["portafolio-avance-descarga-clase"]?.docentes}
+            mapper={mappers.avanceDescargaClase}
+          />
         </div>
       </div>
 
-      
+
     </div>
   );
 }

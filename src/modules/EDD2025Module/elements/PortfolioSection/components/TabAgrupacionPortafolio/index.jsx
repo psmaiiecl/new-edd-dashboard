@@ -6,11 +6,11 @@ import { usePortafolioDataAgrupacion } from "./Hooks/usePortafolioDataAgrupacion
 
 //(modificado por Roberto) se quetan el objeto de filtros, pues en dependencia no hay filtros
 //export function TabDependenciaPortafolio({ filtros = {} }) {
-export function TabAgrupacionPortafolio() {	
-  
+export function TabAgrupacionPortafolio() {
+
   //(modificado por Roberto) acá seinicaliza el hook usePortafolioDataDependencia
   const { data } = usePortafolioDataAgrupacion();
-  
+
   //const serviceUrl = "/2025-portafolio-tab-agrupacion"; // Esta ruta ya se usa en el hook
   const nf = new Intl.NumberFormat("es-CL");
 
@@ -63,52 +63,52 @@ export function TabAgrupacionPortafolio() {
   return (
     <div className="tab-general-upper">
 
-      <div className="tab-general-docente">
+      <div className="normal-container">
         <div className="general-pie-chart-container">
-		{/*
+          {/*
 			acá 
 			- se quitaron los filtros, pues no se usan.
 			- data se envía a GenericColumnChart a través del paramétro rawData, pero antes se mapea con avanceDependenciaMapper
 			- descomentar los gráficos de abajo y replicar como se armó el primero.
 		*/}
-		{
-			data&&
-			<GenericColumnChart
-				subtitle="ESTADO DE AVANCE DEL PORTAFOLIO POR AGRUPACIÓN"
-				rawData = {() => avanceAgrupacionMapper(data['portafolio-avance-agrupacion'])}
+          {
+            data &&
+            <GenericColumnChart
+              subtitle="ESTADO DE AVANCE DEL PORTAFOLIO POR AGRUPACIÓN"
+              rawData={() => avanceAgrupacionMapper(data['portafolio-avance-agrupacion'])}
             />
-		}
+          }
         </div>
       </div>
 
       <div className="general-pie-chart-container">
-		{
-		data&&
-			<GenericColumnChart
-			  subtitle="ESTADO DE AVANCE DEL MÓDULO 1 POR DEPENDENCIA"
-			  rawData ={() => avanceAgrupacionMapper(data['portafolio-avance-agrupacion-m1'])}
-			/>
-   	     }
+        {
+          data &&
+          <GenericColumnChart
+            subtitle="ESTADO DE AVANCE DEL MÓDULO 1 POR DEPENDENCIA"
+            rawData={() => avanceAgrupacionMapper(data['portafolio-avance-agrupacion-m1'])}
+          />
+        }
       </div>
-         <div className="general-pie-chart-container">
-		{
-		data&&
-			<GenericColumnChart
-			  subtitle="ESTADO DE AVANCE DEL MÓDULO 2 POR DEPENDENCIA"
-			  rawData ={() => avanceAgrupacionMapper(data['portafolio-avance-agrupacion-m2'])}
-			/>
-   	     }
+      <div className="general-pie-chart-container">
+        {
+          data &&
+          <GenericColumnChart
+            subtitle="ESTADO DE AVANCE DEL MÓDULO 2 POR DEPENDENCIA"
+            rawData={() => avanceAgrupacionMapper(data['portafolio-avance-agrupacion-m2'])}
+          />
+        }
       </div>
-       <div className="general-pie-chart-container">
-		{
-		data&&
-			<GenericColumnChart
-			  subtitle="ESTADO DE AVANCE DEL MÓDULO 2 POR DEPENDENCIA"
-			  rawData ={() => avanceAgrupacionMapper(data['portafolio-avance-agrupacion-m3'])}
-			/>
-   	     }
+      <div className="general-pie-chart-container">
+        {
+          data &&
+          <GenericColumnChart
+            subtitle="ESTADO DE AVANCE DEL MÓDULO 2 POR DEPENDENCIA"
+            rawData={() => avanceAgrupacionMapper(data['portafolio-avance-agrupacion-m3'])}
+          />
+        }
       </div>
-	 
+
     </div>
   );
 }

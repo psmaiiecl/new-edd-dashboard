@@ -1,12 +1,11 @@
 const nf = new Intl.NumberFormat("es-CL");
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { BasicLegend } from "../BasicLegend";
 
 const ColumnChart = ({
   subtitle = [],
-  color = {},
   chartData,
   showLegend = true,
 }) => {
@@ -103,17 +102,27 @@ const ColumnChart = ({
     const categorias = mappedData.categories || [];
 
     return (
-      <div className="table-responsive mt-3">
-        <table className="table table-bordered table-sm">
-          <thead className="table-light">
+      <div style={{ width: "60%", margin: "0 auto" }}>
+        <table className="legend-table">
+          <thead className="legend-table__head">
             <tr>
               <th>Dependencia</th>
               {mappedData.series.map((serie, i) => (
-                <th key={i} style={{ borderRadius: '5px', backgroundColor: serie.color }}>{serie.name}</th>
+                <th key={i} style={{
+                  alignItems: "center",
+                  backgroundColor: serie.color,
+                  borderRadius: "5px",
+                  width: "60px",
+                  textAlign: "center",
+                  padding: "2px",
+                  fontWeight: "500",
+                  placeSelf: "center",
+                  margin: "0 auto",
+                }}>{serie.name}</th>
               ))}
             </tr>
           </thead>
-          <tbody>
+          <tbody className="legend-table__body">
             {categorias.map((cat, i) => (
               <tr key={i}>
                 <td>{cat}</td>
@@ -134,10 +143,10 @@ const ColumnChart = ({
     <div className="column-chart-wrapper">
       <HighchartsReact highcharts={Highcharts} options={options} />
       <hr />
-      <div className="pie-chart-legend">
-        {renderTablaValores()}
+      {renderTablaValores()}
+      {/* <div className="pie-chart-legend">
         {showLegend && <BasicLegend series={mappedData.series} />}
-      </div>
+      </div> */}
     </div>
   );
 };

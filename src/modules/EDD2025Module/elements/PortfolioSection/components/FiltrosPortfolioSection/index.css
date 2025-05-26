@@ -31,6 +31,7 @@
   justify-content: center;
   gap: 5px;
 }
+
 .filtros-content {
   display: flex;
   overflow-x: hidden;
@@ -40,6 +41,7 @@
   color: #484646;
   margin-bottom: 10px;
 }
+
 .custom-select {
   font-size: 14px;
   height: 30px;
@@ -51,6 +53,7 @@
   transition-duration: 150ms;
   color: #484646;
 }
+
 .filtro {
   font-weight: bold;
   width: 100%;

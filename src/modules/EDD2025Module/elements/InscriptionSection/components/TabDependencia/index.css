@@ -52,6 +52,10 @@
   font-size: 11px;
 }
 
+.centered-cell{
+  text-align: center;
+}
+
 @media (max-width: 1150px) {
   .tab-dependencia-grupo {
     grid-template-columns: 1fr;

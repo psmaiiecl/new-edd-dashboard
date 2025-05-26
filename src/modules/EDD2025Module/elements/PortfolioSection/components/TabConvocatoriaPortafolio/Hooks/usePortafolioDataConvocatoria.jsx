@@ -9,7 +9,7 @@ export function usePortafolioDataConvocatoria(filtros = {}) {
   const baseURL = "http://api-docentemas-dev.3htp.cloud:8095/back/public/api2025";
 
   useEffect(() => {
-	 
+
 
     setLoading(true);
     setError(null);
@@ -19,7 +19,7 @@ export function usePortafolioDataConvocatoria(filtros = {}) {
       .post(`${baseURL}/2025-portafolio-tab-convocatoria`)
       .then((res) => {
         //console.log("Datos Bar Dependencia", res.data);
-		setData(res.data);
+        setData(res.data);
       })
       .catch((err) => {
         console.error("Error al obtener datos de portafolio por dependencia:", err);
@@ -37,6 +37,6 @@ export function usePortafolioDataConvocatoria(filtros = {}) {
     modulo3: data?.modulo3 || null,
     loading,
     error,
-	data
+    data
   };
 }

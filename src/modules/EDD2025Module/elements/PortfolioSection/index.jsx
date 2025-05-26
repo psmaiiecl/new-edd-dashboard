@@ -47,17 +47,17 @@ export function PortfolioSection2025() {
 
         {/* TAB 3 - Convocatoria */}
         <div style={{ display: activeTab === "tab3" ? "block" : "none" }}>
-          <TabConvocatoriaPortafolio  isActive={activeTab === "tab3"} />
+          <TabConvocatoriaPortafolio isActive={activeTab === "tab3"} />
         </div>
 
         {/* TAB 4 - Región */}
         <div style={{ display: activeTab === "tab4" ? "block" : "none" }}>
-          <TabRegionPortafolio isActive={activeTab === "tab4"}/>
+          <TabRegionPortafolio isActive={activeTab === "tab4"} />
         </div>
 
         {/* TAB 5 - Agrupación */}
         <div style={{ display: activeTab === "tab5" ? "block" : "none" }}>
-          <TabAgrupacionPortafolio isActive={activeTab === "tab5"}/>
+          <TabAgrupacionPortafolio isActive={activeTab === "tab5"} />
         </div>
       </article>
     </section>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import axios from "../../../../../EDD2025Module/services/axiosInstance";
 import BarChart from "./BarChart"; // ← Usa tu componente BarChart aquí
 import { AuthContext } from "../../../../../../context/AuthContext";
@@ -32,16 +32,16 @@ const GenericBarChart = ({
         }
         const token = await getToken();
 
-        const body = new FormData();
+        //const body = new FormData();
         const response = await axios.post(serviceUrl, {
           headers: { t: token },
         });
 
 
         const data = response.data;
-        setTotal(tot);
+        setTotal(data.total || 0);
         const mapped = dataMapper(data, { keyPath }, total); // ← Aquí está el cambio
-        setChartData(mapped);
+        setInternalData(mapped);
       }
       catch (error) {
         console.error('Error fetching data from ${serviceUrl}', error);
@@ -50,6 +50,7 @@ const GenericBarChart = ({
 
     fetchData();
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [serviceUrl, dataMapper, JSON.stringify(filtros)]);
 
   const resolvedChartData = chartData || internalData;
