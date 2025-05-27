@@ -131,7 +131,7 @@ export function TabGeneralPortafolio({ filtros }) {
             dataKey={data?.["portafolio-reporte-directores"]?.docentes}
             mapper={mappers.avanceReporteDirectores}
           />
-        </div>
+        </div>sgddfhf
         <div className="tab-general-docente">
           <PieChartContainer
             subtitle="DESCARGA PORTAFOLIO"
