@@ -1,6 +1,9 @@
 import Select from "react-select";
 
-export default function FiltrosPortfolioSection({ filtros = {}, onFiltroChange }) {
+export default function FiltrosPortfolioSection({
+  filtros = {},
+  onFiltroChange,
+}) {
   const DEPENDENCY_LIST = [
     { value: "", label: "Todas" },
     { value: "3", label: "AD" },
@@ -12,8 +15,8 @@ export default function FiltrosPortfolioSection({ filtros = {}, onFiltroChange }
     { value: "9", label: "Párvulo" },
     { value: "1", label: "PS" },
     { value: "8", label: "SLE" },
-    { value: "2", label: "VTF" }
-  ]
+    { value: "2", label: "VTF" },
+  ];
   const REGION_LIST = [
     { value: "", label: "Todas" },
     { value: "15", label: "Arica y Parinacota" },
@@ -31,17 +34,19 @@ export default function FiltrosPortfolioSection({ filtros = {}, onFiltroChange }
     { value: "14", label: "Los Ríos" },
     { value: "10", label: "Los Lagos" },
     { value: "11", label: "Aysén" },
-    { value: "12", label: "Magallanes" }
+    { value: "12", label: "Magallanes" },
   ];
   return (
     <div className="tab-general-filter-row">
-
-
       <div className="tab-general-filter">
         <span>Dependencia: </span>
         <Select
-          value={DEPENDENCY_LIST.find(option => option.value === filtros.dependencia)}
-          onChange={(option) => onFiltroChange("dependencia", option ? option.value : "")}
+          value={DEPENDENCY_LIST.find(
+            (option) => option.value === filtros.dependencia
+          )}
+          onChange={(option) =>
+            onFiltroChange("dependencia", option ? option.value : "")
+          }
           options={DEPENDENCY_LIST}
           isSearchable
           noOptionsMessage={() => "Ninguna dependencia"}
@@ -63,8 +68,14 @@ export default function FiltrosPortfolioSection({ filtros = {}, onFiltroChange }
       <div className="tab-general-filter">
         <span>Region: </span>
         <Select
-          value={filtros.region ? REGION_LIST.find(option => option.value === filtros.region) : ""}
-          onChange={(option) => onFiltroChange("region", option ? option.value : "")}
+          value={
+            filtros.region
+              ? REGION_LIST.find((option) => option.value === filtros.region)
+              : ""
+          }
+          onChange={(option) =>
+            onFiltroChange("region", option ? option.value : "")
+          }
           options={REGION_LIST}
           isSearchable
           noOptionsMessage={() => "Ninguna region"}
@@ -130,5 +141,3 @@ export default function FiltrosPortfolioSection({ filtros = {}, onFiltroChange }
     </div> */
   );
 }
-
-

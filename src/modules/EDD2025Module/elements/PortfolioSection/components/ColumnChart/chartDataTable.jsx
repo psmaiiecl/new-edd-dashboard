@@ -9,7 +9,13 @@ export const ChartDataTable = ({ series, categories }) => {
       <table style={{ borderCollapse: "collapse", width: "100%" }}>
         <thead>
           <tr>
-            <th style={{ padding: "8px", border: "1px solid #ccc", background: "#f0f0f0" }}>
+            <th
+              style={{
+                padding: "8px",
+                border: "1px solid #ccc",
+                background: "#f0f0f0",
+              }}
+            >
               Dependencia
             </th>
             {series.map((s, idx) => (
@@ -30,13 +36,19 @@ export const ChartDataTable = ({ series, categories }) => {
         <tbody>
           {categories.map((cat, rowIdx) => (
             <tr key={rowIdx}>
-              <td style={{ padding: "8px", border: "1px solid #ccc" }}>{cat}</td>
+              <td style={{ padding: "8px", border: "1px solid #ccc" }}>
+                {cat}
+              </td>
               {series.map((s, colIdx) => {
                 const punto = s.data[rowIdx];
                 return (
                   <td
                     key={colIdx}
-                    style={{ padding: "8px", border: "1px solid #ccc", textAlign: "center" }}
+                    style={{
+                      padding: "8px",
+                      border: "1px solid #ccc",
+                      textAlign: "center",
+                    }}
                   >
                     {punto.valor} ({punto.porcentaje}%)
                   </td>

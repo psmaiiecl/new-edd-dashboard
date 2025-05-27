@@ -15,10 +15,14 @@ export default function AvanceDiarioFetcher({
   useEffect(() => {
     const fetchData = async () => {
       const etiqueta = `2024-portafolio-avance-diario#convocatoria:${convocatoria}$estado:${estado}$dependencia:${dependencia}$region:${region}`;
-      let url = webservice.replace("/api", "/api2024") + `/datos-json?etiqueta=${etiqueta}`;
+      let url =
+        webservice.replace("/api", "/api2024") +
+        `/datos-json?etiqueta=${etiqueta}`;
 
       if (valorJSON === "original") {
-        url = webservice.replace("/api", "/api2024") + "/2024-portafolio-avance-diario";
+        url =
+          webservice.replace("/api", "/api2024") +
+          "/2024-portafolio-avance-diario";
       }
 
       if (loadingId) {
@@ -35,7 +39,6 @@ export default function AvanceDiarioFetcher({
         );
 
         onSuccess?.(response.data);
-
       } catch (error) {
         console.error("Error al obtener avance diario:", error);
         onError?.(error);

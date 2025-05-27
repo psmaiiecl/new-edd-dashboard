@@ -10,7 +10,7 @@ const GenericPointChart = ({
   dataMapper,
   color = { data: "#007bff" },
   showLegend = true,
-  filtros = {}
+  filtros = {},
 }) => {
   const { getToken } = useContext(AuthContext);
   const [chartData, setChartData] = useState({});
@@ -19,7 +19,6 @@ const GenericPointChart = ({
     async function fetchData() {
       try {
         const token = await getToken();
-
 
         const body = new FormData();
         if (!filtros || Object.keys(filtros).length === 0) return;
@@ -47,7 +46,6 @@ const GenericPointChart = ({
 
     fetchData();
   }, [serviceUrl, keyPath, dataMapper]);
-
 
   return (
     <PointChart

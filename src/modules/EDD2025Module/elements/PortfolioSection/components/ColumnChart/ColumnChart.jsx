@@ -4,11 +4,7 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { BasicLegend } from "../BasicLegend";
 
-const ColumnChart = ({
-  subtitle = [],
-  chartData,
-  showLegend = true,
-}) => {
+const ColumnChart = ({ subtitle = [], chartData, showLegend = true }) => {
   const [total, setTotal] = useState(0);
   const [mappedData, setMappedData] = useState({});
 
@@ -64,7 +60,9 @@ const ColumnChart = ({
       formatter: function () {
         let s = `<b>${this.key}</b><br/>`;
         this.points.forEach(function (point) {
-          s += `<span style="color:${point.color}">\u25CF</span> ${point.series.name}: <b>${nf.format(point.point.valor)}</b> (${point.y}%)<br/>`;
+          s += `<span style="color:${point.color}">\u25CF</span> ${
+            point.series.name
+          }: <b>${nf.format(point.point.valor)}</b> (${point.y}%)<br/>`;
         });
         return s;
       },
@@ -108,17 +106,22 @@ const ColumnChart = ({
             <tr>
               <th>Dependencia</th>
               {mappedData.series.map((serie, i) => (
-                <th key={i} style={{
-                  alignItems: "center",
-                  backgroundColor: serie.color,
-                  borderRadius: "5px",
-                  width: "60px",
-                  textAlign: "center",
-                  padding: "2px",
-                  fontWeight: "500",
-                  placeSelf: "center",
-                  margin: "0 auto",
-                }}>{serie.name}</th>
+                <th
+                  key={i}
+                  style={{
+                    alignItems: "center",
+                    backgroundColor: serie.color,
+                    borderRadius: "5px",
+                    width: "60px",
+                    textAlign: "center",
+                    padding: "2px",
+                    fontWeight: "500",
+                    placeSelf: "center",
+                    margin: "0 auto",
+                  }}
+                >
+                  {serie.name}
+                </th>
               ))}
             </tr>
           </thead>
@@ -127,9 +130,7 @@ const ColumnChart = ({
               <tr key={i}>
                 <td>{cat}</td>
                 {mappedData.series.map((serie, j) => (
-                  <td key={j}>
-                    {nf.format(serie.data[i]?.valor ?? 0)}
-                  </td>
+                  <td key={j}>{nf.format(serie.data[i]?.valor ?? 0)}</td>
                 ))}
               </tr>
             ))}

@@ -6,11 +6,10 @@ export function usePortafolioDataConvocatoria(filtros = {}) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const baseURL = "http://api-docentemas-dev.3htp.cloud:8095/back/public/api2025";
+  const baseURL =
+    "http://api-docentemas-dev.3htp.cloud:8095/back/public/api2025";
 
   useEffect(() => {
-
-
     setLoading(true);
     setError(null);
 
@@ -22,7 +21,10 @@ export function usePortafolioDataConvocatoria(filtros = {}) {
         setData(res.data);
       })
       .catch((err) => {
-        console.error("Error al obtener datos de portafolio por dependencia:", err);
+        console.error(
+          "Error al obtener datos de portafolio por dependencia:",
+          err
+        );
         setError(err);
       })
       .finally(() => {
@@ -37,6 +39,6 @@ export function usePortafolioDataConvocatoria(filtros = {}) {
     modulo3: data?.modulo3 || null,
     loading,
     error,
-    data
+    data,
   };
 }

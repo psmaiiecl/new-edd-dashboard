@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 import { usePortafolioData } from "../TabGeneralPortafolio/hooks/usePortafolioData";
 
-function ContenedorAvanceDiario() {
-
-
-}
+function ContenedorAvanceDiario() {}
 export default ContenedorAvanceDiario;

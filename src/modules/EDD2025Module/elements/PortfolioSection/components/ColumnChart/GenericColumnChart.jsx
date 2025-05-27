@@ -27,13 +27,11 @@ const GenericColumnChart = ({
   //const shouldFetch = !chartData && serviceUrl && dataMapper;
 
   useEffect(() => {
-
-    //(modificado por Roberto) se comentó esta línea porque no se está usando, sino que se usa el rawData de la línea 15  
+    //(modificado por Roberto) se comentó esta línea porque no se está usando, sino que se usa el rawData de la línea 15
     //if (!shouldFetch) return;
 
     async function fetchData() {
       try {
-
         //(modificado por Roberto) se agregó esta conción para dejarlo como el GerencPueChart.jsx
         if (rawData) {
           setInternalData(rawData);

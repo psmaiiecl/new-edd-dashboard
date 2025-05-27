@@ -62,5 +62,4 @@ const GenericPieChart = ({
   );
 };
 
-
 export default GenericPieChart;

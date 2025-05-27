@@ -12,7 +12,8 @@ export default function GraficoAvanceDiario({ filtros }) {
 
   if (loading) return <p>Cargando datos...</p>;
   if (error) return <p>Error al cargar datos.</p>;
-  if (!data || !data["portafolio-avance-diario"]) return <p>No hay datos disponibles.</p>;
+  if (!data || !data["portafolio-avance-diario"])
+    return <p>No hay datos disponibles.</p>;
 
   const avance = data["portafolio-avance-diario"];
   const fechas = avance.fechas || [];
@@ -44,7 +45,11 @@ export default function GraficoAvanceDiario({ filtros }) {
     <div>
       <HighchartsReact highcharts={Highcharts} options={chartOptions} />
       <h3>Datos absolutos diarios</h3>
-      <table border="1" cellPadding="5" style={{ borderCollapse: "collapse", width: "100%" }}>
+      <table
+        border="1"
+        cellPadding="5"
+        style={{ borderCollapse: "collapse", width: "100%" }}
+      >
         <thead>
           <tr>
             <th>Fecha</th>

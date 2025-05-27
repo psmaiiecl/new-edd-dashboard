@@ -6,27 +6,47 @@ import { usePortafolioDataGeneral } from "./hooks/usePortafolioDataGeneral";
 const createMapper = (subtitle, totalKey, seriesConfig) => (data) =>
   data
     ? {
-      total: { subtitle, data: data[totalKey] },
-      series: seriesConfig.map(({ name, key, color }) => ({
-        name,
-        y: data[key],
-        color,
-      })),
-    }
+        total: { subtitle, data: data[totalKey] },
+        series: seriesConfig.map(({ name, key, color }) => ({
+          name,
+          y: data[key],
+          color,
+        })),
+      }
     : { total: { subtitle: "", data: 0 }, series: [] };
 
 // Mapeadores para cada tipo de gráfico
 const mappers = {
   docentesEvaluados: createMapper("TOTAL VALIDADOS", "total_validados", [
     { name: "RINDEN PORTAFOLIO", key: "rinden_portafolio", color: "#65d9ab" },
-    { name: "NO RINDEN PORTAFOLIO", key: "no_rinden_portafolio", color: "#ff5880" },
+    {
+      name: "NO RINDEN PORTAFOLIO",
+      key: "no_rinden_portafolio",
+      color: "#ff5880",
+    },
     { name: "NO SE EVALUAN", key: "suspendidos", color: "#ff8e53" },
   ]),
   avancePortafolio: createMapper("AVANCE PORTAFOLIO", "total", [
-    { name: "PORTAFOLIO COMPLETADO", key: "portafolio_completado", color: "#65d9ab" },
-    { name: "PORTAFOLIO INICIADO", key: "portafolio_iniciado", color: "#ff8e53" },
-    { name: "PORTAFOLIO NO INICIADO", key: "portafolio_no_iniciado", color: "#ffd153" },
-    { name: "NO INICIADO (SUSP/EXIM PEND)", key: "portafolio_no_iniciado_se_pend", color: "#ff5880" },
+    {
+      name: "PORTAFOLIO COMPLETADO",
+      key: "portafolio_completado",
+      color: "#65d9ab",
+    },
+    {
+      name: "PORTAFOLIO INICIADO",
+      key: "portafolio_iniciado",
+      color: "#ff8e53",
+    },
+    {
+      name: "PORTAFOLIO NO INICIADO",
+      key: "portafolio_no_iniciado",
+      color: "#ffd153",
+    },
+    {
+      name: "NO INICIADO (SUSP/EXIM PEND)",
+      key: "portafolio_no_iniciado_se_pend",
+      color: "#ff5880",
+    },
   ]),
   avanceModuloUno: createMapper("AVANCE MÓDULO 1", "total_m1", [
     { name: "M1 COMPLETADO", key: "m1_completado", color: "#65d9ab" },
@@ -76,7 +96,11 @@ const mappers = {
 // Componente reutilizable para cada gráfico de pastel
 const PieChartContainer = memo(({ subtitle, dataKey, mapper }) => (
   <div className="general-pie-chart-container">
-    <GenericPieChart subtitle={subtitle} keyPath="docentes" rawData={mapper(dataKey)} />
+    <GenericPieChart
+      subtitle={subtitle}
+      keyPath="docentes"
+      rawData={mapper(dataKey)}
+    />
   </div>
 ));
 
@@ -150,8 +174,6 @@ export function TabGeneralPortafolio({ filtros }) {
           />
         </div>
       </div>
-
-
     </div>
   );
 }

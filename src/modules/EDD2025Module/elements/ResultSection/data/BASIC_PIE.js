@@ -1,7 +1,7 @@
 export const BASIC_PIE = {
-   lang: {
-    decimalPoint: ',',
-    thousandsSep: '.'
+  lang: {
+    decimalPoint: ",",
+    thousandsSep: ".",
   },
   chart: {
     plotBackgroundColor: null,
@@ -50,7 +50,7 @@ export const BASIC_PIE = {
     pie: {
       allowPointSelect: true,
       cursor: "pointer",
-      size: '90%',
+      size: "90%",
       dataLabels: {
         enabled: true,
         distance: 20,
@@ -61,7 +61,7 @@ export const BASIC_PIE = {
           fontWeight: "400",
           color: "#666666",
         },
-        overflow:'allow'
+        overflow: "allow",
       },
       showInLegend: true,
     },

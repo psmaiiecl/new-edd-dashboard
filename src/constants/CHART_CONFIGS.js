@@ -1,5 +1,15 @@
 import { numberFormatter } from "../utils/NumberFormatter";
 
+export const BASE_CHART_CONFIG = {
+  lang: {
+    decimalPoint: ",",
+    thousandsSep: ".",
+  },
+  credits: {
+    enabled: false,
+  },
+};
+
 export const PIE_CONFIG = {
   lang: {
     decimalPoint: ",",
@@ -12,7 +22,8 @@ export const PIE_CONFIG = {
     type: "pie",
     marginTop: 100,
     marginBottom: 80,
-    height: 510,
+    // height: 510,
+    height: 410,
   },
   legend: {
     layout: "horizontal",
@@ -21,7 +32,8 @@ export const PIE_CONFIG = {
     enabled: true,
     verticalAlign: "top",
     x: 0,
-    y: 350,
+    // y: 350,
+    y: 250,
 
     itemStyle: {
       fontSize: "12px",
@@ -31,12 +43,19 @@ export const PIE_CONFIG = {
     },
   },
   title: {
-    text: "Total",
+    text: "TOTAL",
     align: "center",
     style: {
       fontWeight: "bold",
       color: "var(--blue-100)",
       fontSize: "35px",
+    },
+  },
+  subtitle: {
+    text: "PIE CHART",
+    align: "center",
+    style: {
+      fontSize: "15px",
     },
   },
   tooltip: {
@@ -58,7 +77,8 @@ export const PIE_CONFIG = {
       size: "70%",
       dataLabels: {
         enabled: true,
-        distance: 20,
+        // distance: 20,
+        distance: 15,
         format:
           "<b>{point.name}</b>: <b>{point.y:.,.0f} </b> ({point.percentage:.0f}%)<br/>",
         style: {
@@ -74,6 +94,7 @@ export const PIE_CONFIG = {
   credits: {
     enabled: false,
   },
+  series: [],
 };
 
 export const STACK_BAR_CONFIG = {
@@ -146,6 +167,9 @@ export const STACK_BAR_CONFIG = {
     },
   },
   series: [],
+  credits: {
+    enabled: false,
+  },
 };
 
 export const MULTIPLE_BAR_CONFIG = {
@@ -219,6 +243,9 @@ export const POINT_CONFIG = {
       pointPadding: 0,
       borderWidth: 0,
     },
+  },
+  credits: {
+    enabled: false,
   },
 };
 

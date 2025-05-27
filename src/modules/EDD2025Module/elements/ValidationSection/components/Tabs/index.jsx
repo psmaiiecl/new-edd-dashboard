@@ -1,7 +1,10 @@
 import "./index.css";
 import { tabList } from "../../data/TabList";
 import { Button } from "../../../../../../components/Button";
-import { getExcelDocente, getExcelSostenedor } from "../../../../services/ValidationServices";
+import {
+  getExcelDocente,
+  getExcelSostenedor,
+} from "../../../../services/ValidationServices";
 import { useContext } from "react";
 import { LoadingContext } from "../../../../../../context/LoadingContext";
 
@@ -20,14 +23,20 @@ export function Tabs({ setActive, active }) {
         ))}
       </div>
       <div className="inscription-excel">
-        <Button text={"Excel Docente"} action={() => {
-          queueLoading();
-          getExcelDocente(dequeueLoading);
-        }} />
-        <Button text={"Excel Sostenedor"} action={() => {
-          queueLoading();
-          getExcelSostenedor(dequeueLoading);  
-        }} />
+        <Button
+          text={"Excel Docente"}
+          action={() => {
+            queueLoading();
+            getExcelDocente(dequeueLoading);
+          }}
+        />
+        <Button
+          text={"Excel Sostenedor"}
+          action={() => {
+            queueLoading();
+            getExcelSostenedor(dequeueLoading);
+          }}
+        />
       </div>
     </div>
   );

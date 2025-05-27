@@ -3,11 +3,7 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 const nf = new Intl.NumberFormat("es-CL");
 
-export const BarChart = ({
-  subtitle = [],
-  chartData,
-  showLegend = true,
-}) => {
+export const BarChart = ({ subtitle = [], chartData, showLegend = true }) => {
   const [total, setTotal] = useState(0);
   const [mappedData, setMappedData] = useState({});
 
@@ -50,12 +46,11 @@ export const BarChart = ({
           fontSize: "11px",
         },
       },
-
     },
     yAxis: {
       min: 0,
       title: {
-        enabled: false
+        enabled: false,
       },
       labels: {
         style: {
@@ -69,7 +64,9 @@ export const BarChart = ({
       formatter: function () {
         let s = `<b>${this.key}</b><br/>`;
         this.points.forEach(function (point) {
-          s += `<span style="color:${point.color}">\u25CF</span> ${point.series.name}: <b>${nf.format(point.point.valor)}</b> (${point.y}%)<br/>`;
+          s += `<span style="color:${point.color}">\u25CF</span> ${
+            point.series.name
+          }: <b>${nf.format(point.point.valor)}</b> (${point.y}%)<br/>`;
         });
         return s;
       },
@@ -116,17 +113,23 @@ export const BarChart = ({
             <tr>
               <th>Dependencia</th>
               {mappedData.series.map((serie, i) => (
-                <th key={i} ><div style={{
-                  alignItems: "center",
-                  backgroundColor: serie.color,
-                  borderRadius: "5px",
-                  width: "70px",
-                  textAlign: "center",
-                  padding: "2px",
-                  fontWeight: "500",
-                  placeSelf: "center",
-                  margin: "0 auto",
-                }}><span>{serie.name}</span></div></th>
+                <th key={i}>
+                  <div
+                    style={{
+                      alignItems: "center",
+                      backgroundColor: serie.color,
+                      borderRadius: "5px",
+                      width: "70px",
+                      textAlign: "center",
+                      padding: "2px",
+                      fontWeight: "500",
+                      placeSelf: "center",
+                      margin: "0 auto",
+                    }}
+                  >
+                    <span>{serie.name}</span>
+                  </div>
+                </th>
               ))}
             </tr>
           </thead>
@@ -135,9 +138,7 @@ export const BarChart = ({
               <tr key={i}>
                 <td className="centered-cell">{cat}</td>
                 {mappedData.series.map((serie, j) => (
-                  <td key={j}>
-                    {nf.format(serie.data[i]?.valor ?? 0)}
-                  </td>
+                  <td key={j}>{nf.format(serie.data[i]?.valor ?? 0)}</td>
                 ))}
               </tr>
             ))}
@@ -149,7 +150,6 @@ export const BarChart = ({
 
   return (
     <div className="tab-dependencia-grupo">
-
       <HighchartsReact highcharts={Highcharts} options={options} />
       {renderTablaValores()}
       {/* <div className="pie-chart-legend">

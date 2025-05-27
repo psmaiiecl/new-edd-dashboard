@@ -12,6 +12,7 @@ export function TabGeneral() {
   const {
     selectedFilter,
     setSelectedFilter,
+    docentesSugeridos,
     docenteSugeridoChart,
     docenteAgregadoChart,
     docenteInscritoChart,
@@ -46,9 +47,9 @@ export function TabGeneral() {
           }}
         />
       </div>
-      <div className="tab-general-upper">
+      <div className="normal-container">
         <div className="pie-grid-3">
-          <CustomPieChart setup={docenteSugeridoChart} />
+          <CustomPieChart setup={docentesSugeridos} />
           <CustomPieChart setup={docenteAgregadoChart} />
           <CustomPieChart setup={docenteInscritoChart} />
         </div>
@@ -56,9 +57,9 @@ export function TabGeneral() {
           <CustomPieChart setup={entidadSostenedorChart} />
           <CustomPieChart setup={sostenedorChart} />
         </div>
-      </div>
-      <div className="general-point-chart-container">
-        <HighchartsReact options={avancePointChart} highcharts={Highcharts} />
+        <div className="general-point-chart-container">
+          <HighchartsReact options={avancePointChart} highcharts={Highcharts} />
+        </div>
       </div>
     </div>
   );

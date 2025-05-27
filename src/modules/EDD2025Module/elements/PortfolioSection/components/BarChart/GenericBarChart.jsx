@@ -37,14 +37,12 @@ const GenericBarChart = ({
           headers: { t: token },
         });
 
-
         const data = response.data;
         setTotal(data.total || 0);
         const mapped = dataMapper(data, { keyPath }, total); // ← Aquí está el cambio
         setInternalData(mapped);
-      }
-      catch (error) {
-        console.error('Error fetching data from ${serviceUrl}', error);
+      } catch (error) {
+        console.error("Error fetching data from ${serviceUrl}", error);
       }
     }
 
@@ -65,7 +63,6 @@ const GenericBarChart = ({
       height={height}
     />
   );
-
 };
 
 export default GenericBarChart;

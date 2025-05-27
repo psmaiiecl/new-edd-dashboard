@@ -6,10 +6,10 @@ export function usePortafolioDataAgrupacion(filtros = {}) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const baseURL = "http://api-docentemas-dev.3htp.cloud:8095/back/public/api2025";
+  const baseURL =
+    "http://api-docentemas-dev.3htp.cloud:8095/back/public/api2025";
 
   useEffect(() => {
-
     //(modificado por Roberto) se comenta esta línea porque en esta pestaña no hay filtros
     //if (!filtros || Object.keys(filtros).length === 0) return;
 
@@ -29,7 +29,10 @@ export function usePortafolioDataAgrupacion(filtros = {}) {
         setData(res.data);
       })
       .catch((err) => {
-        console.error("Error al obtener datos de portafolio por Agrupacion:", err);
+        console.error(
+          "Error al obtener datos de portafolio por Agrupacion:",
+          err
+        );
         setError(err);
       })
       .finally(() => {
@@ -44,6 +47,6 @@ export function usePortafolioDataAgrupacion(filtros = {}) {
     //modulo3: data?.modulo3 || null,
     loading,
     error,
-    data
+    data,
   };
 }

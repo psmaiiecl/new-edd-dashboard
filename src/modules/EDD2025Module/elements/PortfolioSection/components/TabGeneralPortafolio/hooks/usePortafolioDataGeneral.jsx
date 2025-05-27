@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import axios from "../../../../../services/axiosInstance";
 
@@ -7,7 +6,8 @@ export const usePortafolioDataGeneral = (filtros) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const baseURL = "http://api-docentemas-dev.3htp.cloud:8095/back/public/api2025";
+  const baseURL =
+    "http://api-docentemas-dev.3htp.cloud:8095/back/public/api2025";
 
   useEffect(() => {
     if (!filtros || Object.keys(filtros).length === 0) return;
@@ -24,7 +24,7 @@ export const usePortafolioDataGeneral = (filtros) => {
       .post(`${baseURL}/2025-portafolio-tab-general`, body)
       .then((res) => {
         setData(res.data);
-        console.log("Datos portafolio:", res.data);
+        //console.log("Datos portafolio:", res.data);
       })
       .catch((err) => {
         console.error("Error al obtener datos de portafolio:", err);
@@ -33,7 +33,7 @@ export const usePortafolioDataGeneral = (filtros) => {
       .finally(() => {
         setLoading(false);
       });
-  }, [JSON.stringify(filtros)]);
+  }, [filtros]);
 
   return { data, loading, error };
 };

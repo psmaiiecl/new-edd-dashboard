@@ -1,11 +1,11 @@
-.pagina-inscripcion {
+.module-page-layout {
   min-height: 100%;
   width: 100%;
   margin: auto;
   position: relative;
 }
 
-.inscripcion-content {
+.module-page-content {
   display: flex;
   box-shadow: 0 7px 10px 0 rgba(0, 0, 0, 0.1);
   max-width: 1366px;

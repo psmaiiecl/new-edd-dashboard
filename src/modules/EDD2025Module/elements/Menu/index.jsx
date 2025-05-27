@@ -1,9 +1,9 @@
 import "./index.css";
-import { useModules } from "../../hooks/useModules";
-import HighchartsReact from "highcharts-react-official";
-import Highcharts from "highcharts";
-import { ModuleCard } from "../../../../components/ModuleCard";
 import { useNavigate } from "react-router";
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
+import { useModules } from "../../hooks/useModules";
+import { ModuleCard } from "../../../../components/ModuleCard";
 
 export function Menu() {
   const navigate = useNavigate();

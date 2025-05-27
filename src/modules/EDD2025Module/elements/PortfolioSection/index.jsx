@@ -13,13 +13,13 @@ export function PortfolioSection2025() {
 
   const [filtros, setFiltros] = useState({
     dependencia: "",
-    region: ""
+    region: "",
   });
 
   const handleFiltroChange = (filtroNombre, valor) => {
     setFiltros((prev) => ({
       ...prev,
-      [filtroNombre]: valor
+      [filtroNombre]: valor,
     }));
   };
 

@@ -2,13 +2,11 @@ import { tabList } from "../../data/TabList";
 import { Button } from "../../../../../../components/Button";
 
 export function TabsPortafolio({ setActive, active }) {
-
   return (
     <div className="tab-container">
       <div className="tabs">
         {tabList.map((tab) => (
           <TabItem
-
             key={tab.index}
             isActive={tab.index === active}
             text={tab.label}
@@ -17,8 +15,8 @@ export function TabsPortafolio({ setActive, active }) {
         ))}
       </div>
       <div className="inscription-excel">
-        <Button text={"Excel Docente"} action={() => { }} />
-        <Button text={"Excel Sostenedor"} action={() => { }} />
+        <Button text={"Excel Docente"} action={() => {}} />
+        <Button text={"Excel Sostenedor"} action={() => {}} />
       </div>
     </div>
   );

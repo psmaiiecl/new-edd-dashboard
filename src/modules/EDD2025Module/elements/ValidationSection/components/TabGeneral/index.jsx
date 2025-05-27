@@ -136,18 +136,21 @@ export function TabGeneral() {
           <CustomPieChart setup={causalesChart} />
         </div>
       </div>
+      <hr />
       <div className="general-point-chart-container">
         <HighchartsReact
           options={avanceDocentePointChart}
           highcharts={Highcharts}
         />
       </div>
+      <hr />
       <div className="general-point-chart-container">
         <HighchartsReact
           options={evolucionCambioPointChart}
           highcharts={Highcharts}
         />
       </div>
+      <hr />
       <div className="general-point-chart-container">
         <HighchartsReact
           options={evolucionSolicitudesChart}

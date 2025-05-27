@@ -6,7 +6,7 @@ export function NotificationProvider({ children }) {
   const [notification, setNotification] = useState();
   const notificate = ({ type = "success", message = "" }) => {
     setNotification({ type, message });
-    setTimeout(() => setNotification(null), 3000); // Desaparece después de 3s
+    setTimeout(() => setNotification(null), 5000);
   };
 
   const closeNotification = () => {

@@ -8,29 +8,50 @@ import { numberFormatter } from "../../utils/NumberFormatter";
 import { PIE_CONFIG } from "../../constants/CHART_CONFIGS";
 
 export function CustomPieChart({
-  setup,
+  setup = PIE_CONFIG,
   legend = true,
   rawData = null,
-  customMapper = null,
+  customMapper = () => {},
 }) {
-  const [chartSetup, setChartSetup] = useState(setup || PIE_CONFIG);
+  const [chartSetup, setChartSetup] = useState(setup);
+  const [data, setData] = useState(rawData || null);
+
   useEffect(() => {
-    if (!setup) return;
+    //if (!setup) return;
     let stagedSetup = setup;
-    if (customMapper && rawData) {
-      stagedSetup = customMapper(setup, rawData);
+    if (data) {
+      const processedData = customMapper(data);
+      setData(data);
+      stagedSetup = {
+        ...chartSetup,
+        title: {
+          ...PIE_CONFIG.title,
+          text: numberFormatter(processedData.total.data),
+          number: processedData.total.data,
+        },
+        subtitle: {
+          ...PIE_CONFIG.subtitle,
+          text: processedData.total.subtitle,
+        },
+        series: [
+          {
+            ...PIE_CONFIG.series[0],
+            data: processedData.series,
+          },
+        ],
+      };
     }
     setChartSetup(stagedSetup);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setup, rawData]);
+  }, [setup, data]);
   return (
     <div className="pie-chart-container">
       <HighchartsReact options={chartSetup} highcharts={Highcharts} />
       <hr />
-      {legend && (
+      {legend && chartSetup && (
         <BasicLegend
-          data={chartSetup.series}
-          total={+chartSetup.title.number}
+          data={chartSetup.series.length > 0 ? chartSetup.series[0]?.data : []}
+          total={+chartSetup.title.number || 0}
         />
       )}
     </div>
@@ -40,7 +61,7 @@ export function CustomPieChart({
 function BasicLegend({ data, total }) {
   return (
     <div className="pie-chart-legend">
-      {data[0].data.map((item, index) => (
+      {data.map((item, index) => (
         <LegendItem item={item} total={total} key={index} />
       ))}
     </div>

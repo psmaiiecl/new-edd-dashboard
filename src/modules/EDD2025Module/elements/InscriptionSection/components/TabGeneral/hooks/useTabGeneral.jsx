@@ -1,8 +1,5 @@
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../../../../../../context/AuthContext";
-import { LoadingContext } from "../../../../../../../context/LoadingContext";
+import { useEffect, useState } from "react";
 import { DEPENDENCY_LIST } from "../../../data/DependencyList";
-import { getFilteredInscriptionData } from "../../../../../services/InscriptionServices";
 import {
   buildAvanceDiario,
   buildDocentesAgregados,
@@ -13,11 +10,18 @@ import {
 } from "../../../utils/generalTabUtils";
 import { AVANCE_DIARIO_2024 } from "../../../data/AVANCE_DIARIO_2024";
 import { PIE_CONFIG } from "../../../../../../../constants/CHART_CONFIGS";
+import { useCustomFetch } from "../../../../../../../hooks/useCustomFetch";
+import { BASE_API_URL_2025 } from "../../../../../data/BASE_API_URL";
+import { PieConfigBuilder } from "../../../../../../../utils/ChartConfigBuilder";
+import { PieMapper } from "../../../../../../../utils/ChartMapperFactory";
+import { mappers } from "../../../utils/mapSpecs";
 
 export function useTabGeneral() {
-  const { getToken } = useContext(AuthContext);
-  const { queueLoading, dequeueLoading } = useContext(LoadingContext);
+  const customFetch = useCustomFetch();
   const [selectedFilter, setSelectedFilter] = useState(DEPENDENCY_LIST[0]);
+  const [docentesSugeridos, setDocentesSugeridos] = useState(
+    PieConfigBuilder(" DOCENTES <b>SUGERIDOS</b>")
+  );
   const [docenteSugeridoChart, setDocenteSugeridoChart] = useState({
     ...PIE_CONFIG,
     subtitle: {
@@ -30,7 +34,6 @@ export function useTabGeneral() {
     series: [
       {
         name: "Docentes sugeridos",
-        colorByPoint: true,
         data: [
           {
             name: "Inscritos",
@@ -203,7 +206,6 @@ export function useTabGeneral() {
     },
     chart: {
       align: "left",
-      renderTo: "container_avance",
     },
     leyend: {
       itemStyle: {
@@ -271,46 +273,56 @@ export function useTabGeneral() {
   });
 
   useEffect(() => {
-    queueLoading();
-    getFilteredInscriptionData(getToken(), selectedFilter.value).then(
-      (data) => {
-        setDocenteSugeridoChart(
-          buildDocentesSugeridos(docenteSugeridoChart, data.inscripcion_general)
-        );
-        setDocenteAgregadoChart(
-          buildDocentesAgregados(docenteAgregadoChart, data.inscripcion_general)
-        );
-        setDocenteInscritoChart(
-          buildDocentesInscritos(docenteInscritoChart, data.inscripcion_general)
-        );
-        setEntidadSostenedorChart(
-          buildEntidadesSostenedoras(
-            entidadSostenedorChart,
-            data.inscripcion_general
-          )
-        );
-        setSostenedorChart(
-          buildSostenedoresParticipantes(
-            sostenedorChart,
-            data.inscripcion_general
-          )
-        );
-        setAvancePointChart(
-          buildAvanceDiario(
-            avancePointChart,
-            data.avance_diario,
-            AVANCE_DIARIO_2024
-          )
-        );
-        dequeueLoading();
-      }
-    );
+    customFetch({
+      route:
+        BASE_API_URL_2025 +
+        "/2025-datos-inscripcion?dependencia=" +
+        selectedFilter.value,
+      shouldCache: true,
+    }).then((data) => {
+      setDocentesSugeridos((prev) =>
+        PieMapper(
+          prev,
+          data.inscripcion_general.docentes,
+          mappers.docentes_sugeridos
+        )
+      );
+      setDocenteSugeridoChart(
+        buildDocentesSugeridos(docenteSugeridoChart, data.inscripcion_general)
+      );
+      setDocenteAgregadoChart(
+        buildDocentesAgregados(docenteAgregadoChart, data.inscripcion_general)
+      );
+      setDocenteInscritoChart(
+        buildDocentesInscritos(docenteInscritoChart, data.inscripcion_general)
+      );
+      setEntidadSostenedorChart(
+        buildEntidadesSostenedoras(
+          entidadSostenedorChart,
+          data.inscripcion_general
+        )
+      );
+      setSostenedorChart(
+        buildSostenedoresParticipantes(
+          sostenedorChart,
+          data.inscripcion_general
+        )
+      );
+      setAvancePointChart(
+        buildAvanceDiario(
+          avancePointChart,
+          data.avance_diario,
+          AVANCE_DIARIO_2024
+        )
+      );
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedFilter]);
 
   return {
     selectedFilter,
     setSelectedFilter,
+    docentesSugeridos,
     docenteSugeridoChart,
     docenteAgregadoChart,
     docenteInscritoChart,
@@ -319,3 +331,5 @@ export function useTabGeneral() {
     avancePointChart,
   };
 }
+
+//ANTES: 320 Lineas

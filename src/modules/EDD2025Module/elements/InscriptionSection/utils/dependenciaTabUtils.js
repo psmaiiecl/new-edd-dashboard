@@ -19,7 +19,6 @@ export function extraerSumatoriasDocentes(data) {
       };
     }
   }
-  console.log("sumas", sumas);
 
   return sumas;
 }
