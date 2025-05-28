@@ -9,9 +9,13 @@ import {
   extraerSumatoriaSostenedores,
   extraerSumaTotal,
 } from "../../../utils/dependenciaTabUtils";
+import { BarConfigBuilder } from "../../../../../../../utils/ChartConfigBuilder";
 
 export function useTabDependencia() {
   const { getToken } = useContext(AuthContext);
+  const [docentesDependencia, setDocentesDependencia] = useState(
+    BarConfigBuilder('<b>ESTADO DE DOCENTES</b> DISTRIBUIDOS <b>POR DEPENDENCIA</b>')
+  ); 
   const [docentesData, setDocentesData] = useState({});
   const [docentesStatus, setDocentesStatus] = useState({
     Inscrito: 0,
@@ -132,5 +136,8 @@ export function useTabDependencia() {
     sostenedoresChart,
     sostenedoresStatus,
     sostenedoresData,
+    docentesDependencia
   };
 }
+
+//130 LINEAS

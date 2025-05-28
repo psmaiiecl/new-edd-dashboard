@@ -1,24 +1,20 @@
 import "./index.css";
 import Select from "react-select";
-import Highcharts from "highcharts";
-import HighchartsReact from "highcharts-react-official";
-// eslint-disable-next-line no-unused-vars
-import exporting from "highcharts/modules/exporting";
 import { useTabGeneral } from "./hooks/useTabGeneral";
 import { DEPENDENCY_LIST } from "../../data/DependencyList";
 import { CustomPieChart } from "../../../../../../components/CustomPieChart";
+import { CustomDotLineChart } from "../../../../../../components/CustomDotLineChart";
 
 export function TabGeneral() {
   const {
     selectedFilter,
     setSelectedFilter,
     docentesSugeridos,
-    docenteSugeridoChart,
-    docenteAgregadoChart,
-    docenteInscritoChart,
-    entidadSostenedorChart,
-    sostenedorChart,
-    avancePointChart,
+    docentesAgregados,
+    docentesInscritos,
+    entidadesSostenedoras,
+    sostenedoresParticipantes,
+    avanceDiario,
   } = useTabGeneral();
 
   return (
@@ -49,17 +45,32 @@ export function TabGeneral() {
       </div>
       <div className="normal-container">
         <div className="pie-grid-3">
-          <CustomPieChart setup={docentesSugeridos} />
-          <CustomPieChart setup={docenteAgregadoChart} />
-          <CustomPieChart setup={docenteInscritoChart} />
+          <CustomPieChart
+            subtitle={"DOCENTES <b>SUGERIDOS</b>"}
+            data={docentesSugeridos}
+          />
+          <CustomPieChart
+            subtitle={"DOCENTES <b>AGREGADOS POR SOSTENEDORES</b>"}
+            data={docentesAgregados}
+          />
+          <CustomPieChart
+            subtitle={"TOTAL <b>DOCENTES INSCRITOS</b>"}
+            data={docentesInscritos}
+          />
+          {/*
+           */}
         </div>
         <div className="pie-grid-2">
-          <CustomPieChart setup={entidadSostenedorChart} />
-          <CustomPieChart setup={sostenedorChart} />
+          <CustomPieChart
+            subtitle={"TOTAL <b>ENTIDADES SOSTENEDORAS</b>"}
+            data={entidadesSostenedoras}
+          />
+          <CustomPieChart
+            subtitle={"SOSTENEDORES <b>PARTICIPANTES</b>"}
+            data={sostenedoresParticipantes}
+          />
         </div>
-        <div className="general-point-chart-container">
-          <HighchartsReact options={avancePointChart} highcharts={Highcharts} />
-        </div>
+        {/* <CustomDotLineChart setup={avanceDiario} /> */}
       </div>
     </div>
   );

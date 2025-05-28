@@ -1,6 +1,6 @@
 import { numberFormatter } from "../utils/NumberFormatter";
 
-export const BASE_CHART_CONFIG = {
+const BASE_CHART_CONFIG = {
   lang: {
     decimalPoint: ",",
     thousandsSep: ".",
@@ -11,10 +11,7 @@ export const BASE_CHART_CONFIG = {
 };
 
 export const PIE_CONFIG = {
-  lang: {
-    decimalPoint: ",",
-    thousandsSep: ".",
-  },
+  ...BASE_CHART_CONFIG,
   chart: {
     plotBackgroundColor: null,
     plotBorderWidth: null,
@@ -91,10 +88,146 @@ export const PIE_CONFIG = {
       showInLegend: true,
     },
   },
-  credits: {
-    enabled: false,
+  series: [],
+};
+
+export const DOT_CONFIG = {
+  ...BASE_CHART_CONFIG,
+  chart: {
+    align: "left",
+  },
+  title: {
+    text: "DOTTED LINE CHART",
+    align: "center",
+    style: {
+      fontWeight: "300",
+      fontSize: "15px",
+      color: "#666666",
+    },
+  },
+  plotOptions: {
+    series: {
+      color: "#FFA500",
+      label: {
+        connectorAllowed: false,
+      },
+    },
   },
   series: [],
+};
+
+export const BAR_CONFIG = {
+  ...BASE_CHART_CONFIG,
+  chart: {
+    type: "bar",
+    plotBorderWidth: null,
+    plotShadow: false,
+    plotBackgroundColor: null,
+    marginTop: 120,
+    height: 600,
+    // width: 1000,
+  },
+  title: {
+    text: "TOTAL",
+    align: "center",
+    style: {
+      fontWeight: "300",
+      color: "var(--blue-100)",
+      fontSize: "35px",
+    },
+  },
+  subtitle: {
+    text: "BAR CHART",
+    align: "center",
+    style: {
+      fontSize: "15px",
+    },
+  },
+  legend: {
+    itemStyle: {
+      fontSize: "13px",
+    },
+    y: 20,
+    margin: 40,
+  },
+  yAxis: {
+    min: 0,
+    max: 100,
+    allowOverlap: true,
+    title: {
+      enabled: false,
+    },
+    labels: {
+      format: "{value}%",
+      style: {
+        fontSize: "11px",
+      },
+    },
+    tickInterval: 10,
+  },
+  xAxis: {
+    categories: [],
+    labels: {
+      style: {
+        fontSize: "11px",
+      },
+    },
+  },
+  tooltip: {
+    pointFormat:
+      '<span style="font-size:13px;"><span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)</span><br/>',
+    shared: true,
+  },
+  plotOptions: {
+    bar: {
+      stacking: "percent",
+      allowPointSelect: false,
+      cursor: "pointer",
+      dataLabels: {
+        enabled: false,
+        format: "<b>{point.y:.,.0f} </b> ({point.percentage:.0f}%)<br/>",
+        color: "#000000",
+        style: {
+          fontSize: "13px",
+          textOutline: "none",
+          color: "#666666",
+        },
+      },
+    },
+  },
+  series: [],
+};
+
+export const POINT_CONFIG = {
+  chart: {
+    type: "line",
+  },
+  legend: {
+    itemMarginTop: 3,
+    align: "right",
+    verticalAlign: "top",
+    layout: "vertical",
+    x: 5,
+    y: 100,
+  },
+  title: {
+    //text: 'AGENDAMIENTO ACUMULADO',
+    align: "center",
+    style: {
+      fontWeight: "bold",
+      fontSize: "18px",
+      color: "#666666",
+    },
+  },
+  tooltip: {
+    valueSuffix: "",
+  },
+  plotOptions: {
+    column: {
+      pointPadding: 0,
+      borderWidth: 0,
+    },
+  },
 };
 
 export const STACK_BAR_CONFIG = {
@@ -211,41 +344,6 @@ export const MULTIPLE_BAR_CONFIG = {
       pointPadding: 0,
       borderWidth: 0,
     },
-  },
-};
-
-export const POINT_CONFIG = {
-  chart: {
-    type: "line",
-  },
-  legend: {
-    itemMarginTop: 3,
-    align: "right",
-    verticalAlign: "top",
-    layout: "vertical",
-    x: 5,
-    y: 100,
-  },
-  title: {
-    //text: 'AGENDAMIENTO ACUMULADO',
-    align: "center",
-    style: {
-      fontWeight: "bold",
-      fontSize: "18px",
-      color: "#666666",
-    },
-  },
-  tooltip: {
-    valueSuffix: "",
-  },
-  plotOptions: {
-    column: {
-      pointPadding: 0,
-      borderWidth: 0,
-    },
-  },
-  credits: {
-    enabled: false,
   },
 };
 

@@ -3,6 +3,7 @@ import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
 import { numberFormatter } from "../../../../../../utils/NumberFormatter";
 import { useTabDependencia } from "./hooks/useTabDependencia";
+import { CustomBarChart } from "../../../../../../components/CustomBarChart";
 
 export function TabDependencia() {
   const {
@@ -12,6 +13,7 @@ export function TabDependencia() {
     sostenedoresChart,
     sostenedoresStatus,
     sostenedoresData,
+    docentesDependencia
   } = useTabDependencia();
   return (
     <div className="tab-dependencia">
@@ -62,18 +64,18 @@ export function TabDependencia() {
                 return (
                   <tr key={index}>
                     <td>{key}</td>
-                    <td>{numberFormatter(docentesData[key].Inscrito.count)}</td>
+                    <td>{numberFormatter(docentesData[key].Inscrito)}</td>
                     <td>
-                      {numberFormatter(docentesData[key]["En Revisión"].count)}
+                      {numberFormatter(docentesData[key]["En Revisión"])}
                     </td>
                     <td>
-                      {numberFormatter(docentesData[key].Desinscrito.count)}
+                      {numberFormatter(docentesData[key].Desinscrito)}
                     </td>
                     <td>
-                      {numberFormatter(docentesData[key].Pendiente.count)}
+                      {numberFormatter(docentesData[key].Pendiente)}
                     </td>
                     <td>
-                      {numberFormatter(docentesData[key].Cancelado.count)}
+                      {numberFormatter(docentesData[key].Cancelado)}
                     </td>
                   </tr>
                 );

@@ -12,7 +12,7 @@ export function extraerSumatoriasDocentes(data) {
   for (const [key] of Object.entries(data)) {
     for (const [area, quantity] of Object.entries(data[key])) {
       if (sumas[area] === undefined) continue;
-      const sumando = sumas[area] + quantity.count;
+      const sumando = sumas[area] + quantity;
       sumas = {
         ...sumas,
         [area]: sumando,
@@ -28,18 +28,18 @@ export function buildDocentesDependenciaChart(setup, data, total) {
     (d) => d !== "Sin Información" && d !== "Retirado"
   );
 
-  const arrInscritos = dependencias.map((dep) => data[dep].Inscrito.count || 0);
+  const arrInscritos = dependencias.map((dep) => data[dep].Inscrito || 0);
   const arrEnRevision = dependencias.map(
-    (dep) => data[dep]["En Revisión"].count || 0
+    (dep) => data[dep]["En Revisión"] || 0
   );
   const arrDesinscritos = dependencias.map(
-    (dep) => data[dep].Desinscrito.count || 0
+    (dep) => data[dep].Desinscrito || 0
   );
   const arrPendiente = dependencias.map(
-    (dep) => data[dep].Pendiente.count || 0
+    (dep) => data[dep].Pendiente || 0
   );
   const arrCancelado = dependencias.map(
-    (dep) => data[dep].Cancelado.count || 0
+    (dep) => data[dep].Cancelado || 0
   );
   const res = {
     ...setup,

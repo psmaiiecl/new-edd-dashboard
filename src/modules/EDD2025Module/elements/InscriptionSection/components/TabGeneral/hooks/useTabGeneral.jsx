@@ -2,275 +2,71 @@ import { useEffect, useState } from "react";
 import { DEPENDENCY_LIST } from "../../../data/DependencyList";
 import {
   buildAvanceDiario,
-  buildDocentesAgregados,
   buildDocentesInscritos,
-  buildDocentesSugeridos,
-  buildEntidadesSostenedoras,
-  buildSostenedoresParticipantes,
 } from "../../../utils/generalTabUtils";
 import { AVANCE_DIARIO_2024 } from "../../../data/AVANCE_DIARIO_2024";
-import { PIE_CONFIG } from "../../../../../../../constants/CHART_CONFIGS";
 import { useCustomFetch } from "../../../../../../../hooks/useCustomFetch";
 import { BASE_API_URL_2025 } from "../../../../../data/BASE_API_URL";
-import { PieConfigBuilder } from "../../../../../../../utils/ChartConfigBuilder";
-import { PieMapper } from "../../../../../../../utils/ChartMapperFactory";
+import { DotConfigBuilder } from "../../../../../../../utils/ChartConfigBuilder";
+import { mapPieData } from "../../../../../../../utils/ChartMapperFactory";
 import { mappers } from "../../../utils/mapSpecs";
 
 export function useTabGeneral() {
   const customFetch = useCustomFetch();
   const [selectedFilter, setSelectedFilter] = useState(DEPENDENCY_LIST[0]);
-  const [docentesSugeridos, setDocentesSugeridos] = useState(
-    PieConfigBuilder(" DOCENTES <b>SUGERIDOS</b>")
+  const [docentesSugeridos, setDocentesSugeridos] = useState(null);
+  const [docentesAgregados, setDocentesAgregados] = useState(null);
+  const [docentesInscritos, setDocentesInscritos] = useState(null);
+  const [entidadesSostenedoras, setEntidadesSostenedores] = useState(null);
+  const [sostenedoresParticipantes, setSostenedoresParticipantes] =
+    useState(null);
+  const [avanceDiario, setAvanceDiario] = useState(
+    DotConfigBuilder(
+      "AVANCE DIARIO <b>PROCESO DE INSCRIPCIÓN 2025 POR DOCENTE</b>",
+      {
+        yAxis: {
+          title: {
+            enabled: false,
+          },
+          labels: {
+            format: "{value}%",
+          },
+        },
+        xAxis: {
+          type: "category",
+          categories: [],
+          title: {
+            text: "Fecha",
+            style: {
+              fontWeight: "bold",
+              fontSize: "18px",
+              color: "#666666",
+            },
+          },
+        },
+        series: [
+          {
+            color: "#5157FF",
+            name: "Porcentaje avance",
+            data: [],
+            tooltip: {
+              valueSuffix: "%",
+              valueDecimals: 1,
+            },
+          },
+          {
+            color: "#28a745",
+            name: "Porcentaje avance 2024",
+            data: [],
+            tooltip: {
+              valueSuffix: "%",
+              valueDecimals: 1,
+            },
+          },
+        ],
+      }
+    )
   );
-  const [docenteSugeridoChart, setDocenteSugeridoChart] = useState({
-    ...PIE_CONFIG,
-    subtitle: {
-      text: " DOCENTES <b>SUGERIDOS</b>",
-      align: "center",
-      style: {
-        fontSize: "15px",
-      },
-    },
-    series: [
-      {
-        name: "Docentes sugeridos",
-        data: [
-          {
-            name: "Inscritos",
-            y: 0,
-            sliced: true,
-            selected: true,
-            color: "#65D9AB",
-          },
-          {
-            name: "Desinscritos",
-            y: 0,
-            color: "#C1D9CA",
-          },
-          {
-            name: "Pendientes",
-            y: 0,
-            color: "#FFD153",
-          },
-        ],
-      },
-    ],
-  });
-  const [docenteAgregadoChart, setDocenteAgregadoChart] = useState({
-    ...PIE_CONFIG,
-    subtitle: {
-      text: " DOCENTES <b>AGREGADOS POR SOSTENEDORES</b>",
-      align: "center",
-      style: {
-        fontSize: "15px",
-      },
-    },
-    series: [
-      {
-        name: "Docentes agregados por sostenedores",
-        colorByPoint: true,
-        data: [
-          {
-            name: "Inscritos",
-            y: 0,
-            sliced: true,
-            selected: true,
-            color: "#65D9AB",
-          },
-          {
-            name: "En Revisión",
-            y: 0,
-            color: "#FF8E53",
-          },
-          {
-            name: "No Inscritos",
-            y: 0,
-            color: "#FF5880",
-          },
-        ],
-      },
-    ],
-  });
-  const [docenteInscritoChart, setDocenteInscritoChart] = useState({
-    ...PIE_CONFIG,
-    subtitle: {
-      text: " TOTAL <b>DOCENTES INSCRITOS</b>",
-      align: "center",
-      style: {
-        fontSize: "15px",
-      },
-    },
-    series: [
-      {
-        name: "Total docentes inscritos",
-        colorByPoint: true,
-        data: [
-          {
-            name: "Inscritos",
-            y: 0,
-            sliced: true,
-            selected: true,
-            color: "#65D9AB",
-          },
-          {
-            name: "Cancelados",
-            y: 0,
-            color: "#FF5880",
-          },
-        ],
-      },
-    ],
-  });
-  const [entidadSostenedorChart, setEntidadSostenedorChart] = useState({
-    ...PIE_CONFIG,
-    subtitle: {
-      text: "TOTAL <b>ENTIDADES SOSTENEDORAS</b>",
-      align: "center",
-      style: {
-        fontSize: "15px",
-      },
-    },
-    series: [
-      {
-        name: "Sostenedores",
-        colorByPoint: true,
-        data: [
-          {
-            name: "Con Rep. Legal registrado",
-            y: 0,
-            sliced: true,
-            selected: true,
-            color: "#FF5880",
-          },
-          {
-            name: "Sin Rep. Legal registrado",
-            y: 0,
-            color: "#FF8E53",
-          },
-        ],
-      },
-    ],
-  });
-  const [sostenedorChart, setSostenedorChart] = useState({
-    ...PIE_CONFIG,
-    legend: {
-      ...PIE_CONFIG.legend,
-      layout: "horizontal",
-      itemDistance: 10,
-      alignColumns: false,
-      width: "100%",
-      itemMarginTop: 2,
-    },
-    subtitle: {
-      text: " SOSTENEDORES <b>PARTICIPANTES</b>",
-      align: "center",
-      style: {
-        fontSize: "15px",
-      },
-    },
-    series: [
-      {
-        name: "Sostenedores",
-        colorByPoint: true,
-        data: [
-          {
-            name: "Sin ingreso",
-            y: 0,
-            sliced: true,
-            selected: true,
-            color: "#FF5880",
-          },
-          {
-            name: "Con ingreso sin docentes inscritos",
-            y: 0,
-            color: "#FF8E53",
-          },
-          {
-            name: "Inscripción iniciada",
-            y: 0,
-            color: "#65D9AB",
-          },
-          {
-            name: "Sin docentes pendientes",
-            y: 0,
-            color: "#8FB8FF",
-          },
-        ],
-      },
-    ],
-  });
-  const [avancePointChart, setAvancePointChart] = useState({
-    lang: {
-      decimalPoint: ",",
-      thousandsSep: ".",
-    },
-    chart: {
-      align: "left",
-    },
-    leyend: {
-      itemStyle: {
-        fontSize: "22px",
-      },
-    },
-    title: {
-      text: "Avance Diario Proceso de Inscripción 2025 por Docente",
-      align: "center",
-      style: {
-        fontWeight: "bold",
-        fontSize: "18px",
-        color: "#666666",
-      },
-    },
-    yAxis: {
-      title: {
-        enabled: false,
-      },
-      labels: {
-        format: "{value}%",
-      },
-    },
-    xAxis: {
-      type: "category",
-      categories: [],
-      title: {
-        text: "Fecha",
-        style: {
-          fontWeight: "bold",
-          fontSize: "18px",
-          color: "#666666",
-        },
-      },
-    },
-
-    plotOptions: {
-      series: {
-        color: "#FFA500",
-        label: {
-          connectorAllowed: false,
-        },
-      },
-    },
-    series: [
-      {
-        color: "#5157FF",
-        name: "Porcentaje avance",
-        data: [],
-        tooltip: {
-          valueSuffix: "%",
-          valueDecimals: 1,
-        },
-      },
-      {
-        color: "#28a745",
-        name: "Porcentaje avance 2024",
-        data: [],
-        tooltip: {
-          valueSuffix: "%",
-          valueDecimals: 1,
-        },
-      },
-    ],
-  });
 
   useEffect(() => {
     customFetch({
@@ -280,37 +76,34 @@ export function useTabGeneral() {
         selectedFilter.value,
       shouldCache: true,
     }).then((data) => {
-      setDocentesSugeridos((prev) =>
-        PieMapper(
-          prev,
+      setDocentesSugeridos(
+        mapPieData(
           data.inscripcion_general.docentes,
           mappers.docentes_sugeridos
         )
       );
-      setDocenteSugeridoChart(
-        buildDocentesSugeridos(docenteSugeridoChart, data.inscripcion_general)
-      );
-      setDocenteAgregadoChart(
-        buildDocentesAgregados(docenteAgregadoChart, data.inscripcion_general)
-      );
-      setDocenteInscritoChart(
-        buildDocentesInscritos(docenteInscritoChart, data.inscripcion_general)
-      );
-      setEntidadSostenedorChart(
-        buildEntidadesSostenedoras(
-          entidadSostenedorChart,
-          data.inscripcion_general
+      setDocentesAgregados(
+        mapPieData(
+          data.inscripcion_general.docentes,
+          mappers.docentes_agregados
         )
       );
-      setSostenedorChart(
-        buildSostenedoresParticipantes(
-          sostenedorChart,
-          data.inscripcion_general
+      setDocentesInscritos(buildDocentesInscritos(data.inscripcion_general));
+      setEntidadesSostenedores(
+        mapPieData(
+          data.inscripcion_general.total,
+          mappers.entidades_sostenedoras
         )
       );
-      setAvancePointChart(
+      setSostenedoresParticipantes(
+        mapPieData(
+          data.inscripcion_general.sostenedores,
+          mappers.sostenedores_participantes
+        )
+      );
+      setAvanceDiario(
         buildAvanceDiario(
-          avancePointChart,
+          (prev) => prev,
           data.avance_diario,
           AVANCE_DIARIO_2024
         )
@@ -323,12 +116,11 @@ export function useTabGeneral() {
     selectedFilter,
     setSelectedFilter,
     docentesSugeridos,
-    docenteSugeridoChart,
-    docenteAgregadoChart,
-    docenteInscritoChart,
-    entidadSostenedorChart,
-    sostenedorChart,
-    avancePointChart,
+    docentesAgregados,
+    docentesInscritos,
+    entidadesSostenedoras,
+    sostenedoresParticipantes,
+    avanceDiario,
   };
 }
 

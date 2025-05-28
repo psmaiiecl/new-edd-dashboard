@@ -1,49 +1,33 @@
-import "./index.css";
+import "./style.css";
 import { useEffect, useState } from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 // eslint-disable-next-line no-unused-vars
 import exporting from "highcharts/modules/exporting";
 import { numberFormatter } from "../../utils/NumberFormatter";
-import { PIE_CONFIG } from "../../constants/CHART_CONFIGS";
+import { initPieChartConfig } from "../../utils/ChartConfigBuilder";
 
-export function CustomPieChart({
-  setup = PIE_CONFIG,
-  legend = true,
-  rawData = null,
-  customMapper = () => {},
-}) {
-  const [chartSetup, setChartSetup] = useState(setup);
-  const [data, setData] = useState(rawData || null);
+export function CustomPieChart({ subtitle, data, legend = true }) {
+  const [chartSetup, setChartSetup] = useState(initPieChartConfig(subtitle));
 
   useEffect(() => {
-    //if (!setup) return;
-    let stagedSetup = setup;
-    if (data) {
-      const processedData = customMapper(data);
-      setData(data);
-      stagedSetup = {
-        ...chartSetup,
-        title: {
-          ...PIE_CONFIG.title,
-          text: numberFormatter(processedData.total.data),
-          number: processedData.total.data,
+    if (!data) return;
+    setChartSetup((prev) => ({
+      ...prev,
+      title: {
+        ...prev.title,
+        number: data.total.numeric,
+        text: data.total.text,
+      },
+      series: [
+        {
+          ...prev.series[0],
+          data: data.series,
         },
-        subtitle: {
-          ...PIE_CONFIG.subtitle,
-          text: processedData.total.subtitle,
-        },
-        series: [
-          {
-            ...PIE_CONFIG.series[0],
-            data: processedData.series,
-          },
-        ],
-      };
-    }
-    setChartSetup(stagedSetup);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setup, data]);
+      ],
+      ...data?.override
+    }));
+  }, [data]);
   return (
     <div className="pie-chart-container">
       <HighchartsReact options={chartSetup} highcharts={Highcharts} />

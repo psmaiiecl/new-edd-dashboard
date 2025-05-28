@@ -1,177 +1,30 @@
 import { numberFormatter } from "../../../../../utils/NumberFormatter";
 
-export function buildDocentesSugeridos(setup, data) {
-  const total =
-    parseInt(data.docentes.inscritos) +
-    parseInt(data.docentes.desinscritos) +
-    parseInt(data.docentes.pendientes);
-  const res = {
-    ...setup,
-    title: {
-      ...setup.title,
-      number: total,
-      text: numberFormatter(total),
-    },
-    series: [
-      {
-        ...setup.series[0],
-        data: [
-          {
-            ...setup.series[0].data[0],
-            y: parseInt(data.docentes.inscritos),
-          },
-
-          {
-            ...setup.series[0].data[1],
-            y: parseInt(data.docentes.desinscritos),
-          },
-          {
-            ...setup.series[0].data[2],
-            y: parseInt(data.docentes.pendientes),
-          },
-        ],
-      },
-    ],
-  };
-  return res;
-}
-export function buildDocentesAgregados(setup, data) {
-  const total =
-    parseInt(data.docentes["inscritos_agregados_por_sostenedor"]) +
-    parseInt(data.docentes["en_revision"]) +
-    parseInt(data.docentes["no_inscritos"]);
-  const res = {
-    ...setup,
-    title: {
-      ...setup.title,
-      number: total,
-      text: numberFormatter(total),
-    },
-    series: [
-      {
-        ...setup.series[0],
-        data: [
-          {
-            ...setup.series[0].data[0],
-            y: parseInt(data.docentes.inscritos_agregados_por_sostenedor),
-          },
-
-          {
-            ...setup.series[0].data[1],
-            y: parseInt(data.docentes["en_revision"]),
-          },
-          {
-            ...setup.series[0].data[2],
-            y: parseInt(data.docentes["no_inscritos"]),
-          },
-        ],
-      },
-    ],
-  };
-  return res;
-}
-export function buildDocentesInscritos(setup, data) {
+export function buildDocentesInscritos(data) {
   const totalInscritos =
     parseInt(data.docentes.inscritos) +
     parseInt(data.docentes.inscritos_agregados_por_sostenedor);
   const total = totalInscritos + parseInt(data.docentes.cancelados);
-  const res = {
-    ...setup,
-    title: {
-      ...setup.title,
-      number: total,
+  return {
+    series: [
+      {
+        name: "Inscritos",
+        y: totalInscritos,
+        sliced: true,
+        selected: true,
+        color: "#65D9AB",
+      },
+      {
+        name: "Cancelados",
+        y: parseInt(data.docentes.cancelados),
+        color: "#FF5880",
+      },
+    ],
+    total: {
+      numeric: total,
       text: numberFormatter(totalInscritos),
     },
-    series: [
-      {
-        ...setup.series[0],
-        data: [
-          {
-            ...setup.series[0].data[0],
-            y: totalInscritos,
-          },
-          {
-            ...setup.series[0].data[1],
-            y: parseInt(data.docentes.cancelados),
-          },
-        ],
-      },
-    ],
   };
-  return res;
-}
-export function buildEntidadesSostenedoras(setup, data) {
-  const res = {
-    ...setup,
-    title: {
-      ...setup.title,
-      number: data.total.sostenedores,
-      text: numberFormatter(data.total.sostenedores),
-    },
-    series: [
-      {
-        ...setup.series[0],
-        data: [
-          {
-            ...setup.series[0].data[0],
-            y: parseInt(data.total.sostenedores_con_representante),
-          },
-          {
-            ...setup.series[0].data[1],
-            y: parseInt(data.total.sostenedores_sin_representante),
-          },
-        ],
-      },
-    ],
-  };
-  return res;
-}
-export function buildSostenedoresParticipantes(setup, data) {
-  let total =
-    parseInt(data.sostenedores.sin_ingreso) +
-    parseInt(data.sostenedores.con_ingreso_sin_docentes) +
-    parseInt(data.sostenedores.inscripcion_iniciada) +
-    parseInt(data.sostenedores.sin_docentes_pendientes);
-  total = data.sostenedores.habilitados;
-  const res = {
-    ...setup,
-    title: {
-      ...setup.title,
-      number: total,
-      text: numberFormatter(total),
-    },
-    series: [
-      {
-        name: "Sostenedores",
-        colorByPoint: true,
-        data: [
-          {
-            name: "Sin ingreso",
-            y: parseInt(data.sostenedores.sin_ingreso),
-            sliced: true,
-            selected: true,
-            color: "#FF5880",
-          },
-          {
-            name: "Con ingreso sin docentes inscritos",
-            y: parseInt(data.sostenedores.con_ingreso_sin_docentes),
-            color: "#FF8E53",
-          },
-          {
-            name: "Inscripción iniciada",
-            y: parseInt(data.sostenedores.inscripcion_iniciada),
-            color: "#65D9AB",
-          },
-          {
-            name: "Sin docentes pendientes",
-            y: parseInt(data.sostenedores.sin_docentes_pendientes),
-            color: "#8FB8FF",
-          },
-        ],
-      },
-    ],
-  };
-  return res;
 }
 export function buildAvanceDiario(setup, data, data2023) {
   const arrFechas = [];
