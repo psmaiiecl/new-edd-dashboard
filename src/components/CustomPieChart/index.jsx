@@ -7,8 +7,8 @@ import exporting from "highcharts/modules/exporting";
 import { numberFormatter } from "../../utils/NumberFormatter";
 import { initPieChartConfig } from "../../utils/ChartConfigBuilder";
 
-export function CustomPieChart({ subtitle, data, legend = true }) {
-  const [chartSetup, setChartSetup] = useState(initPieChartConfig(subtitle));
+export function CustomPieChart({ subtitle, data, legend = true, overrideConfig }) {
+  const [chartSetup, setChartSetup] = useState(initPieChartConfig(subtitle, overrideConfig));
 
   useEffect(() => {
     if (!data) return;

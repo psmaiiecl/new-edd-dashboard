@@ -4,10 +4,8 @@ import {
   buildAvanceDiario,
   buildDocentesInscritos,
 } from "../../../utils/generalTabUtils";
-import { AVANCE_DIARIO_2024 } from "../../../data/AVANCE_DIARIO_2024";
 import { useCustomFetch } from "../../../../../../../hooks/useCustomFetch";
 import { BASE_API_URL_2025 } from "../../../../../data/BASE_API_URL";
-import { DotConfigBuilder } from "../../../../../../../utils/ChartConfigBuilder";
 import { mapPieData } from "../../../../../../../utils/ChartMapperFactory";
 import { mappers } from "../../../utils/mapSpecs";
 
@@ -20,53 +18,7 @@ export function useTabGeneral() {
   const [entidadesSostenedoras, setEntidadesSostenedores] = useState(null);
   const [sostenedoresParticipantes, setSostenedoresParticipantes] =
     useState(null);
-  const [avanceDiario, setAvanceDiario] = useState(
-    DotConfigBuilder(
-      "AVANCE DIARIO <b>PROCESO DE INSCRIPCIÓN 2025 POR DOCENTE</b>",
-      {
-        yAxis: {
-          title: {
-            enabled: false,
-          },
-          labels: {
-            format: "{value}%",
-          },
-        },
-        xAxis: {
-          type: "category",
-          categories: [],
-          title: {
-            text: "Fecha",
-            style: {
-              fontWeight: "bold",
-              fontSize: "18px",
-              color: "#666666",
-            },
-          },
-        },
-        series: [
-          {
-            color: "#5157FF",
-            name: "Porcentaje avance",
-            data: [],
-            tooltip: {
-              valueSuffix: "%",
-              valueDecimals: 1,
-            },
-          },
-          {
-            color: "#28a745",
-            name: "Porcentaje avance 2024",
-            data: [],
-            tooltip: {
-              valueSuffix: "%",
-              valueDecimals: 1,
-            },
-          },
-        ],
-      }
-    )
-  );
+  const [avanceDiario, setAvanceDiario] = useState(null);
 
   useEffect(() => {
     customFetch({
@@ -101,13 +53,7 @@ export function useTabGeneral() {
           mappers.sostenedores_participantes
         )
       );
-      setAvanceDiario(
-        buildAvanceDiario(
-          (prev) => prev,
-          data.avance_diario,
-          AVANCE_DIARIO_2024
-        )
-      );
+      setAvanceDiario(buildAvanceDiario(data.avance_diario));
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedFilter]);

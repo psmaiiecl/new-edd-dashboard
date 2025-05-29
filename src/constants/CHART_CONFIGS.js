@@ -113,6 +113,14 @@ export const DOT_CONFIG = {
       },
     },
   },
+  yAxis: {
+    title: {
+      enabled: false,
+    },
+    labels: {
+      format: "{value}%",
+    },
+  },
   series: [],
 };
 

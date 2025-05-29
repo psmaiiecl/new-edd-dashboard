@@ -57,8 +57,6 @@ export function TabGeneral() {
             subtitle={"TOTAL <b>DOCENTES INSCRITOS</b>"}
             data={docentesInscritos}
           />
-          {/*
-           */}
         </div>
         <div className="pie-grid-2">
           <CustomPieChart
@@ -70,7 +68,10 @@ export function TabGeneral() {
             data={sostenedoresParticipantes}
           />
         </div>
-        {/* <CustomDotLineChart setup={avanceDiario} /> */}
+        <CustomDotLineChart
+          title={"AVANCE DIARIO <b>PROCESO DE INSCRIPCIÓN 2025 POR DOCENTE</b>"}
+          data={avanceDiario}
+        />
       </div>
     </div>
   );
