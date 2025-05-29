@@ -7,8 +7,32 @@ import exporting from "highcharts/modules/exporting";
 import { numberFormatter } from "../../utils/NumberFormatter";
 import { initPieChartConfig } from "../../utils/ChartConfigBuilder";
 
-export function CustomPieChart({ subtitle, data, legend = true, overrideConfig }) {
-  const [chartSetup, setChartSetup] = useState(initPieChartConfig(subtitle, overrideConfig));
+/**
+ * La data que debe llegar a este componente para poder renderizarse debe tener la siguiente estructura:
+ * data{  
+ *  series: {
+ *     name: item.name,
+ *     y: parseInt(data[item.key]),
+ *     color: item.color,
+ *     sliced: item.sliced || false,
+ *     selected: item.selected || false,
+ *  },
+ *  total: {
+ *     numeric: total,
+ *     text: numberFormatter(total),
+ *  },
+ *  override: {}
+ *}
+ */
+export function CustomPieChart({
+  subtitle,
+  data,
+  legend = true,
+  overrideConfig,
+}) {
+  const [chartSetup, setChartSetup] = useState(
+    initPieChartConfig(subtitle, overrideConfig)
+  );
 
   useEffect(() => {
     if (!data) return;
@@ -25,7 +49,7 @@ export function CustomPieChart({ subtitle, data, legend = true, overrideConfig }
           data: data.series,
         },
       ],
-      ...data?.override
+      ...data?.override,
     }));
   }, [data]);
   return (
