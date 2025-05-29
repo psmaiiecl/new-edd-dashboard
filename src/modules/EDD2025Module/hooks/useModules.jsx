@@ -48,10 +48,10 @@ export function useModules() {
       changeLoadingStatus("portfolio", false);
     });
     changeLoadingStatus("result", true);
-    getResultData(getToken()).then((data) => {
-      setResultChart(buildResultModuleChart(data.docentes));
-      changeLoadingStatus("result", false);
-    });
+    // getResultData(getToken()).then((data) => {
+    //   setResultChart(buildResultModuleChart(data.docentes));
+    //   changeLoadingStatus("result", false);
+    // });
   }, [getToken]);
   return {
     inscriptionChart,
