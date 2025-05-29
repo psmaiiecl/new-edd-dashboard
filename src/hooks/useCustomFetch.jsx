@@ -13,13 +13,19 @@ export function useCustomFetch() {
   const customFetch = useCallback(
     async ({
       route,
-      options = { method: "POST" },
+      options = {},
+      method = "POST",
       shouldCache = false,
       hasLoadPanel = true,
+      formData = null,
     }) => {
       const URL = import.meta.env.VITE_BASE_URL + route;
-      const method = options.method?.toUpperCase() || "GET";
-      const bodyString = options.body ? JSON.stringify(options.body) : "";
+      //const method = method?.toUpperCase() || "GET";
+      const bodyString = formData
+        ? JSON.stringify(formData)
+        : options.body
+        ? JSON.stringify(options.body)
+        : "";
       const cacheKey = `${method}:${URL}:${bodyString}`;
       const now = Date.now();
       if (shouldCache) {
@@ -31,16 +37,23 @@ export function useCustomFetch() {
           }
         }
       }
+      if (formData) {
+        const parsedFormData = new FormData();
+        for (let key in formData) {
+          parsedFormData.append(key, formData[key].value);
+        }
+        options.body = parsedFormData;
+      }
 
       if (hasLoadPanel) queueLoading();
       try {
         const response = await fetch(URL, {
-          ...options,
+          method: method,
           headers: {
-            "Content-Type": "application/json",
+            //"Content-Type": "application/json",
             t: getToken(),
-            method: options.method,
           },
+          ...options,
         });
 
         if (!response.ok) {

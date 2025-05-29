@@ -12,6 +12,8 @@ import {
 } from "../../data/FilterList";
 import { useTabGeneral } from "./hooks/useTabGeneral";
 import { CustomPieChart } from "../../../../../../components/CustomPieChart";
+import { PIE_CONFIG } from "../../../../../../constants/CHART_CONFIGS";
+import { CustomDotLineChart } from "../../../../../../components/CustomDotLineChart";
 
 export function TabGeneral() {
   const {
@@ -79,8 +81,8 @@ export function TabGeneral() {
         <div className="tab-general-filter">
           <span>Cambio Agrupación/Asignatura: </span>
           <Select
-            value={selectedFilter.cambio}
-            onChange={(option) => handleFilter("cambio", option)}
+            value={selectedFilter.nivel}
+            onChange={(option) => handleFilter("nivel", option)}
             options={CAMBIO_LIST}
             isSearchable
             noOptionsMessage={() => "Ninguna agrupacion/asignatura"}
@@ -125,38 +127,91 @@ export function TabGeneral() {
       </div>
       <div className="normal-container">
         <div className="pie-grid-1">
-          <CustomPieChart setup={docentesChart} />
+          <CustomPieChart
+            subtitle={"DOCENTES <b>INSCRITOS</b>"}
+            data={docentesChart}
+            overrideConfig={docentesOverrideConfigs}
+          />
         </div>
         <div className="pie-grid-2">
-          <CustomPieChart setup={solicitudesCambioChart} />
-          <CustomPieChart setup={solicitudesSuspensionChart} />
+          <CustomPieChart
+            subtitle={
+              "SOLICITUDES DE CAMBIO <b>DE AGRUPACIÓN Y/O ASIGNATURA</b>"
+            }
+            data={solicitudesCambioChart}
+          />
+          <CustomPieChart
+            subtitle={"SOLICITUDES DE <b>SUSPENSIÓN Y/O EXIMICIÓN</b>"}
+            data={solicitudesSuspensionChart}
+          />
         </div>
         <div className="pie-grid-2">
-          <CustomPieChart setup={estadoChart} />
-          <CustomPieChart setup={causalesChart} />
+          <CustomPieChart
+            subtitle={"ESTADO DE <b>PARTICIPACIÓN</b> DE DOCENTES VALIDADOS"}
+            data={estadoChart}
+          />
+          <CustomPieChart
+            subtitle={"CAUSALES DE <b>NO EVALUACIÓN</b> DE DOCENTES VALIDADOS"}
+            data={causalesChart}
+          />
         </div>
       </div>
       <hr />
-      <div className="general-point-chart-container">
-        <HighchartsReact
-          options={avanceDocentePointChart}
-          highcharts={Highcharts}
-        />
-      </div>
+      <CustomDotLineChart
+        title={"AVANCE DIARIO <b>VALIDACION DE DOCENTES</b>"}
+        data={avanceDocentePointChart}
+      />
       <hr />
-      <div className="general-point-chart-container">
-        <HighchartsReact
-          options={evolucionCambioPointChart}
-          highcharts={Highcharts}
-        />
-      </div>
+      <CustomDotLineChart
+        title={
+          "EVOLUCIÓN DIARIA DE SOLICITUDES DE <b>CAMBIO DE AGRUPACIÓN Y ASIGNATURA</b>"
+        }
+        data={evolucionCambioPointChart}
+      />
       <hr />
-      <div className="general-point-chart-container">
-        <HighchartsReact
-          options={evolucionSolicitudesChart}
-          highcharts={Highcharts}
-        />
-      </div>
+      <CustomDotLineChart
+        title={"EVOLUCIÓN DIARIA DE SOLICITUDES DE <b>SUSPENSIÓN/EXIMICIÓN</b>"}
+        data={evolucionSolicitudesChart}
+      />
     </div>
   );
 }
+
+const docentesOverrideConfigs = {
+  plotOptions: {
+    ...PIE_CONFIG.plotOptions,
+    pie: {
+      ...PIE_CONFIG.plotOptions.pie,
+      size: "80%",
+    },
+  },
+  legend: {
+    layout: "vertical",
+    align: "right",
+    verticalAlign: "middle",
+    itemMarginBottom: 8,
+    itemStyle: {
+      fontSize: "12px",
+      whiteSpace: "normal",
+    },
+    x: -100,
+  },
+  responsive: {
+    rules: [
+      {
+        condition: {
+          maxWidth: 1000,
+        },
+        chartOptions: {
+          legend: {
+            layout: "horizontal",
+            align: "center",
+            verticalAlign: "bottom",
+            x: 0,
+            y: 0,
+          },
+        },
+      },
+    ],
+  },
+};

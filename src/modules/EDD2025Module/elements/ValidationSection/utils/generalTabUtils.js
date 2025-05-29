@@ -1,167 +1,4 @@
-import { numberFormatter } from "../../../../../utils/NumberFormatter";
-
-export function buildDocentesInscritos(setup, data) {
-  const validado = data.validado;
-  const actualizado = data.actualizado;
-  const noValidado = data.no_validado;
-  const noValidadoSusp = data.no_validado_susp;
-  const sinIngreso = data.sin_ingreso;
-  const total =
-    validado + actualizado + noValidado + noValidadoSusp + sinIngreso;
-  const res = {
-    ...setup,
-    title: {
-      ...setup.title,
-      number: total,
-      text: numberFormatter(total),
-    },
-    series: [
-      {
-        ...setup.series[0],
-        data: [
-          {
-            ...setup.series[0].data[0],
-            y: parseInt(validado),
-          },
-          {
-            ...setup.series[0].data[1],
-            y: parseInt(actualizado),
-          },
-          {
-            ...setup.series[0].data[2],
-            y: parseInt(noValidadoSusp),
-          },
-          {
-            ...setup.series[0].data[3],
-            y: parseInt(noValidado),
-          },
-          {
-            ...setup.series[0].data[4],
-            y: parseInt(sinIngreso),
-          },
-        ],
-      },
-    ],
-  };
-  return res;
-}
-
-export function buildSolicitudes(setup, data) {
-  const aprobadas = data.aprobadas;
-  const noProcesadas = data.no_procesadas;
-  const rechazadas = data.rechazadas;
-  const total = aprobadas + noProcesadas + rechazadas;
-  const res = {
-    ...setup,
-    title: {
-      ...setup.title,
-      number: total,
-      text: numberFormatter(total),
-    },
-    series: [
-      {
-        ...setup.series[0],
-        data: [
-          {
-            ...setup.series[0].data[0],
-            y: parseInt(aprobadas),
-          },
-          {
-            ...setup.series[0].data[1],
-            y: parseInt(noProcesadas),
-          },
-          {
-            ...setup.series[0].data[2],
-            y: parseInt(rechazadas),
-          },
-        ],
-      },
-    ],
-  };
-  return res;
-}
-
-export function buildEstadoParticipacion(setup, data) {
-  const rinde = data.rinde;
-  const noRinde = data.no_rinde;
-  const total = rinde + noRinde;
-  const res = {
-    ...setup,
-    title: {
-      ...setup.title,
-      number: total,
-      text: numberFormatter(total),
-    },
-    series: [
-      {
-        ...setup.series[0],
-        data: [
-          {
-            ...setup.series[0].data[0],
-            y: parseInt(rinde),
-          },
-          {
-            ...setup.series[0].data[1],
-            y: parseInt(noRinde),
-          },
-        ],
-      },
-    ],
-  };
-  return res;
-}
-
-export function buildCausales(setup, data) {
-  const suspende = data.suspende;
-  const eximido = data.eximido;
-  const a19n = data.a19n;
-  const voluntario = data.voluntario;
-  const aplaza = data.aplaza;
-  const portafolioC = data.portafolio_c;
-  const total = suspende + eximido + a19n + voluntario + aplaza + portafolioC;
-  const res = {
-    ...setup,
-    title: {
-      ...setup.title,
-      number: total,
-      text: numberFormatter(total),
-    },
-    series: [
-      {
-        ...setup.series[0],
-        data: [
-          {
-            ...setup.series[0].data[0],
-            y: parseInt(suspende),
-          },
-          {
-            ...setup.series[0].data[1],
-            y: parseInt(eximido),
-          },
-          {
-            ...setup.series[0].data[2],
-            y: parseInt(a19n),
-          },
-          {
-            ...setup.series[0].data[3],
-            y: parseInt(voluntario),
-          },
-          {
-            ...setup.series[0].data[4],
-            y: parseInt(aplaza),
-          },
-          {
-            ...setup.series[0].data[5],
-            y: parseInt(portafolioC),
-          },
-        ],
-      },
-    ],
-  };
-  return res;
-}
-
-export function buildAvanceDiario(setup, data) {
+export function buildAvanceDiario(data) {
   const arrFechas = [];
   const arrValidados = [];
   const arrPValidados = [];
@@ -243,31 +80,43 @@ export function buildAvanceDiario(setup, data) {
     }
   });
   const res = {
-    ...setup,
-    xAxis: {
-      ...setup.xAxis,
-      categories: arrFechas,
-    },
     series: [
       {
-        ...setup.series[0],
+        color: "#5157FF",
+        name: "Validados",
         data: arrValidados,
       },
       {
-        ...setup.series[1],
+        color: "#FF5880",
+        name: "No Validados",
         data: arrNValidados,
       },
       {
-        ...setup.series[2],
+        color: "#ff8e53",
+        name: "Ingresos",
         data: arrIngresos,
       },
     ],
+    override: {
+      xAxis: {
+        type: "category",
+        categories: arrFechas,
+        title: {
+          text: "Fecha",
+          style: {
+            fontWeight: "bold",
+            fontSize: "18px",
+            color: "#666666",
+          },
+        },
+      },
+    },
   };
 
   return res;
 }
 
-export function buildEvoCambio(setup, data) {
+export function buildEvolucion(data) {
   const arrFechas = [];
 
   const arrValidados = [];
@@ -311,85 +160,32 @@ export function buildEvoCambio(setup, data) {
   });
 
   const res = {
-    ...setup,
-    xAxis: {
-      ...setup.xAxis,
-      categories: arrFechas,
-    },
     series: [
       {
-        ...setup.series[0],
+        color: "#5157FF",
+        name: "Solicitudes Creadas",
         data: arrIngresos,
       },
       {
-        ...setup.series[1],
+        color: "#ff8e53",
+        name: "Solicitudes Procesadas",
         data: arrValidados,
       },
     ],
-  };
-
-  return res;
-}
-
-export function buildEvoSuspensionEximicion(setup, data) {
-  const arrFechas = [];
-
-  const arrValidados = [];
-  const arrPValidados = [];
-
-  const arrNValidados = [];
-  const arrPNValidados = [];
-
-  const arrIngresos = [];
-
-  Object.entries(data).forEach(([key, value]) => {
-    if (!arrFechas.includes(key)) {
-      arrFechas.push(key);
-      arrValidados.push(key);
-      arrPValidados.push(key);
-      arrNValidados.push(key);
-      arrPNValidados.push(key);
-      arrIngresos.push(key);
-    }
-    if (arrValidados.includes(key)) {
-      const index = arrValidados.indexOf(key);
-      arrValidados.splice(index, 1, value.atendidos);
-    }
-
-    if (arrNValidados.includes(key)) {
-      const index = arrNValidados.indexOf(key);
-      arrNValidados.splice(index, 1, value.nvalidado);
-    }
-    if (arrPValidados.includes(key)) {
-      const index = arrPValidados.indexOf(key);
-      arrPValidados.splice(index, 1, value.p_validado);
-    }
-    if (arrPNValidados.includes(key)) {
-      const index = arrPNValidados.indexOf(key);
-      arrPNValidados.splice(index, 1, value.p_nvalidado);
-    }
-    if (arrIngresos.includes(key)) {
-      const index = arrIngresos.indexOf(key);
-      arrIngresos.splice(index, 1, value.ingresos);
-    }
-  });
-
-  const res = {
-    ...setup,
-    xAxis: {
-      ...setup.xAxis,
-      categories: arrFechas,
+    override: {
+      xAxis: {
+        type: "category",
+        categories: arrFechas,
+        title: {
+          text: "Fecha",
+          style: {
+            fontWeight: "bold",
+            fontSize: "18px",
+            color: "#666666",
+          },
+        },
+      },
     },
-    series: [
-      {
-        ...setup.series[0],
-        data: arrIngresos,
-      },
-      {
-        ...setup.series[1],
-        data: arrValidados,
-      },
-    ],
   };
 
   return res;
