@@ -7,6 +7,7 @@ import { getPortafolioData } from "../services/PortfolioServices";
 import { buildHelpModuleChart } from "../utils/HelpUtils";
 import { buildInscripcionModuleChart } from "../utils/InscriptionUtils";
 import { buildPortfolioModuleChart } from "../utils/PortfolioUtils";
+import { buildResultModuleChart } from "../utils/ResultUtils";
 import { getGeneralValidation } from "../services/ValidationServices";
 import { buildValidationModuleChart } from "../utils/ValidationUtils";
 export function useModules() {
@@ -14,6 +15,7 @@ export function useModules() {
   const [inscriptionChart, setInscriptionChart] = useState(MODULE_CHART_SETUP);
   const [validationChart, setValidationChart] = useState(MODULE_CHART_SETUP);
   const [portfolioChart, setPortfolioChart] = useState(MODULE_CHART_SETUP);
+  const [resultChart, setResultChart] = useState(MODULE_CHART_SETUP);
   const [helpChart, setHelpChart] = useState(MODULE_CHART_SETUP);
   const [loadingStatus, setLoadingStatus] = useState({});
   const changeLoadingStatus = (field, state) => {
@@ -45,11 +47,17 @@ export function useModules() {
       setPortfolioChart(buildPortfolioModuleChart(data.docentes));
       changeLoadingStatus("portfolio", false);
     });
+    changeLoadingStatus("result", true);
+    getResultData(getToken()).then((data) => {
+      setResultChart(buildResultModuleChart(data.docentes));
+      changeLoadingStatus("result", false);
+    });
   }, [getToken]);
   return {
     inscriptionChart,
     validationChart,
     portfolioChart,
+    resultChart,
     helpChart,
     loadingStatus,
   };

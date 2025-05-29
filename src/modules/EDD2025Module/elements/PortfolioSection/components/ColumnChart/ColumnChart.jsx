@@ -37,7 +37,6 @@ const ColumnChart = ({
       text: subtitle,
       align: "center",
       style: {
-        fontWeight: "bold",
         color: "#666666",
         fontSize: "14px",
       },
@@ -88,7 +87,6 @@ const ColumnChart = ({
       verticalAlign: "bottom",
       itemStyle: {
         fontSize: "10px",
-        fontWeight: "bold",
       },
     },
     credits: {

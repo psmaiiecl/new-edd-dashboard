@@ -36,7 +36,7 @@ export const BarChart = ({
       text: subtitle,
       align: "center",
       style: {
-        fontWeight: "bold",
+        
         color: "rgb(102, 102, 102)",
         fontSize: "14px",
       },
@@ -95,8 +95,7 @@ export const BarChart = ({
       align: "center",
       verticalAlign: "bottom",
       itemStyle: {
-        fontSize: "10px",
-        fontWeight: "bold",
+        fontSize: "10px"
       },
     },
     credits: {
