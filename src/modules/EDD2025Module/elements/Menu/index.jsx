@@ -11,6 +11,7 @@ export function Menu() {
     inscriptionChart,
     validationChart,
     portfolioChart,
+    resultChart,
     helpChart,
     loadingStatus,
   } = useModules();
@@ -59,7 +60,13 @@ export function Menu() {
           <HighchartsReact options={portfolioChart} highcharts={Highcharts} />
         </ModuleCard>
         <ModuleCard title={"Corrección Portafolios"} locked />
-        <ModuleCard title={"Entrega de Resultados"} locked />
+        <ModuleCard
+          title={"Entrega de Resultados"}
+          action={() => navigate("resultados")}
+          loading={loadingStatus.result}
+        >
+          <HighchartsReact options={resultChart} highcharts={Highcharts} />
+        </ModuleCard>
         <ModuleCard
           title={"Mesa de Ayuda - Tickets"}
           loading={loadingStatus.help}

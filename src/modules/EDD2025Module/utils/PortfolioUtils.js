@@ -67,3 +67,11 @@ export function buildPortfolioModuleChart(docentes) {
     ],
   };
 }
+
+export function ConvertirPalabras(str) {
+  return str
+    .toLowerCase()
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}

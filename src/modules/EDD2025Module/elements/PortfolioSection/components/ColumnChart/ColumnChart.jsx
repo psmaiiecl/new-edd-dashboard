@@ -33,7 +33,6 @@ const ColumnChart = ({ subtitle = [], chartData, showLegend = true }) => {
       text: subtitle,
       align: "center",
       style: {
-        fontWeight: "bold",
         color: "#666666",
         fontSize: "14px",
       },
@@ -86,7 +85,6 @@ const ColumnChart = ({ subtitle = [], chartData, showLegend = true }) => {
       verticalAlign: "bottom",
       itemStyle: {
         fontSize: "10px",
-        fontWeight: "bold",
       },
     },
     credits: {
