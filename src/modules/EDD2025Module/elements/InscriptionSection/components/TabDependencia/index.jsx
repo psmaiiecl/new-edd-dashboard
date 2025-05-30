@@ -13,10 +13,17 @@ export function TabDependencia() {
     sostenedoresChart,
     sostenedoresStatus,
     sostenedoresData,
-    docentesDependencia
+    docentesDependencia,
   } = useTabDependencia();
   return (
     <div className="tab-dependencia">
+      <CustomBarChart
+        subtitle={
+          "<b>ESTADO DE DOCENTES</b> DISTRIBUIDOS <b>POR DEPENDENCIA</b>"
+        }
+        data={docentesDependencia}
+      />
+      <hr className="section-separator" />
       <div className="tab-dependencia-grupo">
         <HighchartsReact options={docentesChart} highcharts={Highcharts} />
         <div className="tab-dependencia-table-container">
@@ -65,18 +72,10 @@ export function TabDependencia() {
                   <tr key={index}>
                     <td>{key}</td>
                     <td>{numberFormatter(docentesData[key].Inscrito)}</td>
-                    <td>
-                      {numberFormatter(docentesData[key]["En Revisión"])}
-                    </td>
-                    <td>
-                      {numberFormatter(docentesData[key].Desinscrito)}
-                    </td>
-                    <td>
-                      {numberFormatter(docentesData[key].Pendiente)}
-                    </td>
-                    <td>
-                      {numberFormatter(docentesData[key].Cancelado)}
-                    </td>
+                    <td>{numberFormatter(docentesData[key]["En Revisión"])}</td>
+                    <td>{numberFormatter(docentesData[key].Desinscrito)}</td>
+                    <td>{numberFormatter(docentesData[key].Pendiente)}</td>
+                    <td>{numberFormatter(docentesData[key].Cancelado)}</td>
                   </tr>
                 );
               })}

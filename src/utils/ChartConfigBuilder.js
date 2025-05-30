@@ -22,6 +22,22 @@ export function initDotChartConfig(title, override = {}){
   };
 }
 
+export function initBarChartConfig(subtitle, height, override = {}) {
+  return {
+    ...BAR_CONFIG,
+    chart: {
+      ...BAR_CONFIG.chart,
+      height: height || BAR_CONFIG.chart.height,
+    },
+    subtitle: {
+      ...BAR_CONFIG.subtitle,
+      text: subtitle,
+    },
+    ...override,
+  }
+
+}
+
 export function BarConfigBuilder(subtitle, height, override = {}){
   return {
     ...BAR_CONFIG,

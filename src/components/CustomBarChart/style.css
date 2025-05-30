@@ -1,0 +1,30 @@
+.bar-chart-container {
+    width: 90%;
+    margin: 30px auto;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.bar-chart-container.single-column {
+    grid-template-columns: 1fr;
+}
+
+.bar-table-container {
+    width: 80%;
+    justify-self: end;
+}
+
+@media (max-width: 1150px) {
+  .bar-chart-container {
+    grid-template-columns: 1fr;
+    row-gap: 20px;
+  }
+  .bar-table-container {
+    width: 80%;
+    margin: auto;
+  }
+}

@@ -9,13 +9,13 @@ import {
   extraerSumatoriaSostenedores,
   extraerSumaTotal,
 } from "../../../utils/dependenciaTabUtils";
-import { BarConfigBuilder } from "../../../../../../../utils/ChartConfigBuilder";
+import { useCustomFetch } from "../../../../../../../hooks/useCustomFetch";
+import { BASE_API_URL_2025 } from "../../../../../data/BASE_API_URL";
 
 export function useTabDependencia() {
+  const customFetch = useCustomFetch();
   const { getToken } = useContext(AuthContext);
-  const [docentesDependencia, setDocentesDependencia] = useState(
-    BarConfigBuilder('<b>ESTADO DE DOCENTES</b> DISTRIBUIDOS <b>POR DEPENDENCIA</b>')
-  ); 
+  const [docentesDependencia, setDocentesDependencia] = useState(null);
   const [docentesData, setDocentesData] = useState({});
   const [docentesStatus, setDocentesStatus] = useState({
     Inscrito: 0,
@@ -105,6 +105,10 @@ export function useTabDependencia() {
   });
 
   useEffect(() => {
+    customFetch({
+      route: BASE_API_URL_2025 + "/2025-inscripcion-dependencia",
+      shouldCache: true,
+    }).then(data => console.log(data));
     getInscriptionDependency(getToken()).then((data) => {
       const dStatus = extraerSumatoriasDocentes(data.docentes);
       const dTotal = extraerSumaTotal(dStatus);
@@ -136,7 +140,7 @@ export function useTabDependencia() {
     sostenedoresChart,
     sostenedoresStatus,
     sostenedoresData,
-    docentesDependencia
+    docentesDependencia,
   };
 }
 

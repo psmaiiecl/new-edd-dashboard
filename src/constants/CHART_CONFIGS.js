@@ -139,7 +139,7 @@ export const BAR_CONFIG = {
     text: "TOTAL",
     align: "center",
     style: {
-      fontWeight: "300",
+      fontWeight: "bold",
       color: "var(--blue-100)",
       fontSize: "35px",
     },

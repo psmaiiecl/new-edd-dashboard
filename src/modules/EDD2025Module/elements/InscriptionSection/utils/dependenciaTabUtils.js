@@ -1,5 +1,68 @@
 import { numberFormatter } from "../../../../../utils/NumberFormatter";
 
+export function mapDependenciaData({
+  data,
+  schema,
+  excludeKeys = ["Retirado", "Sin Información"],
+  labelMap = {},
+}) {
+  const dependencias = Object.keys(data || {}).filter(dep => !excludeKeys.includes(dep));
+
+  //const estados = schema.map(({ key }) => key);
+
+  // Series para Highcharts
+  const series = schema.map(({ name, key, color }) => {
+    const serieData = dependencias.map(dep => data[dep]?.[key] || 0);
+    return {
+      name: labelMap[key] || name,
+      data: serieData,
+      color,
+    };
+  });
+
+  // Suma total general
+  const total = series.reduce((acc, serie) => {
+    return acc + serie.data.reduce((a, b) => a + b, 0);
+  }, 0);
+
+  // Tabla: sumatorias por estado
+  const sumatoriasPorEstado = schema.reduce((acc, { key }) => {
+    acc[key] = 0;
+    return acc;
+  }, {});
+
+  // Tabla: filas por dependencia
+  const dependenciasData = {};
+
+  for (const dep of dependencias) {
+    const row = {};
+    for (const { key } of schema) {
+      const val = data[dep]?.[key] || 0;
+      row[key] = val;
+      sumatoriasPorEstado[key] += val;
+    }
+    dependenciasData[labelMap[dep] || dep] = row;
+  }
+
+  // % por estado respecto al total
+  const porcentajes = {};
+  for (const { key } of schema) {
+    const valor = sumatoriasPorEstado[key];
+    const porcentaje = total > 0 ? ((valor / total) * 100).toFixed(1) : "0.0";
+    porcentajes[key] = `${porcentaje}%`;
+  }
+
+  return {
+    total,
+    series,
+    dataTable: {
+      dependencias: dependenciasData,
+      sumatorias: sumatoriasPorEstado,
+      porcentajes,
+    }
+  };
+}
+
 export function extraerSumatoriasDocentes(data) {
   let sumas = {
     Inscrito: 0,

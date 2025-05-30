@@ -81,4 +81,7 @@ export const mappers = {
       },
     ],
   },
+  docentes_dependencia:{
+    
+  }
 };
