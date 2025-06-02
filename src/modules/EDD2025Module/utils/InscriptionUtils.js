@@ -1,7 +1,7 @@
 import { MODULE_CHART_SETUP } from "../data/ModuleChartBase";
 
 export function buildInscripcionModuleChart(data) {
-  const enrolled = data.inscritos ? data.inscritos : 0;
+  const enrolled = data.inscritos_total ? data.inscritos_total : 0;
   const inReview = data.en_revision ? data.en_revision : 0;
   const discharged = data.desinscritos ? data.desinscritos : 0;
   const pending = data.pendientes ? data.pendientes : 0;

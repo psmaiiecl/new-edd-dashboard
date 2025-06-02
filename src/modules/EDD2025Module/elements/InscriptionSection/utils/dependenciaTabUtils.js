@@ -15,7 +15,7 @@ export function mapDocentesDependencia({ data, schema, invert = false }) {
       //Vamos a tratar la data para cada celda de inmediato
       if (!tableData.data[subIndex]) tableData.data[subIndex] = [dep];
       tableData.data[subIndex].push(numberFormatter(item));
-      return item;
+      return parseInt(item);
     });
     const subtotal = serieData.reduce((total, num) => total + parseInt(num), 0);
     //Aprovechamos de extraer el numero del subtotal para la tabla

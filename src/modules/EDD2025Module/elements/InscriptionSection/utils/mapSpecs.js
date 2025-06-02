@@ -3,7 +3,7 @@ export const mappers = {
     series: [
       {
         name: "Inscritos",
-        key: "inscritos",
+        key: "inscritos_nomina",
         color: "#65D9AB",
         sliced: true,
       },
@@ -143,4 +143,38 @@ export const mappers = {
       },
     ]
   },
+  docentes_convocatoria:{
+    series:[
+      {
+        name: "Inscritos en nómina",
+        table: 'Inscritos',
+        key: 'Inscrito',
+        color: "#65D9AB",
+      },
+      {
+        name: "En Revisión",
+        table: 'En Revisión',
+        key: 'En Revisión',
+        color: "#FF8E53",
+      },
+      {
+        name: "Desinscritos",
+        table: "Desinscritos",
+        key: 'Desinscrito',
+        color: "#C1D9CA",
+      },
+      {
+        name: "Pendientes",
+        table: "Pendientes",
+        key: 'Pendiente',
+        color: "#FFD153",
+      },
+      {
+        name: "Cancelados",
+        table: "Cancelados",
+        key: 'Cancelado',
+        color: "#FF5880",
+      },
+    ]
+  }
 };

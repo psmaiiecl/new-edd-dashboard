@@ -2,9 +2,7 @@ import { numberFormatter } from "../../../../../utils/NumberFormatter";
 import { AVANCE_DIARIO_2024 } from "../data/AVANCE_DIARIO_2024";
 
 export function buildDocentesInscritos(data) {
-  const totalInscritos =
-    parseInt(data.docentes.inscritos) +
-    parseInt(data.docentes.inscritos_agregados_por_sostenedor);
+  const totalInscritos = parseInt(data.docentes.inscritos_total) ;
   const total = totalInscritos + parseInt(data.docentes.cancelados);
   return {
     series: [

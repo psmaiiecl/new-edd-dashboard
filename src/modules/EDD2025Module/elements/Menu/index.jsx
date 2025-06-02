@@ -39,6 +39,7 @@ export function Menu() {
         </ModuleCard>
         <ModuleCard
           title={"Agendamiento de Grabaciones"}
+          locked
           action={() => navigate("agendamiento-grabaciones")}
           loading={loadingStatus.agendamiento}
         />
@@ -53,6 +54,7 @@ export function Menu() {
         </ModuleCard>
         <ModuleCard title={"Procesamiento de SD's"} locked />
         <ModuleCard
+          locked
           title={"Portafolio"}
           action={() => navigate("portafolio")}
           loading={loadingStatus.portfolio}
@@ -61,6 +63,7 @@ export function Menu() {
         </ModuleCard>
         <ModuleCard title={"Corrección Portafolios"} locked />
         <ModuleCard
+          locked
           title={"Entrega de Resultados"}
           action={() => navigate("resultados")}
           loading={loadingStatus.result}

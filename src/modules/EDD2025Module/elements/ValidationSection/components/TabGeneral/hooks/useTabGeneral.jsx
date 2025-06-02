@@ -67,6 +67,17 @@ export function useTabGeneral() {
       setEvolucionCambioPointChart(
         buildEvolucion(data.avance_diario_sol_cambio_nivel)
       );
+      let replicate = null;
+      const today = new Date();
+      const day = String(today.getDate()).padStart(2, "0");
+      const month = String(today.getMonth() + 1).padStart(2, "0");
+      const formattedDate = `${day}-${month}`;
+      Object.keys(data.avance_diario).map((key) => {
+        data.avance_diario[key] = replicate
+          ? replicate
+          : data.avance_diario[key];
+        if (key === formattedDate) replicate = data.avance_diario[key];
+      });
       setAvanceDocentePointChart(buildAvanceDiario(data.avance_diario));
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps

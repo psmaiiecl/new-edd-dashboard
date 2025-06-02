@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  mapDocentesDependencia,
-} from "../../../utils/dependenciaTabUtils";
+import { mapDocentesDependencia } from "../../../utils/dependenciaTabUtils";
 import { useCustomFetch } from "../../../../../../../hooks/useCustomFetch";
 import { BASE_API_URL_2025 } from "../../../../../data/BASE_API_URL";
 import { mappers } from "../../../utils/mapSpecs";
@@ -26,7 +24,7 @@ export function useTabDependencia() {
         mapDocentesDependencia({
           data: data.sostenedores,
           schema: mappers.sostenedores_dependencia.series,
-          invert: true
+          invert: true,
         })
       );
     });
@@ -35,7 +33,7 @@ export function useTabDependencia() {
 
   return {
     docentesDependencia,
-    sostenedoresDependencia
+    sostenedoresDependencia,
   };
 }
 

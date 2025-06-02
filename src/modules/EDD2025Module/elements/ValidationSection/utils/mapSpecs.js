@@ -9,17 +9,17 @@ export const mappers = {
       },
       {
         name: "No Validados - Con Ingreso",
-        key: "actualizado",
+        key: "no_validado",
         color: "#ffd153",
       },
       {
         name: "No Validados - Susp/Exim Aprobada",
-        key: "no_validado",
+        key: "no_validado_susp",
         color: "#8fb8ff",
       },
       {
         name: "No Validados",
-        key: "no_validado_susp",
+        key: "actualizado",
         color: "#ff8e53",
       },
       {

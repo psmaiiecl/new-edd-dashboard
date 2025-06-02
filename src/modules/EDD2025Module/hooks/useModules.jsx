@@ -42,12 +42,12 @@ export function useModules() {
       setHelpChart(buildHelpModuleChart(data));
       changeLoadingStatus("help", false);
     });
-    changeLoadingStatus("portfolio", true);
-    getPortafolioData(getToken()).then((data) => {
-      setPortfolioChart(buildPortfolioModuleChart(data.docentes));
-      changeLoadingStatus("portfolio", false);
-    });
-    changeLoadingStatus("result", true);
+    // changeLoadingStatus("portfolio", true);
+    // getPortafolioData(getToken()).then((data) => {
+    //   setPortfolioChart(buildPortfolioModuleChart(data.docentes));
+    //   changeLoadingStatus("portfolio", false);
+    // });
+    // changeLoadingStatus("result", true);
     // getResultData(getToken()).then((data) => {
     //   setResultChart(buildResultModuleChart(data.docentes));
     //   changeLoadingStatus("result", false);

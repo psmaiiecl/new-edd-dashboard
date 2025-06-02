@@ -160,6 +160,7 @@ export function TabGeneral() {
       <CustomDotLineChart
         title={"AVANCE DIARIO <b>VALIDACION DE DOCENTES</b>"}
         data={avanceDocentePointChart}
+        overrideConfig={axisOverrideConfig}
       />
       <hr />
       <CustomDotLineChart
@@ -167,11 +168,13 @@ export function TabGeneral() {
           "EVOLUCIÓN DIARIA DE SOLICITUDES DE <b>CAMBIO DE AGRUPACIÓN Y ASIGNATURA</b>"
         }
         data={evolucionCambioPointChart}
+        overrideConfig={axisOverrideConfig}
       />
       <hr />
       <CustomDotLineChart
         title={"EVOLUCIÓN DIARIA DE SOLICITUDES DE <b>SUSPENSIÓN/EXIMICIÓN</b>"}
         data={evolucionSolicitudesChart}
+        overrideConfig={axisOverrideConfig}
       />
     </div>
   );
@@ -213,5 +216,16 @@ const docentesOverrideConfigs = {
         },
       },
     ],
+  },
+};
+
+const axisOverrideConfig = {
+  yAxis: {
+    title: {
+      enabled: false,
+    },
+    labels: {
+      format: "{value}",
+    },
   },
 };
