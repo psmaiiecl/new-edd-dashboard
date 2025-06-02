@@ -30,15 +30,75 @@ export function CustomBarChart({
   );
   const [tableData, setTableData] = useState(null);
   useEffect(() => {
-    console.log("Bar", data);
+    if (!data) return;
+    setTableData(data.tableData);
+    setChartSetup((prev) => ({
+      ...prev,
+      title: {
+        ...prev.title,
+        text: data.total.text,
+      },
+      series: data.series,
+      ...data?.override,
+    }));
   }, [data]);
 
   return (
     <div className={`bar-chart-container ${table ? "" : "single-column"}`}>
       <HighchartsReact options={chartSetup} highcharts={Highcharts} />
-      <div className="bar-chart-table-container">
-
-      </div>
+      {tableData && (
+        <div className="bar-table-container">
+          <table className="legend-table">
+            <thead className="legend-table__head">
+              <tr>
+                <th></th>
+                {tableData.head.map((estado, index) => (
+                  <th key={index}>{estado}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody className="legend-table__body">
+              <tr>
+                <td></td>
+                {tableData.subtotals.map((subtotal, index) => {
+                  return (
+                    <td key={index}>
+                      <div
+                        style={{
+                          alignItems: "center",
+                          backgroundColor: subtotal.color,
+                          borderRadius: "5px",
+                          width: "60px",
+                          textAlign: "center",
+                          padding: "2px",
+                          fontWeight: "500",
+                          placeSelf: "center",
+                          margin: "0 auto",
+                        }}
+                      >
+                        <span>{subtotal.number}</span>
+                      </div>
+                    </td>
+                  );
+                })}
+              </tr>
+              {tableData.data.map((row, index) => (
+                <tr key={index}>
+                  {row.map((cell, index) => (
+                    <td key={index}>{cell}</td>
+                  ))}
+                </tr>
+              ))}
+              <tr>
+                <td>Total (%)</td>
+                {tableData.percentages.map((item, index) => (
+                  <td key={index}>{item}</td>
+                ))}
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 }
