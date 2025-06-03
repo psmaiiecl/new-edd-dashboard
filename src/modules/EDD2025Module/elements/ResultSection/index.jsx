@@ -6,38 +6,49 @@ import { useResultadosData } from "./hooks/useResultadosData";
 const createMapper = (subtitle, totalKey, seriesConfig) => (data) =>
   data
     ? {
-      total: { subtitle, data: data[totalKey] },
-      series: seriesConfig.map(({ name, key, color }) => ({
-        name,
-        y: data[key],
-        color,
-      })),
-    }
+        total: { subtitle, data: data[totalKey] },
+        series: seriesConfig.map(({ name, key, color }) => ({
+          name,
+          y: data[key],
+          color,
+        })),
+      }
     : { total: { subtitle: "", data: 0 }, series: [] };
 
 // Mapeadores para cada tipo de gráfico
 const mappers = {
-  informesIndividuales: createMapper("INFORMES INDIVIDUALES"[
-    { name: "INFORMES DESCARGADOS", color: "#65d9ab" },
-    { name: "INFORMES NO DESCARGADOS", color: "#ff5880" }
-  ]),
-  informesEstablecimiento: createMapper("INFORMES ESTABLECIMIENTO"[
-    { name: "INFORMES DESCARGADOS", color: "#65d9ab" },
-    { name: "INFORMES NO DESCARGADOS", color: "#ff5880" }
-  ]),
-  informesSostenedor: createMapper("INFORMES SOSTENEDOR"[
-   { name: "INFORMES DESCARGADOS", color: "#65d9ab" },
-    { name: "INFORMES NO DESCARGADOS", color: "#ff5880" }
-  ]),
-  descargaDiariaIndividuales: createMapper("DESCARGA DIARIA DE INFORMES INDIVIDUALES", [
-    { name: "Individuales", color: "#65d9ab" }
-  ]),
-  descargaDiariaEstablecimiento: createMapper("DESCARGA DIARIA DE INFORMES POR ESTABLECIMIENTO"[
-    { name: "Por Establecimiento", color: "#65d9ab" }
-  ]),
-  descargaDiariaSostenedor: createMapper("DESCARGA DIARIA DE INFORMES POR SOSTENEDOR"[
-    { name: "Por sostenedor", color: "#65d9ab" }
-  ])
+  informesIndividuales: createMapper(
+    "INFORMES INDIVIDUALES"[
+      ({ name: "INFORMES DESCARGADOS", color: "#65d9ab" },
+      { name: "INFORMES NO DESCARGADOS", color: "#ff5880" })
+    ]
+  ),
+  informesEstablecimiento: createMapper(
+    "INFORMES ESTABLECIMIENTO"[
+      ({ name: "INFORMES DESCARGADOS", color: "#65d9ab" },
+      { name: "INFORMES NO DESCARGADOS", color: "#ff5880" })
+    ]
+  ),
+  informesSostenedor: createMapper(
+    "INFORMES SOSTENEDOR"[
+      ({ name: "INFORMES DESCARGADOS", color: "#65d9ab" },
+      { name: "INFORMES NO DESCARGADOS", color: "#ff5880" })
+    ]
+  ),
+  descargaDiariaIndividuales: createMapper(
+    "DESCARGA DIARIA DE INFORMES INDIVIDUALES",
+    [{ name: "Individuales", color: "#65d9ab" }]
+  ),
+  descargaDiariaEstablecimiento: createMapper(
+    "DESCARGA DIARIA DE INFORMES POR ESTABLECIMIENTO"[
+      { name: "Por Establecimiento", color: "#65d9ab" }
+    ]
+  ),
+  descargaDiariaSostenedor: createMapper(
+    "DESCARGA DIARIA DE INFORMES POR SOSTENEDOR"[
+      { name: "Por sostenedor", color: "#65d9ab" }
+    ]
+  ),
 };
 
 // Componente reutilizable para cada gráfico de pastel
@@ -87,7 +98,6 @@ export function TabResultados({ filtros }) {
             mapper={mappers.descargaDiariaSostenedor}
           />
         </div>
-
       </div>
     </div>
   );

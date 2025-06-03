@@ -24,6 +24,6 @@ export function mapPieData(data, mapSpec) {
     total: {
       numeric: total,
       text: numberFormatter(total),
-    }
+    },
   };
 }

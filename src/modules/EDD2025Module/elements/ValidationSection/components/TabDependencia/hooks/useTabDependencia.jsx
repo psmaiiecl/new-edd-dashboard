@@ -1,11 +1,4 @@
-import { useContext, useState } from "react";
-import { useEffect } from "react";
-import { AuthContext } from "../../../../../../../context/AuthContext";
-import {
-  getValidacionCambioNivelVistaDependencia,
-  getValidacionSolicitaSuspenderVistaDependencia,
-  getValidacionVistaDependencia,
-} from "../../../../../services/ValidationServices";
+import { useEffect, useState } from "react";
 import { BASIC_BAR } from "../../../../InscriptionSection/data/BASIC_BAR";
 import {
   buildEstadoChart,
@@ -14,9 +7,11 @@ import {
   extraerSumatoriasSolicitudes,
   extraerSumaTotal,
 } from "../../../utils/dependenciaTabUtils";
+import { useCustomFetch } from "../../../../../../../hooks/useCustomFetch";
+import { BASE_API_URL_2025 } from "../../../../../data/BASE_API_URL";
 
 export function useTabDependencia() {
-  const { getToken } = useContext(AuthContext);
+  const customFetch = useCustomFetch();
   const [estadoData, setEstadoData] = useState({});
   const [estadoStatus, setEstadoStatus] = useState({
     validados: 0,
@@ -127,21 +122,36 @@ export function useTabDependencia() {
   });
 
   useEffect(() => {
-    getValidacionVistaDependencia(getToken()).then((data) => {
+    customFetch({
+          route:
+            BASE_API_URL_2025 +
+            "/2025-validacion?endpoint=vista-dependencia",
+          shouldCache: true,
+    }).then((data) => {
       const eStatus = extraerSumatoriasDocentes(data.docentes);
       const eTotal = extraerSumaTotal(eStatus);
       setEstadoData(data.docentes);
       setEstadoStatus({ ...eStatus, total: eTotal });
       setEstadoChart(buildEstadoChart(estadoChart, data.docentes, eTotal));
     });
-    getValidacionCambioNivelVistaDependencia(getToken()).then((data) => {
+    customFetch({
+          route:
+            BASE_API_URL_2025 +
+            "/2025-validacion?endpoint=cambio-nivel-vista-dependencia",
+          shouldCache: true,
+    }).then((data) => {
       const eStatus = extraerSumatoriasSolicitudes(data.docentes);
       const eTotal = extraerSumaTotal(eStatus);
       setCambioData(data.docentes);
       setCambioStatus({ ...eStatus, total: eTotal });
       setCambioChart(buildSolicitudChart(cambioChart, data.docentes, eTotal));
     });
-    getValidacionSolicitaSuspenderVistaDependencia(getToken()).then((data) => {
+    customFetch({
+          route:
+            BASE_API_URL_2025 +
+            "/2025-validacion?endpoint=solicita-suspender-vista-dependencia",
+          shouldCache: true,
+    }).then((data) => {
       const eStatus = extraerSumatoriasSolicitudes(data.docentes);
       const eTotal = extraerSumaTotal(eStatus);
       setSuspensionData(data.docentes);
@@ -151,7 +161,7 @@ export function useTabDependencia() {
       );
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getToken]);
+  }, []);
 
   return {
     estadoData,

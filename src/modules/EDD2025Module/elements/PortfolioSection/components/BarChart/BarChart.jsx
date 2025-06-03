@@ -32,7 +32,6 @@ export const BarChart = ({ subtitle = [], chartData, showLegend = true }) => {
       text: subtitle,
       align: "center",
       style: {
-        
         color: "rgb(102, 102, 102)",
         fontSize: "14px",
       },
@@ -92,7 +91,7 @@ export const BarChart = ({ subtitle = [], chartData, showLegend = true }) => {
       align: "center",
       verticalAlign: "bottom",
       itemStyle: {
-        fontSize: "10px"
+        fontSize: "10px",
       },
     },
     credits: {

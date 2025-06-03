@@ -9,7 +9,7 @@ import { initPieChartConfig } from "../../utils/ChartConfigBuilder";
 
 /**
  * La data que debe llegar a este componente para poder renderizarse debe tener la siguiente estructura:
- * data{  
+ * data{
  *  series: {
  *     name: item.name,
  *     y: parseInt(data[item.key]),

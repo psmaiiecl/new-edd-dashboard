@@ -1,17 +1,17 @@
 import { MODULE_CHART_SETUP } from "../data/ModuleChartBase";
 
 export function buildResultModuleChart(docentes) {
-  const informes_individuales_descargados = docentes.informes_individuales_descargados
-    ? docentes.informes_individuales_descargados
-    : 0;
-  const informes_individuales_no_descargados = docentes.informes_individuales_no_descargados
-    ? docentes.informes_individuales_no_descargados
-    : 0;
- 
+  const informes_individuales_descargados =
+    docentes.informes_individuales_descargados
+      ? docentes.informes_individuales_descargados
+      : 0;
+  const informes_individuales_no_descargados =
+    docentes.informes_individuales_no_descargados
+      ? docentes.informes_individuales_no_descargados
+      : 0;
 
   const total =
-    informes_individuales_descargados +
-    informes_individuales_descargados;
+    informes_individuales_descargados + informes_individuales_descargados;
 
   return {
     ...MODULE_CHART_SETUP,
@@ -42,4 +42,3 @@ export function buildResultModuleChart(docentes) {
     ],
   };
 }
-

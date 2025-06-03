@@ -5,6 +5,7 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 // eslint-disable-next-line no-unused-vars
 import exporting from "highcharts/modules/exporting";
+import { numberFormatter } from "../../utils/NumberFormatter";
 
 /**
  * La data que debe llegar a este componente para poder renderizarse debe tener la siguiente estructura:
@@ -76,7 +77,7 @@ export function CustomBarChart({
                           margin: "0 auto",
                         }}
                       >
-                        <span>{subtotal.number}</span>
+                        <span>{numberFormatter(subtotal.number)}</span>
                       </div>
                     </td>
                   );

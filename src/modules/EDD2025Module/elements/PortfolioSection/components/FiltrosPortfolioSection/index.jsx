@@ -68,8 +68,10 @@ export default function FiltrosPortfolioSection({
       <div className="tab-general-filter">
         <span>Region: </span>
         <Select
-          value={REGION_LIST.find(option => option.value === filtros.region)}
-          onChange={(option) => onFiltroChange("region", option ? option.value : "")}
+          value={REGION_LIST.find((option) => option.value === filtros.region)}
+          onChange={(option) =>
+            onFiltroChange("region", option ? option.value : "")
+          }
           options={REGION_LIST}
           isSearchable
           noOptionsMessage={() => "Ninguna region"}

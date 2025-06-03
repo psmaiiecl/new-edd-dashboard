@@ -11,10 +11,10 @@ export function initPieChartConfig(subtitle, override = {}) {
   };
 }
 
-export function initDotChartConfig(title, override = {}){
+export function initDotChartConfig(title, override = {}) {
   return {
     ...DOT_CONFIG,
-    title:{
+    title: {
       ...DOT_CONFIG.title,
       text: title,
     },
@@ -34,11 +34,10 @@ export function initBarChartConfig(subtitle, height, override = {}) {
       text: subtitle,
     },
     ...override,
-  }
-
+  };
 }
 
-export function BarConfigBuilder(subtitle, height, override = {}){
+export function BarConfigBuilder(subtitle, height, override = {}) {
   return {
     ...BAR_CONFIG,
     chart: {
@@ -50,5 +49,5 @@ export function BarConfigBuilder(subtitle, height, override = {}){
       text: subtitle,
     },
     ...override,
-  }
+  };
 }

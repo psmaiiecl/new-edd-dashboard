@@ -1,10 +1,4 @@
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../../../../../../context/AuthContext";
-import {
-  getValidacionCambioNivelVistaRegion,
-  getValidacionSolicitaSuspenderVistaRegion,
-  getValidacionVistaRegion,
-} from "../../../../../services/ValidationServices";
+import { useEffect, useState } from "react";
 import { BASIC_BAR } from "../../../../InscriptionSection/data/BASIC_BAR";
 import {
   buildEstadoChart,
@@ -13,9 +7,11 @@ import {
   extraerSumatoriasSolicitudes,
   extraerSumaTotal,
 } from "../../../utils/regionTabUtils";
+import { useCustomFetch } from "../../../../../../../hooks/useCustomFetch";
+import { BASE_API_URL_2025 } from "../../../../../data/BASE_API_URL";
 
 export function useTabRegion() {
-  const { getToken } = useContext(AuthContext);
+  const customFetch = useCustomFetch();
   const [estadoData, setEstadoData] = useState({});
   const [estadoStatus, setEstadoStatus] = useState({
     validados: 0,
@@ -26,7 +22,7 @@ export function useTabRegion() {
   const [estadoChart, setEstadoChart] = useState({
     ...BASIC_BAR,
     subtitle: {
-      text: "<b>ESTADO DE VALIDACIÓN DE DOCENTES</b> DISTRIBUIDOS <b>POR DEPENDENCIA</b>",
+      text: "<b>ESTADO DE VALIDACIÓN DE DOCENTES</b> DISTRIBUIDOS <b>POR REGIÓN</b>",
       align: "center",
       style: {
         fontSize: "15px",
@@ -125,21 +121,34 @@ export function useTabRegion() {
     ],
   });
   useEffect(() => {
-    getValidacionVistaRegion(getToken()).then((data) => {
+    customFetch({
+      route: BASE_API_URL_2025 + "/2025-validacion?endpoint=vista-region",
+      shouldCache: true,
+    }).then((data) => {
       const eStatus = extraerSumatoriasDocentes(data.docentes);
       const eTotal = extraerSumaTotal(eStatus);
       setEstadoData(data.docentes);
       setEstadoStatus({ ...eStatus, total: eTotal });
       setEstadoChart(buildEstadoChart(estadoChart, data.docentes, eTotal));
     });
-    getValidacionCambioNivelVistaRegion(getToken()).then((data) => {
+    customFetch({
+      route:
+        BASE_API_URL_2025 +
+        "/2025-validacion?endpoint=cambio-nivel-vista-region",
+      shouldCache: true,
+    }).then((data) => {
       const eStatus = extraerSumatoriasSolicitudes(data);
       const eTotal = extraerSumaTotal(eStatus);
       setCambioData(data);
       setCambioStatus({ ...eStatus, total: eTotal });
       setCambioChart(buildSolicitudChart(cambioChart, data, eTotal));
     });
-    getValidacionSolicitaSuspenderVistaRegion(getToken()).then((data) => {
+    customFetch({
+      route:
+        BASE_API_URL_2025 +
+        "/2025-validacion?endpoint=solicita-suspender-vista-region",
+      shouldCache: true,
+    }).then((data) => {
       const eStatus = extraerSumatoriasSolicitudes(data);
       const eTotal = extraerSumaTotal(eStatus);
       setSuspensionData(data);
@@ -147,7 +156,7 @@ export function useTabRegion() {
       setSuspensionChart(buildSolicitudChart(suspensionChart, data, eTotal));
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getToken]);
+  }, []);
   return {
     estadoData,
     estadoStatus,

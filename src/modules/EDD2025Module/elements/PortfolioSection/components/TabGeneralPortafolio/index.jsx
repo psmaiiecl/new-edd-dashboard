@@ -1,8 +1,8 @@
 import React, { memo } from "react";
 import GenericPieChart from "../../components/PieChart/GenericPieChart";
 import { usePortafolioDataGeneral } from "./hooks/usePortafolioDataGeneral";
-import {ConvertirPalabras} from"../../../../../../utils/portafolioUtils.js"
-import Contador from "../../Contador"
+import { ConvertirPalabras } from "../../../../../../utils/portafolioUtils.js";
+import Contador from "../../Contador";
 
 // Función genérica para crear mapeadores
 const createMapper = (subtitle, totalKey, seriesConfig) => (data) =>
@@ -20,20 +20,60 @@ const createMapper = (subtitle, totalKey, seriesConfig) => (data) =>
 // Mapeadores para cada tipo de gráfico
 const mappers = {
   docentesEvaluados: createMapper("TOTAL <b>VALIDADOS</b>", "total_validados", [
-    { name: ConvertirPalabras("RINDEN PORTAFOLIO"), key: "rinden_portafolio", color: "#65d9ab" },
-    { name: ConvertirPalabras("NO RINDEN PORTAFOLIO"), key: "no_rinden_portafolio", color: "#ff5880" },
-    { name: ConvertirPalabras("NO SE EVALUAN"), key: "suspendidos", color: "#ff8e53" },
+    {
+      name: ConvertirPalabras("RINDEN PORTAFOLIO"),
+      key: "rinden_portafolio",
+      color: "#65d9ab",
+    },
+    {
+      name: ConvertirPalabras("NO RINDEN PORTAFOLIO"),
+      key: "no_rinden_portafolio",
+      color: "#ff5880",
+    },
+    {
+      name: ConvertirPalabras("NO SE EVALUAN"),
+      key: "suspendidos",
+      color: "#ff8e53",
+    },
   ]),
   avancePortafolio: createMapper("AVANCE <b>PORTAFOLIO</b>", "total", [
-    { name: ConvertirPalabras("PORTAFOLIO COMPLETADO"), key: "portafolio_completado", color: "#65d9ab" },
-    { name: ConvertirPalabras("PORTAFOLIO INICIADO"), key: "portafolio_iniciado", color: "#ff8e53" },
-    { name: ConvertirPalabras("PORTAFOLIO NO INICIADO"), key: "portafolio_no_iniciado", color: "#ffd153" },
-    { name: ConvertirPalabras("NO INICIADO (SUSP/EXIM PEND)"), key: "portafolio_no_iniciado_se_pend", color: "#ff5880" },
+    {
+      name: ConvertirPalabras("PORTAFOLIO COMPLETADO"),
+      key: "portafolio_completado",
+      color: "#65d9ab",
+    },
+    {
+      name: ConvertirPalabras("PORTAFOLIO INICIADO"),
+      key: "portafolio_iniciado",
+      color: "#ff8e53",
+    },
+    {
+      name: ConvertirPalabras("PORTAFOLIO NO INICIADO"),
+      key: "portafolio_no_iniciado",
+      color: "#ffd153",
+    },
+    {
+      name: ConvertirPalabras("NO INICIADO (SUSP/EXIM PEND)"),
+      key: "portafolio_no_iniciado_se_pend",
+      color: "#ff5880",
+    },
   ]),
   avanceModuloUno: createMapper("AVANCE <b>MÓDULO 1</b>", "total_m1", [
-    { name: ConvertirPalabras("M1 COMPLETADO"), key: "m1_completado", color: "#65d9ab" },
-    { name: ConvertirPalabras("M1 INICIADO"), key: "m1_iniciado", color: "#ff8e53" },
-    { name: ConvertirPalabras("M1 NO INICIADO"), key: "m1_no_iniciado", color: "#ff5880" },
+    {
+      name: ConvertirPalabras("M1 COMPLETADO"),
+      key: "m1_completado",
+      color: "#65d9ab",
+    },
+    {
+      name: ConvertirPalabras("M1 INICIADO"),
+      key: "m1_iniciado",
+      color: "#ff8e53",
+    },
+    {
+      name: ConvertirPalabras("M1 NO INICIADO"),
+      key: "m1_no_iniciado",
+      color: "#ff5880",
+    },
   ]),
   // avanceModuloDos: createMapper("AVANCE <b>MÓDULO 2</b>", "total_m2", [
   //   { name: ConvertirPalabras("M2 COMPLETADO"), key: "m2_completado", color: "#65d9ab" },
@@ -41,37 +81,125 @@ const mappers = {
   //   { name: ConvertirPalabras("M2 NO INICIADO"), key: "m2_no_iniciado", color: "#ff5880" },
   // ]),
   avanceModuloDosFicha: createMapper("AVANCE <b>MÓDULO 2 FICHA</b>", "total", [
-    { name: ConvertirPalabras("FICHA COMPLETADA"), key: "m2_completado", color: "#65d9ab" },
-    { name: ConvertirPalabras("FICHA INICIADA"), key: "m2_iniciado", color: "#ff8e53" },
-    { name: ConvertirPalabras("FICHA NO INICIADA"), key: "m2_no_iniciado", color: "#ff5880" },
+    {
+      name: ConvertirPalabras("FICHA COMPLETADA"),
+      key: "m2_completado",
+      color: "#65d9ab",
+    },
+    {
+      name: ConvertirPalabras("FICHA INICIADA"),
+      key: "m2_iniciado",
+      color: "#ff8e53",
+    },
+    {
+      name: ConvertirPalabras("FICHA NO INICIADA"),
+      key: "m2_no_iniciado",
+      color: "#ff5880",
+    },
   ]),
   avanceModuloDosClase: createMapper("AVANCE <b>CLASE GRABADA</b>", "total", [
-    { name: ConvertirPalabras("CLASE GRABADA"), key: "m2_completado", color: "#65d9ab" },
-    { name: ConvertirPalabras("GRABACIÓN INICIADA"), key: "m2_iniciado", color: "#ff8e53" },
-    { name: ConvertirPalabras("CLASE NO GRABADA"), key: "m2_no_iniciado", color: "#ff5880" },
+    {
+      name: ConvertirPalabras("CLASE GRABADA"),
+      key: "m2_completado",
+      color: "#65d9ab",
+    },
+    {
+      name: ConvertirPalabras("GRABACIÓN INICIADA"),
+      key: "m2_iniciado",
+      color: "#ff8e53",
+    },
+    {
+      name: ConvertirPalabras("CLASE NO GRABADA"),
+      key: "m2_no_iniciado",
+      color: "#ff5880",
+    },
   ]),
   avanceModuloTres: createMapper("AVANCE <b>MÓDULO 3</b>", "total_m3", [
-    { name: ConvertirPalabras("M3 COMPLETADO"), key: "m3_completado", color: "#65d9ab" },
-    { name: ConvertirPalabras("M3 INICIADO"), key: "m3_iniciado", color: "#ff8e53" },
-    { name: ConvertirPalabras("M3 NO INICIADO"), key: "m3_no_iniciado", color: "#ff5880" },
+    {
+      name: ConvertirPalabras("M3 COMPLETADO"),
+      key: "m3_completado",
+      color: "#65d9ab",
+    },
+    {
+      name: ConvertirPalabras("M3 INICIADO"),
+      key: "m3_iniciado",
+      color: "#ff8e53",
+    },
+    {
+      name: ConvertirPalabras("M3 NO INICIADO"),
+      key: "m3_no_iniciado",
+      color: "#ff5880",
+    },
   ]),
-  avanceReporteDirectores: createMapper("AVANCE <b>M3 DIRECTORES</b>", "total", [
-    { name: ConvertirPalabras("M3 COMPLETADO"), key: "completado", color: "#65d9ab" },
-    { name: ConvertirPalabras("M3 INICIADO"), key: "iniciado", color: "#ff8e53" },
-    { name: ConvertirPalabras("M3 NO INICIADO"), key: "no_iniciado", color: "#ff5880" },
-  ]),
-  avanceDescargaPortafolio: createMapper("<b>DESCARGA DE PORTAFOLIO</b>", "total", [
-    { name: ConvertirPalabras("DESCARGADO"), key: "descargado", color: "#65d9ab" },
-    { name: ConvertirPalabras("NO DESCARGADO"), key: "no_descargado", color: "#ff5880" },
-  ]),
-  avanceVisualizacion: createMapper("<b>VISUALIZACIÓN CLASE GRABADA</b>", "total", [
-    { name: ConvertirPalabras("VISUALIZADA"), key: "visualizado", color: "#65d9ab" },
-    { name: ConvertirPalabras("INCOMPLETA"), key: "iniciado", color: "#ff8e53" },
-    { name: ConvertirPalabras("NO VISUALIZADA"), key: "no_visualizado", color: "#ff5880" },
-  ]),
+  avanceReporteDirectores: createMapper(
+    "AVANCE <b>M3 DIRECTORES</b>",
+    "total",
+    [
+      {
+        name: ConvertirPalabras("M3 COMPLETADO"),
+        key: "completado",
+        color: "#65d9ab",
+      },
+      {
+        name: ConvertirPalabras("M3 INICIADO"),
+        key: "iniciado",
+        color: "#ff8e53",
+      },
+      {
+        name: ConvertirPalabras("M3 NO INICIADO"),
+        key: "no_iniciado",
+        color: "#ff5880",
+      },
+    ]
+  ),
+  avanceDescargaPortafolio: createMapper(
+    "<b>DESCARGA DE PORTAFOLIO</b>",
+    "total",
+    [
+      {
+        name: ConvertirPalabras("DESCARGADO"),
+        key: "descargado",
+        color: "#65d9ab",
+      },
+      {
+        name: ConvertirPalabras("NO DESCARGADO"),
+        key: "no_descargado",
+        color: "#ff5880",
+      },
+    ]
+  ),
+  avanceVisualizacion: createMapper(
+    "<b>VISUALIZACIÓN CLASE GRABADA</b>",
+    "total",
+    [
+      {
+        name: ConvertirPalabras("VISUALIZADA"),
+        key: "visualizado",
+        color: "#65d9ab",
+      },
+      {
+        name: ConvertirPalabras("INCOMPLETA"),
+        key: "iniciado",
+        color: "#ff8e53",
+      },
+      {
+        name: ConvertirPalabras("NO VISUALIZADA"),
+        key: "no_visualizado",
+        color: "#ff5880",
+      },
+    ]
+  ),
   avanceDescargaClase: createMapper("<b>DESCARGA CLASE GRABADA</b>", "total", [
-    { name: ConvertirPalabras("DESCARGADA"), key: "descarga_clase", color: "#65d9ab" },
-    { name: ConvertirPalabras("NO DESCARGADA"), key: "no_descarga_clase", color: "#ff5880" },
+    {
+      name: ConvertirPalabras("DESCARGADA"),
+      key: "descarga_clase",
+      color: "#65d9ab",
+    },
+    {
+      name: ConvertirPalabras("NO DESCARGADA"),
+      key: "no_descarga_clase",
+      color: "#ff5880",
+    },
   ]),
 };
 

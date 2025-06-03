@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { BasicLegend } from "../BasicLegend";
-import {ConvertirPalabras} from "../../../../utils/PortfolioUtils"
+import { ConvertirPalabras } from "../../../../utils/PortfolioUtils";
 
 //import "./index.css";
 import { numberFormatter } from "../../../../../../utils/NumberFormatter";
 
 const PieChart = ({
-  subtitle =[],
+  subtitle = [],
   color = [],
   dataMapper = (data) => data,
   chartData,
@@ -42,7 +42,7 @@ const PieChart = ({
       },
     },
     subtitle: {
-      text: (subtitle),
+      text: subtitle,
 
       align: "center",
       style: {
@@ -51,7 +51,7 @@ const PieChart = ({
       },
     },
     tooltip: {
-      pointFormat:"<b>{point.y}</b> ({point.percentage:.0f}%)<br/>",
+      pointFormat: "<b>{point.y}</b> ({point.percentage:.0f}%)<br/>",
       style: {
         fontSize: "13px",
         color: "#666666",

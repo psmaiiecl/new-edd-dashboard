@@ -1,10 +1,4 @@
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../../../../../../context/AuthContext";
-import {
-  getValidacionCambioNivelVistaConvocatoria,
-  getValidacionSolicitaSuspenderVistaConvocatoria,
-  getValidacionVistaConvocatoria,
-} from "../../../../../services/ValidationServices";
+import { useEffect, useState } from "react";
 import { BASIC_BAR } from "../../../../InscriptionSection/data/BASIC_BAR";
 import {
   buildEstadoChart,
@@ -13,9 +7,11 @@ import {
   extraerSumatoriasSolicitudes,
   extraerSumaTotal,
 } from "../../../utils/convocatoriaTabUtils";
+import { useCustomFetch } from "../../../../../../../hooks/useCustomFetch";
+import { BASE_API_URL_2025 } from "../../../../../data/BASE_API_URL";
 
 export function useTabConvocatoria() {
-  const { getToken } = useContext(AuthContext);
+  const customFetch = useCustomFetch();
   const [estadoData, setEstadoData] = useState({});
   const [estadoStatus, setEstadoStatus] = useState({
     validados: 0,
@@ -30,7 +26,7 @@ export function useTabConvocatoria() {
       height: 450,
     },
     subtitle: {
-      text: "<b>ESTADO DE VALIDACIÓN DE DOCENTES</b> DISTRIBUIDOS <b>POR DEPENDENCIA</b>",
+      text: "<b>ESTADO DE VALIDACIÓN DE DOCENTES</b> DISTRIBUIDOS <b>POR CONVOCATORIA</b>",
       align: "center",
       style: {
         fontSize: "15px",
@@ -137,21 +133,34 @@ export function useTabConvocatoria() {
     ],
   });
   useEffect(() => {
-    getValidacionVistaConvocatoria(getToken()).then((data) => {
+    customFetch({
+      route: BASE_API_URL_2025 + "/2025-validacion?endpoint=vista-convocatoria",
+      shouldCache: true,
+    }).then((data) => {
       const eStatus = extraerSumatoriasDocentes(data.docentes);
       const eTotal = extraerSumaTotal(eStatus);
       setEstadoData(data.docentes);
       setEstadoStatus({ ...eStatus, total: eTotal });
       setEstadoChart(buildEstadoChart(estadoChart, data.docentes, eTotal));
     });
-    getValidacionCambioNivelVistaConvocatoria(getToken()).then((data) => {
+    customFetch({
+      route:
+        BASE_API_URL_2025 +
+        "/2025-validacion?endpoint=cambio-nivel-vista-convocatoria",
+      shouldCache: true,
+    }).then((data) => {
       const eStatus = extraerSumatoriasSolicitudes(data.docentes);
       const eTotal = extraerSumaTotal(eStatus);
       setCambioData(data.docentes);
       setCambioStatus({ ...eStatus, total: eTotal });
       setCambioChart(buildSolicitudChart(cambioChart, data.docentes, eTotal));
     });
-    getValidacionSolicitaSuspenderVistaConvocatoria(getToken()).then((data) => {
+    customFetch({
+      route:
+        BASE_API_URL_2025 +
+        "/2025-validacion?endpoint=solicita-suspender-vista-convocatoria",
+      shouldCache: true,
+    }).then((data) => {
       const eStatus = extraerSumatoriasSolicitudes(data.docentes);
       const eTotal = extraerSumaTotal(eStatus);
       setSuspensionData(data.docentes);
@@ -161,7 +170,7 @@ export function useTabConvocatoria() {
       );
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getToken]);
+  }, []);
   return {
     estadoData,
     estadoStatus,

@@ -33,18 +33,18 @@ export const mappers = {
     series: [
       {
         name: "Aprobadas",
-        key: 'aprobadas',
+        key: "aprobadas",
         sliced: true,
         color: "#65D9AB",
       },
       {
         name: "Pendientes",
-        key: 'no_procesadas',
+        key: "no_procesadas",
         color: "#ff8e53",
       },
       {
         name: "Rechazadas",
-        key: 'rechazadas',
+        key: "rechazadas",
         color: "#ff5880",
       },
     ],

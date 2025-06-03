@@ -81,100 +81,100 @@ export const mappers = {
       },
     ],
   },
-  docentes_dependencia:{
-    series:[
+  docentes_dependencia: {
+    series: [
       {
         name: "Inscritos en nómina",
-        table: 'Inscritos',
-        key: 'Inscrito',
+        table: "Inscritos",
+        key: "Inscrito",
         color: "#65D9AB",
       },
       {
         name: "En Revisión",
-        table: 'En Revisión',
-        key: 'En Revisión',
+        table: "En Revisión",
+        key: "En Revisión",
         color: "#FF8E53",
       },
       {
         name: "Desinscritos",
         table: "Desinscritos",
-        key: 'Desinscrito',
+        key: "Desinscrito",
         color: "#C1D9CA",
       },
       {
         name: "Pendientes",
         table: "Pendientes",
-        key: 'Pendiente',
+        key: "Pendiente",
         color: "#FFD153",
       },
       {
         name: "Cancelados",
         table: "Cancelados",
-        key: 'Cancelado',
+        key: "Cancelado",
         color: "#FF5880",
       },
-    ]
+    ],
   },
-  sostenedores_dependencia:{
-    series:[
+  sostenedores_dependencia: {
+    series: [
       {
         name: "Con inscripción terminada",
         table: "Sin docentes pendientes",
-        key: 'sin_docentes_pendientes',
+        key: "sin_docentes_pendientes",
         color: "#8FB8FF",
       },
       {
         name: "Con inscripción iniciada",
-        table: 'Inscripcion iniciada',
-        key: 'inscripcion_iniciada',
+        table: "Inscripcion iniciada",
+        key: "inscripcion_iniciada",
         color: "#65D9AB",
       },
       {
         name: "Con ingreso - Sin docentes inscritos",
-        table: 'Con ingreso - Sin docentes',
-        key: 'con_ingreso_sin_docentes',
+        table: "Con ingreso - Sin docentes",
+        key: "con_ingreso_sin_docentes",
         color: "#FF8E53",
       },
       {
         name: "Sin ingreso",
         table: "Sin ingreso",
-        key: 'sin_ingreso',
+        key: "sin_ingreso",
         color: "#FF5880",
       },
-    ]
+    ],
   },
-  docentes_convocatoria:{
-    series:[
+  docentes_convocatoria: {
+    series: [
       {
         name: "Inscritos en nómina",
-        table: 'Inscritos',
-        key: 'Inscrito',
+        table: "Inscritos",
+        key: "Inscrito",
         color: "#65D9AB",
       },
       {
         name: "En Revisión",
-        table: 'En Revisión',
-        key: 'En Revisión',
+        table: "En Revisión",
+        key: "En Revisión",
         color: "#FF8E53",
       },
       {
         name: "Desinscritos",
         table: "Desinscritos",
-        key: 'Desinscrito',
+        key: "Desinscrito",
         color: "#C1D9CA",
       },
       {
         name: "Pendientes",
         table: "Pendientes",
-        key: 'Pendiente',
+        key: "Pendiente",
         color: "#FFD153",
       },
       {
         name: "Cancelados",
         table: "Cancelados",
-        key: 'Cancelado',
+        key: "Cancelado",
         color: "#FF5880",
       },
-    ]
-  }
+    ],
+  },
 };
