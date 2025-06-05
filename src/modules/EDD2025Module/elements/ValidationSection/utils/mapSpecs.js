@@ -99,4 +99,48 @@ export const mappers = {
       },
     ],
   },
+  estado_validacion: {
+    series: [
+      {
+        name: "Validados",
+        table: "Validados",
+        key: "validados",
+        color: "#65D9AB",
+      },
+      {
+        name: "No Validados",
+        table: "No Validados",
+        key: "no_validados",
+        color: "#FFD153",
+      },
+      {
+        name: "Sin Ingreso",
+        table: "Sin Ingreso",
+        key: "sin_ingreso",
+        color: "#FF5880",
+      },
+    ],
+  },
+  estado_solicitudes: {
+    series: [
+      {
+        name: "Aprobadas",
+        table: "Aprobadas",
+        key: "aprobadas",
+        color: "#65D9AB",
+      },
+      {
+        name: "No Procesadas",
+        table: "No Procesadas",
+        key: "no_procesadas",
+        color: "#FFD153",
+      },
+      {
+        name: "Rechazadas",
+        table: "Rechazadas",
+        key: "rechazadas",
+        color: "#FF5880",
+      },
+    ],
+  },
 };

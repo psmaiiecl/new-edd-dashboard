@@ -14,13 +14,3 @@
   background-color: white;
   margin: 0 auto;
 }
-
-.normal-container {
-  display: flex;
-  width: 90%;
-  padding: 20px 10px;
-  flex-wrap: wrap;
-  margin: 0 auto;
-  justify-content: space-evenly;
-  row-gap: 60px;
-}

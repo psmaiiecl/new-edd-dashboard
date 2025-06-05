@@ -1,6 +1,5 @@
 import "./style.css";
 import { useState } from "react";
-import { Tabs } from "./components/Tabs";
 import { TabGeneral } from "./components/TabGeneral";
 import { TabDependencia } from "./components/TabDependencia";
 import { TabConvocatoria } from "./components/TabConvocatoria";

@@ -1,9 +1,5 @@
 import "./index.css";
 import Select from "react-select";
-import Highcharts from "highcharts";
-import HighchartsReact from "highcharts-react-official";
-// eslint-disable-next-line no-unused-vars
-import exporting from "highcharts/modules/exporting";
 import {
   CAMBIO_LIST,
   CONVOCATORIA_LIST,
@@ -14,7 +10,7 @@ import { useTabGeneral } from "./hooks/useTabGeneral";
 import { CustomPieChart } from "../../../../../../components/CustomPieChart";
 import { PIE_CONFIG } from "../../../../../../constants/CHART_CONFIGS";
 import { CustomDotLineChart } from "../../../../../../components/CustomDotLineChart";
-
+import { TabContent } from "../../../../../../components/Layout/TabContent";
 export function TabGeneral() {
   const {
     selectedFilter,
@@ -30,7 +26,7 @@ export function TabGeneral() {
   } = useTabGeneral();
 
   return (
-    <div className="tab-general roboto-regular">
+    <TabContent>
       <div className="tab-general-filter-row">
         <div className="tab-general-filter">
           <span>Convocatoria: </span>
@@ -176,7 +172,7 @@ export function TabGeneral() {
         data={evolucionSolicitudesChart}
         overrideConfig={axisOverrideConfig}
       />
-    </div>
+    </TabContent>
   );
 }
 

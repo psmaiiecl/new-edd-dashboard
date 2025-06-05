@@ -12,6 +12,8 @@
 .tabs {
   display: flex;
   align-items: center;
+  width: auto;
+  box-sizing: border-box;
   font-size: 14px;
   justify-content: space-evenly;
   padding: 15px 0 15px 0;

@@ -4,6 +4,7 @@ import { useTabGeneral } from "./hooks/useTabGeneral";
 import { DEPENDENCY_LIST } from "../../data/DependencyList";
 import { CustomPieChart } from "../../../../../../components/CustomPieChart";
 import { CustomDotLineChart } from "../../../../../../components/CustomDotLineChart";
+import { TabContent } from "../../../../../../components/Layout/TabContent";
 
 export function TabGeneral() {
   const {
@@ -18,7 +19,7 @@ export function TabGeneral() {
   } = useTabGeneral();
 
   return (
-    <div className="tab-general">
+    <TabContent>
       <div className="tab-general-filtro">
         <span>Dependencia: </span>
         <Select
@@ -73,6 +74,6 @@ export function TabGeneral() {
           data={avanceDiario}
         />
       </div>
-    </div>
+    </TabContent>
   );
 }

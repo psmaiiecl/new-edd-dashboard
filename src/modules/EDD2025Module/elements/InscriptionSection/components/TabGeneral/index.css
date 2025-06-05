@@ -3,9 +3,9 @@
 }
 
 .tab-general-filtro {
-  width: 90%;
-  margin: 0 auto;
-  padding: 20px 10px;
+  /* width: 90%; */
+  /* margin: 0 auto; */
+  padding: 10px 0;
   display: flex;
   gap: 20px;
   align-items: center;

@@ -32,9 +32,14 @@ export function mapBarChartData({ data, schema, invert = false }) {
   const total = series.reduce((acc, serie) => {
     return acc + serie.data.reduce((a, b) => a + b, 0);
   }, 0);
-  //Insertando los porcentajes  
+  //Insertando los porcentajes
   tableData.percentages = tableData.subtotals.map(
-    (data) => numberFormatter((isNaN(data.number / total) ? 0 : (data.number / total) * 100).toFixed(1)) + "%"
+    (data) =>
+      numberFormatter(
+        (isNaN(data.number / total) ? 0 : (data.number / total) * 100).toFixed(
+          1
+        )
+      ) + "%"
   );
 
   return {

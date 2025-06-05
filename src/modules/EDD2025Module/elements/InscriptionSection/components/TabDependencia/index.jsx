@@ -1,11 +1,12 @@
 import "./index.css";
 import { useTabDependencia } from "./hooks/useTabDependencia";
 import { CustomBarChart } from "../../../../../../components/CustomBarChart";
+import { TabContent } from "../../../../../../components/Layout/TabContent";
 
 export function TabDependencia() {
   const { docentesDependencia, sostenedoresDependencia } = useTabDependencia();
   return (
-    <div className="tab-dependencia">
+    <TabContent>
       <CustomBarChart
         subtitle={"ESTADO DE DOCENTES DISTRIBUIDOS <b>POR DEPENDENCIA</b>"}
         data={docentesDependencia}
@@ -15,7 +16,7 @@ export function TabDependencia() {
         subtitle={"SOSTENEDORES DISTRIBUIDOS <b>POR DEPENDENCIA</b>"}
         data={sostenedoresDependencia}
       />
-    </div>
+    </TabContent>
   );
 }
 //170 Líneas

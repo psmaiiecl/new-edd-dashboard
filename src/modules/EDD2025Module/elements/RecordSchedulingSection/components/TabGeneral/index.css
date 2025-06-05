@@ -2,19 +2,6 @@
   max-width: 100%;
 }
 
-.tab-general-filtro {
-  width: 90%;
-  margin: 0 auto;
-  padding: 20px 10px;
-  display: flex;
-  gap: 20px;
-  align-items: center;
-}
-
-.tab-general-filtro-container {
-  width: 25%;
-}
-
 .tab-general-upper {
   display: flex;
   width: 90%;
