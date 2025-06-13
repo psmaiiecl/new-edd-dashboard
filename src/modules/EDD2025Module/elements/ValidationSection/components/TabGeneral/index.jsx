@@ -147,7 +147,7 @@ export function TabGeneral() {
             data={estadoChart}
           />
           <CustomPieChart
-            subtitle={"CAUSALES DE <b>NO EVALUACIÓN</b> DE DOCENTES VALIDADOS"}
+            subtitle={"CAUSALES DE <b>NO EVALUACIÓN</b> DE DOCENTES INSCRITOS"}
             data={causalesChart}
           />
         </div>
