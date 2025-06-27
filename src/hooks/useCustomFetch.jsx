@@ -37,24 +37,29 @@ export function useCustomFetch() {
           }
         }
       }
+
+      const headers = {
+        "Content-Type": "application/json",
+        t: getToken(),
+        ...(options.headers || {}),
+      };
+
+      options.body = bodyString;
+      options.method = method;
+      options.headers = headers;
+
       if (formData) {
         const parsedFormData = new FormData();
         for (let key in formData) {
           parsedFormData.append(key, formData[key].value);
         }
         options.body = parsedFormData;
+        delete options.headers['Content-Type'];
       }
 
       if (hasLoadPanel) queueLoading();
-      try {
-        const response = await fetch(URL, {
-          method: method,
-          headers: {
-            //"Content-Type": "application/json",
-            t: getToken(),
-          },
-          ...options,
-        });
+      try {        
+        const response = await fetch(URL, options);
 
         if (!response.ok) {
           throw new Error("Error en la solicitud");

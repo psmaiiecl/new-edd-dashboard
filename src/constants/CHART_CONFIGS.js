@@ -238,6 +238,22 @@ export const POINT_CONFIG = {
   },
 };
 
+export const COLUMN_CONFIG = {
+  ...BASE_CHART_CONFIG,
+  chart:{
+    type: "column"
+  },
+  title: {
+    text: "COLUMN CHART",
+    align: "center",
+    style: {
+      fontWeight: "300",
+      fontSize: "15px",
+      color: "#666666",
+    },
+  },
+}
+
 export const STACK_BAR_CONFIG = {
   lang: {
     decimalPoint: ",",
@@ -354,7 +370,3 @@ export const MULTIPLE_BAR_CONFIG = {
     },
   },
 };
-
-export const LINE_CONFIG = {};
-
-export const AREA_CONFIG = {};

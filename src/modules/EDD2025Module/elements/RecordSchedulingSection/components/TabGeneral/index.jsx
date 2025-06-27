@@ -17,78 +17,12 @@ import {
   buildAgendamientoApilado,
   buildAgendamientoGeneral,
 } from "../../utils/generalTabUtils";
+import { useTabGeneral } from "./hooks/useTabGeneral";
+import { TabContent } from "../../../../../../components/Layout/TabContent";
 
 export function TabGeneral() {
   const customFetch = useCustomFetch();
 
-  const [docentesChart, setDocentesChart] = useState({
-    ...PIE_CONFIG,
-    subtitle: {
-      text: "DOCENTES A <b>AGENDAR GRABACIÓN</b>",
-      align: "center",
-      style: {
-        fontSize: "15px",
-      },
-    },
-    series: [
-      {
-        name: "Cantidad de Docentes",
-        colorByPoint: true,
-        data: [
-          {
-            name: "Docentes Agendados",
-            y: 0,
-            sliced: true,
-            selected: true,
-            color: "rgb(143, 184, 255)",
-          },
-          {
-            name: "Docentes con Contacto Inicial",
-            y: 0,
-            color: "rgb(255, 209, 83)",
-          },
-          {
-            name: "Docentes sin Contacto",
-            y: 0,
-            color: "rgb(255, 88, 128)",
-          },
-        ],
-      },
-    ],
-  });
-  const [establecimientosChart, setEstablecimientosChart] = useState({
-    ...PIE_CONFIG,
-    subtitle: {
-      text: "ESTABLECIMIENTO A <b>AGENDAR GRABACIÓN</b>",
-      align: "center",
-      style: {
-        fontSize: "15px",
-      },
-    },
-    series: [
-      {
-        name: "Cantidad de Establecimientos",
-        colorByPoint: true,
-        data: [
-          {
-            name: "Establecimientos con Docentes Agendados",
-            y: 0,
-            color: "rgb(144, 184, 254)",
-          },
-          {
-            name: "Establecimientos con Contacto Inicial",
-            y: 0,
-            color: "rgb(253, 208, 80)",
-          },
-          {
-            name: "Establecimientos sin Contacto",
-            y: 0,
-            color: "rgb(255, 88, 128)",
-          },
-        ],
-      },
-    ],
-  });
   const [weeklyStackChart, setWeeklyStackChart] = useState({
     ...STACK_BAR_CONFIG,
     title: {
@@ -149,57 +83,71 @@ export function TabGeneral() {
     },
   });
 
+  const {
+    docentesAgendados,
+    establecimientosAgendados,
+    agendamientoApilado,
+    agendamientoSemanal,
+    agendamientoGlobal,
+  } = useTabGeneral();
   useEffect(() => {
-    customFetch(
-      BASE_API_URL_2024 +
+    
+
+    customFetch({
+      route:
+        BASE_API_URL_2024 +
         "/datos-json?etiqueta=2024-grabaciones-agendamiento-semanal-apilado",
-      { method: "POST" }
-    ).then((data) =>
-      setWeeklyStackChart(
-        buildAgendamientoApilado(weeklyStackChart, data.agendamiento_semanal)
-      )
+    }).then((data) =>
+      setWeeklyStackChart()
+      //buildAgendamientoApilado(weeklyStackChart, data.agendamiento_semanal)
     );
 
-    customFetch(
-      BASE_API_URL_2024 +
+    customFetch({
+      route:
+        BASE_API_URL_2024 +
         "/datos-json?etiqueta=2024-grabaciones-agendamiento-semanal",
-      { method: "POST" }
-    ).then((data) => {
-      setWeeklyScheduleChart(
-        buildAgendamientoGeneral(weeklyScheduleChart, data.agendamiento_semanal)
-      );
-      setFullScheduleChart(
-        buildAgendamientoGeneral(fullScheduleChart, data.agendamiento_acumulado)
-      );
+    }).then((data) => {
+      setWeeklyScheduleChart();
+      //buildAgendamientoGeneral(weeklyScheduleChart, data.agendamiento_semanal)
+      setFullScheduleChart();
+      //buildAgendamientoGeneral(fullScheduleChart, data.agendamiento_acumulado)
     });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  
   return (
-    <div className="tab-general">
+    <TabContent>
       <div className="normal-container">
         <div className="pie-grid-2">
-          <CustomPieChart setup={docentesChart} />
-          <CustomPieChart setup={establecimientosChart} />
+          <CustomPieChart
+            data={docentesAgendados}
+            subtitle={"DOCENTES A <b>AGENDAR GRABACIÓN</b>"}
+          />
+          <CustomPieChart
+            data={establecimientosAgendados}
+            subtitle={"ESTABLECIMIENTOS A <b>AGENDAR GRABACIÓN</b>"}
+          />
         </div>
       </div>
       <div className="normal-container">
         <div className="general-point-chart-container">
-          <HighchartsReact options={weeklyStackChart} highcharts={Highcharts} />
+          {/* <HighchartsReact options={weeklyStackChart} highcharts={Highcharts} /> */}
         </div>
         <div className="general-point-chart-container">
-          <HighchartsReact
+          {/* <HighchartsReact
             options={weeklyScheduleChart}
             highcharts={Highcharts}
-          />
+          /> */}
         </div>
         <div className="general-point-chart-container">
-          <HighchartsReact
+          {/* <HighchartsReact
             options={fullScheduleChart}
             highcharts={Highcharts}
-          />
+          /> */}
         </div>
       </div>
-    </div>
+    </TabContent>
   );
 }
