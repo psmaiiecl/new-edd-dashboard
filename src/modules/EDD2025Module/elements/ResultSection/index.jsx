@@ -6,7 +6,6 @@ import { TabGeneralResultados } from "./components/Tabs/TabGeneralResultados";
 import { Button } from "../../../../components/Button";
 import { useCustomDownload } from "../../../../hooks/useCustomDownload";
 import { BASE_API_URL_2025 } from "../../data/BASE_API_URL";
-import { RatiosPanel } from "./components/RatiosPanel/RatiosPanel";
 
 export function ResultSection2025() {
   const customDownload = useCustomDownload();
