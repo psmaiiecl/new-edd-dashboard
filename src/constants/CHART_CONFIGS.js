@@ -4,10 +4,14 @@ const BASE_CHART_CONFIG = {
   lang: {
     decimalPoint: ",",
     thousandsSep: ".",
+    
   },
   credits: {
     enabled: false,
   },
+  exporting: {
+    enabled: false
+  }
 };
 
 export const PIE_CONFIG = {
@@ -21,6 +25,9 @@ export const PIE_CONFIG = {
     marginBottom: 80,
     // height: 510,
     height: 410,
+  },
+  exporting: {
+    enabled: false
   },
   legend: {
     layout: "horizontal",
@@ -96,6 +103,9 @@ export const DOT_CONFIG = {
   chart: {
     align: "left",
   },
+  exporting: {
+    enabled: false
+  },
   title: {
     text: "DOTTED LINE CHART",
     align: "center",
@@ -134,6 +144,9 @@ export const BAR_CONFIG = {
     marginTop: 120,
     height: 600,
     // width: 1000,
+  },
+  exporting: {
+    enabled: false
   },
   title: {
     text: "TOTAL",
@@ -207,6 +220,9 @@ export const BAR_CONFIG = {
 };
 
 export const POINT_CONFIG = {
+  exporting: {
+    enabled: false
+  },
   chart: {
     type: "line",
   },
@@ -242,6 +258,9 @@ export const STACK_BAR_CONFIG = {
   lang: {
     decimalPoint: ",",
     thousandsSep: ".",
+  },
+  exporting: {
+    enabled: false
   },
   chart: {
     type: "column",
@@ -318,6 +337,9 @@ export const MULTIPLE_BAR_CONFIG = {
     decimalPoint: ",",
     thousandsSep: ".",
   },
+  exporting: {
+    enabled: false
+  },
   chart: {
     type: "column",
   },
@@ -355,6 +377,38 @@ export const MULTIPLE_BAR_CONFIG = {
   },
 };
 
-export const LINE_CONFIG = {};
-
+export const LINE_CONFIG = {
+lang: {
+    decimalPoint: ",",
+    thousandsSep: ".",
+  },
+  exporting: {
+    enabled: false
+  },
+   chart: {
+      type: 'line',
+      align: 'left'
+    },
+    title: {
+      //text: 'Descarga Diaria de Informes +++',
+      align: 'center',
+      style: {
+        fontWeight: 'bold',
+        fontSize: '18px'
+      }
+    },
+    xAxis: {
+      type: 'category',
+      title: { text: 'Fecha' }
+    },
+    yAxis: {
+      title: { enabled: false },
+      labels: { format: '{value}' }
+    },
+    plotOptions: {
+      series: {
+        label: { connectorAllowed: false }
+      }
+    },
+  };
 export const AREA_CONFIG = {};

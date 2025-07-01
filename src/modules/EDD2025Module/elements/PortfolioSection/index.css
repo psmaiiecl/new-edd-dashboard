@@ -14,3 +14,33 @@
   background-color: white;
   margin: 0 auto;
 }
+.contador-banner {
+  /*
+  position: relative;
+  width: 15%;
+  background: linear-gradient(to right, #0f69b5, #007bff);
+  */
+  opacity: 0.9;
+  color: #484747;
+  /*border-radius: 3px;*/
+  align-items: right;
+  padding: 0.5rem 0;
+  font-family: Arial, sans-serif;
+  font-size: 0.8rem;
+  /*
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  */
+  margin-left: 1000px;
+  
+	
+}
+
+.contador-banner p {
+  margin: 0;
+}
+
+.contador-banner strong {
+  font-size: 0.8rem;
+  color: #0f69b5; 
+}
