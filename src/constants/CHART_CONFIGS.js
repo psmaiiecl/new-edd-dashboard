@@ -8,6 +8,9 @@ const BASE_CHART_CONFIG = {
   credits: {
     enabled: false,
   },
+  exporting: {
+    enabled: false,
+  },
 };
 
 export const PIE_CONFIG = {
@@ -240,8 +243,8 @@ export const POINT_CONFIG = {
 
 export const COLUMN_CONFIG = {
   ...BASE_CHART_CONFIG,
-  chart:{
-    type: "column"
+  chart: {
+    type: "column",
   },
   title: {
     text: "COLUMN CHART",
@@ -252,7 +255,7 @@ export const COLUMN_CONFIG = {
       color: "#666666",
     },
   },
-}
+};
 
 export const STACK_BAR_CONFIG = {
   lang: {
@@ -370,3 +373,39 @@ export const MULTIPLE_BAR_CONFIG = {
     },
   },
 };
+
+export const LINE_CONFIG = {
+  lang: {
+    decimalPoint: ",",
+    thousandsSep: ".",
+  },
+  exporting: {
+    enabled: false,
+  },
+  chart: {
+    type: "line",
+    align: "left",
+  },
+  title: {
+    //text: 'Descarga Diaria de Informes +++',
+    align: "center",
+    style: {
+      fontWeight: "bold",
+      fontSize: "18px",
+    },
+  },
+  xAxis: {
+    type: "category",
+    title: { text: "Fecha" },
+  },
+  yAxis: {
+    title: { enabled: false },
+    labels: { format: "{value}" },
+  },
+  plotOptions: {
+    series: {
+      label: { connectorAllowed: false },
+    },
+  },
+};
+export const AREA_CONFIG = {};

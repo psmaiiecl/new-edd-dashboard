@@ -5,6 +5,7 @@ import { EDD2024Module } from "../../modules/EDD2024Module";
 import { EDD2025Module } from "../../modules/EDD2025Module";
 import { InscriptionSection2025 } from "../../modules/EDD2025Module/elements/InscriptionSection";
 import { PortfolioSection2025 } from "../../modules/EDD2025Module/elements/PortfolioSection";
+import { ResultSection2025 } from "../../modules/EDD2025Module/elements/ResultSection";
 import { DashboardHeader } from "./components/DashboardHeader";
 import { ValidationSection2025 } from "../../modules/EDD2025Module/elements/ValidationSection";
 import { SDRecoverySection2025 } from "../../modules/EDD2025Module/elements/SDRecoverySection";
@@ -38,6 +39,7 @@ export function DashboardPage() {
               <Route path="inscripcion" element={<InscriptionSection2025 />} />
               <Route path="validacion" element={<ValidationSection2025 />} />
               <Route path="portafolio" element={<PortfolioSection2025 />} />
+              <Route path="resultados" element={<ResultSection2025/>} />
               <Route
                 path="agendamiento-grabaciones"
                 element={<RecordSchedulingSection2025 />}

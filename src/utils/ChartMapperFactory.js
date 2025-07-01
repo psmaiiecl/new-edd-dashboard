@@ -89,3 +89,27 @@ export function mapBarChartData({ data, schema, invert = false }) {
     },
   };
 }
+export function mapLineData(rawData, config) {
+    const fechas = rawData[config.fechas];
+
+    const series = config.series.map(serie => ({
+        name: serie.name,
+        color: serie.color,
+        data: rawData[serie.data]
+    }));
+
+    return { fechas, series };
+}
+export function mapLineDataBuild(rawData, config) {
+    const fechas = rawData[config.fechas];
+
+    const series = config.series.map(serie => ({
+        name: serie.name,
+        color: serie.color,
+        valores: rawData[serie.data] // ✅ clave correcta
+    }));
+
+    return { fechas, series };
+}
+
+

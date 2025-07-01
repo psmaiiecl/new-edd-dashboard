@@ -1,0 +1,38 @@
+.ratios-panel {
+  display: flex;
+  flex-direction: row;
+  
+}
+
+.ratio-item {
+  background: #f5f5f5;
+  padding: 8px 12px;
+  border-radius: 8px;
+  color: #484747;
+  margin: 20px 10px 10px 55px;
+}
+
+.rtios-banner {
+ 
+  opacity: 0.9;
+  color: #484747;
+  align-items: right;
+  padding: 0.5rem 0;
+  font-family: Arial, sans-serif;
+  font-size: 0.8rem;
+  
+  margin-left:0px;
+  
+	
+}
+
+.ratios-banner p {
+  margin: 0;
+  font-weight: 450;
+  color: #484747;
+}
+
+.ratios-banner strong {
+  font-size: 1rem;
+  color: #0f69b5; 
+}

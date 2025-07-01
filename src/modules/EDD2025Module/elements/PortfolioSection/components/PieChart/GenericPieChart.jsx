@@ -1,11 +1,8 @@
-import { useEffect, useState, useContext } from "react";
-import axios from "../../../../../EDD2025Module/services/axiosInstance";
+import { usePortafolioFetch } from "./../TabGeneralPortafolio/hooks/usePortafolioFetch";
 import PieChart from "./PieChart";
-import { AuthContext } from "../../../../../../context/AuthContext"; //para manejar el token
-//import "./index.css";
+
 const GenericPieChart = ({
   subtitle,
-  serviceUrl,
   keyPath,
   dataMapper,
   rawData = null,
@@ -14,42 +11,12 @@ const GenericPieChart = ({
   showLegend = true,
   filtros = {},
 }) => {
-  const { getToken } = useContext(AuthContext);
-  const [chartData, setChartData] = useState({});
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        if (rawData) {
-          setChartData(rawData);
-          return;
-        }
-
-        const token = await getToken();
-        if (!filtros || Object.keys(filtros).length === 0) return;
-
-        const body = new FormData();
-        Object.entries(filtros).forEach(([key, value]) => {
-          body.append(key, value);
-        });
-
-        const response = await axios.post(serviceUrl, body, {
-          headers: { t: token },
-        });
-
-        const nested = keyPath
-          .split(".")
-          .reduce((obj, key) => obj?.[key], response.data);
-        const mapped = dataMapper(nested);
-        setChartData(mapped);
-      } catch (error) {
-        console.error(`Error fetching data from ${serviceUrl}`, error);
-      }
-    }
-
-    fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [serviceUrl, keyPath, dataMapper, JSON.stringify(filtros), rawData]);
+  const { data: chartData } = usePortafolioFetch({
+    keyPath,
+    dataMapper,
+    filtros,
+    rawData,
+  });
 
   return (
     <PieChart

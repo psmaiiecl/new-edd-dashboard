@@ -4,6 +4,7 @@ import { AuthContext } from "../../../context/AuthContext";
 import { getZohoCalls } from "../services/HelpServices";
 import { getInscriptionData } from "../services/InscriptionServices";
 import { getPortafolioData } from "../services/PortfolioServices";
+import { getResultData } from "../services/ResultServices";
 import { buildHelpModuleChart } from "../utils/HelpUtils";
 import { buildInscripcionModuleChart } from "../utils/InscriptionUtils";
 import { buildPortfolioModuleChart } from "../utils/PortfolioUtils";
@@ -42,16 +43,17 @@ export function useModules() {
       setHelpChart(buildHelpModuleChart(data));
       changeLoadingStatus("help", false);
     });
-    // changeLoadingStatus("portfolio", true);
-    // getPortafolioData(getToken()).then((data) => {
-    //   setPortfolioChart(buildPortfolioModuleChart(data.docentes));
-    //   changeLoadingStatus("portfolio", false);
-    // });
-    // changeLoadingStatus("result", true);
-    // getResultData(getToken()).then((data) => {
-    //   setResultChart(buildResultModuleChart(data.docentes));
-    //   changeLoadingStatus("result", false);
-    // });
+    changeLoadingStatus("portfolio", true);
+    getPortafolioData(getToken()).then((data) => {
+      setPortfolioChart(buildPortfolioModuleChart(data.docentes));
+      changeLoadingStatus("portfolio", false);
+    });
+	
+    changeLoadingStatus("resultados", true);
+    getResultData(getToken()).then((data) => {
+      setResultChart(buildResultModuleChart(data.ratios));
+      changeLoadingStatus("result", false);
+    });
   }, [getToken]);
   return {
     inscriptionChart,
