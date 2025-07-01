@@ -12,10 +12,10 @@ export const mappers = {
         key: "informes_individuales_no_descargados",
         color: "#FF8E53",
       },
-
     ],
   },
   entrega_informes_establecimiento: {
+    total_key: "informes_establecimiento",
     series: [
       {
         name: "Informes Descargados",
@@ -32,10 +32,11 @@ export const mappers = {
         name: "Informes con Acceso",
         key: "informes_establecimiento_acceso",
         color: "#ffd153",
-      }
+      },
     ],
   },
   entrega_informes_sostenedor: {
+    total_key: "informes_sostenedor",
     series: [
       {
         name: "Informes Descargados",
@@ -52,7 +53,7 @@ export const mappers = {
         name: "Informes con Acceso",
         key: "informes_sostenedor_acceso",
         color: "#ffd153",
-      }
+      },
     ],
-  }
-}
+  },
+};

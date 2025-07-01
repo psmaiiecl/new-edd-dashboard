@@ -23,6 +23,7 @@
     grid-template-columns: 1fr;
     row-gap: 20px;
   }
+
   .bar-table-container {
     width: 80%;
     margin: auto;

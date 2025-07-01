@@ -2,12 +2,11 @@ import { usePortafolioFetch } from "./../TabGeneralPortafolio/hooks/usePortafoli
 import { CustomDotLineChart } from "../ScatterChart/CustomDotLineChart";
 
 const AvanceIniciadosChart = ({
-  keyPath = 'portafolio-avance-diario',
+  keyPath = "portafolio-avance-diario",
   dataMapper,
   title,
   rawData = null,
   filtros = {},
-  
 }) => {
   const { data } = usePortafolioFetch({
     keyPath,

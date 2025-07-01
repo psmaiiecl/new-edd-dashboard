@@ -1,9 +1,3 @@
-import './style.css';
+import "./style.css";
 
-export function CustomColumnChart({
-    title,
-    data,
-    overrideConfig
-}){
-    
-}
+export function CustomColumnChart({ title, data, overrideConfig }) {}

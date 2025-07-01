@@ -16,32 +16,35 @@ function mapAvanceSemanal(data) {
   const colores = {
     completado: "#2ecc71",
     iniciado: "#f1c40f",
-    no_iniciado: "#e74c3c"
+    no_iniciado: "#e74c3c",
   };
 
   // Construir series apiladas
-  const series = tipos.map(tipo => {
+  const series = tipos.map((tipo) => {
     return {
-      name: tipo.replace("_", " ").replace(/\b\w/g, l => l.toUpperCase()),
+      name: tipo.replace("_", " ").replace(/\b\w/g, (l) => l.toUpperCase()),
       color: colores[tipo],
       data: fechas.map((fecha, index) => {
         const valor = avance[tipo]?.[index] ?? 0;
 
-        const total = tipos.reduce((sum, t) => sum + (avance[t]?.[index] ?? 0), 0);
+        const total = tipos.reduce(
+          (sum, t) => sum + (avance[t]?.[index] ?? 0),
+          0
+        );
         const porcentaje = total ? (valor / total) * 100 : 0;
 
         return {
           y: parseFloat(porcentaje.toFixed(2)),
           valor,
           porcentaje: porcentaje.toFixed(1),
-          total
+          total,
         };
-      })
+      }),
     };
   });
   return {
     categories: fechas,
-    series
+    series,
   };
 }
 

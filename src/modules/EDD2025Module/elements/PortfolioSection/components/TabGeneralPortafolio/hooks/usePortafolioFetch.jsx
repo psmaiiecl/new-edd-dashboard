@@ -2,7 +2,12 @@ import { useEffect, useState, useContext } from "react";
 import axios from "../../../../../services/axiosInstance";
 import { AuthContext } from "../../../../../../../context/AuthContext";
 
-export const usePortafolioFetch = ({ keyPath = null, dataMapper = null, filtros = {}, rawData = null }) => {
+export const usePortafolioFetch = ({
+  keyPath = null,
+  dataMapper = null,
+  filtros = {},
+  rawData = null,
+}) => {
   const [data, setData] = useState(null);
   const { getToken } = useContext(AuthContext);
 
@@ -24,14 +29,18 @@ export const usePortafolioFetch = ({ keyPath = null, dataMapper = null, filtros 
         });
 
         //CORREGIDO EL POST DEL AXIOS
-        const response = await axios.post("/back/public/api2025/2025-portafolio-tab-general", formData, {
-          headers: { t: token },
-        });
+        const response = await axios.post(
+          "/back/public/api2025/2025-portafolio-tab-general",
+          formData,
+          {
+            headers: { t: token },
+          }
+        );
 
         const responseData = response?.data;
-		
-		//console.log(responseData)
-		
+
+        //console.log(responseData)
+
         if (!responseData) {
           console.error("❌ Respuesta vacía:", response);
           return;
@@ -47,8 +56,7 @@ export const usePortafolioFetch = ({ keyPath = null, dataMapper = null, filtros 
           }
 
           setData(dataMapper(nestedData));
-        } 
-		else {
+        } else {
           setData(responseData);
         }
       } catch (error) {

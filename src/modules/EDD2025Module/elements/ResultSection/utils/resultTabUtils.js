@@ -69,4 +69,3 @@ export function buildInformesSostenedorDiario(data) {
 export function buildInformesNacionalDiario(data) {
   return buildGraficoDiarioMultipleSeries(data.series, data.fechas || []);
 }
-

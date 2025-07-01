@@ -7,7 +7,6 @@ const AvanceDiarioChart = ({
   title,
   rawData = null,
   filtros = {},
-  
 }) => {
   const { data } = usePortafolioFetch({
     keyPath,

@@ -29,14 +29,14 @@ function Contador({ fechaObjetivo }) {
   return (
     <div className="contador-banner">
       {diasRestantes > 0 ? (
-        <p>
+        <span>
           Faltan <strong>{diasRestantes}</strong> días para el{" "}
           <strong>10 de Noviembre</strong>.
-        </p>
+        </span>
       ) : diasRestantes === 0 ? (
-        <p>¡La fecha es hoy!</p>
+        <span>¡La fecha es hoy!</span>
       ) : (
-        <p>La fecha ya ha pasado.</p>
+        <span>La fecha ya ha pasado.</span>
       )}
     </div>
   );

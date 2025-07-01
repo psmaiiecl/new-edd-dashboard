@@ -54,6 +54,9 @@ export const MODULE_CHART_SETUP = {
   accessibility: {
     enabled: false,
   },
+  exporting: {
+    enabled: false,
+  },
   responsive: {
     rules: [
       {

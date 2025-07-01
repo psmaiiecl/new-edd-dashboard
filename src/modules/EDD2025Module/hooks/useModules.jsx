@@ -48,8 +48,8 @@ export function useModules() {
       setPortfolioChart(buildPortfolioModuleChart(data.docentes));
       changeLoadingStatus("portfolio", false);
     });
-	
-    changeLoadingStatus("resultados", true);
+
+    changeLoadingStatus("result", true);
     getResultData(getToken()).then((data) => {
       setResultChart(buildResultModuleChart(data.ratios));
       changeLoadingStatus("result", false);

@@ -91,14 +91,12 @@ export function TabGeneral() {
     agendamientoGlobal,
   } = useTabGeneral();
   useEffect(() => {
-    
-
     customFetch({
       route:
         BASE_API_URL_2024 +
         "/datos-json?etiqueta=2024-grabaciones-agendamiento-semanal-apilado",
-    }).then((data) =>
-      setWeeklyStackChart()
+    }).then(
+      (data) => setWeeklyStackChart()
       //buildAgendamientoApilado(weeklyStackChart, data.agendamiento_semanal)
     );
 
@@ -116,7 +114,6 @@ export function TabGeneral() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  
   return (
     <TabContent>
       <div className="normal-container">

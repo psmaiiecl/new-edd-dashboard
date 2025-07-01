@@ -5,7 +5,7 @@
   overflow-x: hidden;
   justify-content: space-between;
   align-items: center;
-  padding: 0 25px;
+  padding: 15px 25px;
   box-sizing: border-box;
 }
 
@@ -16,7 +16,7 @@
   box-sizing: border-box;
   font-size: 14px;
   justify-content: space-evenly;
-  padding: 15px 0 15px 0;
+  padding: 0;
   gap: 2%;
 }
 
@@ -45,7 +45,7 @@
 }
 
 .tab__addOns {
-  width: 300px;
+  min-width: 300px;
   height: fit-content;
   display: flex;
   gap: 20px;

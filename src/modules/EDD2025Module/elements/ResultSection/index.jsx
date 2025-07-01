@@ -6,14 +6,13 @@ import { TabGeneralResultados } from "./components/Tabs/TabGeneralResultados";
 import { Button } from "../../../../components/Button";
 import { useCustomDownload } from "../../../../hooks/useCustomDownload";
 import { BASE_API_URL_2025 } from "../../data/BASE_API_URL";
-import {RatiosPanel} from "./components/RatiosPanel/RatiosPanel"
+import { RatiosPanel } from "./components/RatiosPanel/RatiosPanel";
 
 export function ResultSection2025() {
   const customDownload = useCustomDownload();
   const [activeTab, setActiveTab] = useState("tab1");
   return (
     <ModulePageLayout>
-     
       <CustomTabs
         setActiveFn={setActiveTab}
         currentActive={activeTab}
@@ -53,11 +52,9 @@ export function ResultSection2025() {
           }}
         />
       </CustomTabs>
-       <div style={{ display: activeTab === "tab1" ? "block" : "none" }}>
+      <div style={{ display: activeTab === "tab1" ? "block" : "none" }}>
         <TabGeneralResultados />
       </div>
-
     </ModulePageLayout>
   );
 }
-

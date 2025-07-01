@@ -1,8 +1,11 @@
-import{ useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { BASE_API_URL_2025 } from "../../data/BASE_API_URL";
 
 export function RatiosPanel() {
-  const [ratios, setRatios] = useState({ ratioAcceso: null, ratioDescarga: null });
+  const [ratios, setRatios] = useState({
+    ratioAcceso: null,
+    ratioDescarga: null,
+  });
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

@@ -55,7 +55,8 @@ export const usePortafolioDataGeneral = (filtros) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const baseURL = "http://api-docentemas-dev.3htp.cloud:8095/back/public/api2025";
+  const baseURL =
+    "http://api-docentemas-dev.3htp.cloud:8095/back/public/api2025";
 
   useEffect(() => {
     if (!filtros || Object.keys(filtros).length === 0) return;

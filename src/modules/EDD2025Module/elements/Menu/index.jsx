@@ -38,6 +38,22 @@ export function Menu() {
           <HighchartsReact options={validationChart} highcharts={Highcharts} />
         </ModuleCard>
         <ModuleCard
+          title={"Entrega de Resultados"}
+          action={() => navigate("resultados")}
+          loading={loadingStatus.result}
+        >
+          <HighchartsReact options={resultChart} highcharts={Highcharts} />
+        </ModuleCard>
+        <ModuleCard
+          locked
+          title={"Portafolio"}
+          action={() => navigate("portafolio")}
+          loading={loadingStatus.portfolio}
+        >
+          <HighchartsReact options={portfolioChart} highcharts={Highcharts} />
+        </ModuleCard>
+        <ModuleCard
+          locked
           title={"Agendamiento de Grabaciones"}
           action={() => navigate("agendamiento-grabaciones")}
           loading={loadingStatus.agendamiento}
@@ -52,23 +68,7 @@ export function Menu() {
           Recuperacion SD
         </ModuleCard>
         <ModuleCard title={"Procesamiento de SD's"} locked />
-        <ModuleCard
-          locked
-          title={"Portafolio"}
-          action={() => navigate("portafolio")}
-          loading={loadingStatus.portfolio}
-        >
-          <HighchartsReact options={portfolioChart} highcharts={Highcharts} />
-        </ModuleCard>
         <ModuleCard title={"Corrección Portafolios"} locked />
-        <ModuleCard
-          locked
-          title={"Entrega de Resultados"}
-          action={() => navigate("resultados")}
-          loading={loadingStatus.result}
-        >
-          <HighchartsReact options={resultChart} highcharts={Highcharts} />
-        </ModuleCard>
         <ModuleCard
           title={"Mesa de Ayuda - Tickets"}
           loading={loadingStatus.help}

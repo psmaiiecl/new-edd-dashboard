@@ -3,7 +3,11 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import useAvanceDiarioChart from "../TabGeneralPortafolio/hooks/useAvanceDiarioChart";
 
-function AvanceSemanalStackedBarChart({ data, colors, title = "AVANCE SEMANAL DE PORTAFOLIO" }) {
+function AvanceSemanalStackedBarChart({
+  data,
+  colors,
+  title = "AVANCE SEMANAL DE PORTAFOLIO",
+}) {
   const { categories, series } = useAvanceDiarioChart(data, colors);
 
   const options = {
@@ -43,7 +47,9 @@ function AvanceSemanalStackedBarChart({ data, colors, title = "AVANCE SEMANAL DE
         const dia = this.x;
         let html = `<b>${dia}</b><br/>`;
         puntos.forEach((p) => {
-          html += `<span style="color:${p.series.color}">\u25CF</span> ${p.series.name}: <b>${p.point.valor}</b> (${p.y.toFixed(1)}%)<br/>`;
+          html += `<span style="color:${p.series.color}">\u25CF</span> ${
+            p.series.name
+          }: <b>${p.point.valor}</b> (${p.y.toFixed(1)}%)<br/>`;
         });
         return html;
       },

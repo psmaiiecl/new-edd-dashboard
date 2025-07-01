@@ -1,8 +1,8 @@
 import React, { memo } from "react";
 import GenericPieChart from "../../components/PieChart/GenericPieChart";
 import { usePortafolioDataGeneral } from "./hooks/usePortafolioDataGeneral";
-import { ConvertirPalabras } from "../../../../../../utils/portafolioUtils.js"
-import Contador from "../../Contador"
+import { ConvertirPalabras } from "../../../../../../utils/portafolioUtils.js";
+import Contador from "../../Contador";
 import AvanceDiarioChart from "../ScatterChart/AvanceDiarioChart";
 import AvanceIniciadosChart from "../ScatterChart/AvanceIniciadosChart";
 import AvanceSemanalStackedBarChart from "../BarChart/AvanceSemanalStackedBarChart";
@@ -11,28 +11,53 @@ import AvanceSemanalStackedBarChart from "../BarChart/AvanceSemanalStackedBarCha
 const createMapper = (subtitle, totalKey, seriesConfig) => (data) =>
   data
     ? {
-      total: { subtitle, data: data[totalKey] },
-      series: seriesConfig.map(({ name, key, color }) => ({
-        name,
-        y: data[key],
-        color,
-      })),
-    }
+        total: { subtitle, data: data[totalKey] },
+        series: seriesConfig.map(({ name, key, color }) => ({
+          name,
+          y: data[key],
+          color,
+        })),
+      }
     : {
-      total: { subtitle: "", data: 0 }, series: []
-    };
+        total: { subtitle: "", data: 0 },
+        series: [],
+      };
 
 //Mapeadores para cada tipo de gráfico
 const mapAvanceDiario = (data) => ({
   fechas: data.fechas,
   keyPath: "portafolio-avance-diario",
   series: [
-    { name: ConvertirPalabras("Portafolios Completados"), color: "#5157FF", data: data.pfCompletado },
-    { name: ConvertirPalabras("Portafolios Iniciados"), color: "#FF8E53", data: data.pfIniciados },
-    { name: ConvertirPalabras("Módulo 1 Iniciado"), color: "#65D9AB", data: data.m1Iniciado_cant },
-    { name: ConvertirPalabras("Módulo 2 Iniciado"), color: "#FFD153", data: data.m2Iniciado_cant },
-    { name: ConvertirPalabras("Módulo 3 Iniciado"), color: "#FF5880", data: data.m3Iniciado_cant },
-    { name: ConvertirPalabras("Docentes que Rinden Portafolio"), color: "#b5ef59", data: '' },
+    {
+      name: ConvertirPalabras("Portafolios Completados"),
+      color: "#5157FF",
+      data: data.pfCompletado,
+    },
+    {
+      name: ConvertirPalabras("Portafolios Iniciados"),
+      color: "#FF8E53",
+      data: data.pfIniciados,
+    },
+    {
+      name: ConvertirPalabras("Módulo 1 Iniciado"),
+      color: "#65D9AB",
+      data: data.m1Iniciado_cant,
+    },
+    {
+      name: ConvertirPalabras("Módulo 2 Iniciado"),
+      color: "#FFD153",
+      data: data.m2Iniciado_cant,
+    },
+    {
+      name: ConvertirPalabras("Módulo 3 Iniciado"),
+      color: "#FF5880",
+      data: data.m3Iniciado_cant,
+    },
+    {
+      name: ConvertirPalabras("Docentes que Rinden Portafolio"),
+      color: "#b5ef59",
+      data: "",
+    },
   ],
 });
 const mapAvanceIniciados = (data) => ({
@@ -40,8 +65,16 @@ const mapAvanceIniciados = (data) => ({
   keyPath: "portafolio-avance-iniciados",
 
   series: [
-    { name: ConvertirPalabras("Porcentaje avance 2023"), color: "#5157FF", data: data.avance_diario2023 },
-    { name: ConvertirPalabras("Porcentaje avance 2024"), color: "#FF8E53", data: data.pfIniciados },
+    {
+      name: ConvertirPalabras("Porcentaje avance 2023"),
+      color: "#5157FF",
+      data: data.avance_diario2023,
+    },
+    {
+      name: ConvertirPalabras("Porcentaje avance 2024"),
+      color: "#FF8E53",
+      data: data.pfIniciados,
+    },
   ],
 });
 
@@ -247,86 +280,83 @@ export function TabGeneralPortafolio({ filtros }) {
   return (
     <>
       <Contador fechaObjetivo="2025-11-10" />
-      <div className="tab-general">
-        <div className="tab-general-upper">
-          <div className="tab-general-docente">
-            <PieChartContainer
-              subtitle="DOCENTES <b>VALIDADOS</b>"
-              dataKey={data?.["portafolio-docentes-validados"]?.docentes}
-              mapper={mappers.docentesEvaluados}
-            />
-            <PieChartContainer
-              subtitle="AVANCE <b>PORTAFOLIO</b>"
-              dataKey={data?.["portafolio-avance-portafolio"]?.docentes}
-              mapper={mappers.avancePortafolio}
-            />
-            <PieChartContainer
-              subtitle="AVANCE <b>MÓDULO 1</b>"
-              dataKey={data?.["portafolio-avance-modulo-uno"]?.docentes}
-              mapper={mappers.avanceModuloUno}
-            />
-          </div>
-          <div className="tab-general-docente">
-            {/* <PieChartContainer
+      <div className="normal-container">
+        <div className="pie-grid-3">
+          <PieChartContainer
+            subtitle="DOCENTES <b>VALIDADOS</b>"
+            dataKey={data?.["portafolio-docentes-validados"]?.docentes}
+            mapper={mappers.docentesEvaluados}
+          />
+          <PieChartContainer
+            subtitle="AVANCE <b>PORTAFOLIO</b>"
+            dataKey={data?.["portafolio-avance-portafolio"]?.docentes}
+            mapper={mappers.avancePortafolio}
+          />
+          <PieChartContainer
+            subtitle="AVANCE <b>MÓDULO 1</b>"
+            dataKey={data?.["portafolio-avance-modulo-uno"]?.docentes}
+            mapper={mappers.avanceModuloUno}
+          />
+        </div>
+        <div className="pie-grid-2">
+          {/* <PieChartContainer
             subtitle="AVANCE <b>MÓDULO 2</b>"
             dataKey={data?.["portafolio-avance-modulo-dos"]?.docentes}
             mapper={mappers.avanceModuloDos}
           /> */}
-            <PieChartContainer
-              subtitle="AVANCE <b>MÓDULO 2 FICHA</b>"
-              dataKey={data?.["portafolio-avance-modulo-dos-ficha"]?.docentes}
-              mapper={mappers.avanceModuloDosFicha}
-            />
-            <PieChartContainer
-              subtitle="AVANCE <b>MÓDULO 2 CLASE GRABADA</b>"
-              dataKey={data?.["portafolio-avance-modulo-dos-grabada"]?.docentes}
-              mapper={mappers.avanceModuloDosClase}
-            />
-          </div>
-          <div className="tab-general-docente">
-            <PieChartContainer
-              subtitle="AVANCE <b>MÓDULO 3</b>"
-              dataKey={data?.["portafolio-avance-modulo-tres"]?.docentes}
-              mapper={mappers.avanceModuloTres}
-            />
-            <PieChartContainer
-              subtitle="AVANCE <b> REPORTE M3 DIRECTORES"
-              dataKey={data?.["portafolio-reporte-directores"]?.docentes}
-              mapper={mappers.avanceReporteDirectores}
-            />
-          </div>
-          <div className="tab-general-docente">
-            <PieChartContainer
-              subtitle="DESCARGA <b>PORTAFOLIO</b>"
-              dataKey={data?.["portafolio-avance-descarga-portafolio"]?.docentes}
-              mapper={mappers.avanceDescargaPortafolio}
-            />
-            <PieChartContainer
-              subtitle="VISUALIZACIÓN <b>CLASE GRABADA</b>"
-              dataKey={data?.["portafolio-avance-visualizacion"]?.docentes}
-              mapper={mappers.avanceVisualizacion}
-            />
-            <PieChartContainer
-              subtitle="DESCARGA <b>CLASE GRABADA</b>"
-              dataKey={data?.["portafolio-avance-descarga-clase"]?.docentes}
-              mapper={mappers.avanceDescargaClase}
-            />
-          </div>
-          <AvanceDiarioChart
-            title="AVANCE DIARIO <b>PORTAFOLIO</b>"
-            keyPath="portafolio-avance-diario"
-            dataMapper={mapAvanceDiario}
-            filtros={filtros}
+          <PieChartContainer
+            subtitle="AVANCE <b>MÓDULO 2 FICHA</b>"
+            dataKey={data?.["portafolio-avance-modulo-dos-ficha"]?.docentes}
+            mapper={mappers.avanceModuloDosFicha}
           />
-          <AvanceIniciadosChart
-            title="AVANCE DIARIO <b>PORTAFOLIO INICIADO</b>"
-            dataMapper={mapAvanceIniciados}
-            filtros={filtros}
+          <PieChartContainer
+            subtitle="AVANCE <b>MÓDULO 2 CLASE GRABADA</b>"
+            dataKey={data?.["portafolio-avance-modulo-dos-grabada"]?.docentes}
+            mapper={mappers.avanceModuloDosClase}
           />
-          <AvanceSemanalStackedBarChart
+        </div>
+        <div className="pie-grid-2">
+          <PieChartContainer
+            subtitle="AVANCE <b>MÓDULO 3</b>"
+            dataKey={data?.["portafolio-avance-modulo-tres"]?.docentes}
+            mapper={mappers.avanceModuloTres}
+          />
+          <PieChartContainer
+            subtitle="AVANCE <b> REPORTE M3 DIRECTORES"
+            dataKey={data?.["portafolio-reporte-directores"]?.docentes}
+            mapper={mappers.avanceReporteDirectores}
+          />
+        </div>
+        <div className="pie-grid-3">
+          <PieChartContainer
+            subtitle="DESCARGA <b>PORTAFOLIO</b>"
+            dataKey={data?.["portafolio-avance-descarga-portafolio"]?.docentes}
+            mapper={mappers.avanceDescargaPortafolio}
+          />
+          <PieChartContainer
+            subtitle="VISUALIZACIÓN <b>CLASE GRABADA</b>"
+            dataKey={data?.["portafolio-avance-visualizacion"]?.docentes}
+            mapper={mappers.avanceVisualizacion}
+          />
+          <PieChartContainer
+            subtitle="DESCARGA <b>CLASE GRABADA</b>"
+            dataKey={data?.["portafolio-avance-descarga-clase"]?.docentes}
+            mapper={mappers.avanceDescargaClase}
           />
         </div>
       </div>
+      <AvanceDiarioChart
+        title="AVANCE DIARIO <b>PORTAFOLIO</b>"
+        keyPath="portafolio-avance-diario"
+        dataMapper={mapAvanceDiario}
+        filtros={filtros}
+      />
+      <AvanceIniciadosChart
+        title="AVANCE DIARIO <b>PORTAFOLIO INICIADO</b>"
+        dataMapper={mapAvanceIniciados}
+        filtros={filtros}
+      />
+      <AvanceSemanalStackedBarChart />
     </>
   );
 }

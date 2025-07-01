@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 function calcularDiasRestantes(fechaObjetivoStr) {
   const hoy = new Date();
   const fechaObjetivo = new Date(fechaObjetivoStr);
@@ -11,10 +11,10 @@ function calcularDiasRestantes(fechaObjetivoStr) {
   return Math.floor(diffMs / (1000 * 60 * 60 * 24));
 }
 
-function Contador ({ fechaObjetivo })  {
-
-  
-  const [diasRestantes, setDiasRestantes] = useState(() => calcularDiasRestantes(fechaObjetivo));
+function Contador({ fechaObjetivo }) {
+  const [diasRestantes, setDiasRestantes] = useState(() =>
+    calcularDiasRestantes(fechaObjetivo)
+  );
 
   useEffect(() => {
     // Actualiza el contador cada 24 horas (86400000 ms)
@@ -31,7 +31,9 @@ function Contador ({ fechaObjetivo })  {
   return (
     <div className="general-pie-chart-container">
       {diasRestantes > 0 ? (
-        <p>Faltan <strong>{diasRestantes}</strong> días para la fecha objetivo.</p>
+        <p>
+          Faltan <strong>{diasRestantes}</strong> días para la fecha objetivo.
+        </p>
       ) : diasRestantes === 0 ? (
         <p>¡La fecha es hoy!</p>
       ) : (
@@ -39,6 +41,5 @@ function Contador ({ fechaObjetivo })  {
       )}
     </div>
   );
-};
+}
 export default Contador;
-

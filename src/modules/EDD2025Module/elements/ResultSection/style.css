@@ -9,22 +9,20 @@
   background: #f5f5f5;
   padding: 8px 12px;
   border-radius: 8px;
-  box-shadow: 0 0 4px rgba(0,0,0,0.1);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
 }
+
 .contador-banner {
   opacity: 0.9;
   color: #484747;
-  text-align: left;
   padding: 0.5rem 0;
   font-family: Arial, sans-serif;
   font-size: 0.8rem;
-  margin-right: 66px;
-  
+  text-align: right;
+
 }
-.contador-banner p {
-  margin: 0;
-}
+
 .contador-banner strong {
   font-size: 0.8rem;
-  color: #0f69b5; 
+  color: #0f69b5;
 }

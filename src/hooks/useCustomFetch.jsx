@@ -54,11 +54,11 @@ export function useCustomFetch() {
           parsedFormData.append(key, formData[key].value);
         }
         options.body = parsedFormData;
-        delete options.headers['Content-Type'];
+        delete options.headers["Content-Type"];
       }
 
       if (hasLoadPanel) queueLoading();
-      try {        
+      try {
         const response = await fetch(URL, options);
 
         if (!response.ok) {

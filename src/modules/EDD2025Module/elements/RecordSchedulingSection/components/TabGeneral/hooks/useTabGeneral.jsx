@@ -26,17 +26,16 @@ export function useTabGeneral() {
       )
     );
     setEstablecimientosAgendados(
-        mapPieData(
-          {
-            establecimientos_agendamiento_completo: 100,
-            establecimientos_agendamiento_iniciado: 100,
-            establecimientos_contacto_inicial_exitoso: 100,
-            establecimientos_contacto_inicial_fallido: 100,
-            establecimientos_sin_contactar: 100,
-          },
-          mappers.establecimientos_agendados
-        )
-
+      mapPieData(
+        {
+          establecimientos_agendamiento_completo: 100,
+          establecimientos_agendamiento_iniciado: 100,
+          establecimientos_contacto_inicial_exitoso: 100,
+          establecimientos_contacto_inicial_fallido: 100,
+          establecimientos_sin_contactar: 100,
+        },
+        mappers.establecimientos_agendados
+      )
     );
     customFetch({
       route:

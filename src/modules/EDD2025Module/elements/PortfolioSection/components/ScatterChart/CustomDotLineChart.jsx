@@ -14,16 +14,16 @@ export function CustomDotLineChart({ title, fechas, series, textGraph }) {
     title: {
       useHTML: true,
       text: title,
-      align: 'center',
+      align: "center",
       style: {
-        fontWeight: 'bold',
-        fontSize: '18px',
-      }
+        fontWeight: "bold",
+        fontSize: "18px",
+      },
     },
     xAxis: {
       categories: fechas,
       title: {
-         textGraph,
+        textGraph,
       },
       labels: {
         rotation: -45,
@@ -37,9 +37,8 @@ export function CustomDotLineChart({ title, fechas, series, textGraph }) {
         enabled: false,
       },
       labels: {
-        format: '{value}'
-
-      }
+        format: "{value}",
+      },
     },
     tooltip: {
       shared: true,
@@ -48,38 +47,35 @@ export function CustomDotLineChart({ title, fechas, series, textGraph }) {
     },
     plotOptions: {
       series: {
-        color: '#FFA500',
+        color: "#FFA500",
         label: {
           connectorAllowed: false,
           valueDecimals: 2,
         },
+      },
+    },
 
-    }
-
-  },
-    
     series: series.map((s) => ({
       name: s.name,
       data: s.data,
       color: s.color,
     })),
-      credits: {
-    enabled: false,
+    credits: {
+      enabled: false,
     },
-  legend: {
-    layout: "horizontal",
+    legend: {
+      layout: "horizontal",
       align: "center",
-        verticalAlign: "bottom",
+      verticalAlign: "bottom",
     },
-};
+  };
 
-//TODO: CREAR COMPONENTE  PARA QUE GRAFIQUE
-console.log("Crear grafico de linea")
+  //TODO: CREAR COMPONENTE  PARA QUE GRAFIQUE
+  console.log("Crear grafico de linea");
 
-return (
-  <div className="general-point-chart-container">
-    <HighchartsReact highcharts={Highcharts} options={options} />
-  </div>
-);
-
+  return (
+    <div className="dot-line-container">
+      <HighchartsReact highcharts={Highcharts} options={options} />
+    </div>
+  );
 }

@@ -61,6 +61,7 @@
     grid-template-columns: 1fr;
     row-gap: 20px;
   }
+
   .tab-dependencia-table-container {
     width: 80%;
     margin: auto;
