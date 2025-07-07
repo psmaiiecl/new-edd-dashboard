@@ -1,19 +1,23 @@
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "../../../../../services/axiosInstance";
+import { LoadingContext } from "../../../../../../../context/LoadingContext";
 
 export const usePortafolioDataGeneral = (filtros) => {
   const [data, setData] = useState(null);
+  const {queueLoading, dequeueLoading} = useContext(LoadingContext);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  // const baseURL =
+  //   "http://api-docentemas-dev.3htp.cloud:8095/back/public/api2025";
   const baseURL =
-    "http://api-docentemas-dev.3htp.cloud:8095/back/public/api2025";
+    import.meta.env.VITE_BASE_URL + "/back/public/api2025";
 
   useEffect(() => {
     if (!filtros || Object.keys(filtros).length === 0) return;
 
-    setLoading(true);
+    queueLoading(true);
     setError(null);
 
     const body = new FormData();
@@ -25,16 +29,16 @@ export const usePortafolioDataGeneral = (filtros) => {
       .post(`${baseURL}/2025-portafolio-tab-general`, body)
       .then((res) => {
         setData(res.data);
-        console.log("Datos portafolio:", res.data);
       })
       .catch((err) => {
         console.error("Error al obtener datos de portafolio:", err);
         setError(err);
       })
       .finally(() => {
-        setLoading(false);
+        dequeueLoading(false);
       });
-  }, [JSON.stringify(filtros)]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filtros]);
 
-  return { data, loading, error };
+  return { data, error };
 };

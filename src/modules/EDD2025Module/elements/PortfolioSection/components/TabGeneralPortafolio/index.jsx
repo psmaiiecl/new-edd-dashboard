@@ -12,17 +12,17 @@ import AvanceIniciadosChart from "../ScatterChart/AvanceIniciadosChart";
 const createMapper = (subtitle, totalKey, seriesConfig) => (data) =>
   data
     ? {
-      total: { subtitle, data: data[totalKey] },
-      series: seriesConfig.map(({ name, key, color }) => ({
-        name,
-        y: data[key],
-        color,
-      })),
-    }
+        total: { subtitle, data: data[totalKey] },
+        series: seriesConfig.map(({ name, key, color }) => ({
+          name,
+          y: data[key],
+          color,
+        })),
+      }
     : {
-      total: { subtitle: "", data: 0 },
-      series: [],
-    };
+        total: { subtitle: "", data: 0 },
+        series: [],
+      };
 
 //Mapeadores para cada tipo de gráfico
 
@@ -70,10 +70,15 @@ const mapAvanceDiario = (data, dataGeneral) => {
   const m3Iniciado = data.m3Iniciado_cant;
 
   // TOTALES fijos desde dataGeneral
-  const rindenPortafolioTotal = dataGeneral?.["portafolio-docentes-validados"]?.docentes?.rinden_portafolio || 0;
-  const suspendidosTotal = dataGeneral?.["portafolio-docentes-validados"]?.docentes?.suspendidos || 0;
+  const rindenPortafolioTotal =
+    dataGeneral?.["portafolio-docentes-validados"]?.docentes
+      ?.rinden_portafolio || 0;
+  const suspendidosTotal =
+    dataGeneral?.["portafolio-docentes-validados"]?.docentes?.suspendidos || 0;
 
-  const rindenPortafolioPorFecha = fechas.map(() => rindenPortafolioTotal - suspendidosTotal);
+  const rindenPortafolioPorFecha = fechas.map(
+    () => rindenPortafolioTotal - suspendidosTotal
+  );
 
   return {
     fechas,
@@ -192,41 +197,48 @@ const mappers = {
   //   { name: ConvertirPalabras("M2 INICIADO"), key: "m2_iniciado", color: "#ff8e53" },
   //   { name: ConvertirPalabras("M2 NO INICIADO"), key: "m2_no_iniciado", color: "#ff5880" },
   // ]),
-  avanceModuloDosFicha: createMapper("AVANCE <b>MÓDULO 2 FICHA</b>", "total_m2", [
-    {
-      name: ConvertirPalabras("FICHA COMPLETADA"),
-      key: "m2_completado",
-      color: "#65d9ab",
-    },
-    {
-      name: ConvertirPalabras("FICHA INICIADA"),
-      key: "m2_iniciado",
-      color: "#ff8e53",
-    },
-    {
-      name: ConvertirPalabras("FICHA NO INICIADA"),
-      key: "m2_no_iniciado",
-      color: "#ff5880",
-    },
-   
-  ]),
-  avanceModuloDosClase: createMapper("AVANCE <b>CLASE GRABADA</b>", "total_m2", [
-    {
-      name: ConvertirPalabras("CLASE GRABADA"),
-      key: "m2_completado",
-      color: "#65d9ab",
-    },
-    {
-      name: ConvertirPalabras("GRABACIÓN INICIADA"),
-      key: "m2_iniciado",
-      color: "#ff8e53",
-    },
-    {
-      name: ConvertirPalabras("CLASE NO GRABADA"),
-      key: "m2_no_iniciado",
-      color: "#ff5880",
-    },
-  ]),
+  avanceModuloDosFicha: createMapper(
+    "AVANCE <b>MÓDULO 2 FICHA</b>",
+    "total_m2",
+    [
+      {
+        name: ConvertirPalabras("FICHA COMPLETADA"),
+        key: "m2_completado",
+        color: "#65d9ab",
+      },
+      {
+        name: ConvertirPalabras("FICHA INICIADA"),
+        key: "m2_iniciado",
+        color: "#ff8e53",
+      },
+      {
+        name: ConvertirPalabras("FICHA NO INICIADA"),
+        key: "m2_no_iniciado",
+        color: "#ff5880",
+      },
+    ]
+  ),
+  avanceModuloDosClase: createMapper(
+    "AVANCE <b>CLASE GRABADA</b>",
+    "total_m2",
+    [
+      {
+        name: ConvertirPalabras("CLASE GRABADA"),
+        key: "m2_completado",
+        color: "#65d9ab",
+      },
+      {
+        name: ConvertirPalabras("GRABACIÓN INICIADA"),
+        key: "m2_iniciado",
+        color: "#ff8e53",
+      },
+      {
+        name: ConvertirPalabras("CLASE NO GRABADA"),
+        key: "m2_no_iniciado",
+        color: "#ff5880",
+      },
+    ]
+  ),
   avanceModuloTres: createMapper("AVANCE <b>MÓDULO 3</b>", "total_m3", [
     {
       name: ConvertirPalabras("M3 COMPLETADO"),
@@ -339,23 +351,17 @@ export function TabGeneralPortafolio({ filtros }) {
         <div className="pie-grid-3">
           <PieChartContainer
             subtitle="DOCENTES <b>VALIDADOS</b>"
-            dataKey={
-              dataGeneral?.["portafolio-docentes-validados"]?.docentes
-            }
+            dataKey={dataGeneral?.["portafolio-docentes-validados"]?.docentes}
             mapper={mappers.docentesEvaluados}
           />
           <PieChartContainer
             subtitle="AVANCE <b>PORTAFOLIO</b>"
-            dataKey={
-              dataGeneral?.["portafolio-avance-portafolio"]?.docentes
-            }
+            dataKey={dataGeneral?.["portafolio-avance-portafolio"]?.docentes}
             mapper={mappers.avancePortafolio}
           />
           <PieChartContainer
             subtitle="AVANCE <b>MÓDULO 1</b>"
-            dataKey={
-              dataGeneral?.["portafolio-avance-modulo-uno"]?.docentes
-            }
+            dataKey={dataGeneral?.["portafolio-avance-modulo-uno"]?.docentes}
             mapper={mappers.avanceModuloUno}
           />
         </div>
@@ -379,16 +385,12 @@ export function TabGeneralPortafolio({ filtros }) {
         <div className="pie-grid-2">
           <PieChartContainer
             subtitle="AVANCE <b>MÓDULO 3</b>"
-            dataKey={
-              dataGeneral?.["portafolio-avance-modulo-tres"]?.docentes
-            }
+            dataKey={dataGeneral?.["portafolio-avance-modulo-tres"]?.docentes}
             mapper={mappers.avanceModuloTres}
           />
           <PieChartContainer
             subtitle="AVANCE <b> REPORTE M3 DIRECTORES"
-            dataKey={
-              dataGeneral?.["portafolio-reporte-directores"]?.docentes
-            }
+            dataKey={dataGeneral?.["portafolio-reporte-directores"]?.docentes}
             mapper={mappers.avanceReporteDirectores}
           />
         </div>
@@ -421,18 +423,20 @@ export function TabGeneralPortafolio({ filtros }) {
       <AvanceDiarioChart
         title="AVANCE DIARIO <b>PORTAFOLIO</b>"
         keyPath="portafolio-avance-diario"
-        dataMapper={(data) => mapAvanceDiario(data, dataGeneral)}
+        dataMapper={mapAvanceDiario}
         filtros={filtros}
+        // rawData={dataGeneral?.["portafolio-avance-diario"]}
+        rawData={dataGeneral}
       />
 
       <AvanceIniciadosChart
         title="AVANCE DIARIO <b>PORTAFOLIO INICIADO</b>"
         dataMapper={mapAvanceIniciados}
         filtros={filtros}
+        rawData={dataGeneral}
       />
 
       {/* <AvanceSemanalChart/> */}
-
     </>
   );
 }
