@@ -53,7 +53,6 @@ export function Menu() {
           <HighchartsReact options={portfolioChart} highcharts={Highcharts} />
         </ModuleCard>
         <ModuleCard
-          locked
           title={"Agendamiento de Grabaciones"}
           action={() => navigate("agendamiento-grabaciones")}
           loading={loadingStatus.agendamiento}

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { TabGeneral } from "./components/TabGeneral";
-import { Tabs } from "./components/Tabs";
 import "./index.css";
 import { tabList } from "./data/TabList";
 import { ModulePageLayout } from "../../../../components/Layout/ModulePageLayout";
