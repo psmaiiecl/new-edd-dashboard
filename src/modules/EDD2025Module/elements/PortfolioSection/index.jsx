@@ -18,10 +18,10 @@ export function PortfolioSection2025() {
     region: "",
   });
 
-  const handleFiltroChange = (filtroNombre, valor) => {
+  const handleFiltroChange = (dependencia, valor) => {
     setFiltros((prev) => ({
       ...prev,
-      [filtroNombre]: valor,
+      [dependencia]: valor,
     }));
   };
 
@@ -36,6 +36,7 @@ export function PortfolioSection2025() {
             filtros={filtros}
             onFiltroChange={handleFiltroChange}
           />
+
           <TabGeneralPortafolio
             filtros={filtros}
             onFiltroChange={handleFiltroChange}

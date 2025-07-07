@@ -5,11 +5,11 @@ export function buildResultModuleChart(ratios) {
     ? ratios.informes_individuales_descargados
     : 0;
   const individuales_no_descargados =
-    ratios.informes_individuales - individuales_descargados
-      ? ratios.informes_individuales_descargados
+    ratios.informes_individuales_no_descargados
+      ? ratios.informes_individuales_no_descargados
       : 0;
 
-  const total = individuales_descargados + individuales_no_descargados;
+  const total = ratios.informes_individuales;
   return {
     ...MODULE_CHART_SETUP,
     series: [

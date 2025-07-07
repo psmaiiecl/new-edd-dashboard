@@ -1,22 +1,19 @@
 import React from "react";
 import GenericColumnChart from "../../components/ColumnChart/GenericColumnChart";
 
-//(modificado por Roberto) se agregó esta línea para importar el hook usePortafolioDataDependencia.jsx
 import { usePortafolioDataRegion } from "./Hooks/usePortafolioDataRegion.jsx";
 
-//(modificado por Roberto) se quetan el objeto de filtros, pues en dependencia no hay filtros
-//export function TabDependenciaPortafolio({ filtros = {} }) {
+
 export function TabRegionPortafolio() {
-  //(modificado por Roberto) acá seinicaliza el hook usePortafolioDataDependencia
+
   const { data } = usePortafolioDataRegion();
 
-  //const serviceUrl = "/2025-portafolio-tab-region"; // Esta ruta ya se usa en el hook
   const nf = new Intl.NumberFormat("es-CL");
 
   const avanceRegionMapper = (data) => {
-    const dependencias = data?.docentes ?? {};
+    const region = data?.docentes ?? {};
 
-    const categories = Object.keys(dependencias);
+    const categories = Object.keys(region);
 
     const colores = {
       completado: "#2ecc71",
@@ -30,7 +27,7 @@ export function TabRegionPortafolio() {
       name: tipo.replace("_", " ").replace(/\b\w/g, (l) => l.toUpperCase()),
       color: colores[tipo],
       data: categories.map((dep) => {
-        const valores = dependencias[dep];
+        const valores = region[dep];
         const total =
           valores.completado + valores.iniciado + valores.no_iniciado;
         const valor = valores[tipo];
@@ -46,7 +43,7 @@ export function TabRegionPortafolio() {
     }));
 
     const totalDocentes = categories.reduce((sum, dep) => {
-      const v = dependencias[dep];
+      const v = region[dep];
       return sum + v.completado + v.iniciado + v.no_iniciado;
     }, 0);
 
@@ -55,7 +52,7 @@ export function TabRegionPortafolio() {
       series,
       total: {
         data: `${nf.format(totalDocentes)}`,
-        subtitulo: "Avance por dependencia",
+        subtitulo: "Avance por región",
       },
     };
   };
@@ -75,7 +72,7 @@ export function TabRegionPortafolio() {
         <div className="general-pie-chart-container">
           {data && (
             <GenericColumnChart
-              subtitle="ESTADO DE AVANCE DEL MÓDULO 1 POR DEPENDENCIA"
+              subtitle="ESTADO DE AVANCE DEL MÓDULO 1 POR REGIÓN"
               rawData={() =>
                 avanceRegionMapper(data["portafolio-avance-region-m1"])
               }
@@ -85,7 +82,7 @@ export function TabRegionPortafolio() {
         <div className="general-pie-chart-container">
           {data && (
             <GenericColumnChart
-              subtitle="ESTADO DE AVANCE DEL MÓDULO 2 POR DEPENDENCIA"
+              subtitle="ESTADO DE AVANCE DEL MÓDULO 2 POR REGIÓN"
               rawData={() =>
                 avanceRegionMapper(data["portafolio-avance-region-m2"])
               }
@@ -95,7 +92,7 @@ export function TabRegionPortafolio() {
         <div className="general-pie-chart-container">
           {data && (
             <GenericColumnChart
-              subtitle="ESTADO DE AVANCE DEL MÓDULO 2 POR DEPENDENCIA"
+              subtitle="ESTADO DE AVANCE DEL MÓDULO 2 POR REGIÓN"
               rawData={() =>
                 avanceRegionMapper(data["portafolio-avance-region-m3"])
               }

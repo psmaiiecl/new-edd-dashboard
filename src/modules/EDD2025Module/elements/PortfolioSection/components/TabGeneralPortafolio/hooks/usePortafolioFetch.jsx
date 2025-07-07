@@ -12,6 +12,7 @@ export const usePortafolioFetch = ({
   const { getToken } = useContext(AuthContext);
 
   useEffect(() => {
+    
     const fetchData = async () => {
       try {
         if (rawData) {
@@ -29,24 +30,26 @@ export const usePortafolioFetch = ({
         });
 
         //CORREGIDO EL POST DEL AXIOS
-        const response = await axios.post(
-          "/back/public/api2025/2025-portafolio-tab-general",
-          formData,
-          {
-            headers: { t: token },
-          }
-        );
+        // const response = await axios.post(
+        //   "/back/public/api2025/2025-portafolio-tab-general",
+        //   formData,
+        //   {
+        //     headers: { t: token },
+        //   }
+        // );
 
-        const responseData = response?.data;
+        // const responseData = response?.data;
+        const responseData = null;
 
         //console.log(responseData)
 
-        if (!responseData) {
-          console.error("❌ Respuesta vacía:", response);
-          return;
-        }
+        // if (!responseData) {
+        //   console.error("❌ Respuesta vacía:", response);
+        //   return;
+        // }
 
-        if (keyPath && dataMapper) {
+        //if (keyPath && dataMapper) {
+        if (keyPath && dataMapper &&responseData) {
           const nestedData = keyPath
             .split(".")
             .reduce((obj, key) => obj?.[key], responseData);
@@ -65,7 +68,9 @@ export const usePortafolioFetch = ({
     };
 
     fetchData();
-  }, [keyPath, dataMapper, JSON.stringify(filtros), rawData]);
+  //}, [keyPath, dataMapper, JSON.stringify(filtros), rawData]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filtros]);
 
   return { data };
 };

@@ -45,7 +45,6 @@ export function Menu() {
           <HighchartsReact options={resultChart} highcharts={Highcharts} />
         </ModuleCard>
         <ModuleCard
-          locked
           title={"Portafolio"}
           action={() => navigate("portafolio")}
           loading={loadingStatus.portfolio}

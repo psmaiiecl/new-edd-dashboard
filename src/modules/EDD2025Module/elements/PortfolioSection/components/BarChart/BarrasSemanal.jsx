@@ -1,69 +1,81 @@
-import React from "react";
-import { AvanceDiarioStackedBarChart } from "./AvanceDiarioStackedBarChart";
-import { useAvanceDiarioChart } from "./hooks/useAvanceDiarioChart";
 
-function mapAvanceSemanal(data) {
-  if (!data) return null;
+function AvanceSemanalChart({ BarrasSemanal, containerId = "avance-semanal-portafolio" }) {
 
-  // Extrae fechas
-  const fechas = data["portafolio-avance-diario"]?.fechas ?? [];
+    const { data } = BarrasSemanal;
 
-  // Series de avance
-  const avance = data["portafolio-avance-portafolio"] ?? {};
+  useEffect(() => {
+    Highcharts.setOptions({
+      lang: { thousandsSep: "." }
+    });
+  }, []);
 
-  const tipos = ["completado", "iniciado", "no_iniciado"];
-
-  const colores = {
-    completado: "#2ecc71",
-    iniciado: "#f1c40f",
-    no_iniciado: "#e74c3c",
-  };
-
-  // Construir series apiladas
-  const series = tipos.map((tipo) => {
-    return {
-      name: tipo.replace("_", " ").replace(/\b\w/g, (l) => l.toUpperCase()),
-      color: colores[tipo],
-      data: fechas.map((fecha, index) => {
-        const valor = avance[tipo]?.[index] ?? 0;
-
-        const total = tipos.reduce(
-          (sum, t) => sum + (avance[t]?.[index] ?? 0),
-          0
-        );
-        const porcentaje = total ? (valor / total) * 100 : 0;
-
-        return {
-          y: parseFloat(porcentaje.toFixed(2)),
-          valor,
-          porcentaje: porcentaje.toFixed(1),
-          total,
-        };
-      }),
-    };
-  });
-  return {
-    categories: fechas,
-    series,
-  };
-}
-
-export default function BarrasSemanal() {
-  const { data } = useAvanceDiarioChart();
-
-  const customColors = {
-    completado: "#4CAF50",
-    iniciado: "#FFC107",
-    no_iniciado: "#F44336",
+  const chartOptions = {
+    chart: {
+      type: "bar",
+      style: {
+        color: "rgb(102, 102, 102)",
+        fontSize: "15px",
+        fontWeight: "bold",
+      },
+    },
+    colors: ['#FF5880', '#FF8E53', '#FFD153', '#8FB8FF', '#65D9AB'],
+    title: {
+      text: "",
+      align: "center",
+      style: {
+        fontWeight: "bold",
+        color: "#5157FF",
+        fontSize: "35px",
+      },
+    },
+    subtitle: {
+      useHTML: true,
+      text: "<b>Estado de Procesamiento de las SD Recepcionadas cada día</b>",
+      align: "center",
+      style: { fontSize: "15px", marginBottom: 10 },
+    },
+    xAxis: {
+      type: "datetime",
+      tickInterval: 24 * 3600 * 1000,
+      min: Date.UTC(2024, 8, 9), // septiembre es 8 en JS (0-index)
+      max: Date.UTC(2024, 11, 11),
+      labels: {
+        format: "{value:%d-%m-%Y}",
+      },
+    },
+    yAxis: {
+      visible: true,
+      title: { text: "" },
+      labels: { format: "{value}", style: { fontSize: "13px" } },
+    },
+    time: {
+      timezone: "America/Santiago",
+      useUTC: false,
+    },
+    tooltip: {
+      // formatter: function () {
+      //   const days = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+      //   const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+      //   const date = new Date(this.x);
+      //   return ({<b>${days[date.getDay()]}, ${date.getDate()} de ${months[date.getMonth()]}</b><br/>Cantidad: ${Highcharts.numberFormat(this.y, 0, ',', '.')};
+      // }
+    },
+    legend: { fontSize: "12px" },
+    plotOptions: {
+      bar: {
+        stacking: "normal",
+        dataLabels: {
+          enabled: false,
+          style: { fontSize: "13px", color: "#333" },
+        },
+      },
+    },
+    series: emanal.data,
   };
 
   return (
-    <div>
-      <AvanceDiarioStackedBarChart
-        data={data}
-        colors={customColors}
-        title="Avance Diario Personalizado"
-      />
-    </div>
-  );
+   <>
+      <HighchartsReact highcharts={Highcharts} options={chartOptions} />
+    </>
+  )
 }
