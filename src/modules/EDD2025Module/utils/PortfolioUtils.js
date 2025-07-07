@@ -14,11 +14,7 @@ export function buildPortfolioModuleChart(docentes) {
     ? docentes.portafolio_no_iniciado_se_pend
     : 0;
 
-  const total =
-    portafolio_completado +
-    portafolio_iniciado +
-    portafolio_no_iniciado +
-    portafolio_no_iniciado_se_pend;
+  const total = docentes.total
 
   return {
     ...MODULE_CHART_SETUP,

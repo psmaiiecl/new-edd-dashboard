@@ -30,6 +30,7 @@ export function ResultSection2025() {
         />
         <Button
           text={"Excel Director EE"}
+		  disabled 
           style={{ width: "500px", textAlign: "center" }}
           action={() => {
             customDownload(
@@ -42,6 +43,7 @@ export function ResultSection2025() {
         <Button
           text={"Excel Sostenedor"}
           style={{ width: "500px", textAlign: "center" }}
+		  disabled
           action={() => {
             customDownload(
               BASE_API_URL_2025 + "/2025-informes-resultados-excel-sostenedor",

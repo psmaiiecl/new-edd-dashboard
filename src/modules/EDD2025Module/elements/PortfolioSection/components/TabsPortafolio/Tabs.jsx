@@ -15,8 +15,24 @@ export function TabsPortafolio({ setActive, active }) {
         ))}
       </div>
       <div className="inscription-excel">
-        <Button text={"Excel Docente"} action={() => {}} />
-        <Button text={"Excel Sostenedor"} action={() => {}} />
+        <Button
+          text={"Excel Docente"}
+          action={() =>
+            window.open(
+              "https://resultados-ee-2024.iie.cl/resultados_api/documentos/informe-sostenedores/excel-sostenedores.csv",
+              "_blank"
+            )
+          }
+        />
+       <Button
+          text={"Excel Sostenedor"}
+          action={() =>
+            window.open(
+              "https://resultados-ee-2024.iie.cl/resultados_api/documentos/informe-sostenedores/excel-establecimientos.csv",
+              "_blank"
+            )
+          }
+        />
       </div>
     </div>
   );

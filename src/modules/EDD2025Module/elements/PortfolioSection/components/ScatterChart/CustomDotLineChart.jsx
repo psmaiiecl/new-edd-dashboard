@@ -37,13 +37,22 @@ export function CustomDotLineChart({ title, fechas, series, textGraph }) {
         enabled: false,
       },
       labels: {
-        format: "{value}",
+        formatter: function () {
+          return new Intl.NumberFormat('es-CL').format(this.value);
+        },
       },
     },
     tooltip: {
       shared: true,
-      valueSuffix: "",
       useHTML: true,
+      formatter: function () {
+        let tooltip = `<b>${this.x}</b><br/>`;
+        this.points.forEach(point => {
+          const valor = new Intl.NumberFormat('es-CL').format(point.y);
+          tooltip += `<span style="color:${point.color}">\u25CF</span> ${point.series.name}: <b>${valor}</b><br/>`;
+        });
+        return tooltip;
+      },
     },
     plotOptions: {
       series: {
@@ -54,7 +63,6 @@ export function CustomDotLineChart({ title, fechas, series, textGraph }) {
         },
       },
     },
-
     series: series.map((s) => ({
       name: s.name,
       data: s.data,
@@ -69,9 +77,6 @@ export function CustomDotLineChart({ title, fechas, series, textGraph }) {
       verticalAlign: "bottom",
     },
   };
-
-  //TODO: CREAR COMPONENTE  PARA QUE GRAFIQUE
-  console.log("Crear grafico de linea");
 
   return (
     <div className="dot-line-container">

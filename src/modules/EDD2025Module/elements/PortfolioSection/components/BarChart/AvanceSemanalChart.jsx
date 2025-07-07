@@ -1,22 +1,20 @@
 import { usePortafolioFetch } from "./../TabGeneralPortafolio/hooks/usePortafolioFetch";
-import { CustomDotLineChart } from "../ScatterChart/CustomDotLineChart";
+import {Barrasemanal} from "./BarrasSemanal"
 
-const AvanceDiarioChart = ({
-  keyPath = "portafolio-avance-diario",
+const AvanceSemanalChart = ({
+  keyPath = "portafolio-avance-semanal",
   dataMapper,
   title,
   rawData = null,
-  filtros = {},
 }) => {
   const { data } = usePortafolioFetch({
     keyPath,
     title,
     dataMapper,
-    filtros,
     rawData,
   });
   return (
-    <CustomDotLineChart
+    <Barrasemanal
       title={title}
       fechas={data?.fechas}
       series={data?.series}
@@ -24,4 +22,4 @@ const AvanceDiarioChart = ({
   );
 };
 
-export default AvanceDiarioChart;
+export default AvanceSemanalChart;

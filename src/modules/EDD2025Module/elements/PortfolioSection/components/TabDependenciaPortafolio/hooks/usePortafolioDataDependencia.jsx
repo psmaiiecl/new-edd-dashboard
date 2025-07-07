@@ -20,7 +20,7 @@ export function usePortafolioDataDependencia(filtros = {}) {
     //Object.entries(filtros).forEach(([key, value]) => {
     //  //if (value !== "") body.append(key, value);
     //});
-
+    // en conocimiento
     const body = new FormData();
     axios
       .post(`${baseURL}/2025-portafolio-tab-dependencia`, body)

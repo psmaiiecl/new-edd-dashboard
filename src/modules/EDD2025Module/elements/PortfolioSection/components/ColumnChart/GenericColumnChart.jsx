@@ -15,7 +15,6 @@ const GenericColumnChart = ({
   rawData = null,
 
   colors = [],
-  height = 400,
   showLegend = true,
   filtros = {},
 }) => {
@@ -78,7 +77,7 @@ const GenericColumnChart = ({
       dataMapper={dataMapper}
       color={colors}
       showLegend={showLegend}
-      height={height}
+      
     />
   );
 };

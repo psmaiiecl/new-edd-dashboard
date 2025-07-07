@@ -14,8 +14,8 @@ export function TabAgrupacionPortafolio() {
   const nf = new Intl.NumberFormat("es-CL");
 
   const avanceAgrupacionMapper = (data) => {
-    const dependencias = data?.docentes ?? {};
-    const categories = Object.keys(dependencias);
+    const agrupacion = data?.docentes ?? {};
+    const categories = Object.keys(agrupacion);
 
     const colores = {
       completado: "#2ecc71",
@@ -29,7 +29,7 @@ export function TabAgrupacionPortafolio() {
       name: tipo.replace("_", " ").replace(/\b\w/g, (l) => l.toUpperCase()),
       color: colores[tipo],
       data: categories.map((dep) => {
-        const valores = dependencias[dep];
+        const valores = agrupacion[dep];
         const total =
           valores.completado + valores.iniciado + valores.no_iniciado;
         const valor = valores[tipo];
@@ -45,7 +45,7 @@ export function TabAgrupacionPortafolio() {
     }));
 
     const totalDocentes = categories.reduce((sum, dep) => {
-      const v = dependencias[dep];
+      const v = agrupacion[dep];
       return sum + v.completado + v.iniciado + v.no_iniciado;
     }, 0);
 
@@ -60,15 +60,12 @@ export function TabAgrupacionPortafolio() {
   };
 
   return (
-    <div className="tab-general-upper">
+   
+
+     
+<div className="tab-general-upper">
       <div className="normal-container">
-        <div className="general-pie-chart-container">
-          {/*
-			acá 
-			- se quitaron los filtros, pues no se usan.
-			- data se envía a GenericColumnChart a través del paramétro rawData, pero antes se mapea con avanceDependenciaMapper
-			- descomentar los gráficos de abajo y replicar como se armó el primero.
-		*/}
+          <div className="general-pie-chart-container">
           {data && (
             <GenericColumnChart
               subtitle="ESTADO DE AVANCE DEL PORTAFOLIO POR AGRUPACIÓN"
@@ -77,13 +74,12 @@ export function TabAgrupacionPortafolio() {
               }
             />
           )}
-        </div>
-      </div>
+       </div> 
 
       <div className="general-pie-chart-container">
         {data && (
           <GenericColumnChart
-            subtitle="ESTADO DE AVANCE DEL MÓDULO 1 POR DEPENDENCIA"
+            subtitle="ESTADO DE AVANCE DEL MÓDULO 1 POR AGRUPACIÓN"
             rawData={() =>
               avanceAgrupacionMapper(data["portafolio-avance-agrupacion-m1"])
             }
@@ -93,7 +89,7 @@ export function TabAgrupacionPortafolio() {
       <div className="general-pie-chart-container">
         {data && (
           <GenericColumnChart
-            subtitle="ESTADO DE AVANCE DEL MÓDULO 2 POR DEPENDENCIA"
+            subtitle="ESTADO DE AVANCE DEL MÓDULO 2 POR AGRUPACIÓN"
             rawData={() =>
               avanceAgrupacionMapper(data["portafolio-avance-agrupacion-m2"])
             }
@@ -103,12 +99,13 @@ export function TabAgrupacionPortafolio() {
       <div className="general-pie-chart-container">
         {data && (
           <GenericColumnChart
-            subtitle="ESTADO DE AVANCE DEL MÓDULO 2 POR DEPENDENCIA"
+            subtitle="ESTADO DE AVANCE DEL MÓDULO 2 POR AGRUPACIÓN"
             rawData={() =>
               avanceAgrupacionMapper(data["portafolio-avance-agrupacion-m3"])
             }
           />
         )}
+        </div>
       </div>
     </div>
   );

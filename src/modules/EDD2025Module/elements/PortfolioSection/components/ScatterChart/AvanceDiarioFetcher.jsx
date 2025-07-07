@@ -15,9 +15,10 @@ export default function AvanceDiarioFetcher({
   useEffect(() => {
     const fetchData = async () => {
       const etiqueta = `2024-portafolio-avance-diario#convocatoria:${convocatoria}$estado:${estado}$dependencia:${dependencia}$region:${region}`;
+      
       let url =
         webservice.replace("/api", "/api2024") +
-        `/datos-json?etiqueta=${etiqueta}`;
+        `/datos-json?etiqueta=${encodeURIComponent(etiqueta)}`;
 
       if (valorJSON === "original") {
         url =

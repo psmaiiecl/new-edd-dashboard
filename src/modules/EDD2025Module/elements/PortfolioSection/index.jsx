@@ -18,10 +18,10 @@ export function PortfolioSection2025() {
     region: "",
   });
 
-  const handleFiltroChange = (filtroNombre, valor) => {
+  const handleFiltroChange = (dependencia, valor) => {
     setFiltros((prev) => ({
       ...prev,
-      [filtroNombre]: valor,
+      [dependencia]: valor,
     }));
   };
 
@@ -32,15 +32,19 @@ export function PortfolioSection2025() {
       {/* TAB 1 - General */}
       <div style={{ display: activeTab === "tab1" ? "block" : "none" }}>
         <TabContent>
+		{/*
           <FiltrosPortfolioSection
             filtros={filtros}
             onFiltroChange={handleFiltroChange}
           />
+		  */}
           <TabGeneralPortafolio
             filtros={filtros}
             onFiltroChange={handleFiltroChange}
           />
-        </TabContent>
+        
+		</TabContent>
+		
       </div>
 
       {/* TAB 2 - Dependencia */}
