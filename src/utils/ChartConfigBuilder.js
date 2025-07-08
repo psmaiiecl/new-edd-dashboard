@@ -1,4 +1,11 @@
-import { BAR_CONFIG, DOT_CONFIG, PIE_CONFIG } from "../constants/CHART_CONFIGS";
+import {
+  BAR_CONFIG,
+  COLUMN_CONFIG,
+  DOT_CONFIG,
+  MULTIPLE_BAR_CONFIG,
+  PIE_CONFIG,
+  STACK_BAR_CONFIG,
+} from "../constants/CHART_CONFIGS";
 
 export function initPieChartConfig(subtitle, override = {}) {
   return {
@@ -32,6 +39,28 @@ export function initBarChartConfig(subtitle, height, override = {}) {
     subtitle: {
       ...BAR_CONFIG.subtitle,
       text: subtitle,
+    },
+    ...override,
+  };
+}
+
+export function initColumnChartConfig(title, type, override = {}) {
+  let baseConfig = COLUMN_CONFIG;
+  switch (type) {
+    case "STACK":
+      baseConfig = STACK_BAR_CONFIG;
+      break;
+    case "MULTIPLE":
+      baseConfig = MULTIPLE_BAR_CONFIG;
+      break;
+    default:
+      break;
+  }
+  return {
+    ...baseConfig,
+    title: {
+      ...baseConfig?.title,
+      text: title,
     },
     ...override,
   };

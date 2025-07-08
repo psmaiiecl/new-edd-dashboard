@@ -8,12 +8,12 @@ export const mappers = {
         sliced: true,
       },
       {
-        name: "Con Contaxto Inicial Exitoso",
+        name: "Con Contacto Inicial Exitoso",
         key: "docentes_contacto_inicial_exitoso",
         color: "#FFD153",
       },
       {
-        name: "Con Contaxto Inicial no Exitoso",
+        name: "Con Contacto Inicial no Exitoso",
         key: "docentes_contacto_inicial_fallido",
         color: "#C1D9CA",
       },
@@ -38,12 +38,12 @@ export const mappers = {
         color: "#65D9AB",
       },
       {
-        name: "Con Contaxto Inicial Exitoso",
+        name: "Con Contacto Inicial Exitoso",
         key: "establecimientos_contacto_inicial_exitoso",
         color: "#FFD153",
       },
       {
-        name: "Con Contaxto Inicial no Exitoso",
+        name: "Con Contacto Inicial no Exitoso",
         key: "establecimientos_contacto_inicial_fallido",
         color: "#C1D9CA",
       },

@@ -89,6 +89,7 @@ export function mapBarChartData({ data, schema, invert = false }) {
     },
   };
 }
+
 export function mapLineData(rawData, config) {
   const fechas = rawData[config.fechas];
 
@@ -100,6 +101,7 @@ export function mapLineData(rawData, config) {
 
   return { fechas, series };
 }
+
 export function mapLineDataBuild(rawData, config) {
   const fechas = rawData[config.fechas];
 

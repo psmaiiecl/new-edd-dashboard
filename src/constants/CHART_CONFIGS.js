@@ -258,34 +258,16 @@ export const COLUMN_CONFIG = {
 };
 
 export const STACK_BAR_CONFIG = {
-  lang: {
-    decimalPoint: ",",
-    thousandsSep: ".",
-  },
+  ...BASE_CHART_CONFIG,
   chart: {
     type: "column",
-    //height: 500,
-    // style: {
-    //   color: "#333333",
-    //   fontSize: "15px",
-    //   fontWeight: "bold",
-    // },
   },
-  colors: [
-    "#165e84",
-    "#e87131",
-    "#196b23",
-    "#0e9ed7",
-    "#9e2b96",
-    "#ff3f3f",
-    "#ff3f3f",
-  ],
   title: {
-    //text: "AGENDAMIENTO PARA CADA SEMANA",
+    text: "STACK CHART",
     align: "center",
     style: {
-      fontWeight: "bold",
-      fontSize: "18px",
+      fontWeight: "300",
+      fontSize: "15px",
       color: "#666666",
     },
   },
@@ -327,16 +309,10 @@ export const STACK_BAR_CONFIG = {
     },
   },
   series: [],
-  credits: {
-    enabled: false,
-  },
 };
 
 export const MULTIPLE_BAR_CONFIG = {
-  lang: {
-    decimalPoint: ",",
-    thousandsSep: ".",
-  },
+  ...BASE_CHART_CONFIG,
   chart: {
     type: "column",
   },
@@ -408,4 +384,5 @@ export const LINE_CONFIG = {
     },
   },
 };
+
 export const AREA_CONFIG = {};

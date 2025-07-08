@@ -3,6 +3,10 @@ import { useCustomFetch } from "../../../../../../../hooks/useCustomFetch";
 import { BASE_API_URL_2024 } from "../../../../../data/BASE_API_URL";
 import { mapPieData } from "../../../../../../../utils/ChartMapperFactory";
 import { mappers } from "../../../utils/mapSpecs";
+import {
+  buildAgendamientoApilado,
+  buildAgendamientoGeneral,
+} from "../../../utils/generalTabUtils";
 
 export function useTabGeneral() {
   const customFetch = useCustomFetch();
@@ -41,7 +45,23 @@ export function useTabGeneral() {
       route:
         BASE_API_URL_2024 +
         "/datos-json?etiqueta=2024-grabaciones-agendamiento-semanal-apilado",
-    }).then((data) => console.log(data));
+    }).then((data) =>
+      setAgendamientoApilado(
+        buildAgendamientoApilado(data.agendamiento_semanal)
+      )
+    );
+    customFetch({
+      route:
+        BASE_API_URL_2024 +
+        "/datos-json?etiqueta=2024-grabaciones-agendamiento-semanal",
+    }).then((data) => {
+      setAgendamientoSemanal(
+        buildAgendamientoGeneral(data.agendamiento_semanal)
+      );
+      setAgendamientoGlobal(
+        buildAgendamientoGeneral(data.agendamiento_acumulado)
+      );
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

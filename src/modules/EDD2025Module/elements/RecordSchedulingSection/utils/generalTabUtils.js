@@ -1,4 +1,4 @@
-export function buildAgendamientoApilado(setup, data) {
+export function buildAgendamientoApilado(data) {
   const semanas = data.semanas;
   const datosLunes = data.lunes;
   const datosMartes = data.martes;
@@ -8,14 +8,6 @@ export function buildAgendamientoApilado(setup, data) {
   const datosSabado = data.sabado;
   const datosDomingo = data.domingo;
   const res = {
-    ...setup,
-    xAxis: {
-      ...setup.xAxis,
-      title: {
-        text: "Semanas",
-      },
-      categories: semanas,
-    },
     series: [
       {
         name: "Lunes",
@@ -46,19 +38,29 @@ export function buildAgendamientoApilado(setup, data) {
         data: datosDomingo,
       },
     ],
+    override: {
+      xAxis: {
+        title: {
+          text: "Semanas",
+        },
+        categories: semanas,
+      },
+    },
   };
   return res;
 }
-export function buildAgendamientoGeneral(setup, data) {
-  const semanas = data.semanas;
-  const avanceReal = data.avance_real;
-  const avanceEsperado = data.avance_esperado;
-  const avanceReal2024 = [];
+
+export function buildAgendamientoGeneral(data) {
+  const semanas = data?.semanas || [];
+  const avanceReal = data?.avance_real || [];
+  const avanceEsperado = data?.avance_esperado || [];
+  const avanceReal2024 = data?.avance_real_2024 || [];
+  const avanceEsperadoSinDocentes = data?.avance_esperado_sin_docentes || [];
   const res = {
-    ...setup,
-    xAxis: {
-      ...setup.xAxis,
-      categories: semanas,
+    override: {
+      xAxis: {
+        categories: semanas,
+      },
     },
     series: [
       {
@@ -75,6 +77,11 @@ export function buildAgendamientoGeneral(setup, data) {
         name: "Avance Real 2024",
         data: avanceReal2024,
         color: "#ff5880",
+      },
+      {
+        name: "A. Esperado sin docentes con solicitud pendiente",
+        data: avanceEsperadoSinDocentes,
+        color: "#c5a8ff",
       },
     ],
   };
