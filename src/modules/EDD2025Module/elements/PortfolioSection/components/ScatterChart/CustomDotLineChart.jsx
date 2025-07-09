@@ -69,7 +69,7 @@ export function CustomDotLineChart({ title, fechas, series, textGraph, valueForm
       shared: true,
       useHTML: true,
       formatter: function () {
-        let tooltip = `<b>${this.x}</b><br/>`;
+        let tooltip = `<b>${this.key}</b><br/>`;
         this.points.forEach((point) => {
           tooltip += `<span style="color:${point.color}">\u25CF</span> ${point.series.name}: <b>${formatValue(point.y, valueFormat)}</b><br/>`;
         });

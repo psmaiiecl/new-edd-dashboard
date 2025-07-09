@@ -16,8 +16,7 @@ const AvanceDiarioChart = ({
     if (rawData) {
       setData(
         dataMapper(
-          rawData?.["portafolio-avance-diario"],
-          rawData
+          rawData?.["portafolio-avance-diario"]
         )
       );
     }

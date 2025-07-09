@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import { memo } from "react";
 import GenericPieChart from "../../components/PieChart/GenericPieChart";
 import { usePortafolioDataGeneral } from "./hooks/usePortafolioDataGeneral";
 import { ConvertirPalabras } from "../../../../../../utils/portafolioUtils.js";
@@ -59,7 +59,7 @@ const createMapper = (subtitle, totalKey, seriesConfig) => (data) =>
 //     series,
 //   }
 // };
-const mapAvanceDiario = (data, dataGeneral) => {
+const mapAvanceDiario = (data) => {
   const fechas = data.fechas;
 
   const completados = data.pfCompletado_cant;
@@ -70,15 +70,15 @@ const mapAvanceDiario = (data, dataGeneral) => {
   const rinde = data.pfRinde_cant;
 
   // TOTALES fijos desde dataGeneral
-  const rindenPortafolioTotal =
-    dataGeneral?.["portafolio-docentes-validados"]?.docentes
-      ?.rinden_portafolio || 0;
-  const suspendidosTotal =
-    dataGeneral?.["portafolio-docentes-validados"]?.docentes?.suspendidos || 0;
+  // const rindenPortafolioTotal =
+  //   dataGeneral?.["portafolio-docentes-validados"]?.docentes
+  //     ?.rinden_portafolio || 0;
+  // const suspendidosTotal =
+  //   dataGeneral?.["portafolio-docentes-validados"]?.docentes?.suspendidos || 0;
 
-  const rindenPortafolioPorFecha = fechas.map(
-    () => rindenPortafolioTotal - suspendidosTotal
-  );
+  // const rindenPortafolioPorFecha = fechas.map(
+  //   () => rindenPortafolioTotal - suspendidosTotal
+  // );
 
   return {
     fechas,
@@ -278,55 +278,55 @@ const mappers = {
       },
     ]
   ),
-  // avanceDescargaPortafolio: createMapper(
-  //   "<b>DESCARGA DE PORTAFOLIO</b>",
-  //   "total",
-  //   [
-  //     {
-  //       name: ConvertirPalabras("DESCARGADO"),
-  //       key: "descargado",
-  //       color: "#65d9ab",
-  //     },
-  //     {
-  //       name: ConvertirPalabras("NO DESCARGADO"),
-  //       key: "no_descargado",
-  //       color: "#ff5880",
-  //     },
-  //   ]
-  // ),
-  // avanceVisualizacion: createMapper(
-  //   "<b>VISUALIZACIÓN CLASE GRABADA</b>",
-  //   "total",
-  //   [
-  //     {
-  //       name: ConvertirPalabras("VISUALIZADA"),
-  //       key: "visualizado",
-  //       color: "#65d9ab",
-  //     },
-  //     {
-  //       name: ConvertirPalabras("INCOMPLETA"),
-  //       key: "iniciado",
-  //       color: "#ff8e53",
-  //     },
-  //     {
-  //       name: ConvertirPalabras("NO VISUALIZADA"),
-  //       key: "no_visualizado",
-  //       color: "#ff5880",
-  //     },
-  //   ]
-  // ),
-  // avanceDescargaClase: createMapper("<b>DESCARGA CLASE GRABADA</b>", "total", [
-  //   {
-  //     name: ConvertirPalabras("DESCARGADA"),
-  //     key: "descarga_clase",
-  //     color: "#65d9ab",
-  //   },
-  //   {
-  //     name: ConvertirPalabras("NO DESCARGADA"),
-  //     key: "no_descarga_clase",
-  //     color: "#ff5880",
-  //   },
-  // ]),
+  avanceDescargaPortafolio: createMapper(
+    "<b>DESCARGA DE PORTAFOLIO</b>",
+    "total",
+    [
+      {
+        name: ConvertirPalabras("DESCARGADO"),
+        key: "descargado",
+        color: "#65d9ab",
+      },
+      {
+        name: ConvertirPalabras("NO DESCARGADO"),
+        key: "no_descargado",
+        color: "#ff5880",
+      },
+    ]
+  ),
+  avanceVisualizacion: createMapper(
+    "<b>VISUALIZACIÓN CLASE GRABADA</b>",
+    "total",
+    [
+      {
+        name: ConvertirPalabras("VISUALIZADA"),
+        key: "visualizado",
+        color: "#65d9ab",
+      },
+      {
+        name: ConvertirPalabras("INCOMPLETA"),
+        key: "iniciado",
+        color: "#ff8e53",
+      },
+      {
+        name: ConvertirPalabras("NO VISUALIZADA"),
+        key: "no_visualizado",
+        color: "#ff5880",
+      },
+    ]
+  ),
+  avanceDescargaClase: createMapper("<b>DESCARGA CLASE GRABADA</b>", "total", [
+    {
+      name: ConvertirPalabras("DESCARGADA"),
+      key: "descarga_clase",
+      color: "#65d9ab",
+    },
+    {
+      name: ConvertirPalabras("NO DESCARGADA"),
+      key: "no_descarga_clase",
+      color: "#ff5880",
+    },
+  ]),
 };
 
 // Componente reutilizable para cada gráfico de pastel
@@ -396,7 +396,7 @@ export function TabGeneralPortafolio({ filtros }) {
           />
         </div>
 
-        {/* <div className="pie-grid-3">
+        <div className="pie-grid-3">
           <PieChartContainer
             subtitle="DESCARGA <b>PORTAFOLIO</b>"
             dataKey={
@@ -406,9 +406,7 @@ export function TabGeneralPortafolio({ filtros }) {
           />
           <PieChartContainer
             subtitle="VISUALIZACIÓN <b>CLASE GRABADA</b>"
-            dataKey={
-              dataGeneral?.["portafolio-avance-visualizacion"]?.docentes
-            }
+            dataKey={dataGeneral?.["portafolio-avance-visualizacion"]?.docentes}
             mapper={mappers.avanceVisualizacion}
           />
           <PieChartContainer
@@ -418,7 +416,7 @@ export function TabGeneralPortafolio({ filtros }) {
             }
             mapper={mappers.avanceDescargaClase}
           />
-        </div> */}
+        </div>
       </div>
 
       <AvanceDiarioChart
