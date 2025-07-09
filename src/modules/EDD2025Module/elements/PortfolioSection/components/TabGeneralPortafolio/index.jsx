@@ -124,7 +124,7 @@ const mapAvanceIniciados = (data) => ({
 
   series: [
     {
-      name: ConvertirPalabras("Porcentaje avance 2024"),
+      name: ConvertirPalabras("Porcentaje avance 2023"),
       color: "#5157FF",
       data: data.avance_diario2023,
     },
@@ -305,7 +305,7 @@ const mappers = {
       },
       {
         name: ConvertirPalabras("INCOMPLETA"),
-        key: "iniciado",
+        key: "incompleto",
         color: "#ff8e53",
       },
       {
@@ -396,7 +396,7 @@ export function TabGeneralPortafolio({ filtros }) {
           />
         </div>
 
-        <div className="pie-grid-3">
+        <div className="pie-grid-3" style={{display: "none"}}>
           <PieChartContainer
             subtitle="DESCARGA <b>PORTAFOLIO</b>"
             dataKey={
