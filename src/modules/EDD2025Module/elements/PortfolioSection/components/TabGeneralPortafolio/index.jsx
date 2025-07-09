@@ -63,11 +63,11 @@ const mapAvanceDiario = (data, dataGeneral) => {
   const fechas = data.fechas;
 
   const completados = data.pfCompletado_cant;
-  const iniciados = data.pfiniciados_cant;
-
+  const iniciados = data.pfIniciados_cant;
   const m1Iniciado = data.m1Iniciado_cant;
   const m2Iniciado = data.m2Iniciado_cant;
   const m3Iniciado = data.m3Iniciado_cant;
+  const rinde = data.pfRinde_cant;
 
   // TOTALES fijos desde dataGeneral
   const rindenPortafolioTotal =
@@ -112,7 +112,8 @@ const mapAvanceDiario = (data, dataGeneral) => {
       {
         name: ConvertirPalabras("Docentes que Rinden Portafolio"),
         color: "#b5ef59",
-        data: rindenPortafolioPorFecha,
+        // data: rindenPortafolioPorFecha,
+        data: rinde,
       },
     ],
   };
@@ -123,12 +124,12 @@ const mapAvanceIniciados = (data) => ({
 
   series: [
     {
-      name: ConvertirPalabras("Porcentaje avance 2023"),
+      name: ConvertirPalabras("Porcentaje avance 2024"),
       color: "#5157FF",
       data: data.avance_diario2023,
     },
     {
-      name: ConvertirPalabras("Porcentaje avance 2024"),
+      name: ConvertirPalabras("Porcentaje avance 2025"),
       color: "#FF8E53",
       data: data.pfIniciados,
     },
@@ -434,6 +435,7 @@ export function TabGeneralPortafolio({ filtros }) {
         dataMapper={mapAvanceIniciados}
         filtros={filtros}
         rawData={dataGeneral}
+        valueFormat="percent"
       />
 
       {/* <AvanceSemanalChart/> */}

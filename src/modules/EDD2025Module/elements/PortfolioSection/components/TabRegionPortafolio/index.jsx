@@ -10,7 +10,7 @@ export function TabRegionPortafolio() {
 
   const nf = new Intl.NumberFormat("es-CL");
 
-  const avanceRegionMapper = (data) => {
+  const avanceRegionMapper = (data, tableName = "Región") => {
     const region = data?.docentes ?? {};
 
     const categories = Object.keys(region);
@@ -48,6 +48,7 @@ export function TabRegionPortafolio() {
     }, 0);
 
     return {
+      tableName,
       categories,
       series,
       total: {
@@ -92,7 +93,7 @@ export function TabRegionPortafolio() {
         <div className="general-pie-chart-container">
           {data && (
             <GenericColumnChart
-              subtitle="ESTADO DE AVANCE DEL MÓDULO 2 POR REGIÓN"
+              subtitle="ESTADO DE AVANCE DEL MÓDULO 3 POR REGIÓN"
               rawData={() =>
                 avanceRegionMapper(data["portafolio-avance-region-m3"])
               }

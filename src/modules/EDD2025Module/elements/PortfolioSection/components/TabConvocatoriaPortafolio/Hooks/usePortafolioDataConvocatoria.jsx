@@ -7,7 +7,7 @@ export function usePortafolioDataConvocatoria(filtros = {}) {
   const [error, setError] = useState(null);
 
   const baseURL =
-    "http://api-docentemas-dev.3htp.cloud:8095/back/public/api2025";
+    import.meta.env.VITE_BASE_URL + "/back/public/api2025";
 
   useEffect(() => {
     setLoading(true);
@@ -30,7 +30,8 @@ export function usePortafolioDataConvocatoria(filtros = {}) {
       .finally(() => {
         setLoading(false);
       });
-  }, [JSON.stringify(filtros)]);
+  //}, [filtros]);
+  }, []);
 
   return {
     general: data?.general || null,
