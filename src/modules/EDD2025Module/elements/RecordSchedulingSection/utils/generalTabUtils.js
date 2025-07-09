@@ -1,3 +1,6 @@
+import { numberFormatter } from "../../../../../utils/NumberFormatter";
+import { extractCTGInfo } from "../../../../../utils/StringUtils";
+
 export function buildAgendamientoApilado(data) {
   const semanas = data.semanas;
   const datosLunes = data.lunes;
@@ -86,4 +89,91 @@ export function buildAgendamientoGeneral(data) {
     ],
   };
   return res;
+}
+
+export function mapChartData(data, specs) {
+  let categories = data[specs.categories.key] ?? [];
+  categories = categories.map((item) => {
+    const ctgSeparado = extractCTGInfo(item);
+    return ctgSeparado.region + " - " + ctgSeparado.nombre;
+  });
+  let total = 0;
+  const series = specs.series.map(({ name, color, key }) => {
+    const serieData = data[key] || [];
+    total += serieData.reduce((total, num) => total + parseInt(num), 0);
+    return {
+      name,
+      color,
+      data: serieData,
+    };
+  });
+  return {
+    series,
+    total: {
+      numeric: total,
+      text: numberFormatter(total),
+    },
+    override: {
+      xAxis: {
+        categories: categories,
+        labels: {
+          enabled: specs.categories.labels ?? true,
+          style: {
+            fontSize: "11px",
+          },
+        },
+      },
+    },
+  };
+}
+export function mapTableData(data, specs) {
+  const categories = data[specs.categoriesKey] ?? [];
+  const rows = [];
+
+  for (let i = 0; i < categories.length; i++) {
+    const rawCategory = categories[i];
+    let parsed = { rawCategory };
+    if (specs.rowParser) {
+      parsed = specs.rowParser(rawCategory);
+    }
+
+    const values = {};
+    let totalDocentes = 0;
+    let totalEE = 0;
+
+    for (const col of specs.columns) {
+      const docentesKey = col.keys.doc;
+      const eeKey = col.keys.ee;
+
+      const valDocentes = docentesKey
+        ? parseInt(data[docentesKey]?.[i] ?? 0)
+        : null;
+      const valEE = eeKey ? parseInt(data[eeKey]?.[i] ?? 0) : null;
+
+      values[col.label] = {
+        doc: valDocentes,
+        ee: valEE,
+      };
+
+      if (valDocentes !== null) totalDocentes += valDocentes;
+      if (valEE !== null) totalEE += valEE;
+    }
+
+    rows.push({
+      ...parsed,
+      values,
+      total: {
+        doc: totalDocentes,
+        ee: totalEE,
+      },
+      avance: {
+        doc: totalDocentes > 0 ? 100 : 0,
+        ee: totalEE > 0 ? 100 : 0,
+      },
+    });
+  }
+  return {
+    rows,
+    columns: specs.columns,
+  };
 }

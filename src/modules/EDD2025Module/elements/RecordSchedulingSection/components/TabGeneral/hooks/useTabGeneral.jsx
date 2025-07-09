@@ -32,11 +32,11 @@ export function useTabGeneral() {
     setEstablecimientosAgendados(
       mapPieData(
         {
-          establecimientos_agendamiento_completo: 100,
-          establecimientos_agendamiento_iniciado: 100,
-          establecimientos_contacto_inicial_exitoso: 100,
-          establecimientos_contacto_inicial_fallido: 100,
-          establecimientos_sin_contactar: 100,
+          ee_agendamiento_completo: 100,
+          ee_agendamiento_iniciado: 100,
+          ee_contacto_inicial_exitoso: 100,
+          ee_contacto_inicial_fallido: 100,
+          ee_sin_contactar: 100,
         },
         mappers.establecimientos_agendados
       )

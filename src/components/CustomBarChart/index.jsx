@@ -32,12 +32,12 @@ export function CustomBarChart({
   const [tableData, setTableData] = useState(null);
   useEffect(() => {
     if (!data) return;
-    setTableData(data.tableData);
+    setTableData(data?.tableData);
     setChartSetup((prev) => ({
       ...prev,
       title: {
         ...prev.title,
-        text: data.total.text,
+        text: data.total?.text,
       },
       series: data.series,
       ...data?.override,

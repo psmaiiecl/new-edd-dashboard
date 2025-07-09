@@ -1,77 +1,52 @@
-.tab-general {
-  max-width: 100%;
+.dual-bar-chart-container{
+    display: flex;
 }
 
-.tab-general-upper {
-  display: flex;
-  width: 90%;
-  padding: 20px 10px;
-  flex-wrap: wrap;
-  margin: 0 auto;
-  justify-content: space-evenly;
-  row-gap: 60px;
-}
-
-.tab-general-docente {
+.combined-table-container{
   display: flex;
   width: 100%;
-  overflow-x: hidden;
-  justify-content: space-between;
-  gap: 5px;
 }
 
-.pie-grid-3 {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 5px;
+.combined-table {
+  border-collapse: collapse;
   width: 100%;
+  border: 1px solid #dcdcdc;
 }
 
-.pie-grid-2 {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 5px;
-  width: 100%;
+.combined-table th {
+  border: 1px solid #dcdcdc;
+  padding: 5px 4px;
+  font-size: 12px;
 }
 
-.pie-grid-1 {
-  display: grid;
-  grid-template-columns: 1fr;
-  width: 100%;
+.combined-table td {
+  border: 1px solid #dcdcdc;
+  padding: 2px 1px;
+  font-size: 13px;
+  text-align: center;
 }
 
-.tab-general-portafolio {
-  display: flex;
-  width: 100%;
-  overflow-x: hidden;
-  justify-content: space-between;
-  gap: 5px;
+.combined-table__head th {
+  background-color: #f9f9f9;
+  font-weight: 400;
+  text-align: center;
 }
 
-.general-pie-chart-container {
-  width: 100%;
-  border: 1px solid #e0dddd;
-  padding: 15px 0;
-  box-sizing: border-box;
-  max-width: 100%;
-  overflow: hidden;
+.combined-table__body td {
+  text-align: center;
 }
 
-.general-point-chart-container {
-  width: 90%;
-  margin: 30px auto;
+.combined-table__body tr td:first-child {
+  text-align: right;
+  font-weight: 300;
+  padding-right: 5px;
+  font-size: 11px;
 }
 
-@media (max-width: 1100px) {
-  .tab-general-docente {
-    flex-wrap: wrap;
-  }
+.to-right-cell{
+  text-align: right !important;
+ }
 
-  .pie-grid-3 {
-    grid-template-columns: repeat(1, 1fr);
-  }
-
-  .pie-grid-2 {
-    grid-template-columns: repeat(1, 1fr);
-  }
+.to-left-cell{
+  text-align: left;
 }

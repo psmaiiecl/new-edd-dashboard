@@ -22,36 +22,6 @@
   justify-self: end;
 }
 
-.legend-table {
-  border-collapse: collapse;
-  width: 100%;
-  border: 1px solid #dcdcdc;
-}
-
-.legend-table th,
-.legend-table td {
-  border: 1px solid #dcdcdc;
-  padding: 2px 1px;
-  font-size: 13px;
-}
-
-.legend-table__head th {
-  background-color: #f9f9f9;
-  font-weight: 400;
-  text-align: center;
-}
-
-.legend-table__body td {
-  text-align: center;
-}
-
-.legend-table__body tr td:first-child {
-  text-align: right;
-  font-weight: 300;
-  padding-right: 5px;
-  font-size: 11px;
-}
-
 @media (max-width: 1150px) {
   .tab-dependencia-grupo {
     grid-template-columns: 1fr;
