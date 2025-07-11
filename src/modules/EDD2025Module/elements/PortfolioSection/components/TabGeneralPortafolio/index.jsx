@@ -396,7 +396,7 @@ export function TabGeneralPortafolio({ filtros }) {
           />
         </div>
 
-        <div className="pie-grid-3" style={{display: "none"}}>
+        <div className="pie-grid-3">
           <PieChartContainer
             subtitle="DESCARGA <b>PORTAFOLIO</b>"
             dataKey={
