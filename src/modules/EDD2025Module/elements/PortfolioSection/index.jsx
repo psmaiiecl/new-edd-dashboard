@@ -32,12 +32,12 @@ export function PortfolioSection2025() {
       {/* TAB 1 - General */}
       <div style={{ display: activeTab === "tab1" ? "block" : "none" }}>
         <TabContent>
-		{/*
+		
           <FiltrosPortfolioSection
             filtros={filtros}
             onFiltroChange={handleFiltroChange}
           />
-		  */}
+		 
 
           <TabGeneralPortafolio
             filtros={filtros}
