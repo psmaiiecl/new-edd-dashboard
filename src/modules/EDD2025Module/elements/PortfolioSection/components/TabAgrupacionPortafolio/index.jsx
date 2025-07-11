@@ -13,7 +13,7 @@ export function TabAgrupacionPortafolio() {
   //const serviceUrl = "/2025-portafolio-tab-agrupacion"; // Esta ruta ya se usa en el hook
   const nf = new Intl.NumberFormat("es-CL");
 
-  const avanceAgrupacionMapper = (data) => {
+  const avanceAgrupacionMapper = (data, tableName = 'Agrupación') => {
     const agrupacion = data?.docentes ?? {};
     const categories = Object.keys(agrupacion);
 
@@ -50,6 +50,7 @@ export function TabAgrupacionPortafolio() {
     }, 0);
 
     return {
+      tableName,
       categories,
       series,
       total: {
@@ -99,7 +100,7 @@ export function TabAgrupacionPortafolio() {
       <div className="general-pie-chart-container">
         {data && (
           <GenericColumnChart
-            subtitle="ESTADO DE AVANCE DEL MÓDULO 2 POR AGRUPACIÓN"
+            subtitle="ESTADO DE AVANCE DEL MÓDULO 3 POR AGRUPACIÓN"
             rawData={() =>
               avanceAgrupacionMapper(data["portafolio-avance-agrupacion-m3"])
             }

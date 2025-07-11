@@ -8,26 +8,22 @@ const AvanceIniciadosChart = ({
   title,
   rawData = null,
   filtros = {},
+  valueFormat,
 }) => {
   const [data, setData] = useState(null);
   useEffect(() => {
+
     if (rawData) {
       setData(dataMapper(rawData?.["portafolio-avance-diario"]));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rawData]);
-  // const { data } = usePortafolioFetch({
-  //   keyPath,
-  //   title,
-  //   dataMapper,
-  //   filtros,
-  //   rawData,
-  // });
+
   return (
     <CustomDotLineChart
       title={title}
       fechas={data?.fechas}
       series={data?.series}
+      valueFormat={valueFormat} 
     />
   );
 };

@@ -4,7 +4,7 @@ import { usePortafolioDataConvocatoria } from "../TabConvocatoriaPortafolio/Hook
 const nf = new Intl.NumberFormat("es-CL");
 export function TabConvocatoriaPortafolio() {
   const { data } = usePortafolioDataConvocatoria();
-  const avanceConvocatoriaMapper = (data) => {
+  const avanceConvocatoriaMapper = (data, tableName = 'Convocatoria') => {
     const dependencias = data?.docentes ?? {};
     const categories = Object.keys(dependencias);
 
@@ -41,6 +41,7 @@ export function TabConvocatoriaPortafolio() {
     }, 0);
 
     return {
+      tableName,
       categories,
       series,
       total: {

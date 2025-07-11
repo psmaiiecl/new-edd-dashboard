@@ -1,7 +1,10 @@
 import { tabList } from "../../data/TabList";
 import { Button } from "../../../../../../components/Button";
+import { useCustomDownload } from "../../../../../../hooks/useCustomDownload";
+import { BASE_API_URL_2025 } from "../../../../data/BASE_API_URL";
 
 export function TabsPortafolio({ setActive, active }) {
+  const customDownload = useCustomDownload(); 	
   return (
     <div className="tab-container">
       <div className="tabs">
@@ -17,21 +20,23 @@ export function TabsPortafolio({ setActive, active }) {
       <div className="inscription-excel">
         <Button
           text={"Excel Docente"}
-          action={() =>
-            window.open(
-              "https://resultados-ee-2024.iie.cl/resultados_api/documentos/informe-sostenedores/excel-sostenedores.csv",
-              "_blank"
-            )
-          }
+			action={() => {
+						customDownload(
+						  BASE_API_URL_2025 + "/2025-portafolio-excel-docente",
+						  { method: "POST" },
+						  "portafolio-docente.csv"
+					    );
+			          }}
         />
        <Button
           text={"Excel Sostenedor"}
-          action={() =>
-            window.open(
-              "https://resultados-ee-2024.iie.cl/resultados_api/documentos/informe-sostenedores/excel-establecimientos.csv",
-              "_blank"
-            )
-          }
+			action={() => {
+						customDownload(
+						  BASE_API_URL_2025 + "/2025-portafolio-excel-sostenedor",
+						  { method: "POST" },
+						  "portafolio-sostenedores.csv"
+					    );
+			          }}
         />
       </div>
     </div>

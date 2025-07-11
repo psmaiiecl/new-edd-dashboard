@@ -7,7 +7,7 @@ export function usePortafolioDataAgrupacion(filtros = {}) {
   const [error, setError] = useState(null);
 
   const baseURL =
-    "http://api-docentemas-dev.3htp.cloud:8095/back/public/api2025";
+    import.meta.env.VITE_BASE_URL + "/back/public/api2025";
 
   useEffect(() => {
     //(modificado por Roberto) se comenta esta línea porque en esta pestaña no hay filtros

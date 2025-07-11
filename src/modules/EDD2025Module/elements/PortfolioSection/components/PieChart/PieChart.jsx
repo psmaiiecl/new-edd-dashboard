@@ -18,6 +18,11 @@ const PieChart = ({
   const [mappedData, setMappedData] = useState([]);
 
   useEffect(() => {
+    Highcharts.setOptions({
+      lang: {
+        thousandsSep: ".", 
+      },
+    });
     if (chartData) {
       const newData = dataMapper(chartData, color, subtitle);
       setTotal(chartData.total);
@@ -26,6 +31,7 @@ const PieChart = ({
   }, [chartData, dataMapper, color, subtitle]);
 
   const options = {
+
     chart: {
       type: "pie",
       backgroundColor: null,

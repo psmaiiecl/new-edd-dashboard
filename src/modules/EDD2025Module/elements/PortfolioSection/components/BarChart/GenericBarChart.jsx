@@ -49,14 +49,14 @@ const GenericBarChart = ({
     fetchData();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [serviceUrl, dataMapper, JSON.stringify(filtros)]);
+  }, [dataMapper]);
 
-  const resolvedChartData = chartData || internalData;
+  //const resolvedChartData = chartData || internalData;
   return (
     <BarChart
       title={title || total}
       subtitle={subtitle}
-      chartData={resolvedChartData}
+      chartData={internalData}
       dataMapper={dataMapper}
       color={colors}
       showLegend={showLegend}

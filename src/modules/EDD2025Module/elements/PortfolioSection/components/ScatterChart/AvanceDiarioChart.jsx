@@ -8,6 +8,7 @@ const AvanceDiarioChart = ({
   title,
   rawData = null,
   filtros = {},
+  valueFormat= "integer"
 }) => {
   const [data, setData] = useState(null);
 
@@ -15,8 +16,7 @@ const AvanceDiarioChart = ({
     if (rawData) {
       setData(
         dataMapper(
-          rawData?.["portafolio-avance-diario"],
-          rawData
+          rawData?.["portafolio-avance-diario"]
         )
       );
     }
@@ -32,6 +32,7 @@ const AvanceDiarioChart = ({
   // });
   return (
     <CustomDotLineChart
+    valueFormat={valueFormat}
       title={title}
       fechas={data?.fechas}
       series={data?.series}
