@@ -5,23 +5,23 @@ export const mappers = {
     series: [
       {
         name: "Docentes Agendados",
-        key: "docentes_agendados",
+        key: "agendados",
         color: "#65D9AB",
         sliced: true,
       },
       {
         name: "Con Contacto Inicial Exitoso",
-        key: "docentes_contacto_inicial_exitoso",
+        key: "contacto_exitoso",
         color: "#FFD153",
       },
       {
         name: "Con Contacto Inicial no Exitoso",
-        key: "docentes_contacto_inicial_fallido",
+        key: "contacto_no_exitoso",
         color: "#C1D9CA",
       },
       {
         name: "Sin Contactar",
-        key: "docentes_sin_contactar",
+        key: "sin_contactar",
         color: "#FF5880",
       },
     ],

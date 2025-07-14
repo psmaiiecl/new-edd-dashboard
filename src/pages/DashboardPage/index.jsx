@@ -10,6 +10,7 @@ import { DashboardHeader } from "./components/DashboardHeader";
 import { ValidationSection2025 } from "../../modules/EDD2025Module/elements/ValidationSection";
 import { SDRecoverySection2025 } from "../../modules/EDD2025Module/elements/SDRecoverySection";
 import { RecordSchedulingSection2025 } from "../../modules/EDD2025Module/elements/RecordSchedulingSection";
+import { RecordSection2025 } from "../../modules/EDD2025Module/elements/RecordSection";
 
 export function DashboardPage() {
   const { year } = useParams();
@@ -43,6 +44,10 @@ export function DashboardPage() {
               <Route
                 path="agendamiento-grabaciones"
                 element={<RecordSchedulingSection2025 />}
+              />
+              <Route
+                path="grabaciones"
+                element={<RecordSection2025 />}
               />
               <Route
                 path="recuperacion-sd"
