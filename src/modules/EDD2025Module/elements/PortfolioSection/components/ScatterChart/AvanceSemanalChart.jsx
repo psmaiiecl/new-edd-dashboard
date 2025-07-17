@@ -1,25 +1,16 @@
-import { usePortafolioFetch } from "./../TabGeneralPortafolio/hooks/usePortafolioFetch";
-import { CustomBarChart } from "../ScatterChart/CustomBarChart";
+import { useEffect, useState } from "react";
+import { CustomColumnChart } from "../../../../../../components/CustomColumnChart";
+import { buildAvanceSemanalPortafolio } from "../../../RecordSchedulingSection/utils/generalTabUtils";
 
-const AvanceDiarioChart = ({
-  keyPath = "portafolio-avance-semanal",
-  dataMapper,
-  title,
-  rawData = null,
-}) => {
-  const { data } = usePortafolioFetch({
-    keyPath,
-    title,
-    dataMapper,
-    rawData,
-  });
-  return (
-    <CustomBarChart
-      title={title}
-      categories={data?.fechas}
-      series={data?.series}
-    />
-  );
+const AvanceSemanalChart = ({ title, rawData = null }) => {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    if (rawData) {      
+      setData(buildAvanceSemanalPortafolio(rawData?.["portafolio-avance-semanal"]));
+    }
+  }, [rawData]);
+  return <CustomColumnChart data={data} title={title} />;
 };
 
-export default AvanceDiarioChart;
+export default AvanceSemanalChart;

@@ -1,13 +1,10 @@
-import { usePortafolioFetch } from "./../TabGeneralPortafolio/hooks/usePortafolioFetch";
 import { CustomDotLineChart } from "../ScatterChart/CustomDotLineChart";
 import { useEffect, useState } from "react";
 
 const AvanceDiarioChart = ({
-  keyPath = "portafolio-avance-diario",
   dataMapper,
   title,
   rawData = null,
-  filtros = {},
   valueFormat= "integer"
 }) => {
   const [data, setData] = useState(null);

@@ -91,6 +91,50 @@ export function buildAgendamientoGeneral(data) {
   return res;
 }
 
+export function buildAvanceSemanalPortafolio(data) {
+  const fechas = data?.fechas || [];
+  const m1 = data?.m1Iniciado_cant || [];
+  const m2 = data?.m2Iniciado_cant || [];
+  const m3 = data?.m3Iniciado_cant || [];
+  const pfIniciado = data?.pfIniciados_cant || [];
+  const pfCompletado = data?.pfCompletado_cant || [];
+  const res = {
+    override: {
+      xAxis: {
+        categories: fechas,
+      },
+    },
+    series: [
+      {
+        name: "Módulo 1 Iniciado",
+        data: m1,
+        color: "#b2de95",
+      },
+      {
+        name: "Módulo 2 Iniciado",
+        data: m2,
+        color: "#5b9bd5",
+      },
+      {
+        name: "Módulo 3 Iniciado",
+        data: m3,
+        color: "#ff5880",
+      },
+      {
+        name: "Portafolio Iniciado",
+        data: pfIniciado,
+        color: "#c5a8ff",
+      },
+      {
+        name: "Portafolio Completado",
+        data: pfCompletado,
+        color: "#ffc400ff",
+      },
+    ],
+  };
+  return res;
+}
+
 export function mapChartData(data, specs) {
   let categories = data[specs.categories.key] ?? [];
   categories = categories.map((item) => {

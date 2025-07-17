@@ -5,6 +5,7 @@ import { ConvertirPalabras } from "../../../../../../utils/portafolioUtils.js";
 import Contador from "../../Contador";
 import AvanceDiarioChart from "../ScatterChart/AvanceDiarioChart";
 import AvanceIniciadosChart from "../ScatterChart/AvanceIniciadosChart";
+import AvanceSemanalChart from "../ScatterChart/AvanceSemanalChart.jsx";
 
 // import AvanceSemanalChart from "../BarChart/AvanceSemanalChart";
 
@@ -436,7 +437,10 @@ export function TabGeneralPortafolio({ filtros }) {
         valueFormat="percent"
       />
 
-      {/* <AvanceSemanalChart/> */}
+      <AvanceSemanalChart
+        title="AVANCE SEMANAL <b>PORTAFOLIO</b>"
+        rawData={dataGeneral}
+      />
     </>
   );
 }
