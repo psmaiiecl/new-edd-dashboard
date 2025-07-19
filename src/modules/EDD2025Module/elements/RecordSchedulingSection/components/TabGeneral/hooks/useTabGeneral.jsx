@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { useCustomFetch } from "../../../../../../../hooks/useCustomFetch";
-import { BASE_API_URL_2024 } from "../../../../../data/BASE_API_URL";
+import {
+  BASE_API_URL_2024,
+  BASE_API_URL_2025,
+} from "../../../../../data/BASE_API_URL";
 import { mapPieData } from "../../../../../../../utils/ChartMapperFactory";
 import { mappers } from "../../../utils/mapSpecs";
 import {
@@ -18,17 +21,14 @@ export function useTabGeneral() {
   const [agendamientoGlobal, setAgendamientoGlobal] = useState(null);
 
   useEffect(() => {
-    setDocentesAgendados(
-      mapPieData(
-        {
-          docentes_agendados: 100,
-          docentes_contacto_inicial_exitoso: 100,
-          docentes_contacto_inicial_fallido: 100,
-          docentes_sin_contactar: 100,
-        },
-        mappers.docentes_agendados
+    customFetch({
+      route: BASE_API_URL_2025 + "/2025-agendamiento-grabaciones",
+    }).then((data) =>
+      setDocentesAgendados(
+        mapPieData(data.docentes_agendados, mappers.docentes_agendados)
       )
     );
+
     setEstablecimientosAgendados(
       mapPieData(
         {

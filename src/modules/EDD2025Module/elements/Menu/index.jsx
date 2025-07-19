@@ -55,7 +55,7 @@ export function Menu() {
           title={"Agendamiento de Grabaciones"}
           action={() => navigate("agendamiento-grabaciones")}
           loading={loadingStatus.agendamiento}
-          locked
+          
         />
         <ModuleCard
           title={"Grabaciones"}
