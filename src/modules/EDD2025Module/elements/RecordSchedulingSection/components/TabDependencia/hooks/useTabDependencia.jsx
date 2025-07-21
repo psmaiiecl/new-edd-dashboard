@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useCustomFetch } from "../../../../../../../hooks/useCustomFetch";
-import { BASE_API_URL_2024 } from "../../../../../data/BASE_API_URL";
+import { BASE_API_URL_2025 } from "../../../../../data/BASE_API_URL";
 import { mapChartData, mapTableData } from "../../../utils/generalTabUtils";
 import { mappers } from "../../../utils/mapSpecs";
 
@@ -18,14 +18,26 @@ export function useTabDependencia() {
 
   useEffect(() => {
     customFetch({
-      route: BASE_API_URL_2024 + "/2024-grabaciones-dependencia",
+      route: BASE_API_URL_2025 + "/2025-agendamiento-grabaciones-tab-dependencia",
       shouldCache: true,
     }).then((data) => {
-      const docentes = mapChartData(data.docentesPorDependencia, mappers.docentes_dependencia);
-      const establecimientos = mapChartData(data.docentesPorDependencia, mappers.establecimientos_dependencia);
-      const dataTabla = mapTableData(data.docentesPorDependencia, mappers.tabla_dependencia);
-      
-      setTableData(dataTabla)
+      const docentes = mapChartData(
+        data.agendamiento_dependencia_docentes,
+        mappers.docentes_dependencia
+      );
+      const establecimientos = mapChartData(
+        data.agendamiento_dependencia_establecimientos,
+        mappers.establecimientos_dependencia
+      );
+      const dataTabla = mapTableData(
+        {
+          ...data.agendamiento_dependencia_docentes,
+          ...data.agendamiento_dependencia_establecimientos
+        },
+        mappers.tabla_dependencia
+      );
+
+      setTableData(dataTabla);
       setChartData({
         docentes,
         establecimientos,

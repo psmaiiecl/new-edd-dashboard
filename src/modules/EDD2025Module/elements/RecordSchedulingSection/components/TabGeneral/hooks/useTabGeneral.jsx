@@ -22,25 +22,20 @@ export function useTabGeneral() {
 
   useEffect(() => {
     customFetch({
-      route: BASE_API_URL_2025 + "/2025-agendamiento-grabaciones",
-    }).then((data) =>
+      route: BASE_API_URL_2025 + "/2025-agendamiento-grabaciones-tab-general",
+      shouldCache: true
+    }).then((data) => {
       setDocentesAgendados(
-        mapPieData(data.docentes_agendados, mappers.docentes_agendados)
-      )
-    );
+        mapPieData(data.agendamiento_docentes, mappers.docentes_agendados)
+      );
+      setEstablecimientosAgendados(
+        mapPieData(
+          data.agendamiento_establecimientos,
+          mappers.establecimientos_agendados
+        )
+      );
+    });
 
-    setEstablecimientosAgendados(
-      mapPieData(
-        {
-          ee_agendamiento_completo: 100,
-          ee_agendamiento_iniciado: 100,
-          ee_contacto_inicial_exitoso: 100,
-          ee_contacto_inicial_fallido: 100,
-          ee_sin_contactar: 100,
-        },
-        mappers.establecimientos_agendados
-      )
-    );
     customFetch({
       route:
         BASE_API_URL_2024 +

@@ -83,6 +83,7 @@ export function TabCTG() {
           </tbody>
         </table>
       </div>
+      <br />
     </TabContent>
   );
 }

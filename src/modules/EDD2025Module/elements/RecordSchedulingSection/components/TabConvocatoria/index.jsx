@@ -81,6 +81,7 @@ export function TabConvocatoria() {
           </tbody>
         </table>
       </div>
+      <br />
     </TabContent>
   );
 }

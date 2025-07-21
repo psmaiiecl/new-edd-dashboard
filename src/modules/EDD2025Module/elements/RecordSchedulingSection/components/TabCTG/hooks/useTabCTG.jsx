@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useCallback } from "react";
 import { useCustomFetch } from "../../../../../../../hooks/useCustomFetch";
-import { BASE_API_URL_2024 } from "../../../../../data/BASE_API_URL";
+import { BASE_API_URL_2025 } from "../../../../../data/BASE_API_URL";
 import { mapChartData, mapTableData } from "../../../utils/generalTabUtils";
 import { mappers } from "../../../utils/mapSpecs";
 
@@ -20,12 +20,15 @@ export function useTabCTG() {
 
   useEffect(() => {
     customFetch({
-      route: BASE_API_URL_2024 + "/2024-grabaciones-ctg",
+      route: BASE_API_URL_2025 + "/2025-agendamiento-grabaciones-tab-ctg",
       shouldCache: true,
     }).then((data) => {
-      const docentes = mapChartData(data, mappers.docentes_ctg);
-      const establecimientos = mapChartData(data, mappers.establecimientos_ctg);
-      const dataTabla = mapTableData(data, mappers.tabla_ctg);
+      const docentes = mapChartData(data.agendamiento_ctg_docentes, mappers.docentes_ctg);
+      const establecimientos = mapChartData(data.agendamiento_ctg_establecimientos, mappers.establecimientos_ctg);
+      const dataTabla = mapTableData({
+        ...data.agendamiento_ctg_docentes,
+        ...data.agendamiento_ctg_establecimientos
+      }, mappers.tabla_ctg);
 
       setTableData(dataTabla)
       setChartData({

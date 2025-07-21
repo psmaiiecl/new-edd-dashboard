@@ -81,6 +81,7 @@ export function TabRegion() {
           </tbody>
         </table>
       </div>
+      <br />
     </TabContent>
   );
 }

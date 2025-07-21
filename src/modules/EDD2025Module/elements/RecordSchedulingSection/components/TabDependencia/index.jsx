@@ -81,6 +81,7 @@ export function TabDependencia() {
           </tbody>
         </table>
       </div>
+      <br />
     </TabContent>
   );
 }

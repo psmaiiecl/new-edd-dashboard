@@ -12,6 +12,7 @@ export function Menu() {
     validationChart,
     portfolioChart,
     resultChart,
+    recordSchedulingChart,
     helpChart,
     loadingStatus,
   } = useModules();
@@ -55,19 +56,23 @@ export function Menu() {
           title={"Agendamiento de Grabaciones"}
           action={() => navigate("agendamiento-grabaciones")}
           loading={loadingStatus.agendamiento}
-          
-        />
+        >
+          <HighchartsReact
+            options={recordSchedulingChart}
+            highcharts={Highcharts}
+          />
+        </ModuleCard>
         <ModuleCard
           title={"Grabaciones"}
           action={() => navigate("grabaciones")}
           locked
         />
         <ModuleCard
-          locked
           title={"Recuperación de SD's"}
           action={() => navigate("recuperacion-sd")}
           loading={loadingStatus.recuperacion}
-        >
+          locked
+          >
           Recuperacion SD
         </ModuleCard>
         <ModuleCard title={"Procesamiento de SD's"} locked />
