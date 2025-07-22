@@ -34,29 +34,17 @@ export function useTabGeneral() {
           mappers.establecimientos_agendados
         )
       );
-    });
-
-    customFetch({
-      route:
-        BASE_API_URL_2024 +
-        "/datos-json?etiqueta=2024-grabaciones-agendamiento-semanal-apilado",
-    }).then((data) =>
       setAgendamientoApilado(
-        buildAgendamientoApilado(data.agendamiento_semanal)
+        buildAgendamientoApilado(data.agendamiento_semanal_apilado)
       )
-    );
-    customFetch({
-      route:
-        BASE_API_URL_2024 +
-        "/datos-json?etiqueta=2024-grabaciones-agendamiento-semanal",
-    }).then((data) => {
       setAgendamientoSemanal(
-        buildAgendamientoGeneral(data.agendamiento_semanal)
+        buildAgendamientoGeneral(data.agendamiento_semanal.normal)
       );
       setAgendamientoGlobal(
-        buildAgendamientoGeneral(data.agendamiento_acumulado)
+        buildAgendamientoGeneral(data.agendamiento_semanal.acumulado)
       );
     });
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

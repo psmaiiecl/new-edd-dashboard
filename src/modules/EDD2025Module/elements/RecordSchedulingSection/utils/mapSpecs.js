@@ -313,7 +313,7 @@ export const mappers = {
       {
         label: "Agendamiento Iniciado",
         keys: { ee: "ee_agendamiento_iniciado" },
-        color: "#FFD153",
+        color: "#8fb8ff",
         span: 1,
       },
       {
@@ -322,7 +322,7 @@ export const mappers = {
           doc: "contacto_exitoso",
           ee: "ee_contacto_exitoso",
         },
-        color: "#F9A825",
+        color: "#ffd153",
         span: 2,
       },
       {
@@ -331,13 +331,13 @@ export const mappers = {
           doc: "contacto_no_exitoso",
           ee: "ee_contacto_no_exitoso",
         },
-        color: "#FF5880",
+        color: "#c1d9ca",
         span: 2,
       },
       {
         label: "Sin Contactar",
         keys: { doc: "sin_contacto", ee: "ee_sin_contacto" },
-        color: "#1976D2",
+        color: "#ff5880",
         span: 2,
       },
     ],
@@ -354,7 +354,7 @@ export const mappers = {
       {
         label: "Agendamiento Iniciado",
         keys: { ee: "ee_agendamiento_iniciado" },
-        color: "#FFD153",
+        color: "#8fb8ff",
         span: 1,
       },
       {
@@ -363,7 +363,7 @@ export const mappers = {
           doc: "contacto_exitoso",
           ee: "ee_contacto_exitoso",
         },
-        color: "#F9A825",
+        color: "#ffd153",
         span: 2,
       },
       {
@@ -372,13 +372,13 @@ export const mappers = {
           doc: "contacto_no_exitoso",
           ee: "ee_contacto_no_exitoso",
         },
-        color: "#FF5880",
+        color: "#c1d9ca",
         span: 2,
       },
       {
         label: "Sin Contactar",
         keys: { doc: "sin_contactar", ee: "ee_sin_contacto" },
-        color: "#1976D2",
+        color: "#ff5880",
         span: 2,
       },
     ],
@@ -395,7 +395,7 @@ export const mappers = {
       {
         label: "Agendamiento Iniciado",
         keys: { ee: "ee_agendamiento_iniciado" },
-        color: "#FFD153",
+        color: "#8fb8ff",
         span: 1,
       },
       {
@@ -404,7 +404,7 @@ export const mappers = {
           doc: "contacto_exitoso",
           ee: "ee_contacto_exitoso",
         },
-        color: "#F9A825",
+        color: "#ffd153",
         span: 2,
       },
       {
@@ -413,13 +413,13 @@ export const mappers = {
           doc: "contacto_no_exitoso",
           ee: "ee_contacto_no_exitoso",
         },
-        color: "#FF5880",
+        color: "#c1d9ca",
         span: 2,
       },
       {
         label: "Sin Contactar",
         keys: { doc: "sin_contacto", ee: "ee_sin_contacto" },
-        color: "#1976D2",
+        color: "#ff5880",
         span: 2,
       },
     ],
@@ -436,7 +436,7 @@ export const mappers = {
       {
         label: "Agendamiento Iniciado",
         keys: { ee: "ee_agendamiento_iniciado" },
-        color: "#FFD153",
+        color: "#8fb8ff",
         span: 1,
       },
       {
@@ -445,7 +445,7 @@ export const mappers = {
           doc: "contacto_exitoso",
           ee: "ee_contacto_exitoso",
         },
-        color: "#F9A825",
+        color: "#ffd153",
         span: 2,
       },
       {
@@ -454,13 +454,13 @@ export const mappers = {
           doc: "contacto_no_exitoso",
           ee: "ee_contacto_no_exitoso",
         },
-        color: "#FF5880",
+        color: "#c1d9ca",
         span: 2,
       },
       {
         label: "Sin Contactar",
         keys: { doc: "sin_contacto", ee: "ee_sin_contacto" },
-        color: "#1976D2",
+        color: "#ff5880",
         span: 2,
       },
     ],

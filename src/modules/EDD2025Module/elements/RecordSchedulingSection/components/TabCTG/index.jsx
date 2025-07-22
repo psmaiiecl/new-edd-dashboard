@@ -76,8 +76,8 @@ export function TabCTG() {
                 ))}
                 <td className="text-center">{row.total.doc}</td>
                 <td className="text-center">{row.total.ee}</td>
-                <td className="text-center">{row.avance.doc.toFixed(1)}%</td>
-                <td className="text-center">{row.avance.ee.toFixed(1)}%</td>
+                <td className="text-center">{row.avance.doc}%</td>
+                <td className="text-center">{row.avance.ee}%</td>
               </tr>
             ))}
           </tbody>

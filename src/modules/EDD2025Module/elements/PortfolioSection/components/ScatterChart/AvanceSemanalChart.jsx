@@ -10,7 +10,7 @@ const AvanceSemanalChart = ({ title, rawData = null }) => {
       setData(buildAvanceSemanalPortafolio(rawData?.["portafolio-avance-semanal"]));
     }
   }, [rawData]);
-  return <CustomColumnChart data={data} title={title} />;
+  return <CustomColumnChart type={"STACK"} data={data} title={title} />;
 };
 
 export default AvanceSemanalChart;

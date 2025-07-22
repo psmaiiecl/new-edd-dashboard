@@ -1,4 +1,4 @@
-import { numberFormatter } from "../../../../../utils/NumberFormatter";
+import { numberFormatter, numberParser } from "../../../../../utils/NumberFormatter";
 import { extractCTGInfo } from "../../../../../utils/StringUtils";
 
 export function buildAgendamientoApilado(data) {
@@ -92,43 +92,88 @@ export function buildAgendamientoGeneral(data) {
 }
 
 export function buildAvanceSemanalPortafolio(data) {
-  const fechas = data?.fechas || [];
-  const m1 = data?.m1Iniciado_cant || [];
-  const m2 = data?.m2Iniciado_cant || [];
-  const m3 = data?.m3Iniciado_cant || [];
-  const pfIniciado = data?.pfIniciados_cant || [];
-  const pfCompletado = data?.pfCompletado_cant || [];
+  const noIniciados = [];
+  const iniciados = [];
+  const completados = [];
+
+  const anidadoCategorias = { categories: ["M1", "M2", "M3", "PF"] };
+  let fechas = data?.fechas || [];
+  let categorias = [];
+
+  for (let i = 0; i < fechas.length; i++) {
+    noIniciados.push(data?.m1NoIniciado[i]);
+    noIniciados.push(data?.m2NoIniciado[i]);
+    noIniciados.push(data?.m3NoIniciado[i]);
+    noIniciados.push(data?.pfNoIniciados[i]);
+    iniciados.push(data?.m1Iniciado[i]);
+    iniciados.push(data?.m2Iniciado[i]);
+    iniciados.push(data?.m3Iniciado[i]);
+    iniciados.push(data?.pfIniciados[i]);
+    completados.push(data?.m1Completado[i]);
+    completados.push(data?.m2Completado[i]);
+    completados.push(data?.m3Completado[i]);
+    completados.push(data?.pfCompletado[i]);
+
+    categorias.push({
+      name: fechas[i],
+      ...anidadoCategorias,
+    });
+  }
+
   const res = {
     override: {
+      tooltip: {
+        pointFormatter: function () {
+          return `<span style="color:${this.color}">●</span> ${
+            this.series.name
+          }: <b>${this.y.toFixed(1)}%</b><br/>`;
+        },
+      },
+      yAxis: {
+        labels: {
+          formatter: function () {
+            return `${this.value.toFixed(0)}%`;
+          },
+        },
+        stackLabels: {
+          enabled: true,
+          style: {
+            fontWeight: "bold",
+            fontSize: "13px",
+            color: "#333",
+            textOutline: "none",
+          },
+          formatter: function () {
+            return `${this.total.toFixed(0)}%`;
+          },
+        },
+      },
       xAxis: {
-        categories: fechas,
+        categories: [...categorias],
+      },
+      stackLabels: {
+        enabled: true,
+        style: {
+          fontWeight: "bold",
+          color: "gray",
+        },
       },
     },
     series: [
       {
-        name: "Módulo 1 Iniciado",
-        data: m1,
-        color: "#b2de95",
+        name: "No Iniciado",
+        data: noIniciados,
+        color: "#F25C75",
       },
       {
-        name: "Módulo 2 Iniciado",
-        data: m2,
-        color: "#5b9bd5",
+        name: "Iniciado",
+        data: iniciados,
+        color: "#5FA8F5",
       },
       {
-        name: "Módulo 3 Iniciado",
-        data: m3,
-        color: "#ff5880",
-      },
-      {
-        name: "Portafolio Iniciado",
-        data: pfIniciado,
-        color: "#c5a8ff",
-      },
-      {
-        name: "Portafolio Completado",
-        data: pfCompletado,
-        color: "#ffc400ff",
+        name: "Completado",
+        data: completados,
+        color: "#6EE7B7",
       },
     ],
   };
@@ -195,27 +240,33 @@ export function mapTableData(data, specs) {
       const valEE = eeKey ? parseInt(data[eeKey]?.[i] ?? 0) : null;
 
       values[col.label] = {
-        doc: valDocentes,
-        ee: valEE,
+        doc: numberFormatter(valDocentes),
+        ee: numberFormatter(valEE),
       };
 
       if (valDocentes !== null) totalDocentes += valDocentes;
       if (valEE !== null) totalEE += valEE;
     }
 
+    //Tipo avance
+    const avDoc = (numberParser(values['Agendamiento Completo']?.doc || 0 )/totalDocentes)*100;
+    const avEE = (numberParser(values['Agendamiento Completo']?.ee || 0)/totalDocentes)*100;
+
     rows.push({
       ...parsed,
       values,
       total: {
-        doc: totalDocentes,
-        ee: totalEE,
+        doc: numberFormatter(totalDocentes),
+        ee: numberFormatter(totalEE),
       },
       avance: {
-        doc: totalDocentes > 0 ? 100 : 0,
-        ee: totalEE > 0 ? 100 : 0,
+        // doc: totalDocentes > 0 ? 100 : 0,
+        // ee: totalEE > 0 ? 100 : 0,
+        doc: numberFormatter(avDoc.toFixed(1)),
+        ee: numberFormatter(avEE.toFixed(1))
       },
     });
-  }
+  }  
   return {
     rows,
     columns: specs.columns,

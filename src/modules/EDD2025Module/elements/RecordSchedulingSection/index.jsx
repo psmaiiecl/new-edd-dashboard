@@ -14,7 +14,7 @@ import { BASE_API_URL_2025 } from "../../data/BASE_API_URL";
 
 export function RecordSchedulingSection2025() {
   const [activeTab, setActiveTab] = useState("tab1");
-const customDownload = useCustomDownload();
+  const customDownload = useCustomDownload();
   return (
     <ModulePageLayout>
       <CustomTabs
@@ -22,16 +22,17 @@ const customDownload = useCustomDownload();
         currentActive={activeTab}
         tabArray={tabList}
       >
+        <div style={{width: 100}}></div>
         <Button
-                  text={"Excel Docente"}
-                  action={() => {
-                    customDownload(
-                      BASE_API_URL_2025 + "/2025-grabaciones-excel",
-                      { method: "POST" },
-                      "grabacion-docentes.csv"
-                    );
-                  }}
-                />
+          text={"Excel Docente"}
+          action={() => {
+            customDownload(
+              BASE_API_URL_2025 + "/2025-grabaciones-excel",
+              { method: "POST" },
+              "grabacion-docentes.csv"
+            );
+          }}
+        />
       </CustomTabs>
       <div style={{ display: activeTab === "tab1" ? "block" : "none" }}>
         <TabGeneral />
