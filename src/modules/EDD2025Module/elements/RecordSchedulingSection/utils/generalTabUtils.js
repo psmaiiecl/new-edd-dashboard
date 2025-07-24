@@ -1,4 +1,7 @@
-import { numberFormatter, numberParser } from "../../../../../utils/NumberFormatter";
+import {
+  numberFormatter,
+  numberParser,
+} from "../../../../../utils/NumberFormatter";
 import { extractCTGInfo } from "../../../../../utils/StringUtils";
 
 export function buildAgendamientoApilado(data) {
@@ -58,9 +61,23 @@ export function buildAgendamientoGeneral(data) {
   const avanceReal = data?.avance_real || [];
   const avanceEsperado = data?.avance_esperado || [];
   const avanceReal2024 = data?.avance_real_2024 || [];
-  const avanceEsperadoSinDocentes = data?.avance_esperado_sin_docentes || [];
+  const avanceRealSinDocentes = data?.avance_real_sin_docentes || [];
   const res = {
     override: {
+      tooltip: {
+        pointFormatter: function () {
+          return `<span style="color:${this.color}">●</span> ${
+            this.series.name
+          }: <b>${(this.y*100).toFixed(1)}%</b><br/>`;
+        },
+      },
+      yAxis: {
+        labels: {
+          formatter: function () {
+            return `${(this.value*100).toFixed(0)}%`;
+          },
+        },
+      },
       xAxis: {
         categories: semanas,
       },
@@ -77,14 +94,14 @@ export function buildAgendamientoGeneral(data) {
         color: "#5b9bd5",
       },
       {
+        name: "A. Real sin docentes con solicitud pendiente",
+        data: avanceRealSinDocentes,
+        color: "#c5a8ff",
+      },
+      {
         name: "Avance Real 2024",
         data: avanceReal2024,
         color: "#ff5880",
-      },
-      {
-        name: "A. Esperado sin docentes con solicitud pendiente",
-        data: avanceEsperadoSinDocentes,
-        color: "#c5a8ff",
       },
     ],
   };
@@ -249,8 +266,13 @@ export function mapTableData(data, specs) {
     }
 
     //Tipo avance
-    const avDoc = (numberParser(values['Agendamiento Completo']?.doc || 0 )/totalDocentes)*100;
-    const avEE = (numberParser(values['Agendamiento Completo']?.ee || 0)/totalDocentes)*100;
+    const avDoc =
+      (numberParser(values["Agendamiento Completo"]?.doc || 0) /
+        totalDocentes) *
+      100;
+    const avEE =
+      (numberParser(values["Agendamiento Completo"]?.ee || 0) / totalDocentes) *
+      100;
 
     rows.push({
       ...parsed,
@@ -263,10 +285,10 @@ export function mapTableData(data, specs) {
         // doc: totalDocentes > 0 ? 100 : 0,
         // ee: totalEE > 0 ? 100 : 0,
         doc: numberFormatter(avDoc.toFixed(1)),
-        ee: numberFormatter(avEE.toFixed(1))
+        ee: numberFormatter(avEE.toFixed(1)),
       },
     });
-  }  
+  }
   return {
     rows,
     columns: specs.columns,

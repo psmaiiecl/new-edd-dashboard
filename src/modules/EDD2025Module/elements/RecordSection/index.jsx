@@ -1,9 +1,13 @@
 import { useState } from "react";
 import "./index.css";
 import { tabList } from "./data/TabList";
-import TabGeneral from "./components/TabGeneral";
 import { ModulePageLayout } from "../../../../components/Layout/ModulePageLayout";
 import { CustomTabs } from "../../../../components/CustomTabs";
+import TabGeneral from "./components/TabGeneral";
+import TabCTG from "./components/TabCTG";
+import TabDependencia from "./components/TabDependencia";
+import TabConvocatoria from "./components/TabConvocatoria";
+import TabRegion from "./components/TabRegion";
 
 export function RecordSection2025() {
   const [activeTab, setActiveTab] = useState("tab1");
@@ -18,16 +22,16 @@ export function RecordSection2025() {
         <TabGeneral />
       </div>
       <div style={{ display: activeTab === "tab2" ? "block" : "none" }}>
-        {/* <TabCTG /> */}
+        <TabCTG />
       </div>
       <div style={{ display: activeTab === "tab3" ? "block" : "none" }}>
-        {/* <TabDependencia /> */}
+        <TabDependencia />
       </div>
       <div style={{ display: activeTab === "tab4" ? "block" : "none" }}>
-        {/* <TabConvocatoria /> */}
+        <TabConvocatoria />
       </div>
       <div style={{ display: activeTab === "tab5" ? "block" : "none" }}>
-        {/* <TabRegion /> */}
+        <TabRegion />
       </div>
     </ModulePageLayout>
   );

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useCustomFetch } from "../../../../../../../hooks/useCustomFetch";
 import {
-  BASE_API_URL_2024,
   BASE_API_URL_2025,
 } from "../../../../../data/BASE_API_URL";
 import { mapPieData } from "../../../../../../../utils/ChartMapperFactory";

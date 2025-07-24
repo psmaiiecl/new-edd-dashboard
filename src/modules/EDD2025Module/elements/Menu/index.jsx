@@ -65,7 +65,7 @@ export function Menu() {
         <ModuleCard
           title={"Grabaciones"}
           action={() => navigate("grabaciones")}
-          locked
+          locked          
         />
         <ModuleCard
           title={"Recuperación de SD's"}
