@@ -12,9 +12,10 @@ import { getGeneralValidation } from "../services/ValidationServices";
 import { buildValidationModuleChart } from "../utils/ValidationUtils";
 import {
   getAgendamientoData,
+  getGrabacionesData,
   getInscriptionData,
 } from "../services/menuAPIServices";
-import { buildAgendamientoModuleChart } from "../utils/menuChartMappers";
+import { buildAgendamientoModuleChart, buildGrabacionesModuleChart } from "../utils/menuChartMappers";
 export function useModules() {
   const { getToken } = useContext(AuthContext);
   const [inscriptionChart, setInscriptionChart] = useState(MODULE_CHART_SETUP);
@@ -23,6 +24,7 @@ export function useModules() {
   const [resultChart, setResultChart] = useState(MODULE_CHART_SETUP);
   const [recordSchedulingChart, setRecordSchedulingChart] =
     useState(MODULE_CHART_SETUP);
+  const [recordChart, setRecordChart] = useState(MODULE_CHART_SETUP);
   const [helpChart, setHelpChart] = useState(MODULE_CHART_SETUP);
   const [loadingStatus, setLoadingStatus] = useState({});
   const changeLoadingStatus = (field, state) => {
@@ -68,6 +70,13 @@ export function useModules() {
       );
       changeLoadingStatus("agendamiento", false);
     });
+    changeLoadingStatus("grabaciones", true);
+    getGrabacionesData(getToken()).then((data) => {
+      setRecordChart(
+        buildGrabacionesModuleChart(data.docentes_estado_rinde)
+      );
+      changeLoadingStatus("grabaciones", false);
+    });
   }, [getToken]);
   return {
     inscriptionChart,
@@ -75,6 +84,7 @@ export function useModules() {
     portfolioChart,
     resultChart,
     recordSchedulingChart,
+    recordChart,
     helpChart,
     loadingStatus,
   };

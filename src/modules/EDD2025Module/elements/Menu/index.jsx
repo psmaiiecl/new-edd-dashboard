@@ -13,6 +13,7 @@ export function Menu() {
     portfolioChart,
     resultChart,
     recordSchedulingChart,
+    recordChart,
     helpChart,
     loadingStatus,
   } = useModules();
@@ -64,15 +65,16 @@ export function Menu() {
         </ModuleCard>
         <ModuleCard
           title={"Grabaciones"}
+          loading={loadingStatus.grabaciones}
           action={() => navigate("grabaciones")}
-          locked          
-        />
+        >
+          <HighchartsReact options={recordChart} highcharts={Highcharts} />
+        </ModuleCard>
         <ModuleCard
           title={"Recuperación de SD's"}
           action={() => navigate("recuperacion-sd")}
           loading={loadingStatus.recuperacion}
-          locked
-          >
+        >
           Recuperacion SD
         </ModuleCard>
         <ModuleCard title={"Procesamiento de SD's"} locked />

@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useCustomFetch } from "../../../../../../../hooks/useCustomFetch";
-import {
-  BASE_API_URL_2025,
-} from "../../../../../data/BASE_API_URL";
+import { BASE_API_URL_2025 } from "../../../../../data/BASE_API_URL";
 import { mapPieData } from "../../../../../../../utils/ChartMapperFactory";
 import { mappers } from "../../../utils/mapSpecs";
 import {
@@ -19,10 +17,15 @@ export function useTabGeneral() {
   const [agendamientoSemanal, setAgendamientoSemanal] = useState(null);
   const [agendamientoGlobal, setAgendamientoGlobal] = useState(null);
 
+  const [reload, setReload] = useState(0);
+  const reloadFn = useCallback(() => {
+    setReload((prev) => prev + 1);
+  }, []);
+
   useEffect(() => {
     customFetch({
       route: BASE_API_URL_2025 + "/2025-agendamiento-grabaciones-tab-general",
-      shouldCache: true
+      shouldCache: true,
     }).then((data) => {
       setDocentesAgendados(
         mapPieData(data.agendamiento_docentes, mappers.docentes_agendados)
@@ -35,7 +38,7 @@ export function useTabGeneral() {
       );
       setAgendamientoApilado(
         buildAgendamientoApilado(data.agendamiento_semanal_apilado)
-      )
+      );
       setAgendamientoSemanal(
         buildAgendamientoGeneral(data.agendamiento_semanal.normal)
       );
@@ -45,7 +48,7 @@ export function useTabGeneral() {
     });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [reload]);
 
   return {
     docentesAgendados,
@@ -53,5 +56,6 @@ export function useTabGeneral() {
     agendamientoApilado,
     agendamientoSemanal,
     agendamientoGlobal,
+    reloadFn
   };
 }

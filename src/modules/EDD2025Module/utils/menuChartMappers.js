@@ -54,3 +54,68 @@ export function buildAgendamientoModuleChart(data) {
     ],
   };
 }
+
+export function buildGrabacionesModuleChart(data) {
+  const agendados = data.agendados ?? 0;
+  const sinAgendar = data.sin_agendar ?? 0;
+  const pospuestos = data.pospuestos ?? 0;
+  const grabados = data.grabados ?? 0;
+  const noGrabados = data.no_grabados ?? 0;
+  const total = data.todos;
+
+  return {
+    ...MODULE_CHART_SETUP,
+    series: [
+      {
+        ...MODULE_CHART_SETUP.series[0],
+        data: [
+          {
+            name: "Grabados",
+            y: grabados,
+            color: "#65D9AB",
+            drilldown: {
+              categories: ["Grabados"],
+              data: [(grabados / total) * 100],
+            },
+          },
+          {
+            name: "No Grabados",
+            y: noGrabados,
+            color: "#FF5880",
+            drilldown: {
+              categories: ["No Grabados"],
+              data: [(noGrabados / total) * 100],
+            },
+          },
+          {
+            name: "Agendados",
+            color: "#C1D9CA",
+            y: agendados,
+            drilldown: {
+              categories: ["Agendados"],
+              data: [(agendados / total) * 100],
+            },
+          },
+          {
+            name: "Pospuestos",
+            y: pospuestos,
+            color: "#FFD153",
+            drilldown: {
+              categories: ["Pospuestos"],
+              data: [(pospuestos / total) * 100],
+            },
+          },
+          {
+            name: "Sin Agendar",
+            y: sinAgendar,
+            color: "#7fb4f0ff",
+            drilldown: {
+              categories: ["Sin Agendar"],
+              data: [(sinAgendar / total) * 100],
+            },
+          },
+        ],
+      },
+    ],
+  };
+}
