@@ -3,7 +3,7 @@ import { useCustomFetch } from "../../../../../../../hooks/useCustomFetch";
 import { BASE_API_URL_2025 } from "../../../../../data/BASE_API_URL";
 import { mapPieData } from "../../../../../../../utils/ChartMapperFactory";
 import mappers from "../../../utils/mapSpecs";
-import { buildAvanceDiarioGrabaciones } from "../../../utils/utils";
+import { buildAvanceDiarioGrabaciones, buildGrabacionesSemanales } from "../../../utils/utils";
 
 function useTabGeneral() {
   const customFetch = useCustomFetch();
@@ -13,6 +13,9 @@ function useTabGeneral() {
   const [sostenedoresParticipantes, setSostenedoresParticipantes] =
     useState(null);
   const [avanceDiario, setAvanceDiario] = useState(null);
+  const [grabacionesSemanales, setGrabacionesSemanales] = useState(null);
+  const [grabacionesAcumuladas, setGrabacionesAcumuladas] = useState(null);
+
   useEffect(() => {
     customFetch({
       route: BASE_API_URL_2025 + "/2025-grabaciones-tab-general",
@@ -39,7 +42,15 @@ function useTabGeneral() {
           mappers.sostenedores_participantes
         )
       );
-      setAvanceDiario(buildAvanceDiarioGrabaciones(data.avance_diario_grabaciones));
+      setAvanceDiario(
+        buildAvanceDiarioGrabaciones(data.avance_diario_grabaciones)
+      );
+      setGrabacionesSemanales(
+        buildGrabacionesSemanales(data.grabaciones_semanales?.normal)
+      );
+      setGrabacionesAcumuladas(
+        buildGrabacionesSemanales(data.grabaciones_semanales?.acumulado)
+      )
     });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -49,7 +60,9 @@ function useTabGeneral() {
     docentesGrabados,
     establecimientosAGrabar,
     sostenedoresParticipantes,
-    avanceDiario
+    avanceDiario,
+    grabacionesSemanales,
+    grabacionesAcumuladas
   };
 }
 
