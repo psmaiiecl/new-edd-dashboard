@@ -74,6 +74,7 @@ export function Menu() {
           title={"Recuperación de SD's"}
           action={() => navigate("recuperacion-sd")}
           loading={loadingStatus.recuperacion}
+          locked
         >
           Recuperacion SD
         </ModuleCard>

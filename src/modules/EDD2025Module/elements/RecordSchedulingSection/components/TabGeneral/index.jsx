@@ -37,6 +37,17 @@ export function TabGeneral() {
       <CustomColumnChart
         title={"AGENDAMIENTO <b>SEMANAL</b>"}
         data={agendamientoSemanal}
+         overrideConfig={{
+          yAxis: {
+            min: 0,
+            title: {
+              text: "Avance",
+            },
+            labels: {
+              format: "{value}",
+            },
+          },
+        }}s
       />
       <hr />
       <CustomDotLineChart
