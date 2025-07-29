@@ -6,8 +6,10 @@ const AvanceSemanalChart = ({ title, rawData = null }) => {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    if (rawData) {      
-      setData(buildAvanceSemanalPortafolio(rawData?.["portafolio-avance-semanal"]));
+    if (rawData) {
+      setData(
+        buildAvanceSemanalPortafolio(rawData?.["portafolio-avance-semanal"])
+      );
     }
   }, [rawData]);
   return <CustomColumnChart type={"STACK"} data={data} title={title} />;

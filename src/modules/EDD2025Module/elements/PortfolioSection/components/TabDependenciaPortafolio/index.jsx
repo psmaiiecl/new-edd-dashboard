@@ -13,7 +13,7 @@ export function TabDependenciaPortafolio() {
   //const serviceUrl = "/2025-portafolio-tab-dependencia"; // Esta ruta ya se usa en el hook
   const nf = new Intl.NumberFormat("es-CL");
 
-  const avanceDependenciaMapper = (data, tableName='Dependencia') => {
+  const avanceDependenciaMapper = (data, tableName = "Dependencia") => {
     const dependencias = data?.docentes ?? {};
     const categories = Object.keys(dependencias);
 

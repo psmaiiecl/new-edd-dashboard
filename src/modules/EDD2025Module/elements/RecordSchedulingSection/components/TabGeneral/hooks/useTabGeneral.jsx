@@ -56,6 +56,6 @@ export function useTabGeneral() {
     agendamientoApilado,
     agendamientoSemanal,
     agendamientoGlobal,
-    reloadFn
+    reloadFn,
   };
 }

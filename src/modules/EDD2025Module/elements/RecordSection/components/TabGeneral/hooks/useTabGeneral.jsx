@@ -3,7 +3,10 @@ import { useCustomFetch } from "../../../../../../../hooks/useCustomFetch";
 import { BASE_API_URL_2025 } from "../../../../../data/BASE_API_URL";
 import { mapPieData } from "../../../../../../../utils/ChartMapperFactory";
 import mappers from "../../../utils/mapSpecs";
-import { buildAvanceDiarioGrabaciones, buildGrabacionesSemanales } from "../../../utils/utils";
+import {
+  buildAvanceDiarioGrabaciones,
+  buildGrabacionesSemanales,
+} from "../../../utils/utils";
 
 function useTabGeneral() {
   const customFetch = useCustomFetch();
@@ -50,7 +53,7 @@ function useTabGeneral() {
       );
       setGrabacionesAcumuladas(
         buildGrabacionesSemanales(data.grabaciones_semanales?.acumulado)
-      )
+      );
     });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -62,7 +65,7 @@ function useTabGeneral() {
     sostenedoresParticipantes,
     avanceDiario,
     grabacionesSemanales,
-    grabacionesAcumuladas
+    grabacionesAcumuladas,
   };
 }
 

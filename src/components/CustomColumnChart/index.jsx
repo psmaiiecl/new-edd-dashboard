@@ -20,11 +20,10 @@ export function CustomColumnChart({
   useEffect(() => {
     if (!data) return;
     setChartSetup((prev) => ({
-        ...prev,
-        series: [...data.series],
-        ...data?.override,
-      }
-    ));
+      ...prev,
+      series: [...data.series],
+      ...data?.override,
+    }));
   }, [data]);
   return (
     <div className="column-chart-container">

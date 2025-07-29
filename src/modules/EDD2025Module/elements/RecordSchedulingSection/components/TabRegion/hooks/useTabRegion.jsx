@@ -21,14 +21,23 @@ export function useTabRegion() {
       route: BASE_API_URL_2025 + "/2025-agendamiento-grabaciones-tab-region",
       shouldCache: true,
     }).then((data) => {
-      const docentes = mapChartData(data.agendamiento_region_docentes, mappers.docentes_region);
-      const establecimientos = mapChartData(data.agendamiento_region_establecimientos, mappers.establecimientos_region);
-      const dataTabla = mapTableData({
-        ...data.agendamiento_region_docentes,
-        ...data.agendamiento_region_establecimientos
-      }, mappers.tabla_region);
-      
-      setTableData(dataTabla)
+      const docentes = mapChartData(
+        data.agendamiento_region_docentes,
+        mappers.docentes_region
+      );
+      const establecimientos = mapChartData(
+        data.agendamiento_region_establecimientos,
+        mappers.establecimientos_region
+      );
+      const dataTabla = mapTableData(
+        {
+          ...data.agendamiento_region_docentes,
+          ...data.agendamiento_region_establecimientos,
+        },
+        mappers.tabla_region
+      );
+
+      setTableData(dataTabla);
       setChartData({
         docentes,
         establecimientos,

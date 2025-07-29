@@ -1,11 +1,12 @@
-
-function AvanceSemanalChart({ BarrasSemanal, containerId = "avance-semanal-portafolio" }) {
-
-    const { data } = BarrasSemanal;
+function AvanceSemanalChart({
+  BarrasSemanal,
+  containerId = "avance-semanal-portafolio",
+}) {
+  const { data } = BarrasSemanal;
 
   useEffect(() => {
     Highcharts.setOptions({
-      lang: { thousandsSep: "." }
+      lang: { thousandsSep: "." },
     });
   }, []);
 
@@ -18,7 +19,7 @@ function AvanceSemanalChart({ BarrasSemanal, containerId = "avance-semanal-porta
         fontWeight: "bold",
       },
     },
-    colors: ['#FF5880', '#FF8E53', '#FFD153', '#8FB8FF', '#65D9AB'],
+    colors: ["#FF5880", "#FF8E53", "#FFD153", "#8FB8FF", "#65D9AB"],
     title: {
       text: "",
       align: "center",
@@ -74,8 +75,8 @@ function AvanceSemanalChart({ BarrasSemanal, containerId = "avance-semanal-porta
   };
 
   return (
-   <>
+    <>
       <HighchartsReact highcharts={Highcharts} options={chartOptions} />
     </>
-  )
+  );
 }

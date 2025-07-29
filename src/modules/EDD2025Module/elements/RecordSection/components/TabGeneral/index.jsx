@@ -12,7 +12,7 @@ function TabGeneral() {
     sostenedoresParticipantes,
     avanceDiario,
     grabacionesSemanales,
-    grabacionesAcumuladas
+    grabacionesAcumuladas,
   } = useTabGeneral();
 
   return (
@@ -44,9 +44,15 @@ function TabGeneral() {
         title={"AVANCE DIARIO DEL PROCESO <b>DE GRABACIONES</b>"}
       />
       <hr />
-      <CustomColumnChart data={grabacionesSemanales} title={"GRABACIONES <b>SEMANALES</b>"} />
+      <CustomColumnChart
+        data={grabacionesSemanales}
+        title={"GRABACIONES <b>SEMANALES</b>"}
+      />
       <hr />
-      <CustomDotLineChart data={grabacionesAcumuladas} title={"GRABACIONES <b>ACUMULADAS</b>"} />
+      <CustomDotLineChart
+        data={grabacionesAcumuladas}
+        title={"GRABACIONES <b>ACUMULADAS</b>"}
+      />
     </TabContent>
   );
 }

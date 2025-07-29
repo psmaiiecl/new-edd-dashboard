@@ -20,7 +20,7 @@ const PieChart = ({
   useEffect(() => {
     Highcharts.setOptions({
       lang: {
-        thousandsSep: ".", 
+        thousandsSep: ".",
       },
     });
     if (chartData) {
@@ -31,7 +31,6 @@ const PieChart = ({
   }, [chartData, dataMapper, color, subtitle]);
 
   const options = {
-
     chart: {
       type: "pie",
       backgroundColor: null,

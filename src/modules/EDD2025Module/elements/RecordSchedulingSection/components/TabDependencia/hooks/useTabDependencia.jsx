@@ -18,7 +18,8 @@ export function useTabDependencia() {
 
   useEffect(() => {
     customFetch({
-      route: BASE_API_URL_2025 + "/2025-agendamiento-grabaciones-tab-dependencia",
+      route:
+        BASE_API_URL_2025 + "/2025-agendamiento-grabaciones-tab-dependencia",
       shouldCache: true,
     }).then((data) => {
       const docentes = mapChartData(
@@ -32,7 +33,7 @@ export function useTabDependencia() {
       const dataTabla = mapTableData(
         {
           ...data.agendamiento_dependencia_docentes,
-          ...data.agendamiento_dependencia_establecimientos
+          ...data.agendamiento_dependencia_establecimientos,
         },
         mappers.tabla_dependencia
       );

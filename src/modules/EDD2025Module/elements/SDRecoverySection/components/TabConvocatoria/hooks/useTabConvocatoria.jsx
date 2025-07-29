@@ -3,16 +3,14 @@ import { useCustomFetch } from "../../../../../../../hooks/useCustomFetch";
 
 export function useTabConvocatoria() {
   const customFetch = useCustomFetch();
- 
+
   const [chartData, setChartData] = useState({
     docentes: null,
     establecimientos: null,
   });
   const [tableData, setTableData] = useState(null);
 
-  useEffect(() => {
-    
-  }, []);
+  useEffect(() => {}, []);
 
   return { chartData, tableData };
 }

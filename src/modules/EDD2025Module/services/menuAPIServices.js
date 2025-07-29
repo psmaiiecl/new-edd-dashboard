@@ -16,8 +16,8 @@ export async function getInscriptionData(token) {
   return data;
 }
 
-export async function getAgendamientoData(token){
-    const URL =
+export async function getAgendamientoData(token) {
+  const URL =
     import.meta.env.VITE_BASE_URL +
     BASE_API_URL_2025 +
     "/2025-agendamiento-grabaciones-tab-general";
@@ -32,8 +32,8 @@ export async function getAgendamientoData(token){
   return data;
 }
 
-export async function getGrabacionesData(token){
-    const URL =
+export async function getGrabacionesData(token) {
+  const URL =
     import.meta.env.VITE_BASE_URL +
     BASE_API_URL_2025 +
     "/2025-grabaciones-tab-general";
@@ -47,4 +47,3 @@ export async function getGrabacionesData(token){
   const data = await response.json();
   return data;
 }
-

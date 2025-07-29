@@ -18,7 +18,9 @@ function TabConvocatoria() {
           table={false}
           data={chartData.establecimientos}
           height={500}
-          subtitle={"Estado de Grabación de Establecimientos <b>por Convocatoria</b>"}
+          subtitle={
+            "Estado de Grabación de Establecimientos <b>por Convocatoria</b>"
+          }
         />
       </div>
       <div className="combined-table-container">

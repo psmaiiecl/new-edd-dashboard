@@ -12,7 +12,6 @@ const AvanceIniciadosChart = ({
 }) => {
   const [data, setData] = useState(null);
   useEffect(() => {
-
     if (rawData) {
       setData(dataMapper(rawData?.["portafolio-avance-diario"]));
     }
@@ -23,7 +22,7 @@ const AvanceIniciadosChart = ({
       title={title}
       fechas={data?.fechas}
       series={data?.series}
-      valueFormat={valueFormat} 
+      valueFormat={valueFormat}
     />
   );
 };

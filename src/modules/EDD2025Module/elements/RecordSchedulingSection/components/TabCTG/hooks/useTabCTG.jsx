@@ -23,14 +23,23 @@ export function useTabCTG() {
       route: BASE_API_URL_2025 + "/2025-agendamiento-grabaciones-tab-ctg",
       shouldCache: true,
     }).then((data) => {
-      const docentes = mapChartData(data.agendamiento_ctg_docentes, mappers.docentes_ctg);
-      const establecimientos = mapChartData(data.agendamiento_ctg_establecimientos, mappers.establecimientos_ctg);
-      const dataTabla = mapTableData({
-        ...data.agendamiento_ctg_docentes,
-        ...data.agendamiento_ctg_establecimientos
-      }, mappers.tabla_ctg);
+      const docentes = mapChartData(
+        data.agendamiento_ctg_docentes,
+        mappers.docentes_ctg
+      );
+      const establecimientos = mapChartData(
+        data.agendamiento_ctg_establecimientos,
+        mappers.establecimientos_ctg
+      );
+      const dataTabla = mapTableData(
+        {
+          ...data.agendamiento_ctg_docentes,
+          ...data.agendamiento_ctg_establecimientos,
+        },
+        mappers.tabla_ctg
+      );
 
-      setTableData(dataTabla)
+      setTableData(dataTabla);
       setChartData({
         docentes,
         establecimientos,

@@ -6,8 +6,7 @@ export function usePortafolioDataRegion(filtros = {}) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const baseURL =
-    import.meta.env.VITE_BASE_URL + "/back/public/api2025";
+  const baseURL = import.meta.env.VITE_BASE_URL + "/back/public/api2025";
 
   useEffect(() => {
     //if (!filtros || Object.keys(filtros).length === 0) {

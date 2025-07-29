@@ -1,7 +1,7 @@
 // ChartDataTable.js
 import React from "react";
 
-export const ChartDataTable = ({ series, categories}) => {
+export const ChartDataTable = ({ series, categories }) => {
   if (!series?.length || !categories?.length) return null;
 
   return (
@@ -17,7 +17,7 @@ export const ChartDataTable = ({ series, categories}) => {
               }}
             >
               {/* {categories} */}
-            INCLUIR TIPO DE PORTAFOLIO
+              INCLUIR TIPO DE PORTAFOLIO
             </th>
             {series.map((s, idx) => (
               <th

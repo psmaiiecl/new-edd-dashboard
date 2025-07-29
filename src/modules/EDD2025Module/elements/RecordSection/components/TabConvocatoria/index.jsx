@@ -2,6 +2,7 @@ import { Fragment } from "react";
 import { CustomBarChart } from "../../../../../../components/CustomBarChart";
 import { TabContent } from "../../../../../../components/Layout/TabContent";
 import { useTabConvocatoria } from "./hooks/useTabConvocatoria";
+import { getColorForAvance } from "../../utils/utils";
 
 function TabConvocatoria() {
   const { chartData, tableData } = useTabConvocatoria();
@@ -12,13 +13,15 @@ function TabConvocatoria() {
           table={false}
           data={chartData.docentes}
           height={500}
-          subtitle={"Estado de Grabación de Docentes <b>por Convocatoria</b>"}
+          subtitle={"ESTADO DE GRABACION DE DOCENTES <b>POR CONVOCATORIA</b>"}
         />
         <CustomBarChart
           table={false}
           data={chartData.establecimientos}
           height={500}
-          subtitle={"Estado de Grabación de Establecimientos <b>por Convocatoria</b>"}
+          subtitle={
+            "ESTADO DE GRABACION DE ESTABLECIMIENTOS <b>POR CONVOCATORIA</b>"
+          }
         />
       </div>
       <div className="combined-table-container">
@@ -27,28 +30,21 @@ function TabConvocatoria() {
             <tr>
               <th rowSpan={2}>Convocatoria</th>
               {tableData?.columns.map((col, idx) => (
-                <th
-                  key={idx}
-                  colSpan={col?.span || 2}
-                  style={{ backgroundColor: col.color }}
-                >
+                <th key={idx} colSpan={col.series.length + 2}>
                   {col.label}
                 </th>
               ))}
-              <th rowSpan={2}>Total Doc</th>
-              <th rowSpan={2}>Total EE</th>
-              <th rowSpan={2}>% Avance Doc</th>
-              <th rowSpan={2}>% Avance EE</th>
             </tr>
             <tr>
               {tableData?.columns.map((col, idx) => (
                 <Fragment key={idx}>
-                  {col.keys?.doc && (
-                    <th style={{ backgroundColor: col.color }}>Doc</th>
-                  )}
-                  {col.keys?.ee && (
-                    <th style={{ backgroundColor: col.color }}>EE</th>
-                  )}
+                  {col.series.map((serie, sidx) => (
+                    <th key={sidx} style={{ backgroundColor: serie.color }}>
+                      {serie.name}
+                    </th>
+                  ))}
+                  <th style={{ whiteSpace: "nowrap" }}>Total</th>
+                  <th style={{ whiteSpace: "nowrap" }}>% Avance</th>
                 </Fragment>
               ))}
             </tr>
@@ -56,25 +52,36 @@ function TabConvocatoria() {
           <tbody>
             {tableData?.rows.map((row, idx) => (
               <tr key={idx}>
-                <td className="to-right-cell">{row?.rawCategory}</td>
+                <td className="to-right-cell">{row.rawCategory}</td>
                 {tableData?.columns.map((col, cidx) => (
                   <Fragment key={cidx}>
-                    {col.keys?.doc && (
-                      <td className="text-center">
-                        {row.values[col.label]?.doc ?? "-"}
+                    {col.series.map((serie, sidx) => (
+                      <td key={sidx} className="text-center">
+                        {row.values[col.label]?.[serie.name]?.value ?? "-"}
                       </td>
-                    )}
-                    {col.keys?.ee && (
-                      <td className="text-center">
-                        {row.values[col.label]?.ee ?? "-"}
-                      </td>
-                    )}
+                    ))}
+                    <td className="text-center">
+                      {row.totals?.[col.label] ?? "-"}
+                    </td>
+                    <td className="text-center">
+                      {row.avance?.[col.label] != null ? (
+                        <>
+                          <span
+                            className="avance-dot"
+                            style={{
+                              backgroundColor: getColorForAvance(
+                                row.avance[col.label]
+                              ),
+                            }}
+                          ></span>
+                          {row.avance[col.label]}%
+                        </>
+                      ) : (
+                        "-"
+                      )}
+                    </td>
                   </Fragment>
                 ))}
-                <td className="text-center">{row.total.doc}</td>
-                <td className="text-center">{row.total.ee}</td>
-                <td className="text-center">{row.avance.doc}%</td>
-                <td className="text-center">{row.avance.ee}%</td>
               </tr>
             ))}
           </tbody>

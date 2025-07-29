@@ -68,13 +68,13 @@ export function buildAgendamientoGeneral(data) {
         pointFormatter: function () {
           return `<span style="color:${this.color}">●</span> ${
             this.series.name
-          }: <b>${(this.y*100).toFixed(1)}%</b><br/>`;
+          }: <b>${(this.y * 100).toFixed(1)}%</b><br/>`;
         },
       },
       yAxis: {
         labels: {
           formatter: function () {
-            return `${(this.value*100).toFixed(0)}%`;
+            return `${(this.value * 100).toFixed(0)}%`;
           },
         },
       },

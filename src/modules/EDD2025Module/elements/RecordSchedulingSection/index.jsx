@@ -22,7 +22,7 @@ export function RecordSchedulingSection2025() {
         currentActive={activeTab}
         tabArray={tabList}
       >
-        <div style={{width: 100}}></div>
+        <div style={{ width: 100 }}></div>
         <Button
           text={"Excel Docente"}
           action={() => {

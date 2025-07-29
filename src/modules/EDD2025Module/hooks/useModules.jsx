@@ -15,7 +15,10 @@ import {
   getGrabacionesData,
   getInscriptionData,
 } from "../services/menuAPIServices";
-import { buildAgendamientoModuleChart, buildGrabacionesModuleChart } from "../utils/menuChartMappers";
+import {
+  buildAgendamientoModuleChart,
+  buildGrabacionesModuleChart,
+} from "../utils/menuChartMappers";
 export function useModules() {
   const { getToken } = useContext(AuthContext);
   const [inscriptionChart, setInscriptionChart] = useState(MODULE_CHART_SETUP);
@@ -72,9 +75,7 @@ export function useModules() {
     });
     changeLoadingStatus("grabaciones", true);
     getGrabacionesData(getToken()).then((data) => {
-      setRecordChart(
-        buildGrabacionesModuleChart(data.docentes_estado_rinde)
-      );
+      setRecordChart(buildGrabacionesModuleChart(data.docentes_estado_rinde));
       changeLoadingStatus("grabaciones", false);
     });
   }, [getToken]);

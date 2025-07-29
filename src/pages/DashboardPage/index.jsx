@@ -45,10 +45,7 @@ export function DashboardPage() {
                 path="agendamiento-grabaciones"
                 element={<RecordSchedulingSection2025 />}
               />
-              <Route
-                path="grabaciones"
-                element={<RecordSection2025 />}
-              />
+              <Route path="grabaciones" element={<RecordSection2025 />} />
               <Route
                 path="recuperacion-sd"
                 element={<SDRecoverySection2025 />}
