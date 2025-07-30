@@ -11,8 +11,6 @@ export function Menu() {
     inscriptionChart,
     validationChart,
     portfolioChart,
-    portfolioCorrectionChart,
-    processingChart,
     resultChart,
     recordSchedulingChart,
     recordChart,
