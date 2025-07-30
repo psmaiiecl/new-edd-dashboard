@@ -28,7 +28,7 @@ export function Menu() {
       </div>
       <div className="module-menu">
         <ModuleCard
-          title={"F"}
+          title={"Inscripción"}
           action={() => navigate("inscripcion")}
           loading={loadingStatus.inscription}
         >
@@ -76,7 +76,6 @@ export function Menu() {
           title={"Recuperación de SD's"}
           action={() => navigate("recuperacion-sd")}
           loading={loadingStatus.recuperacion}
-          locked
         >
           Recuperacion SD
         </ModuleCard>
@@ -86,9 +85,15 @@ export function Menu() {
           loading={loadingStatus.procesamiento}
         />
         <ModuleCard
-        title={"Corrección Portafolios"}
-          action={() => navigate("correcciones")}
-          loading={loadingStatus.correcciones}  />
+          title={"Corrección Postulaciones"}
+          action={() => navigate("correccion-postulaciones")}
+          loading={loadingStatus.correccion_postulaciones}
+        />
+        <ModuleCard
+          title={"Corrección Portafolios"}
+          action={() => navigate("correcciones-portafolios")}
+          loading={loadingStatus.correcciones_portafolios}
+        />
         <ModuleCard
           title={"Mesa de Ayuda - Tickets"}
           loading={loadingStatus.help}

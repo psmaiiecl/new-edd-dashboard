@@ -1,0 +1,48 @@
+.pagina-portafolio {
+  min-height: 100%;
+  width: 100%;
+  margin: auto;
+  position: relative;
+}
+
+.portafolio-content {
+  display: flex;
+  box-shadow: 0 7px 10px 0 rgba(0, 0, 0, 0.1);
+  max-width: 1366px;
+  width: 100%;
+  flex-direction: column;
+  background-color: white;
+  margin: 0 auto;
+}
+
+.contador-banner {
+  /*
+  position: relative;
+  width: 15%;
+  background: linear-gradient(to right, #0f69b5, #007bff);
+  */
+  opacity: 0.9;
+  color: #484747;
+  /*border-radius: 3px;*/
+  align-items: right;
+  padding: 0.5rem 0;
+  font-family: Arial, sans-serif;
+  font-size: 0.8rem;
+  /*
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  */
+  text-align: right;
+}
+
+.contador-banner p {
+  width: fit-content;
+  white-space: nowrap;
+  text-align: right;
+  margin-right: 0;
+}
+
+.contador-banner strong {
+  font-size: 0.8rem;
+  color: #0f69b5;
+}
