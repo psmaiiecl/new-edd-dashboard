@@ -5,17 +5,13 @@ const AvanceDiarioChart = ({
   dataMapper,
   title,
   rawData = null,
-  valueFormat= "integer"
+  valueFormat = "integer",
 }) => {
   const [data, setData] = useState(null);
 
   useEffect(() => {
     if (rawData) {
-      setData(
-        dataMapper(
-          rawData?.["portafolio-avance-diario"]
-        )
-      );
+      setData(dataMapper(rawData?.["portafolio-avance-diario"]));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rawData]);
@@ -29,7 +25,7 @@ const AvanceDiarioChart = ({
   // });
   return (
     <CustomDotLineChart
-    valueFormat={valueFormat}
+      valueFormat={valueFormat}
       title={title}
       fechas={data?.fechas}
       series={data?.series}

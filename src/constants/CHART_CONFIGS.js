@@ -8,9 +8,9 @@ const BASE_CHART_CONFIG = {
   credits: {
     enabled: false,
   },
-  exporting: {
-    enabled: false,
-  },
+  // exporting: {
+  //   enabled: false,
+  // },
 };
 
 export const PIE_CONFIG = {

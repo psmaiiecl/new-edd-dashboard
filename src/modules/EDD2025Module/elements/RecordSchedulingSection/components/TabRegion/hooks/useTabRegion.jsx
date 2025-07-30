@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useCustomFetch } from "../../../../../../../hooks/useCustomFetch";
-import { BASE_API_URL_2024 } from "../../../../../data/BASE_API_URL";
+import { BASE_API_URL_2025 } from "../../../../../data/BASE_API_URL";
 import { mapChartData, mapTableData } from "../../../utils/generalTabUtils";
 import { mappers } from "../../../utils/mapSpecs";
 
@@ -18,14 +18,26 @@ export function useTabRegion() {
 
   useEffect(() => {
     customFetch({
-      route: BASE_API_URL_2024 + "/2024-grabaciones-region",
+      route: BASE_API_URL_2025 + "/2025-agendamiento-grabaciones-tab-region",
       shouldCache: true,
     }).then((data) => {
-      const docentes = mapChartData(data.docentesPorRegion, mappers.docentes_region);
-      const establecimientos = mapChartData(data.docentesPorRegion, mappers.establecimientos_region);
-      const dataTabla = mapTableData(data.docentesPorRegion, mappers.tabla_region);
-      
-      setTableData(dataTabla)
+      const docentes = mapChartData(
+        data.agendamiento_region_docentes,
+        mappers.docentes_region
+      );
+      const establecimientos = mapChartData(
+        data.agendamiento_region_establecimientos,
+        mappers.establecimientos_region
+      );
+      const dataTabla = mapTableData(
+        {
+          ...data.agendamiento_region_docentes,
+          ...data.agendamiento_region_establecimientos,
+        },
+        mappers.tabla_region
+      );
+
+      setTableData(dataTabla);
       setChartData({
         docentes,
         establecimientos,

@@ -9,7 +9,13 @@ function formatValue(val, type = "integer") {
   return val;
 }
 
-export function CustomDotLineChart({ title, fechas, series, textGraph, valueFormat = "integer" }) {
+export function CustomDotLineChart({
+  title,
+  fechas,
+  series,
+  textGraph,
+  valueFormat = "integer",
+}) {
   if (!fechas || !series) return null;
 
   Highcharts.setOptions({
@@ -23,16 +29,16 @@ export function CustomDotLineChart({ title, fechas, series, textGraph, valueForm
       type: "line",
       backgroundColor: "transparent",
     },
-	  title: {
-		text: title,
-		align: "center",
-		style: {
-		  fontWeight: "normal",
-		  fontSize: "15px",
-		  color: "#666666",
-		},
-	  },
-  /*
+    title: {
+      text: title,
+      align: "center",
+      style: {
+        fontWeight: "normal",
+        fontSize: "15px",
+        color: "#666666",
+      },
+    },
+    /*
     title: {
       useHTML: true,
       text: title,
@@ -52,7 +58,7 @@ export function CustomDotLineChart({ title, fechas, series, textGraph, valueForm
         rotation: -45,
         style: {
           fontSize: "0.8em",
-		  fill: "rgb(51, 51, 51)",
+          fill: "rgb(51, 51, 51)",
         },
       },
     },
@@ -71,7 +77,9 @@ export function CustomDotLineChart({ title, fechas, series, textGraph, valueForm
       formatter: function () {
         let tooltip = `<b>${this.key}</b><br/>`;
         this.points.forEach((point) => {
-          tooltip += `<span style="color:${point.color}">\u25CF</span> ${point.series.name}: <b>${formatValue(point.y, valueFormat)}</b><br/>`;
+          tooltip += `<span style="color:${point.color}">\u25CF</span> ${
+            point.series.name
+          }: <b>${formatValue(point.y, valueFormat)}</b><br/>`;
         });
         return tooltip;
       },

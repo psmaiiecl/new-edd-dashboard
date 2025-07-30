@@ -3,9 +3,7 @@ import GenericColumnChart from "../../components/ColumnChart/GenericColumnChart"
 
 import { usePortafolioDataRegion } from "./Hooks/usePortafolioDataRegion.jsx";
 
-
 export function TabRegionPortafolio() {
-
   const { data } = usePortafolioDataRegion();
 
   const nf = new Intl.NumberFormat("es-CL");

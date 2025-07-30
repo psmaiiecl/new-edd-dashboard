@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import "./style.css";
 import Highcharts from "highcharts";
+import GroupedCategories from "highcharts-grouped-categories";
+GroupedCategories(Highcharts);
+
 import HighchartsReact from "highcharts-react-official";
 import { initColumnChartConfig } from "../../utils/ChartConfigBuilder";
 

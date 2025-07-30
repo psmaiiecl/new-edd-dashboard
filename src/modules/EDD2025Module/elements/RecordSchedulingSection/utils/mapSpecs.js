@@ -30,28 +30,28 @@ export const mappers = {
     series: [
       {
         name: "Con agendamiento completado",
-        key: "ee_agendamiento_completo",
+        key: "agendamiento_completo",
         color: "#65D9AB",
         sliced: true,
       },
       {
         name: "Con agendamiento iniciado",
-        key: "ee_agendamiento_iniciado",
+        key: "agendamiento_iniciado",
         color: "#8FB8FF",
       },
       {
         name: "Con Contacto Inicial Exitoso",
-        key: "ee_contacto_inicial_exitoso",
+        key: "contacto_exitoso",
         color: "#FFD153",
       },
       {
         name: "Con Contacto Inicial no Exitoso",
-        key: "ee_contacto_inicial_fallido",
+        key: "contacto_no_exitoso",
         color: "#C1D9CA",
       },
       {
         name: "Sin Contactar",
-        key: "ee_sin_contactar",
+        key: "sin_contactar",
         color: "#FF5880",
       },
     ],
@@ -68,17 +68,17 @@ export const mappers = {
       },
       {
         name: "Contacto Inicial Exitoso",
-        key: "contacto_inicial_exitoso",
+        key: "contacto_exitoso",
         color: "#FFD153",
       },
       {
         name: "Contacto Inicial no Exitoso",
-        key: "contacto_inicial_no_exitoso",
+        key: "contacto_no_exitoso",
         color: "#C1D9CA",
       },
       {
         name: "Sin Contactar",
-        key: "sin_contactar",
+        key: "sin_contacto",
         color: "#FF5880",
       },
     ],
@@ -97,29 +97,29 @@ export const mappers = {
       {
         name: "Agendamiento Completo",
         //key: "ee_agendado",
-        key: "agendado_ee",
+        key: "ee_agendamiento_completado",
         color: "#65D9AB",
       },
       {
         name: "Contac. Inicial Exitoso",
-        key: "ee_contacto_inicial_exitoso",
+        key: "ee_contacto_exitoso",
         color: "#FFD153",
       },
       {
         name: "Contac. Inicial no Exitoso",
-        key: "ee_contacto_inicial_no_exitoso",
+        key: "ee_contacto_no_exitoso",
         color: "#C1D9CA",
       },
       {
         name: "Sin Contactar",
-        key: "ee_sin_contactar",
+        key: "ee_sin_contacto",
         color: "#FF5880",
       },
     ],
   },
   docentes_dependencia: {
     categories: {
-      key: "categorias",
+      key: "dependencia",
     },
     series: [
       {
@@ -129,24 +129,24 @@ export const mappers = {
       },
       {
         name: "Contacto Inicial Exitoso",
-        key: "contacto_inicial_exitoso",
+        key: "contacto_exitoso",
         color: "#FFD153",
       },
       {
         name: "Contacto Inicial no Exitoso",
-        key: "contacto_inicial_no_exitoso",
+        key: "contacto_no_exitoso",
         color: "#C1D9CA",
       },
       {
         name: "Sin Contactar",
-        key: "sin_contactar",
+        key: "sin_contacto",
         color: "#FF5880",
       },
     ],
   },
   establecimientos_dependencia: {
     categories: {
-      key: "categorias",
+      key: "dependencia",
       labels: false,
     },
     series: [
@@ -158,29 +158,29 @@ export const mappers = {
       {
         name: "Agendamiento Completo",
         //key: "ee_agendado",
-        key: "agendado_ee",
+        key: "ee_agendamiento_completado",
         color: "#65D9AB",
       },
       {
         name: "Contac. Inicial Exitoso",
-        key: "ee_contacto_inicial_exitoso",
+        key: "ee_contacto_exitoso",
         color: "#FFD153",
       },
       {
         name: "Contac. Inicial no Exitoso",
-        key: "ee_contacto_inicial_no_exitoso",
+        key: "ee_contacto_no_exitoso",
         color: "#C1D9CA",
       },
       {
         name: "Sin Contactar",
-        key: "ee_sin_contactar",
+        key: "ee_sin_contacto",
         color: "#FF5880",
       },
     ],
   },
   docentes_convocatoria: {
     categories: {
-      key: "categorias",
+      key: "convocatoria",
     },
     series: [
       {
@@ -190,24 +190,24 @@ export const mappers = {
       },
       {
         name: "Contacto Inicial Exitoso",
-        key: "contacto_inicial_exitoso",
+        key: "contacto_exitoso",
         color: "#FFD153",
       },
       {
         name: "Contacto Inicial no Exitoso",
-        key: "contacto_inicial_no_exitoso",
+        key: "contacto_no_exitoso",
         color: "#C1D9CA",
       },
       {
         name: "Sin Contactar",
-        key: "sin_contactar",
+        key: "sin_contacto",
         color: "#FF5880",
       },
     ],
   },
   establecimientos_convocatoria: {
     categories: {
-      key: "categorias",
+      key: "convocatoria",
       labels: false,
     },
     series: [
@@ -219,29 +219,29 @@ export const mappers = {
       {
         name: "Agendamiento Completo",
         //key: "ee_agendado",
-        key: "agendado_ee",
+        key: "ee_agendamiento_completado",
         color: "#65D9AB",
       },
       {
         name: "Contac. Inicial Exitoso",
-        key: "ee_contacto_inicial_exitoso",
+        key: "ee_contacto_exitoso",
         color: "#FFD153",
       },
       {
         name: "Contac. Inicial no Exitoso",
-        key: "ee_contacto_inicial_no_exitoso",
+        key: "ee_contacto_no_exitoso",
         color: "#C1D9CA",
       },
       {
         name: "Sin Contactar",
-        key: "ee_sin_contactar",
+        key: "ee_sin_contacto",
         color: "#FF5880",
       },
     ],
   },
   docentes_region: {
     categories: {
-      key: "categorias",
+      key: "region",
     },
     series: [
       {
@@ -251,24 +251,24 @@ export const mappers = {
       },
       {
         name: "Contacto Inicial Exitoso",
-        key: "contacto_inicial_exitoso",
+        key: "contacto_exitoso",
         color: "#FFD153",
       },
       {
         name: "Contacto Inicial no Exitoso",
-        key: "contacto_inicial_no_exitoso",
+        key: "contacto_no_exitoso",
         color: "#C1D9CA",
       },
       {
         name: "Sin Contactar",
-        key: "sin_contactar",
+        key: "sin_contacto",
         color: "#FF5880",
       },
     ],
   },
   establecimientos_region: {
     categories: {
-      key: "categorias",
+      key: "region",
       labels: false,
     },
     series: [
@@ -279,23 +279,22 @@ export const mappers = {
       },
       {
         name: "Agendamiento Completo",
-        //key: "ee_agendado",
-        key: "agendado_ee",
+        key: "ee_agendamiento_completado",
         color: "#65D9AB",
       },
       {
         name: "Contac. Inicial Exitoso",
-        key: "ee_contacto_inicial_exitoso",
+        key: "ee_contacto_exitoso",
         color: "#FFD153",
       },
       {
         name: "Contac. Inicial no Exitoso",
-        key: "ee_contacto_inicial_no_exitoso",
+        key: "ee_contacto_no_exitoso",
         color: "#C1D9CA",
       },
       {
         name: "Sin Contactar",
-        key: "ee_sin_contactar",
+        key: "ee_sin_contacto",
         color: "#FF5880",
       },
     ],
@@ -307,161 +306,161 @@ export const mappers = {
     columns: [
       {
         label: "Agendamiento Completo",
-        keys: { doc: "agendado", ee: "ee_agendamiento_completo" },
+        keys: { doc: "agendado", ee: "ee_agendamiento_completado" },
         color: "#65D9AB",
         span: 2,
       },
       {
         label: "Agendamiento Iniciado",
         keys: { ee: "ee_agendamiento_iniciado" },
-        color: "#FFD153",
+        color: "#8fb8ff",
         span: 1,
       },
       {
         label: "Contacto Inicial Exitoso",
         keys: {
-          doc: "contacto_inicial_exitoso",
-          ee: "ee_contacto_inicial_exitoso",
+          doc: "contacto_exitoso",
+          ee: "ee_contacto_exitoso",
         },
-        color: "#F9A825",
+        color: "#ffd153",
         span: 2,
       },
       {
         label: "Contacto Inicial no Exitoso",
         keys: {
-          doc: "contacto_inicial_no_exitoso",
-          ee: "ee_contacto_inicial_no_exitoso",
+          doc: "contacto_no_exitoso",
+          ee: "ee_contacto_no_exitoso",
         },
-        color: "#FF5880",
+        color: "#c1d9ca",
         span: 2,
       },
       {
         label: "Sin Contactar",
-        keys: { doc: "sin_contactar", ee: "ee_sin_contactar" },
-        color: "#1976D2",
+        keys: { doc: "sin_contacto", ee: "ee_sin_contacto" },
+        color: "#ff5880",
         span: 2,
       },
     ],
   },
   tabla_dependencia: {
-    categoriesKey: "categorias",
+    categoriesKey: "dependencia",
     columns: [
       {
         label: "Agendamiento Completo",
-        keys: { doc: "agendado", ee: "ee_agendamiento_completo" },
+        keys: { doc: "agendado", ee: "ee_agendamiento_completado" },
         color: "#65D9AB",
         span: 2,
       },
       {
         label: "Agendamiento Iniciado",
         keys: { ee: "ee_agendamiento_iniciado" },
-        color: "#FFD153",
+        color: "#8fb8ff",
         span: 1,
       },
       {
         label: "Contacto Inicial Exitoso",
         keys: {
-          doc: "contacto_inicial_exitoso",
-          ee: "ee_contacto_inicial_exitoso",
+          doc: "contacto_exitoso",
+          ee: "ee_contacto_exitoso",
         },
-        color: "#F9A825",
+        color: "#ffd153",
         span: 2,
       },
       {
         label: "Contacto Inicial no Exitoso",
         keys: {
-          doc: "contacto_inicial_no_exitoso",
-          ee: "ee_contacto_inicial_no_exitoso",
+          doc: "contacto_no_exitoso",
+          ee: "ee_contacto_no_exitoso",
         },
-        color: "#FF5880",
+        color: "#c1d9ca",
         span: 2,
       },
       {
         label: "Sin Contactar",
-        keys: { doc: "sin_contactar", ee: "ee_sin_contactar" },
-        color: "#1976D2",
+        keys: { doc: "sin_contactar", ee: "ee_sin_contacto" },
+        color: "#ff5880",
         span: 2,
       },
     ],
   },
   tabla_convocatoria: {
-    categoriesKey: "categorias",
+    categoriesKey: "convocatoria",
     columns: [
       {
         label: "Agendamiento Completo",
-        keys: { doc: "agendado", ee: "ee_agendamiento_completo" },
+        keys: { doc: "agendado", ee: "ee_agendamiento_completado" },
         color: "#65D9AB",
         span: 2,
       },
       {
         label: "Agendamiento Iniciado",
         keys: { ee: "ee_agendamiento_iniciado" },
-        color: "#FFD153",
+        color: "#8fb8ff",
         span: 1,
       },
       {
         label: "Contacto Inicial Exitoso",
         keys: {
-          doc: "contacto_inicial_exitoso",
-          ee: "ee_contacto_inicial_exitoso",
+          doc: "contacto_exitoso",
+          ee: "ee_contacto_exitoso",
         },
-        color: "#F9A825",
+        color: "#ffd153",
         span: 2,
       },
       {
         label: "Contacto Inicial no Exitoso",
         keys: {
-          doc: "contacto_inicial_no_exitoso",
-          ee: "ee_contacto_inicial_no_exitoso",
+          doc: "contacto_no_exitoso",
+          ee: "ee_contacto_no_exitoso",
         },
-        color: "#FF5880",
+        color: "#c1d9ca",
         span: 2,
       },
       {
         label: "Sin Contactar",
-        keys: { doc: "sin_contactar", ee: "ee_sin_contactar" },
-        color: "#1976D2",
+        keys: { doc: "sin_contacto", ee: "ee_sin_contacto" },
+        color: "#ff5880",
         span: 2,
       },
     ],
   },
   tabla_region: {
-    categoriesKey: "categorias",
+    categoriesKey: "region",
     columns: [
       {
         label: "Agendamiento Completo",
-        keys: { doc: "agendado", ee: "ee_agendamiento_completo" },
+        keys: { doc: "agendado", ee: "ee_agendamiento_completado" },
         color: "#65D9AB",
         span: 2,
       },
       {
         label: "Agendamiento Iniciado",
         keys: { ee: "ee_agendamiento_iniciado" },
-        color: "#FFD153",
+        color: "#8fb8ff",
         span: 1,
       },
       {
         label: "Contacto Inicial Exitoso",
         keys: {
-          doc: "contacto_inicial_exitoso",
-          ee: "ee_contacto_inicial_exitoso",
+          doc: "contacto_exitoso",
+          ee: "ee_contacto_exitoso",
         },
-        color: "#F9A825",
+        color: "#ffd153",
         span: 2,
       },
       {
         label: "Contacto Inicial no Exitoso",
         keys: {
-          doc: "contacto_inicial_no_exitoso",
-          ee: "ee_contacto_inicial_no_exitoso",
+          doc: "contacto_no_exitoso",
+          ee: "ee_contacto_no_exitoso",
         },
-        color: "#FF5880",
+        color: "#c1d9ca",
         span: 2,
       },
       {
         label: "Sin Contactar",
-        keys: { doc: "sin_contactar", ee: "ee_sin_contactar" },
-        color: "#1976D2",
+        keys: { doc: "sin_contacto", ee: "ee_sin_contacto" },
+        color: "#ff5880",
         span: 2,
       },
     ],

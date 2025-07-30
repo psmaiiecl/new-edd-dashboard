@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useCustomFetch } from "../../../../../../../hooks/useCustomFetch";
-import { BASE_API_URL_2024 } from "../../../../../data/BASE_API_URL";
+import { BASE_API_URL_2025 } from "../../../../../data/BASE_API_URL";
 import { mapPieData } from "../../../../../../../utils/ChartMapperFactory";
 import { mappers } from "../../../utils/mapSpecs";
 import {
@@ -17,53 +17,38 @@ export function useTabGeneral() {
   const [agendamientoSemanal, setAgendamientoSemanal] = useState(null);
   const [agendamientoGlobal, setAgendamientoGlobal] = useState(null);
 
+  const [reload, setReload] = useState(0);
+  const reloadFn = useCallback(() => {
+    setReload((prev) => prev + 1);
+  }, []);
+
   useEffect(() => {
-    setDocentesAgendados(
-      mapPieData(
-        {
-          docentes_agendados: 100,
-          docentes_contacto_inicial_exitoso: 100,
-          docentes_contacto_inicial_fallido: 100,
-          docentes_sin_contactar: 100,
-        },
-        mappers.docentes_agendados
-      )
-    );
-    setEstablecimientosAgendados(
-      mapPieData(
-        {
-          ee_agendamiento_completo: 100,
-          ee_agendamiento_iniciado: 100,
-          ee_contacto_inicial_exitoso: 100,
-          ee_contacto_inicial_fallido: 100,
-          ee_sin_contactar: 100,
-        },
-        mappers.establecimientos_agendados
-      )
-    );
     customFetch({
-      route:
-        BASE_API_URL_2024 +
-        "/datos-json?etiqueta=2024-grabaciones-agendamiento-semanal-apilado",
-    }).then((data) =>
-      setAgendamientoApilado(
-        buildAgendamientoApilado(data.agendamiento_semanal)
-      )
-    );
-    customFetch({
-      route:
-        BASE_API_URL_2024 +
-        "/datos-json?etiqueta=2024-grabaciones-agendamiento-semanal",
+      route: BASE_API_URL_2025 + "/2025-agendamiento-grabaciones-tab-general",
+      shouldCache: true,
     }).then((data) => {
+      setDocentesAgendados(
+        mapPieData(data.agendamiento_docentes, mappers.docentes_agendados)
+      );
+      setEstablecimientosAgendados(
+        mapPieData(
+          data.agendamiento_establecimientos,
+          mappers.establecimientos_agendados
+        )
+      );
+      setAgendamientoApilado(
+        buildAgendamientoApilado(data.agendamiento_semanal_apilado)
+      );
       setAgendamientoSemanal(
-        buildAgendamientoGeneral(data.agendamiento_semanal)
+        buildAgendamientoGeneral(data.agendamiento_semanal.normal)
       );
       setAgendamientoGlobal(
-        buildAgendamientoGeneral(data.agendamiento_acumulado)
+        buildAgendamientoGeneral(data.agendamiento_semanal.acumulado)
       );
     });
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [reload]);
 
   return {
     docentesAgendados,
@@ -71,5 +56,6 @@ export function useTabGeneral() {
     agendamientoApilado,
     agendamientoSemanal,
     agendamientoGlobal,
+    reloadFn,
   };
 }

@@ -11,7 +11,8 @@ export const mapAvanceDiario = (data, dataGeneral) => {
 
   // 🔑 Datos generales (valores fijos)
   const rindenPortafolioTotal =
-    dataGeneral?.["portafolio-docentes-validados"]?.docentes?.rinden_portafolio || 0;
+    dataGeneral?.["portafolio-docentes-validados"]?.docentes
+      ?.rinden_portafolio || 0;
   const suspendidosTotal =
     dataGeneral?.["portafolio-docentes-validados"]?.docentes?.suspendidos || 0;
 

@@ -8,17 +8,32 @@ import { TabCTG } from "./components/TabCTG";
 import { TabConvocatoria } from "./components/TabConvocatoria";
 import { TabDependencia } from "./components/TabDependencia";
 import { TabRegion } from "./components/TabRegion";
+import { Button } from "../../../../components/Button";
+import { useCustomDownload } from "../../../../hooks/useCustomDownload";
+import { BASE_API_URL_2025 } from "../../data/BASE_API_URL";
 
 export function RecordSchedulingSection2025() {
   const [activeTab, setActiveTab] = useState("tab1");
-
+  const customDownload = useCustomDownload();
   return (
     <ModulePageLayout>
       <CustomTabs
         setActiveFn={setActiveTab}
         currentActive={activeTab}
         tabArray={tabList}
-      />
+      >
+        <div style={{ width: 100 }}></div>
+        <Button
+          text={"Excel Docente"}
+          action={() => {
+            customDownload(
+              BASE_API_URL_2025 + "/2025-grabaciones-excel",
+              { method: "POST" },
+              "grabacion-docentes.csv"
+            );
+          }}
+        />
+      </CustomTabs>
       <div style={{ display: activeTab === "tab1" ? "block" : "none" }}>
         <TabGeneral />
       </div>

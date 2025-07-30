@@ -1,18 +1,16 @@
-
 import { useContext, useEffect, useState } from "react";
 import axios from "../../../../../services/axiosInstance";
 import { LoadingContext } from "../../../../../../../context/LoadingContext";
 
 export const usePortafolioDataGeneral = (filtros) => {
   const [data, setData] = useState(null);
-  const {queueLoading, dequeueLoading} = useContext(LoadingContext);
+  const { queueLoading, dequeueLoading } = useContext(LoadingContext);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   // const baseURL =
   //   "http://api-docentemas-dev.3htp.cloud:8095/back/public/api2025";
-  const baseURL =
-    import.meta.env.VITE_BASE_URL + "/back/public/api2025";
+  const baseURL = import.meta.env.VITE_BASE_URL + "/back/public/api2025";
 
   useEffect(() => {
     if (!filtros || Object.keys(filtros).length === 0) return;
@@ -37,7 +35,7 @@ export const usePortafolioDataGeneral = (filtros) => {
       .finally(() => {
         dequeueLoading(false);
       });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filtros]);
 
   return { data, error };

@@ -109,7 +109,7 @@ export const BarChart = ({ subtitle = [], chartData, showLegend = true }) => {
         <table className="legend-table">
           <thead className="legend-table__head">
             <tr>
-              <th>{mappedData?.tableName || ''}</th>
+              <th>{mappedData?.tableName || ""}</th>
               {mappedData.series.map((serie, i) => (
                 <th key={i}>
                   <div

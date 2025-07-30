@@ -1,4 +1,8 @@
 export const MODULE_CHART_SETUP = {
+  lang: {
+    decimalPoint: ",",
+    thousandsSep: ".",
+  },
   chart: {
     type: "pie",
     height: 260,
@@ -20,21 +24,13 @@ export const MODULE_CHART_SETUP = {
       allowPointSelect: true,
       cursor: "pointer",
       dataLabels: {
-        enabled: false,
+        format:
+          "<b>{point.name}</b>: <b>{point.y:.,.0f} </b> ({point.percentage:.0f}%)<br/>",
       },
       showInLegend: true,
     },
   },
-  tooltip: {
-    headerFormat:
-      '<span style="font-size:12px" class="fw-semibold">{point.key}</span><table>',
-    pointFormat:
-      '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-      '<td style="padding:0"><b>{point.y}</b> ({point.percentage:.0f}%)</td></tr>',
-    footerFormat: "</table>",
-    shared: true,
-    useHTML: true,
-  },
+  tooltip: {},
   series: [
     {
       name: "Cantidad",

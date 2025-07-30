@@ -12,7 +12,6 @@ export const usePortafolioFetch = ({
   const { getToken } = useContext(AuthContext);
 
   useEffect(() => {
-    
     const fetchData = async () => {
       try {
         if (rawData) {
@@ -49,7 +48,7 @@ export const usePortafolioFetch = ({
         // }
 
         //if (keyPath && dataMapper) {
-        if (keyPath && dataMapper &&responseData) {
+        if (keyPath && dataMapper && responseData) {
           const nestedData = keyPath
             .split(".")
             .reduce((obj, key) => obj?.[key], responseData);
@@ -68,8 +67,8 @@ export const usePortafolioFetch = ({
     };
 
     fetchData();
-  //}, [keyPath, dataMapper, JSON.stringify(filtros), rawData]);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    //}, [keyPath, dataMapper, JSON.stringify(filtros), rawData]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filtros]);
 
   return { data };

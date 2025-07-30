@@ -1,5 +1,5 @@
 import { usePortafolioFetch } from "./../TabGeneralPortafolio/hooks/usePortafolioFetch";
-import {Barrasemanal} from "./BarrasSemanal"
+import { Barrasemanal } from "./BarrasSemanal";
 
 const AvanceSemanalChart = ({
   keyPath = "portafolio-avance-semanal",
@@ -14,11 +14,7 @@ const AvanceSemanalChart = ({
     rawData,
   });
   return (
-    <Barrasemanal
-      title={title}
-      fechas={data?.fechas}
-      series={data?.series}
-    />
+    <Barrasemanal title={title} fechas={data?.fechas} series={data?.series} />
   );
 };
 

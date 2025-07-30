@@ -2,40 +2,68 @@ import { CustomColumnChart } from "../../../../../../components/CustomColumnChar
 import { CustomDotLineChart } from "../../../../../../components/CustomDotLineChart";
 import { CustomPieChart } from "../../../../../../components/CustomPieChart";
 import { TabContent } from "../../../../../../components/Layout/TabContent";
+import useTabGeneral from "./hooks/useTabGeneral";
 
 function TabGeneral() {
+  const {
+    docentesRinde,
+    docentesGrabados,
+    establecimientosAGrabar,
+    sostenedoresParticipantes,
+    avanceDiario,
+    grabacionesSemanales,
+    grabacionesAcumuladas,
+  } = useTabGeneral();
+
   return (
     <TabContent>
       <div className="normal-container">
         <div className="pie-grid-2">
           <CustomPieChart
-            data={null}
+            data={docentesRinde}
             subtitle={"DOCENTES EN <b>ESTADO RINDE</b>"}
           />
           <CustomPieChart
-            data={null}
+            data={docentesGrabados}
             subtitle={"TOTAL DOCENTES <b>GRABADOS</b>"}
           />
         </div>
         <div className="pie-grid-2">
           <CustomPieChart
-            data={null}
+            data={establecimientosAGrabar}
             subtitle={"ESTABLECIMIENTOS A <b>GRABAR</b>"}
           />
           <CustomPieChart
-            data={null}
+            data={sostenedoresParticipantes}
             subtitle={"SOSTENEDORES <b>PARTICIPANTES</b>"}
           />
         </div>
       </div>
       <CustomDotLineChart
-        data={null}
+        data={avanceDiario}
         title={"AVANCE DIARIO DEL PROCESO <b>DE GRABACIONES</b>"}
       />
       <hr />
-      <CustomColumnChart data={null} title={"GRABACIONES <b>SEMANALES</b>"} />
+      <CustomColumnChart
+        data={grabacionesSemanales}
+        title={"GRABACIONES <b>SEMANALES</b>"}
+         overrideConfig={{
+          yAxis: {
+            min: 0,
+            title: {
+              text: null,
+            },
+            labels: {
+              format: "{value}",
+            },
+          },
+        }}
+      />
       <hr />
-      <CustomDotLineChart data={null} title={"GRABACIONES <b>ACUMULADAS</b>"} />
+      <CustomDotLineChart
+        data={grabacionesAcumuladas}
+        title={"GRABACIONES <b>ACUMULADAS</b>"}
+      />
     </TabContent>
   );
 }

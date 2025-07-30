@@ -77,7 +77,6 @@ const GenericColumnChart = ({
       dataMapper={dataMapper}
       color={colors}
       showLegend={showLegend}
-      
     />
   );
 };

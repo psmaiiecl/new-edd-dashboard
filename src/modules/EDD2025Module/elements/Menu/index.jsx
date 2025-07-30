@@ -14,6 +14,8 @@ export function Menu() {
     portfolioCorrectionChart,
     processingChart,
     resultChart,
+    recordSchedulingChart,
+    recordChart,
     helpChart,
     loadingStatus,
   } = useModules();
@@ -57,18 +59,24 @@ export function Menu() {
           title={"Agendamiento de Grabaciones"}
           action={() => navigate("agendamiento-grabaciones")}
           loading={loadingStatus.agendamiento}
-          locked
-        />
+        >
+          <HighchartsReact
+            options={recordSchedulingChart}
+            highcharts={Highcharts}
+          />
+        </ModuleCard>
         <ModuleCard
           title={"Grabaciones"}
+          loading={loadingStatus.grabaciones}
           action={() => navigate("grabaciones")}
-          locked
-        />
+        >
+          <HighchartsReact options={recordChart} highcharts={Highcharts} />
+        </ModuleCard>
         <ModuleCard
-          locked
           title={"Recuperación de SD's"}
           action={() => navigate("recuperacion-sd")}
           loading={loadingStatus.recuperacion}
+          locked
         >
           Recuperacion SD
         </ModuleCard>

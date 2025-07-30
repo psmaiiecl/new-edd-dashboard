@@ -6,8 +6,7 @@ export function usePortafolioDataConvocatoria(filtros = {}) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const baseURL =
-    import.meta.env.VITE_BASE_URL + "/back/public/api2025";
+  const baseURL = import.meta.env.VITE_BASE_URL + "/back/public/api2025";
 
   useEffect(() => {
     setLoading(true);
@@ -30,7 +29,7 @@ export function usePortafolioDataConvocatoria(filtros = {}) {
       .finally(() => {
         setLoading(false);
       });
-  //}, [filtros]);
+    //}, [filtros]);
   }, []);
 
   return {

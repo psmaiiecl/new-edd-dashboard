@@ -44,7 +44,8 @@ export function ResultSection2025() {
           style={{ width: "500px", textAlign: "center" }}
           action={() => {
             customDownload(
-              BASE_API_URL_2025 + "/2025-informes-resultados-excel-sostenedores",
+              BASE_API_URL_2025 +
+                "/2025-informes-resultados-excel-sostenedores",
               { method: "POST" },
               "Entrega-resultados-sostenedores.csv"
             );

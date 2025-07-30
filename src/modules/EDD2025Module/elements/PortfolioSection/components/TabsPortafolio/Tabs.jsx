@@ -4,7 +4,7 @@ import { useCustomDownload } from "../../../../../../hooks/useCustomDownload";
 import { BASE_API_URL_2025 } from "../../../../data/BASE_API_URL";
 
 export function TabsPortafolio({ setActive, active }) {
-  const customDownload = useCustomDownload(); 	
+  const customDownload = useCustomDownload();
   return (
     <div className="tab-container">
       <div className="tabs">
@@ -20,23 +20,23 @@ export function TabsPortafolio({ setActive, active }) {
       <div className="inscription-excel">
         <Button
           text={"Excel Docente"}
-			action={() => {
-						customDownload(
-						  BASE_API_URL_2025 + "/2025-portafolio-excel-docente",
-						  { method: "POST" },
-						  "portafolio-docente.csv"
-					    );
-			          }}
+          action={() => {
+            customDownload(
+              BASE_API_URL_2025 + "/2025-portafolio-excel-docente",
+              { method: "POST" },
+              "portafolio-docente.csv"
+            );
+          }}
         />
-       <Button
+        <Button
           text={"Excel Sostenedor"}
-			action={() => {
-						customDownload(
-						  BASE_API_URL_2025 + "/2025-portafolio-excel-sostenedor",
-						  { method: "POST" },
-						  "portafolio-sostenedores.csv"
-					    );
-			          }}
+          action={() => {
+            customDownload(
+              BASE_API_URL_2025 + "/2025-portafolio-excel-sostenedor",
+              { method: "POST" },
+              "portafolio-sostenedores.csv"
+            );
+          }}
         />
       </div>
     </div>

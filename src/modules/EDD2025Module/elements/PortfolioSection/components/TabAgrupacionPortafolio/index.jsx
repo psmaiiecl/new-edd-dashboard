@@ -13,7 +13,7 @@ export function TabAgrupacionPortafolio() {
   //const serviceUrl = "/2025-portafolio-tab-agrupacion"; // Esta ruta ya se usa en el hook
   const nf = new Intl.NumberFormat("es-CL");
 
-  const avanceAgrupacionMapper = (data, tableName = 'Agrupación') => {
+  const avanceAgrupacionMapper = (data, tableName = "Agrupación") => {
     const agrupacion = data?.docentes ?? {};
     const categories = Object.keys(agrupacion);
 
@@ -61,12 +61,9 @@ export function TabAgrupacionPortafolio() {
   };
 
   return (
-   
-
-     
-<div className="tab-general-upper">
+    <div className="tab-general-upper">
       <div className="normal-container">
-          <div className="general-pie-chart-container">
+        <div className="general-pie-chart-container">
           {data && (
             <GenericColumnChart
               subtitle="ESTADO DE AVANCE DEL PORTAFOLIO POR AGRUPACIÓN"
@@ -75,37 +72,37 @@ export function TabAgrupacionPortafolio() {
               }
             />
           )}
-       </div> 
+        </div>
 
-      <div className="general-pie-chart-container">
-        {data && (
-          <GenericColumnChart
-            subtitle="ESTADO DE AVANCE DEL MÓDULO 1 POR AGRUPACIÓN"
-            rawData={() =>
-              avanceAgrupacionMapper(data["portafolio-avance-agrupacion-m1"])
-            }
-          />
-        )}
-      </div>
-      <div className="general-pie-chart-container">
-        {data && (
-          <GenericColumnChart
-            subtitle="ESTADO DE AVANCE DEL MÓDULO 2 POR AGRUPACIÓN"
-            rawData={() =>
-              avanceAgrupacionMapper(data["portafolio-avance-agrupacion-m2"])
-            }
-          />
-        )}
-      </div>
-      <div className="general-pie-chart-container">
-        {data && (
-          <GenericColumnChart
-            subtitle="ESTADO DE AVANCE DEL MÓDULO 3 POR AGRUPACIÓN"
-            rawData={() =>
-              avanceAgrupacionMapper(data["portafolio-avance-agrupacion-m3"])
-            }
-          />
-        )}
+        <div className="general-pie-chart-container">
+          {data && (
+            <GenericColumnChart
+              subtitle="ESTADO DE AVANCE DEL MÓDULO 1 POR AGRUPACIÓN"
+              rawData={() =>
+                avanceAgrupacionMapper(data["portafolio-avance-agrupacion-m1"])
+              }
+            />
+          )}
+        </div>
+        <div className="general-pie-chart-container">
+          {data && (
+            <GenericColumnChart
+              subtitle="ESTADO DE AVANCE DEL MÓDULO 2 POR AGRUPACIÓN"
+              rawData={() =>
+                avanceAgrupacionMapper(data["portafolio-avance-agrupacion-m2"])
+              }
+            />
+          )}
+        </div>
+        <div className="general-pie-chart-container">
+          {data && (
+            <GenericColumnChart
+              subtitle="ESTADO DE AVANCE DEL MÓDULO 3 POR AGRUPACIÓN"
+              rawData={() =>
+                avanceAgrupacionMapper(data["portafolio-avance-agrupacion-m3"])
+              }
+            />
+          )}
         </div>
       </div>
     </div>
