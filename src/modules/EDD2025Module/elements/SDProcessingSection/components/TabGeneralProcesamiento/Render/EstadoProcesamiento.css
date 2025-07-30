@@ -1,0 +1,91 @@
+/* Contenedor general */
+.estado-procesamiento {
+  width: 100%;
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+ 
+}
+
+/* Cabecera */
+.estado-procesamiento .header {
+  display: flex;
+  font-weight: bold;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 20px;
+
+}
+
+/* Fila */
+.estado-procesamiento .row {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  padding: 4px 0;
+}
+
+/* Columna de datos */
+.estado-procesamiento .datos {
+ 
+  flex: none;
+  width: 50%;
+}
+
+.estado-procesamiento .datos > div {
+  text-align: center;
+}
+
+.estado-procesamiento .fecha {
+  width: 100px;
+  text-align: left;
+}
+
+.estado-procesamiento .valor {
+  width: 60px;
+}
+
+.estado-procesamiento .avance {
+  width: 80px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Barra de estado */
+.estado-procesamiento .barra {
+  flex: 1;
+  display: flex;
+  height: 12px;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.estado-procesamiento .barra div {
+  height: 60%;
+}
+#tabla_estado_procesamiento_semana table,
+#tabla_estado_procesamiento_semana th,
+#tabla_estado_procesamiento_semana td {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+}
+
+#tabla_estado_procesamiento_semana table {
+  max-width: 70%;
+  font-size: 12px;
+  margin-top: 9px;
+}
+
+#tabla_estado_procesamiento_semana th,
+#tabla_estado_procesamiento_semana td {
+  padding: 4px 8px;
+  text-align: center;
+}
+
+#tabla_estado_procesamiento_semana th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+#tabla_estado_procesamiento_semana td span {
+  vertical-align: middle;
+}

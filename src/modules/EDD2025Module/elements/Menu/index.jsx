@@ -11,6 +11,8 @@ export function Menu() {
     inscriptionChart,
     validationChart,
     portfolioChart,
+    portfolioCorrectionChart,
+    processingChart,
     resultChart,
     helpChart,
     loadingStatus,
@@ -24,7 +26,7 @@ export function Menu() {
       </div>
       <div className="module-menu">
         <ModuleCard
-          title={"Inscripción"}
+          title={"F"}
           action={() => navigate("inscripcion")}
           loading={loadingStatus.inscription}
         >
@@ -70,8 +72,15 @@ export function Menu() {
         >
           Recuperacion SD
         </ModuleCard>
-        <ModuleCard title={"Procesamiento de SD's"} locked />
-        <ModuleCard title={"Corrección Portafolios"} locked />
+        <ModuleCard
+          title={"Procesamiento de SD's"}
+          action={() => navigate("procesamiento-sd")}
+          loading={loadingStatus.procesamiento}
+        />
+        <ModuleCard
+        title={"Corrección Portafolios"}
+          action={() => navigate("correcciones")}
+          loading={loadingStatus.correcciones}  />
         <ModuleCard
           title={"Mesa de Ayuda - Tickets"}
           loading={loadingStatus.help}

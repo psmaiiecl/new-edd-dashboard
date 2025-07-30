@@ -11,7 +11,8 @@ import { ValidationSection2025 } from "../../modules/EDD2025Module/elements/Vali
 import { SDRecoverySection2025 } from "../../modules/EDD2025Module/elements/SDRecoverySection";
 import { RecordSchedulingSection2025 } from "../../modules/EDD2025Module/elements/RecordSchedulingSection";
 import { RecordSection2025 } from "../../modules/EDD2025Module/elements/RecordSection";
-
+import { SDProcessingSection2025 } from "../../modules/EDD2025Module/elements/SDProcessingSection";
+// import { PortfolioCorrectionSection2025 } from "../../modules/EDD2025Module/elements";
 export function DashboardPage() {
   const { year } = useParams();
 
@@ -53,6 +54,14 @@ export function DashboardPage() {
                 path="recuperacion-sd"
                 element={<SDRecoverySection2025 />}
               />
+              <Route
+                path="procesamiento-sd"
+                element={<SDProcessingSection2025 />}
+              />
+              <Route
+                // path="correcciones"
+                // element={<PortfolioCorrectionSection2025 />} 
+                />
             </Route>
           )}
         </Routes>
