@@ -39,20 +39,22 @@ export default function TablaTerciles({ data }) {
         <thead>
           <tr>
             <th>Convocatoria</th>
-            
+
             <th>Grabaciones Totales</th>
-            <th style={{ background: data.series[8].color }}>Grabaciones Realizadas</th>
+            <th style={{ background: data.series[8].color }}>
+              Grabaciones Realizadas
+            </th>
             <th style={{ background: data.series[1].color }}>SD Pendientes</th>
             <th style={{ background: data.series[2].color }}>SD Recuperadas</th>
             <th>Avance Recuperación SD (%)</th>
             <th style={{ background: data.series[3].color }}>SD en Caja</th>
-            <th style={{ background: data.series[4].color }}>SD Respaldadas en DD</th>
+            <th style={{ background: data.series[4].color }}>
+              SD Respaldadas en DD
+            </th>
             <th style={{ background: data.series[5].color }}>SD en Nube</th>
             <th style={{ background: data.series[6].color }}>SD Procesadas</th>
             <th style={{ background: data.series[7].color }}>SD Verificadas</th>
             <th>Avance Respaldo en Nube (%)</th>
-            
-            
           </tr>
         </thead>
         <tbody>
@@ -76,7 +78,7 @@ export default function TablaTerciles({ data }) {
                   >
                     ●
                   </span>{" "}
-                  {avanceRecup.toFixed(1)}%
+                  {isNaN(avanceRecup) ? 0 : avanceRecup.toFixed(1)}%
                 </td>
                 <td>{formatearNumero(data.series[3].data[i])}</td>
                 <td>{formatearNumero(data.series[4].data[i])}</td>
@@ -92,7 +94,7 @@ export default function TablaTerciles({ data }) {
                   >
                     ●
                   </span>{" "}
-                  {avanceNube.toFixed(1)}%
+                  {isNaN(avanceNube) ? 0 : avanceNube.toFixed(1)}%
                 </td>
               </tr>
             );
