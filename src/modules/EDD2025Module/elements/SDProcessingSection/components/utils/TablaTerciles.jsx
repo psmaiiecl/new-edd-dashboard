@@ -2,7 +2,7 @@ import React from "react";
 import { formatearNumero, formatearPorcentaje } from "./FormatearNumero";
 
 export default function TablaTerciles({ data }) {
-  const avancesRecuperacionSD = data.categories.map(
+  const avancesRecuperacionSD = data?.categories.map(
     (_, i) => (data.series[2].data[i] / data.series[8].data[i]) * 100
   );
 

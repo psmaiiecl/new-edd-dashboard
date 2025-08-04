@@ -91,8 +91,8 @@ export function Menu() {
         />
         <ModuleCard
           title={"Corrección Portafolios"}
-          action={() => navigate("correcciones-portafolios")}
-          loading={loadingStatus.correcciones_portafolios}
+          action={() => navigate("correccion-portafolios")}
+          loading={loadingStatus.correccion_portafolios}
           locked
         />
         <ModuleCard
