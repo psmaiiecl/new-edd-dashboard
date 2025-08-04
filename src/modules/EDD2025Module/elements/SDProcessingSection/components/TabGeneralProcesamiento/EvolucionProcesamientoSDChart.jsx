@@ -1,7 +1,7 @@
-import Highcharts from 'highcharts';
-import HighchartsReact from 'highcharts-react-official';
 
-
+// src/modules/EDD2025Module/components/GraficoEvolucion.jsx
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
 
 
 export default function EvolucionProcesamientoSDChart({ data }) {
@@ -64,8 +64,9 @@ export default function EvolucionProcesamientoSDChart({ data }) {
                 Cantidad: ${new Intl.NumberFormat().format(this.y)}`;
       },
     },
-    series: data,
+    series: data.series,
   };
 
   return <HighchartsReact highcharts={Highcharts} options={options} />;
 }
+

@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import useSWR from "swr";
+
 import axios from "axios";
 
 /**
@@ -7,7 +7,7 @@ import axios from "axios";
  * @param {Object} filtros - Parámetros para el POST.
  * @param {String} anio - Año a consultar, por ejemplo "2025".
  */
-export function useAvanceDiario(filtros, anio = "2025") {
+export function useAvanceDiarioChart(filtros, anio = "2025") {
   const endpoint = `/back/public/api${anio}/${anio}-avance-diario-postulaciones`;
 
   const { data, isLoading, error } = useSWR(

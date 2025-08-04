@@ -1,66 +1,66 @@
 import { memo } from "react";
-import { usePostulacionGeneral } from "./hooks/usePostulacionGeneral";
 import { ConvertirPalabras } from "../../../../../../utils/portafolioUtils.js";
-import AvanceDiarioChart from "../ScatterChart/AvanceDiarioChart";
-
-
-// import AvanceSemanalChart from "../BarChart/AvanceSemanalChart";
-
-
-const mapAvanceDiario = (data) => {
-  const fechas = data.fechas;
-
-  const completados = data.pfCompletado_cant;
-  const iniciados = data.pfIniciados_cant;
-  const m1Iniciado = data.m1Iniciado_cant;
-  const m2Iniciado = data.m2Iniciado_cant;
-  const m3Iniciado = data.m3Iniciado_cant;
-  const rinde = data.pfRinde_cant;
-
-  return {
-    fechas,
-    keyPath: "postulacion-avance-diario",
-    series: [
-      {
-        name: ConvertirPalabras("Postulantes Totales"),
-        color: "#5157FF",
-        data: completados,
-      },
-      {
-        name: ConvertirPalabras("Pueden ser Supervisores"),
-        color: "#FF8E53",
-        data: iniciados,
-      },
-      {
-        name: ConvertirPalabras("Supervisores Requqeridos"),
-        color: "#65D9AB",
-        data: m1Iniciado,
-      },
-      {
-        name: ConvertirPalabras("Total seleccionados Requeridos"),
-        color: "#FFD153",
-        data: m2Iniciado,
-      },
-      
-    ],
-  };
-};
+import AvanceDiarioChartPostulacion from "./AvanceDiarioChartPostulacion";
+import { useAvanceDiarioChart } from "./hooks/useAvanceDiarioChart.js";
 
 
 // Componente principal
 export function TabGeneralPostulacion({ filtros }) {
-  const { data: dataGeneral } = usePostulacionGeneral(filtros);
+  const { data, isLoading } = useAvanceDiarioChart(filtros, "2025");
+  const mapAvanceDiario = (data) => {
+  const fechas = data.fechas;
+
+  const postulantesTotales = data.postulantes_totales_por_dia;
+  const puedenSerSupervisores = data.supervisores;
+  const supervisoresRequeridos = fechas.map(() => 127); // fijo
+  const correctoresRequeridos = fechas.map(() => 1201); // fijo
+  const seleccionadosRequeridos = fechas.map(() => 1328); // fijo
+
+  return {
+    fechas,
+    keyPath: "postulacion",
+    series: [
+      {
+        name: "Postulantes Totales",
+        color: "#e91e63",
+        data: postulantesTotales,
+      },
+      {
+        name: "Pueden ser Supervisores",
+        color: "#4caf50",
+        data: puedenSerSupervisores,
+      },
+      {
+        name: "Supervisores Requeridos",
+        color: "#ff9800",
+        dashStyle: "Dash",
+        data: supervisoresRequeridos,
+      },
+      {
+        name: "Total Seleccionados Requeridos",
+        color: "#00bcd4",
+        dashStyle: "ShortDot",
+        data: seleccionadosRequeridos,
+      },
+      {
+        name: "Correctores Requeridos",
+        color: "#9c27b0",
+        dashStyle: "DashDot",
+        data: correctoresRequeridos,
+      },
+    ],
+  };
+};
+
+  if (isLoading || !data) return <div>Cargando gráfico...</div>;
+
 
   return (
     <>
+
       
-      <AvanceDiarioChart
-        title="AVANCE DIARIO <b>POSTULACIÓN</b>"
-        keyPath="postulacion-avance-diario"
-        dataMapper={mapAvanceDiario}
-        filtros={filtros}
-        rawData={dataGeneral}
-      />
+  <AvanceDiarioChartPostulacion data={data} />
+
 
     </>
   );

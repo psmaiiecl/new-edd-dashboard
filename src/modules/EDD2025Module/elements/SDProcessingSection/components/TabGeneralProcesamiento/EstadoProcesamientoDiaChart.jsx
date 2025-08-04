@@ -1,11 +1,15 @@
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import { useProcesamientoDiarioChart } from './hooks/useProcesamientoDiarioChart';
 
-export default function EstadoProcesamientoDiaChart({ data }) {
+export default function EstadoProcesamientoDiaChart() {
+  const { series, categories, loading, error } = useProcesamientoDiarioChart();
+
+  if (loading) return <p>Cargando gráfico...</p>;
+  if (error) return <p>Error al cargar gráfico: {error.message}</p>;
+
   const options = {
-    chart: {
-      type: 'bar',
-    },
+    chart: { type: 'bar' },
     colors: ['#FF5880', '#FF8E53', '#FFD153', '#8FB8FF', '#65D9AB'],
     title: { text: '' },
     subtitle: {
@@ -14,49 +18,24 @@ export default function EstadoProcesamientoDiaChart({ data }) {
       style: { fontSize: '15px' },
     },
     xAxis: {
-      type: 'datetime',
-      tickInterval: 24 * 3600 * 1000,
-     
-      labels: {
-        format: '{value:%d-%m-%Y}',
-        style: { fontSize: '14px' },
-      },
+      categories,
+      title: { text: 'Fecha' },
+      labels: { style: { fontSize: '13px' } },
     },
     yAxis: {
-      visible: true,
-      title: { text: '' },
-      labels: {
-        format: '{value}',
-        style: { fontSize: '13px' },
-      },
+      min: 0,
+      title: { text: 'Cantidad' },
+      labels: { style: { fontSize: '13px' } },
     },
-    time: {
-      timezone: 'America/Santiago',
-      useUTC: false,
-    },
-    tooltip: {
-      formatter: function () {
-        const days = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
-        const months = [
-          'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-          'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre',
-        ];
-        const date = new Date(this.x);
-        return `<b>${days[date.getDay()]}, ${date.getDate()} de ${months[date.getMonth()]}</b><br/>
-                Cantidad: ${Highcharts.numberFormat(this.y, 0, ',', '.')}`;
-      },
-    },
-    legend: {
-      fontSize: '12px',
-    },
+    tooltip: { shared: true, valueDecimals: 0 },
+    legend: { itemStyle: { fontSize: '12px' } },
     plotOptions: {
       bar: {
         stacking: 'normal',
-        pointWidth: 20,
-        pointPadding: 0.9,
+        borderWidth: 0,
       },
     },
-   data: data.series,
+    series,
   };
 
   return <HighchartsReact highcharts={Highcharts} options={options} />;

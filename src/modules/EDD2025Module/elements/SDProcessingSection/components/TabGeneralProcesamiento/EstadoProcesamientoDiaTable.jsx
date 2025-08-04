@@ -1,74 +1,106 @@
-import Highcharts from 'highcharts';
+import "./EstadoProcesamiento.css";
+
+const colores = ['#FF5880', '#FF8E53', '#FFD153', '#8FB8FF', '#65D9AB'];
 
 export default function EstadoProcesamientoDiaTable({ series, minDate, maxDate }) {
-  const days = [];
   const tickInterval = 24 * 3600 * 1000;
-  for (let t = minDate; t <= maxDate; t += tickInterval) {
-    days.push(t);
-  }
 
-  const formatDate = (timestamp) => Highcharts.dateFormat('%d-%m-%Y', timestamp);
+  const totales = {};
+  series.forEach((serie) => {
+    totales[serie.name] = serie.data.reduce((sum, [_, val]) => sum + val, 0);
+  });
 
-  const calcularPorcentajeAvance = (valores) => {
-    const { verificada, recepcionada, respaldadaDD, respaldadaNube, procesada } = valores;
-    const total = verificada + recepcionada + respaldadaDD + respaldadaNube + procesada;
-    return total > 0 ? (verificada / total) * 100 : 0;
-  };
+  const rows = [];
+  for (let time = minDate; time <= maxDate; time += tickInterval) {
+    const formattedDate = new Date(time).toLocaleDateString('es-CL');
 
-  const renderFila = (timestamp) => {
-    const fecha = formatDate(timestamp);
-    const valores = { verificada: 0, recepcionada: 0, respaldadaDD: 0, respaldadaNube: 0, procesada: 0 };
-    const celdas = series.map(s => {
-      const punto = s.data.find(p => formatDate(p.x) === fecha);
-      const val = punto ? punto.y : '-';
-      if (val !== '-') {
-        if (s.name === 'SD Verificada') valores.verificada = val;
-        if (s.name === 'SD Recepcionadas') valores.recepcionada = val;
-        if (s.name === 'SD Respaldada en DD') valores.respaldadaDD = val;
-        if (s.name === 'SD Respaldada en Nube') valores.respaldadaNube = val;
-        if (s.name === 'SD Procesada') valores.procesada = val;
-      }
-      return <td key={s.name}>{val !== '-' ? Highcharts.numberFormat(val, 0, ',', '.') : '-'}</td>;
+    let totalVerificada = 0;
+    let totalRecepcionada = 0;
+    let totalRespaldadaDD = 0;
+    let totalRespaldadaNube = 0;
+    let totalProcesada = 0;
+
+    const cells = series.map((serie) => {
+      const point = serie.data.find(
+        (p) => new Date(p[0]).toLocaleDateString('es-CL') === formattedDate
+      );
+      const value = point ? point[1] : '-';
+      const formattedValue = value !== '-' ? value.toLocaleString('es-CL') : value;
+
+      if (serie.name === 'SD Verificada') totalVerificada = value !== '-' ? value : 0;
+      if (serie.name === 'SD Recepcionadas') totalRecepcionada = value !== '-' ? value : 0;
+      if (serie.name === 'SD Respaldada en DD') totalRespaldadaDD = value !== '-' ? value : 0;
+      if (serie.name === 'SD Respaldada en Nube') totalRespaldadaNube = value !== '-' ? value : 0;
+      if (serie.name === 'SD Procesada') totalProcesada = value !== '-' ? value : 0;
+
+      return <td key={serie.name}>{formattedValue}</td>;
     });
 
-    const porcentaje = calcularPorcentajeAvance(valores);
-    const color =
-      porcentaje <= 33 ? 'red' : porcentaje <= 66 ? 'yellow' : 'green';
+    const denom = totalVerificada + totalRecepcionada + totalRespaldadaDD + totalRespaldadaNube + totalProcesada;
+    const porcentaje = denom > 0 ? (totalVerificada / denom) * 100 : 0;
 
-    return (
-      <tr key={fecha}>
-        <td>{fecha}</td>
-        {celdas}
+    let color = 'green';
+    if (porcentaje <= 33) color = 'red';
+    else if (porcentaje <= 66) color = 'yellow';
+
+    rows.push(
+      <tr key={time}>
+        <td>{formattedDate}</td>
+        {cells}
         <td>
-          <span style={{
-            display: 'inline-block',
-            width: 10,
-            height: 10,
-            borderRadius: '50%',
-            backgroundColor: color,
-            marginRight: 4,
-          }}></span>
+          <span
+            style={{
+              display: 'inline-block',
+              width: 10,
+              height: 10,
+              borderRadius: '50%',
+              backgroundColor: color,
+            }}
+          />{' '}
           {porcentaje.toFixed(1)}%
         </td>
       </tr>
     );
-  };
+  }
 
   return (
     <div className="table-container">
-      <table className="custom-table">
+      <table>
         <thead>
+          {/* Totales */}
           <tr>
-            <th>Fecha</th>
-            {series.map(s => (
-              <th key={s.name} style={{ backgroundColor: s.color }}>{s.name.replace('SD ', 'SD<br/>')}</th>
+            <th style={{ background: '#ddd' }}>Total</th>
+            {series.map((s, idx) => (
+              <th
+                key={`total-${s.name}`}
+                style={{
+                  backgroundColor: colores[idx] || '#ccc',
+                  color: '#fff',
+                }}
+              >
+                {totales[s.name].toLocaleString('es-CL')}
+              </th>
             ))}
-            <th>% Avance</th>
+            <th style={{ background: '#ddd' }}>—</th>
+          </tr>
+          {/* Encabezado con colores */}
+          <tr>
+            <th style={{ background: '#eee' }}>Fecha</th>
+            {series.map((s, idx) => (
+              <th
+                key={s.name}
+                style={{
+                  backgroundColor: colores[idx] || '#ccc',
+                  color: '#fff',
+                }}
+              >
+                {s.name}
+              </th>
+            ))}
+            <th style={{ background: '#eee' }}>% Avance</th>
           </tr>
         </thead>
-        <tbody>
-          {days.map(renderFila)}
-        </tbody>
+        <tbody>{rows}</tbody>
       </table>
     </div>
   );

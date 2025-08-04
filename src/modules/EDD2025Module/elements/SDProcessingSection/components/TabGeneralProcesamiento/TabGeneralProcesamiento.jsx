@@ -1,17 +1,19 @@
 import { TabContent } from "../../../../../../components/Layout/TabContent";
 import EvolucionProcesamientoSDChart from "./EvolucionProcesamientoSDChart";
-import EstadoProcesamientoDiaChart from './Render/EstadoProcesamientoDiaChart';
-import EstadoProcesamientoDiaTable from './Render/EstadoProcesamientoDiatTable';
+import EstadoProcesamientoDiaChart from './EstadoProcesamientoDiaChart';
+import EstadoProcesamientoDiaTable from './EstadoProcesamientoDiaTable';
 
-import { useEvolucionProcesamiento } from "./hooks/useEvolucionProcesamiento";
-// import { useProcesamientoDiario } from "./hooks/useProcesamientoDiario";
+import { useProcesamientoEvolucion } from "./hooks/useProcesamientoEvolucion";
+import { useProcesamientoDiarioCompleto } from "./hooks/useProcesamientoDiarioCompleto";
+import "./EstadoProcesamiento.css";
+
 export function TabGeneralProcesamiento() {
-  const { data, loading: loadingEvol, error: errorEvol } = useEvolucionProcesamiento();
-  // const { series, loading: loadingDiario, error: errorDiario } = useProcesamientoDiario();
+  const { data, loading: loadingEvol, error: errorEvol } = useProcesamientoEvolucion();
+  const { series, categories, minDate, maxDate, loading: loadingDiario, error: errorDiario } = useProcesamientoDiarioCompleto();
 
-  if (loadingEvol ) return <p>Cargando datos...</p>;
-  if (errorEvol )
-    return <p>Error al cargar datos: {errorEvol?.message }</p>;
+  if (loadingEvol || loadingDiario) return <p>Cargando datos...</p>;
+  if (errorEvol || errorDiario)
+    return <p>Error al cargar datos: {errorEvol?.message || errorDiario?.message}</p>;
 
   return (
     <TabContent>
@@ -19,18 +21,23 @@ export function TabGeneralProcesamiento() {
         <EvolucionProcesamientoSDChart data={data} />
       </div>
 
-      {/* <div id="tabla_estado_procesamiento_semana">
+      <div id="tabla_estado_procesamiento_semana">
         <div style={{ display: 'flex' }}>
           <div style={{ flex: 1 }}>
             <EstadoProcesamientoDiaTable
               series={series}
-              minDate={Date.UTC(2024, 9, 10)}
-              maxDate={Date.UTC(2024, 12, 11)}
+              categories={categories}
+              minDate={minDate}
+              maxDate={maxDate}
             />
           </div>
-          <EstadoProcesamientoDiaChart series={series} />
+
+          <div style={{ paddingTop: '20px' }}> 
+            <EstadoProcesamientoDiaChart data={series} />
+          </div>
         </div>
-      </div> */}
+      </div>
+
     </TabContent>
   );
 }
