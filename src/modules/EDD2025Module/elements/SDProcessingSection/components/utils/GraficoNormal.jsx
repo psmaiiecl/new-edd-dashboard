@@ -31,7 +31,7 @@ export default function GraficoNormal({ data }) {
       shared: true,
     },
     plotOptions: { bar: { stacking: "normal", dataLabels: { enabled: false } } },
-    series: data.series
+    series: data.series.slice(1)
   };
 
   return (
