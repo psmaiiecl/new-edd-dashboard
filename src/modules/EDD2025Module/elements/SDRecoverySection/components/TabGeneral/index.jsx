@@ -4,7 +4,8 @@ import { TabContent } from "../../../../../../components/Layout/TabContent";
 import useTabGeneral from "./hooks/useTabGeneral";
 
 function TabGeneral() {
-  const { recuperacionGrabaciones, recuperacionSD } = useTabGeneral();
+  const { recuperacionGrabaciones, recuperacionSD, grabacionesRecibidas } =
+    useTabGeneral();
 
   return (
     <TabContent>
@@ -25,8 +26,9 @@ function TabGeneral() {
         </div>
       </div>
       <CustomColumnChart
-        data={null}
+        data={grabacionesRecibidas}
         title={"GRABACIONES RECIBIDAS <b>DIARIAMENTE</b>"}
+        type={"STACK"}
       />
       <hr />
     </TabContent>

@@ -8,18 +8,14 @@ const mappers = {
         sliced: true,
       },
       {
-        name: "Grabación en celular del camarógrafo",
-        key: "grabados_celular_camarografo",
-        color: "#8FB8FF",
-      },
-      {
-        name: "Grabación realizada con cámara (solo SD)",
-        key: "grabados_camara",
-        color: "#FFD153",
+        name: "Grabación realizada No Recuperada",
+        key: "grabados_no_recuperado",
+        color: "#FF5880",
       },
     ],
   },
   recuperacion_sd: {
+    total_key: 'total',
     series: [
       {
         name: "En DOCENTEMÁS",
