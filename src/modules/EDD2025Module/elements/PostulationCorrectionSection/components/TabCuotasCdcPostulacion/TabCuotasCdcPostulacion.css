@@ -1,0 +1,51 @@
+.tabla-cuotas {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.tabla-cuotas th {
+  background-color: #1f76cc;
+  color: white;
+  padding: 8px;
+  text-align: center;
+}
+
+.tabla-cuotas td {
+  padding: 6px;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+
+.boton-descarga {
+  padding: 8px 12px;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  font-weight: bold;
+  cursor: pointer;
+}
+.tabla-resumen-cdc {
+  border-collapse: collapse;
+  font-size: 12px;
+  border: 1px solid #c3c3c3;
+  width: 100%;
+}
+
+.tabla-resumen-cdc th,
+.tabla-resumen-cdc td {
+  border: 1px solid #c3c3c3;
+  padding: 4px 6px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.tabla-resumen-cdc th {
+  color: #000;
+  font-weight: normal;
+}
+
+.filtro {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
