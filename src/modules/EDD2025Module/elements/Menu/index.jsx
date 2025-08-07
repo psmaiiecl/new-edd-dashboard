@@ -75,13 +75,14 @@ export function Menu() {
           action={() => navigate("recuperacion-sd")}
           loading={loadingStatus.recuperacion}
           locked
-        >
+          >
           Recuperacion SD
         </ModuleCard>
         <ModuleCard
           title={"Procesamiento de SD's"}
           action={() => navigate("procesamiento-sd")}
           loading={loadingStatus.procesamiento}
+          locked
         />
         <ModuleCard
           title={"Corrección Postulaciones"}
