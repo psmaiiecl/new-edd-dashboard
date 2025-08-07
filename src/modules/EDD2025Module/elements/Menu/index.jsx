@@ -74,6 +74,7 @@ export function Menu() {
           title={"Recuperación de SD's"}
           action={() => navigate("recuperacion-sd")}
           loading={loadingStatus.recuperacion}
+          locked
         >
           Recuperacion SD
         </ModuleCard>
@@ -86,11 +87,13 @@ export function Menu() {
           title={"Corrección Postulaciones"}
           action={() => navigate("correccion-postulaciones")}
           loading={loadingStatus.correccion_postulaciones}
+          locked
         />
         <ModuleCard
           title={"Corrección Portafolios"}
-          action={() => navigate("correcciones-portafolios")}
-          loading={loadingStatus.correcciones_portafolios}
+          action={() => navigate("correccion-portafolios")}
+          loading={loadingStatus.correccion_portafolios}
+          locked
         />
         <ModuleCard
           title={"Mesa de Ayuda - Tickets"}

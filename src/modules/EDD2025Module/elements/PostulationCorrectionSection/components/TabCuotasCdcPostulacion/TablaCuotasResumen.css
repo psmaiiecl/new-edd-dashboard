@@ -1,0 +1,78 @@
+.tabla-cuotas {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  table-layout: fixed;
+}
+
+.tabla-cuotas thead {
+  position: sticky;
+  top: 0;
+  background-color: #004085; /* azul oscuro */
+  color: white;
+  z-index: 1;
+}
+
+.tabla-cuotas th,
+.tabla-cuotas td {
+  padding: 8px;
+  text-align: center;
+  border: 1px solid #ccc;
+  word-wrap: break-word;
+}
+
+.fila-sin-postulados {
+  background-color: #f2f2f2;
+}
+
+.fila-completa {
+  background-color: #d4edda; /* verde claro */
+}
+
+.fila-parcial {
+  background-color: #fff3cd; /* amarillo */
+}
+
+.fila-incompleta {
+  background-color: #f8d7da; /* rojo claro */
+}
+
+.texto-destacado {
+  font-weight: bold;
+  color: #333;
+}
+
+.tabla-cuotas {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+.tabla-cuotas th {
+  background-color: #f6f8fa;
+  color: #333;
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+.tabla-cuotas td {
+  padding: 8px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.dot-red {
+  position: relative;
+}
+
+.dot-red::before {
+  content: " ";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
+  margin-right: 5px;
+}

@@ -229,11 +229,11 @@ const mappers = {
         key: "m2_completado",
         color: "#65d9ab",
       },
-      {
-        name: ConvertirPalabras("GRABACIÓN INICIADA"),
-        key: "m2_iniciado",
-        color: "#ff8e53",
-      },
+      // {
+      //   name: ConvertirPalabras("GRABACIÓN INICIADA"),
+      //   key: "m2_iniciado",
+      //   color: "#ff8e53",
+      // },
       {
         name: ConvertirPalabras("CLASE NO GRABADA"),
         key: "m2_no_iniciado",

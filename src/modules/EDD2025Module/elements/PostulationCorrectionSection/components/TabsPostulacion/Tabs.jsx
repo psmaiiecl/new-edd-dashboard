@@ -2,8 +2,8 @@ import { tabList } from "../../data/TabList";
 import { Button } from "../../../../../../components/Button";
 import { useCustomDownload } from "../../../../../../hooks/useCustomDownload";
 import { BASE_API_URL_2025 } from "../../../../data/BASE_API_URL";
-import "./Tabs.css";
-export function TabsProcesamiento({ setActive, active }) {
+
+export function TabsPostulacion({ setActive, active }) {
   const customDownload = useCustomDownload();
   return (
     <div className="tab-container">
@@ -17,15 +17,14 @@ export function TabsProcesamiento({ setActive, active }) {
           />
         ))}
       </div>
-      <div className="tab__addOns">
-        <div style={{ width: 100 }}></div>
+      <div className="postulacion-excel">
         <Button
-          text={"Excel Docente"}
+          text={"Descargar Excel"}
           action={() => {
             customDownload(
-              BASE_API_URL_2025 + "/2025-procesamiento-excel",
+              BASE_API_URL_2025 + "/2025-postulacion-excel-docente",
               { method: "POST" },
-              "procesamiento_sd.csv"
+              "Postulacion.csv"
             );
           }}
         />

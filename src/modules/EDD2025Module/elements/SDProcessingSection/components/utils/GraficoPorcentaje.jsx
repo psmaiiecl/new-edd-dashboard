@@ -30,7 +30,7 @@ export default function GraficoPorcentaje({ data }) {
       shared: true
     },
     plotOptions: { bar: { stacking: "percent" } },
-    series: data.series.slice(3, 8), // por ejemplo
+    series: data.series.slice(1)
   };
 
   return (

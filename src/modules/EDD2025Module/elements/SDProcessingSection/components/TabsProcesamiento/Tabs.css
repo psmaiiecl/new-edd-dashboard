@@ -1,4 +1,4 @@
-.button {
+/* .button {
   width: 90%;
   height: 100%;
   transition-duration: 150ms;
@@ -6,8 +6,8 @@
   font-size: 14px;
   border-radius: 4px;
   padding: 8px 10px;
-  /* box-sizing: border-box; */
+   box-sizing: border-box; 
   display: flex;
   align-items: center;
   margin-right: 100px;
-}
+} */
