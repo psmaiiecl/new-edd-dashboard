@@ -39,6 +39,5 @@ export function useTab() {
     selectedFilter,
     handleFilter,
     correccionChart,
-    setCorreccionChart,
   };
 }

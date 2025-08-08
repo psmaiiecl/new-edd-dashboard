@@ -5,8 +5,7 @@ import { agrupacionesDistRes } from "../../data/selectorLists";
 import { useTab } from "./hooks/useTab";
 
 export function TabDistribucionResultados() {
-  const { selectedFilter, handleFilter, correccionChart, setCorreccionChart } =
-    useTab();
+  const { selectedFilter, handleFilter, correccionChart } = useTab();
 
   return (
     <TabContent>
@@ -45,21 +44,11 @@ export function TabDistribucionResultados() {
           <table>
             <thead>
               <tr>
-                <th style={{ backgroundColor: "#cccccc" }}>
-                  CC
-                </th>
-                <th style={{ backgroundColor: "#f9a8b9" }}>
-                  Corregidos 2023
-                </th>
-                <th style={{ backgroundColor: "#f9a8b9" }}>
-                  % 2023
-                </th>
-                <th style={{ backgroundColor: "#8fc475" }}>
-                  Corregidos 2024
-                </th>
-                <th style={{ backgroundColor: "#8fc475" }}>
-                  % 2024
-                </th>
+                <th style={{ backgroundColor: "#cccccc" }}>CC</th>
+                <th style={{ backgroundColor: "#f9a8b9" }}>Corregidos 2023</th>
+                <th style={{ backgroundColor: "#f9a8b9" }}>% 2023</th>
+                <th style={{ backgroundColor: "#8fc475" }}>Corregidos 2024</th>
+                <th style={{ backgroundColor: "#8fc475" }}>% 2024</th>
               </tr>
             </thead>
             <tbody>

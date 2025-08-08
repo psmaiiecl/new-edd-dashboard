@@ -50,8 +50,9 @@ export function useCustomFetch() {
 
       if (formData) {
         const parsedFormData = new FormData();
+        
         for (let key in formData) {
-          parsedFormData.append(key, formData[key].value);
+          parsedFormData.append(key, formData[key]?.value ?? formData[key]);
         }
         options.body = parsedFormData;
         delete options.headers["Content-Type"];
