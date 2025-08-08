@@ -1,30 +1,61 @@
-import { useState } from "react";
-import { useCustomDownload } from "../../../../hooks/useCustomDownload";
+import { useEffect, useState } from "react";
 import { ModulePageLayout } from "../../../../components/Layout/ModulePageLayout";
 import { CustomTabs } from "../../../../components/CustomTabs";
+import { monitoreoTabList, resultadosTabList, tabList } from "./data/TabList";
+import { TabDistribucionResultados } from "./components/TabDistribucionResultados";
+import { TabModulo } from "./components/TabModulo";
 
 export function PortfolioCorrectionSection2025() {
-  const customDownload = useCustomDownload();
   const [activeTab, setActiveTab] = useState("tab1");
+  const [innerTab, setInnerTab] = useState("rtab1");
+
+  useEffect(() => {
+    const outer = tabList.find((tab) => tab.index === activeTab);
+    if (outer && outer.inner && outer.inner.length > 0) {
+      setInnerTab(outer.inner[0].index);
+    }
+  }, [activeTab]);
   return (
     <ModulePageLayout>
       <CustomTabs
         setActiveFn={setActiveTab}
         currentActive={activeTab}
-        tabArray={[]}
-      >
-      </CustomTabs>
+        tabArray={tabList}
+      ></CustomTabs>
       <div style={{ display: activeTab === "tab1" ? "block" : "none" }}>
-        {/* <TabGeneral /> */}
+        <CustomTabs
+          setActiveFn={setInnerTab}
+          currentActive={innerTab}
+          tabArray={resultadosTabList}
+        ></CustomTabs>
+        <div style={{ display: innerTab === "rtab1" ? "block" : "none" }}>
+          <TabDistribucionResultados />
+        </div>
+        <div style={{ display: innerTab === "rtab2" ? "block" : "none" }}>
+          <TabModulo module={"Módulo 1"} />
+        </div>
+        <div style={{ display: innerTab === "rtab3" ? "block" : "none" }}>
+          <TabModulo module={"Módulo 2"} />
+        </div>
+        <div style={{ display: innerTab === "rtab4" ? "block" : "none" }}>
+          <TabModulo module={"Módulo 3"} />
+        </div>
       </div>
       <div style={{ display: activeTab === "tab2" ? "block" : "none" }}>
-        {/* <TabDependencia /> */}
-      </div>
-      <div style={{ display: activeTab === "tab3" ? "block" : "none" }}>
-        {/* <TabConvocatoria /> */}
-      </div>
-      <div style={{ display: activeTab === "tab4" ? "block" : "none" }}>
-        {/* <TabRegion /> */}
+        <CustomTabs
+          setActiveFn={setInnerTab}
+          currentActive={innerTab}
+          tabArray={monitoreoTabList}
+        ></CustomTabs>
+        <div style={{ display: innerTab === "mtab1" ? "block" : "none" }}>
+          Calibracion correcciones grupales
+        </div>
+        <div style={{ display: innerTab === "mtab2" ? "block" : "none" }}>
+          Calibracion terceras correcciones
+        </div>
+        <div style={{ display: innerTab === "mtab3" ? "block" : "none" }}>
+          Distribucion porcentajes
+        </div>
       </div>
     </ModulePageLayout>
   );
