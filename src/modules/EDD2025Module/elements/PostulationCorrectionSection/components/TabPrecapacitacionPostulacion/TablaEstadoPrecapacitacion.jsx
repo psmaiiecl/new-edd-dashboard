@@ -1,13 +1,8 @@
 import React from "react";
-import "./TablaEstadoPrecapacitacion.css"; // Importa estilos por separado
+import "./TablaEstadoPrecapacitacion.css";
 
 export default function TablaEstadoPrecapacitacion({ data }) {
-  if (!data || data.length === 0) return <div>Cargando datos...</div>;
-
-  // Separa datos por tipo
-  const supervisor = data.find((item) => item.tipo === "SUPERVISOR");
-  const corrector = data.find((item) => item.tipo === "CORRECTOR");
-
+  // Define todos los campos que deben aparecer
   const campos = [
     { key: "no_iniciada", label: "No Iniciada", color: "#f85a8b" },
     { key: "unidad1", label: "En Unidad 1", color: "#ffd54f" },
@@ -17,13 +12,23 @@ export default function TablaEstadoPrecapacitacion({ data }) {
     { key: "terminada", label: "Terminada", color: "#80cbc4" },
   ];
 
+  // Crea objetos vacíos por defecto
+  const defaultData = campos.reduce((acc, campo) => {
+    acc[campo.key] = 0;
+    return acc;
+  }, { total: 0 });
+
+  // Busca datos y rellena con valores por defecto si no existen
+  const supervisor = data?.find((item) => item.tipo === "SUPERVISOR") ?? defaultData;
+  const corrector = data?.find((item) => item.tipo === "CORRECTOR") ?? defaultData;
+
   const renderRow = (titulo, item) => (
     <tr>
       <td className="estado-label">{titulo}</td>
       {campos.map((campo) => (
-        <td key={campo.key}>{item?.[campo.key] ?? 0}</td>
+        <td key={campo.key}>{item[campo.key] ?? 0}</td>
       ))}
-      <td><strong>{item?.total ?? 0}</strong></td>
+      <td><strong>{item.total ?? 0}</strong></td>
     </tr>
   );
 

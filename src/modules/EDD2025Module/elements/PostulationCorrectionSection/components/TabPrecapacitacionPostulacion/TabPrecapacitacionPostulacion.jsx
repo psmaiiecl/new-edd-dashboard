@@ -1,13 +1,13 @@
 import { usePrecapacitacionPostulacion } from "./hooks/usePrecapacitacionPostulacion";
-import PrecapacitacionPieChart from "./PrecapacitacionPieChart";
+import PrecapacitacionPieChart from "./utils/PrecapacitacionPieChart";
 import TablaEstadoPrecapacitacion from "./TablaEstadoPrecapacitacion";
 import { mapSupervisorData, mapCorrectorData } from "../../utils/precapacitacionMappers";
 import { TabContent } from "../../../../../../components/Layout/TabContent";
 import { chartColors } from "./utils/precapacitacionChartOptions";
 import "./TabPrecapacitacionPostulacion.css";
-
-export default function TabPrecapacitacionPostulacion({ filtros }) {
-  const { data } = usePrecapacitacionPostulacion(filtros);
+ 
+export default function TabPrecapacitacionPostulacion() {
+  const { data } = usePrecapacitacionPostulacion();
 
   return (
     <div className="p-4">
@@ -31,10 +31,12 @@ export default function TabPrecapacitacionPostulacion({ filtros }) {
           </div>
         </div>
         <div className="mt-6 table-wrapper">
-          <TablaEstadoPrecapacitacion data={[
-            ...data?.resumen?.supervisores || [],
-            ...data?.resumen?.correctores || []
-          ]} />
+          <TablaEstadoPrecapacitacion
+            data={[
+              ...(data?.resumen?.supervisores ?? []),
+              ...(data?.resumen?.correctores ?? [])
+            ]}
+          />
         </div>
       </TabContent>
     </div>
