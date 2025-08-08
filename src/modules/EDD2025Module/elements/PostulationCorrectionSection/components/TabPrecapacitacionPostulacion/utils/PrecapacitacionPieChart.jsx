@@ -39,7 +39,7 @@ export default function PrecapacitacionPieChart({ title, data }) {
     },
     plotOptions: {
       pie: {
-        ...precapacitacionChartOptions.plotOptions.pie,
+        // ...precapacitacionChartOptions.plotOptions.pie,
         showInLegend: true,
         dataLabels: {
           enabled: true,

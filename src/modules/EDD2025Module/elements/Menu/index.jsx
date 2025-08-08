@@ -88,7 +88,6 @@ export function Menu() {
           title={"Corrección Postulaciones"}
           action={() => navigate("correccion-postulaciones")}
           loading={loadingStatus.correccion_postulaciones}
-          locked
         />
         <ModuleCard
           title={"Corrección Portafolios"}

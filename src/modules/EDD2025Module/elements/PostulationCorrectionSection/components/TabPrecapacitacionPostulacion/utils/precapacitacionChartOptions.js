@@ -1,4 +1,10 @@
 // utils/precapacitacionChartOptions.js
+export const precapacitacionChartOptions = {
+  chart: {
+    type: "pie",
+  },
+};
+
 export const chartColors = [
   "#EF4A60", // No Iniciada
   "#EFA638", // En Unidad 1
