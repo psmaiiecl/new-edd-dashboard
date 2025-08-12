@@ -2,12 +2,23 @@ import { extractCTGInfo } from "../../../../../utils/StringUtils";
 
 export const mappers = {
   docentes_agendados: {
+    total_key: "todos",
     series: [
       {
         name: "Docentes Agendados",
         key: "agendados",
         color: "#65D9AB",
         sliced: true,
+      },
+      {
+        name: "Pospuestos con agendamiento",
+        key: "pospuestos_agendados",
+        color: "#ffaf53ff",
+      },
+      {
+        name: "Pospuestos sin agendamiento",
+        key: "pospuestos_no_agendados",
+        color: "#ec80deff",
       },
       {
         name: "Con Contacto Inicial Exitoso",
