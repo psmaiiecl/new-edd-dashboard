@@ -11,9 +11,10 @@ import { ValidationSection2025 } from "../../modules/EDD2025Module/elements/Vali
 import { SDRecoverySection2025 } from "../../modules/EDD2025Module/elements/SDRecoverySection";
 import { RecordSchedulingSection2025 } from "../../modules/EDD2025Module/elements/RecordSchedulingSection";
 import { RecordSection2025 } from "../../modules/EDD2025Module/elements/RecordSection";
-import { SDProcessingSection2025 } from "../../modules/EDD2025Module/elements/SDProcessingSection";
+// import { SDProcessingSection2025 } from "../../modules/EDD2025Module/elements/SDProcessingSection";
 import { PostulationCorrectionSection2025 } from "../../modules/EDD2025Module/elements/PostulationCorrectionSection";
 import { PortfolioCorrectionSection2025 } from "../../modules/EDD2025Module/elements/PortfolioCorrectionSection/Index";
+import { ProcessingSection2025 } from "../../modules/EDD2025Module/elements/ProcessingSection";
 
 export function DashboardPage() {
   const { year } = useParams();
@@ -55,7 +56,7 @@ export function DashboardPage() {
               />
               <Route
                 path="procesamiento-sd"
-                element={<SDProcessingSection2025 />}
+                element={<ProcessingSection2025 />}
               />
               <Route
                 path="correccion-postulaciones"

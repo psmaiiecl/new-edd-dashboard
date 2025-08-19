@@ -15,9 +15,14 @@ const mappers = {
         color: "#8FB8FF",
       },
       {
-        name: "Pospuestos",
-        key: "pospuestos",
+        name: "Pospuestos Agendados",
+        key: "pospuestos_a",
         color: "#FFD153",
+      },
+      {
+        name: "Pospuestos No Agendados",
+        key: "pospuestos_na",
+        color: "#fab042ff",
       },
       {
         name: "Agendados",
