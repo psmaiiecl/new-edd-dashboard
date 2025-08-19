@@ -15,6 +15,7 @@ import { RecordSection2025 } from "../../modules/EDD2025Module/elements/RecordSe
 import { PostulationCorrectionSection2025 } from "../../modules/EDD2025Module/elements/PostulationCorrectionSection";
 import { PortfolioCorrectionSection2025 } from "../../modules/EDD2025Module/elements/PortfolioCorrectionSection/Index";
 import { ProcessingSection2025 } from "../../modules/EDD2025Module/elements/ProcessingSection";
+import { PostulationSection2025 } from "../../modules/EDD2025Module/elements/PostulationSection";
 
 export function DashboardPage() {
   const { year } = useParams();
@@ -60,7 +61,7 @@ export function DashboardPage() {
               />
               <Route
                 path="correccion-postulaciones"
-                element={<PostulationCorrectionSection2025 />}
+                element={<PostulationSection2025 />}
               />
               <Route
                 path="correccion-portafolios"

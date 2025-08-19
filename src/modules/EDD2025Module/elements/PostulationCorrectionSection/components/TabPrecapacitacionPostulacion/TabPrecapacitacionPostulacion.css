@@ -84,7 +84,7 @@ thead {
 }
 
 tbody tr:last-child td {
-  font-weight: bold;
+  /* font-weight: bold; */
   background-color: #f9fafb;
 }
 .tabla-wrapper {

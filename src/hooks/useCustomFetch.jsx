@@ -44,13 +44,15 @@ export function useCustomFetch() {
         ...(options.headers || {}),
       };
 
-      options.body = bodyString;
+      if (method !== "GET") {
+        options.body = bodyString;
+      }
       options.method = method;
       options.headers = headers;
 
       if (formData) {
         const parsedFormData = new FormData();
-        
+
         for (let key in formData) {
           parsedFormData.append(key, formData[key]?.value ?? formData[key]);
         }
