@@ -1,32 +1,55 @@
 import { useState } from "react";
-import { useCuotasCdcPostulacion } from "./hooks/useCuotasCdcPostulacion";
+import { useCuotasCdcResumen } from "./hooks/useCuotasCdcResumen";
+import TablaResumenCdc from "./TablaResumenCdc";
 import TablaCuotasCDC from "./TablaCuotasCDC";
 
+import "./TabCuotasCdcPostulacion.css";
+
 export default function TabCuotasCdcPostulacion() {
-  const [centroSeleccionado, setCentroSeleccionado] = useState("SOME_CENTRO");
-  const { resumen, detalle, loading } = useCuotasCdcPostulacion(centroSeleccionado);
+  const { data, loading } = useCuotasCdcResumen();
+  const [especialidadSeleccionada, setEspecialidadSeleccionada] = useState("");
+
+  if (loading) return <p>Cargando...</p>;
+  if (!data || data.length === 0) return <p>No hay datos para mostrar</p>;
+
+  // Filtrar detalle por especialidad seleccionada
+  const detalleFiltrado = especialidadSeleccionada
+    ? data.filter((row) => row.especialidad === especialidadSeleccionada)
+    : [];
+
+  // Obtener lista de especialidades únicas para el select
+  const especialidades = [...new Set(detalleFiltrado.map((r) => r.especialidad))];
 
   return (
-    <div>
-      <h3>Postulación - Cuotas CDC</h3>
+    <div className="tab-cdc-container">
+      {/* Tabla resumen con todos los datos */}
+      <TablaResumenCdc data={data} />
 
-      {loading && <p>Cargando...</p>}
+      {/* Filtro de especialidad */}
+      {especialidades.length > 0 && (
+        <div className="selector-especialidad">
+          <label htmlFor="especialidad-select">Filtrar por Especialidad:</label>
+          <select
+            id="especialidad-select"
+            value={especialidadSeleccionada}
+            onChange={(e) => setEspecialidadSeleccionada(e.target.value)}
+          >
+            <option value="">--Seleccione una especialidad--</option>
+            {especialidades.map((esp) => (
+              <option key={esp} value={esp}>
+                {esp}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
 
-      {/* Filtro Centro CDC */}
-      <select
-        value={centroSeleccionado}
-        onChange={(e) => setCentroSeleccionado(e.target.value)}
-      >
-        {/* Opciones dinámicas si vienen desde `resumen` */}
-        {resumen?.centros?.map((centro) => (
-          <option key={centro} value={centro}>
-            {centro.toUpperCase()}
-          </option>
-        ))}
-      </select>
-
-      {detalle && (
-        <TablaCuotasCDC data={detalle} centro={centroSeleccionado} />
+      {/* Tabla detalle filtrada */}
+      {detalleFiltrado.length > 0 && (
+        <>
+          <h3>Detalle de {especialidadSeleccionada}</h3>
+          <TablaCuotasCDC data={detalleFiltrado} />
+        </>
       )}
     </div>
   );

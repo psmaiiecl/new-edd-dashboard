@@ -3,26 +3,20 @@ import { ConvertirPalabras } from "../../../../../../utils/portafolioUtils.js";
 import TablaResumenPostulacion from "./TablaResumenPostulacion";
 import AvanceDiarioChartPostulacion from "./AvanceDiarioChartPostulacion";
 import { usePostulacionData } from "./hooks/usePostulacionData";
+import { useAvanceDiarioPostulacion } from "./hooks/useAvanceDiarioPostulacion";
+export default function TabGeneralPostulacion() {
+  const { fechas, series, resumen, loading, error } = useAvanceDiarioPostulacion();
 
-export default function TabAvanceDiarioPostulacion({ filtros }) {
-  const hookResult = usePostulacionData(
-    import.meta.env.VITE_BASE_URL + "/back/public/api2024/2024-postulacion",
-    filtros
-  );
-
-  if (!hookResult) {
-    console.error("usePostulacionData está retornando undefined");
-    return <div>Error interno</div>;
-  }
-
-  const { data, isLoading } = hookResult;
-
-  if (isLoading || !data) return <div>Cargando...</div>;
+  if (loading) return <div>Cargando...</div>;
+  if (error) return <div>Error al cargar los datos</div>;
 
   return (
     <>
-      <AvanceDiarioChartPostulacion fechas={data.fechas} series={data.series} />
-      <TablaResumenPostulacion resumen={data.resumen} />
+      <AvanceDiarioChartPostulacion fechas={fechas} series={series} />
+      <TablaResumenPostulacion resumen={resumen} />
     </>
   );
 }
+
+
+

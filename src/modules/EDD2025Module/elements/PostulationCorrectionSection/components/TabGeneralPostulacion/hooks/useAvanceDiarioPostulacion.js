@@ -1,91 +1,69 @@
-// hooks/useAvanceDiarioPostulacion.js
-import { useEffect, useState, useMemo } from "react";
-import axios from "axios";
+import { useState, useEffect } from "react";
+import axiosInstance from "../../../../../services/axiosInstance";
 
-export function useAvanceDiarioPostulacion(url, filtros = {}) {
-  const [data, setData] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+export function useAvanceDiarioPostulacion() {
+  const [fechas, setFechas] = useState([]);
+  const [series, setSeries] = useState([]);
+  const [resumen, setResumen] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setIsLoading(true);
-        const res = await axios.post(url, filtros);
-        setData(res.data);
-        setError(null);
+        setLoading(true);
+        // const res = await axiosInstance.get("/back/public/api2024/2024-postulacion");
+        const res = await axiosInstance.get("/back/public/api2025/2025-postulacion");
+        const d = res.data?.postulacion?.avance_diario_postulaciones;
+        
+        if (!d) throw new Error("Datos no encontrados");
+
+        const fechasArr = d.fechas || [];
+
+        setFechas(fechasArr);
+        const Requeridos= (d.correctores + d.supervisores);
+        // Construir series para el gráfico
+        const seriesData = [
+          
+          
+          {
+            name: "Total Postulantes",
+            data: d.postulantes,
+          },
+          
+          {
+            name: "Total Requeridos",
+            // data: Array(fechasArr.length).fill(d.total_correctores),
+            data: Array(fechasArr.length).fill(d.postulantes_requeridos || 0),
+            color:"#ffc729",
+          },
+        ];
+
+        setSeries(seriesData);
+        // console.log('tota de requeridos :' + Requeridos)
+        // Calcular resumen
+        setResumen({
+          total_postulantes: d.postulantes_totales || 0,
+          // total_requeridos: d.total_correctores,
+          total_requeridos: d.postulantes_requeridos || 0,
+
+  // seleccionados_requeridos: d.total_correctores || 0, // si tienes otro valor, cámbialo aquí
+  // correctores_requeridos: d.correctores || 0,
+  // seleccionados_requeridos: d.supervisores_requeridos,
+  // postulantes_totales: d.postulantes_totales ,
+ 
+
+
+        });
       } catch (err) {
-        console.error("Error al obtener avance diario postulaciones:", err);
         setError(err);
       } finally {
-        setIsLoading(false);
+        setLoading(false);
       }
     };
 
     fetchData();
-  }, [url, JSON.stringify(filtros)]);
+  }, []);
 
-  const parsedData = useMemo(() => {
-    const raw = data?.postulacion?.avance_diario_postulaciones;
-    if (!raw) return null;
-
-    const {
-      fechas = [],
-      correctores = [],
-      supervisores = [],
-      postulantes_totales = 0,
-      total_correctores = 0,
-      total_supervisores = 0,
-    } = raw;
-
-    const SUPERVISORES_REQUERIDOS = 127;
-    const CORRECTORES_REQUERIDOS = 1201;
-    const TOTAL_REQUERIDOS = 1328;
-
-    const series = [
-      {
-        name: "Postulantes Totales",
-        data: correctores,
-        color: "#ff537c",
-      },
-      {
-        name: "Pueden ser Supervisores",
-        data: supervisores,
-        color: "#c1d9ca",
-      },
-      {
-        name: "Supervisores Requeridos",
-        data: fechas.map(() => SUPERVISORES_REQUERIDOS),
-        color: "#ff8e53",
-        dashStyle: "longdash",
-      },
-      {
-        name: "Total Seleccionados Requeridos",
-        data: fechas.map(() => TOTAL_REQUERIDOS),
-        color: "#65d7aa",
-        dashStyle: "longdash",
-      },
-    ];
-
-    const resumen = {
-      postulantes_totales,
-      total_correctores,
-      total_supervisores,
-      correctores_requeridos: CORRECTORES_REQUERIDOS,
-      supervisores_requeridos: SUPERVISORES_REQUERIDOS,
-      total_requeridos: TOTAL_REQUERIDOS,
-    };
-
-    return {
-      categorias: fechas,
-      series,
-      resumen,
-    };
-  }, [data]);
-
-  return {
-    data: parsedData,
-    isLoading,
-    error,
-  };
+  return { fechas, series, resumen, loading, error };
 }

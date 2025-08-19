@@ -1,18 +1,18 @@
-// hooks/useCuotasCdcPostulacion.js
 import { useEffect, useState } from "react";
-import axios from "../../../../../services/axiosInstance";
+import axiosInstance from "../../../../../services/axiosInstance";
 
 export function useCuotasCdcPostulacion(centroCorreccion) {
   const [resumen, setResumen] = useState(null);
   const [detalle, setDetalle] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  // Obtener resumen general
   const fetchResumen = async () => {
     setLoading(true);
     try {
-      const response = await axios.get("2024/2024-cuotasCdcResumen");
-      setResumen(response);
-      console.log("resumen:"+ response);
+      const { data } = await axiosInstance.get("/back/public/api2024/2024-cuotasCdcResumen"); 
+      setResumen(data);
+      console.log("Resumen CDC:", data);
     } catch (err) {
       console.error("Error al cargar resumen:", err);
     } finally {
@@ -20,15 +20,17 @@ export function useCuotasCdcPostulacion(centroCorreccion) {
     }
   };
 
+  // Obtener detalle de un centro específico
   const fetchDetalle = async () => {
     if (!centroCorreccion) return;
     setLoading(true);
     try {
-      const response = await axios.get(`2024/2024-cuotasCdcResumen/${centroCorreccion}`, {
-        params: { centro_correccion: centroCorreccion },
-      });
-      setDetalle(response);
-      console.log("detalle:"+ centroCorreccion);
+      const { data } = await axios.get(
+        `/back/public/api2024/2024-cuotas-cdc/${centroCorreccion}`,
+        { params: { centro_correccion: centroCorreccion } }
+      );
+      setDetalle(data);
+      console.log(`Detalle CDC (${centroCorreccion}):`, data);
     } catch (err) {
       console.error("Error al cargar detalle:", err);
     } finally {
