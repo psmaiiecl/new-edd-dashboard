@@ -1,5 +1,6 @@
 .dual-bar-chart-container {
   display: flex;
+  align-items: start;
 }
 
 .avance-dot {
