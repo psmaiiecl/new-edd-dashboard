@@ -13,7 +13,7 @@ export const useCuotasCdcResumen = () => {
       try {
         queueLoading();
         setLoading(true);
-        const url = "/back/public/api2024/2024-cuotasCdcResumen";
+        const url = "/back/public/api2025/2025-cuotasCdcResumen";
         const response = await axiosInstance.get(url);
         setData(response.data || []);
         console.log(response);
