@@ -81,3 +81,8 @@ export function buildCdCSummaryData(data){
 
   return {tableData, centrosFiltros};
 }
+
+export function buildCdCFilteredData(data){
+  console.log(data);
+  
+}
