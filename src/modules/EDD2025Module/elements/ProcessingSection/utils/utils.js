@@ -30,25 +30,9 @@ export function buildEvolucionProcesamiento(data) {
     },
     series: [
       {
-        name: "Revisión finalizada",
-        data: estadoOK,
-        color: "#b2de95",
-        marker: {
-          enabled: false,
-        },
-      },
-      {
-        name: "QA con incidencias críticas",
-        data: QACritico,
-        color: "#c5a8ff",
-        marker: {
-          enabled: false,
-        },
-      },
-      {
-        name: "En QA",
-        data: enQA,
-        color: "#5b9bd5",
+        name: "Grabaciones recibidas",
+        data: grabacionRecibida,
+        color: "#ff5880",
         marker: {
           enabled: false,
         },
@@ -62,9 +46,25 @@ export function buildEvolucionProcesamiento(data) {
         },
       },
       {
-        name: "Grabaciones recibidas",
-        data: grabacionRecibida,
-        color: "#ff5880",
+        name: "En QA",
+        data: enQA,
+        color: "#5b9bd5",
+        marker: {
+          enabled: false,
+        },
+      },
+      {
+        name: "QA con incidencias críticas",
+        data: QACritico,
+        color: "#c5a8ff",
+        marker: {
+          enabled: false,
+        },
+      },
+      {
+        name: "Revisión finalizada",
+        data: estadoOK,
+        color: "#b2de95",
         marker: {
           enabled: false,
         },
