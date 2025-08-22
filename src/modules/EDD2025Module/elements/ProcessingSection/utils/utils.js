@@ -119,7 +119,7 @@ export function mapGraphTable(dataset, config) {
     const cols = config.columns || [];
     const totalKeys = config.totalKeys || [];
 
-    let totalGlobal = 0;
+    // let totalGlobal = 0;
 
     const tableData = categories.map((fecha, i) => {
       const row = { fecha };
@@ -139,17 +139,22 @@ export function mapGraphTable(dataset, config) {
         0
       );
       row.total = totalDia;
-      totalGlobal += totalDia;
+      // totalGlobal += totalDia;
       return row;
     });
 
     // porcentaje respecto del total global
     if (config.showPercentOfGlobal) {
       for (const row of tableData) {
+        const revisionesFinalizadas = numberOrZero(row["QA_SIN_INCIDENCIAS"]);
         row.porcentaje_avance =
-          totalGlobal > 0
-            ? ((row.total / totalGlobal) * 100).toFixed(2) + "%"
+          row.total > 0
+            ? ((revisionesFinalizadas / row.total) * 100).toFixed(2) + "%"
             : "0%";
+        // row.porcentaje_avance =
+        //   totalGlobal > 0
+        //     ? ((row.total / totalGlobal) * 100).toFixed(2) + "%"
+        //     : "0%";
       }
     }
 
