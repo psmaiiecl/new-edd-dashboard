@@ -106,29 +106,31 @@ function TabCuotas() {
             }}
           />
         </div>
-        <div className="tab-general-filter">
-          <span>Filtro por Módulo: </span>
-          <Select
-            value={filters?.modulo || null}
-            onChange={(option) => handleFilter("modulo", option)}
-            options={SelectorItems.modulos}
-            isSearchable
-            noOptionsMessage={() => "Ningún módulo"}
-            placeholder="Seleccione un módulo"
-            styles={{
-              control: (base) => ({
-                ...base,
-                fontSize: "13px",
-                padding: "0px 10px ",
-              }),
-              option: (base) => ({
-                ...base,
-                fontSize: "13px",
-                color: "black",
-              }),
-            }}
-          />
-        </div>
+        {filters?.centro && (
+          <div className="tab-general-filter">
+            <span>Filtro por Módulo: </span>
+            <Select
+              value={filters?.modulo || null}
+              onChange={(option) => handleFilter("modulo", option)}
+              options={SelectorItems.modulos}
+              isSearchable
+              noOptionsMessage={() => "Ningún módulo"}
+              placeholder="Seleccione un módulo"
+              styles={{
+                control: (base) => ({
+                  ...base,
+                  fontSize: "13px",
+                  padding: "0px 10px ",
+                }),
+                option: (base) => ({
+                  ...base,
+                  fontSize: "13px",
+                  color: "black",
+                }),
+              }}
+            />
+          </div>
+        )}
       </div>
       {tableData.filtrado && (
         <div style={{ maxWidth: "100%", overflowX: "scroll" }}>

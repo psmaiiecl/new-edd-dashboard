@@ -37,20 +37,25 @@ function useTabCuotas() {
     });
   }, [customFetch]);
 
-  useEffect(()=>{
-    if (!filters.centro) return
+  useEffect(() => {
+    if (!filters.centro) return;
     customFetch({
-      route: BASE_API_URL_2025 + `/2025-cuotas-cdc/${filters.centro.value}`,
+      route:
+        BASE_API_URL_2025 +
+        `/2025-cuotas-cdc?centro=${filters.centro.value}${
+          filters.modulo?.value ? `&modulo=${filters.modulo.value}` : ""
+        }`,
       shouldCache: true,
       method: "GET",
     }).then((data) => {
+      console.log("data", data);
+      
       setTableData((prevData) => ({
         ...prevData,
         filtrado: data,
       }));
-      
     });
-  },[filters, customFetch])
+  }, [filters, customFetch]);
 
   return { tableData, selectorCentros, filters, handleFilter };
 }
