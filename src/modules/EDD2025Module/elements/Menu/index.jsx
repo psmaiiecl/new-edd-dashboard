@@ -4,6 +4,7 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { useModules } from "../../hooks/useModules";
 import { ModuleCard } from "../../../../components/ModuleCard";
+import sdIMG from "../../../../assets/icons/sd_recovery.svg";
 
 export function Menu() {
   const navigate = useNavigate();
@@ -72,25 +73,36 @@ export function Menu() {
         </ModuleCard>
         <ModuleCard
           title={"Recuperación de SD's"}
-          action={() => navigate("recuperacion-sd")}
+          // action={() => navigate("recuperacion-sd")}
+          action={() =>
+            window.open(
+              "https://analytics.zoho.com/open-view/2835166000007221945/7fbffad3f812038aa551fb6cea9cde8a",
+              "_blank"
+            )
+          }
           loading={loadingStatus.recuperacion}
-          >
-          Recuperacion SD
+        >
+          <div className="mesa-ayuda-content">
+            <img src={sdIMG} />
+          </div>
         </ModuleCard>
         <ModuleCard
           title={"Procesamiento de SD's"}
           action={() => navigate("procesamiento-sd")}
           loading={loadingStatus.procesamiento}
+          locked
         />
         <ModuleCard
           title={"Corrección Postulaciones"}
           action={() => navigate("correccion-postulaciones")}
           loading={loadingStatus.correccion_postulaciones}
+          locked
         />
         <ModuleCard
           title={"Corrección Portafolios"}
           action={() => navigate("correccion-portafolios")}
           loading={loadingStatus.correccion_portafolios}
+          locked
         />
         <ModuleCard
           title={"Mesa de Ayuda - Tickets"}
