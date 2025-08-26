@@ -90,19 +90,16 @@ export function Menu() {
           title={"Procesamiento de SD's"}
           action={() => navigate("procesamiento-sd")}
           loading={loadingStatus.procesamiento}
-          locked
         />
         <ModuleCard
           title={"Corrección Postulaciones"}
           action={() => navigate("correccion-postulaciones")}
           loading={loadingStatus.correccion_postulaciones}
-          locked
         />
         <ModuleCard
           title={"Corrección Portafolios"}
           action={() => navigate("correccion-portafolios")}
           loading={loadingStatus.correccion_portafolios}
-          locked
         />
         <ModuleCard
           title={"Mesa de Ayuda - Tickets"}
