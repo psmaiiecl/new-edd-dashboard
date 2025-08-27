@@ -8,43 +8,36 @@ const mappers = {
         name: "Revisión completa sin incidencias",
         key: "COMPLETA_SIN_INCIDENCIAS",
         color: "#b2de95",
-        marker: { enabled: false },
       },
       {
         name: "Revisión completa con incidencias",
         key: "COMPLETA_CON_INCIDENCIAS",
         color: "#ffc710ff",
-        marker: { enabled: false },
       },
       {
         name: "QA en revisión",
         key: "QA_EN_REVISION",
         color: "#c5a8ff",
-        marker: { enabled: false },
       },
       {
         name: "En QA con incidencias a revisar",
         key: "QA_CON_INCIDENCIAS_A_REVISAR",
         color: "#5b9bd5",
-        marker: { enabled: false },
       },
       {
         name: "En QA pendiente de revisión",
         key: "QA_PENDIENTE_DE_REVISION",
         color: "#69eeeeff",
-        marker: { enabled: false },
       },
       {
         name: "En PRE QA con incidencias críticas",
         key: "PRE_QA_CON_INCIDENCIAS_CRITICAS",
         color: "#ff5880",
-        marker: { enabled: false },
       },
       {
         name: "En espera PRE QA",
         key: "EN_ESPERA_PREQA",
         color: "#c9c9c9ff",
-        marker: { enabled: false },
       },
     ],
     // overrides opcionales para Highcharts
@@ -56,6 +49,7 @@ const mappers = {
         pointFormat:
           '<span style="font-size:13px;"><span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b></span><br/>',
       },
+     
     },
   },
 

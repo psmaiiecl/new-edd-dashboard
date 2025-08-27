@@ -8,16 +8,7 @@ import sdIMG from "../../../../assets/icons/sd_recovery.svg";
 
 export function Menu() {
   const navigate = useNavigate();
-  const {
-    inscriptionChart,
-    validationChart,
-    portfolioChart,
-    resultChart,
-    recordSchedulingChart,
-    recordChart,
-    helpChart,
-    loadingStatus,
-  } = useModules();
+  const { cardCharts, loadingStatus } = useModules();
 
   return (
     <>
@@ -31,28 +22,40 @@ export function Menu() {
           action={() => navigate("inscripcion")}
           loading={loadingStatus.inscription}
         >
-          <HighchartsReact options={inscriptionChart} highcharts={Highcharts} />
+          <HighchartsReact
+            options={cardCharts?.inscripcion}
+            highcharts={Highcharts}
+          />
         </ModuleCard>
         <ModuleCard
           title={"Validación"}
           loading={loadingStatus.validation}
           action={() => navigate("validacion")}
         >
-          <HighchartsReact options={validationChart} highcharts={Highcharts} />
+          <HighchartsReact
+            options={cardCharts?.validacion}
+            highcharts={Highcharts}
+          />
         </ModuleCard>
         <ModuleCard
           title={"Entrega de Resultados"}
           action={() => navigate("resultados")}
           loading={loadingStatus.result}
         >
-          <HighchartsReact options={resultChart} highcharts={Highcharts} />
+          <HighchartsReact
+            options={cardCharts?.resultados}
+            highcharts={Highcharts}
+          />
         </ModuleCard>
         <ModuleCard
           title={"Portafolio"}
           action={() => navigate("portafolio")}
           loading={loadingStatus.portfolio}
         >
-          <HighchartsReact options={portfolioChart} highcharts={Highcharts} />
+          <HighchartsReact
+            options={cardCharts?.portafolio}
+            highcharts={Highcharts}
+          />
         </ModuleCard>
         <ModuleCard
           title={"Agendamiento de Grabaciones"}
@@ -60,7 +63,7 @@ export function Menu() {
           loading={loadingStatus.agendamiento}
         >
           <HighchartsReact
-            options={recordSchedulingChart}
+            options={cardCharts?.agendamiento}
             highcharts={Highcharts}
           />
         </ModuleCard>
@@ -69,7 +72,10 @@ export function Menu() {
           loading={loadingStatus.grabaciones}
           action={() => navigate("grabaciones")}
         >
-          <HighchartsReact options={recordChart} highcharts={Highcharts} />
+          <HighchartsReact
+            options={cardCharts?.grabaciones}
+            highcharts={Highcharts}
+          />
         </ModuleCard>
         <ModuleCard
           title={"Recuperación de SD's"}
@@ -87,19 +93,26 @@ export function Menu() {
           </div>
         </ModuleCard>
         <ModuleCard
-          title={"Procesamiento de SD's"}
+          title={"Procesamiento de Grabaciones"}
           action={() => navigate("procesamiento-sd")}
           loading={loadingStatus.procesamiento}
-        />
+        >
+          <HighchartsReact
+            options={cardCharts?.procesamiento}
+            highcharts={Highcharts}
+          />
+        </ModuleCard>
         <ModuleCard
           title={"Corrección Postulaciones"}
           action={() => navigate("correccion-postulaciones")}
           loading={loadingStatus.correccion_postulaciones}
+          locked
         />
         <ModuleCard
           title={"Corrección Portafolios"}
           action={() => navigate("correccion-portafolios")}
           loading={loadingStatus.correccion_portafolios}
+          locked
         />
         <ModuleCard
           title={"Mesa de Ayuda - Tickets"}
@@ -111,7 +124,10 @@ export function Menu() {
             )
           }
         >
-          <HighchartsReact options={helpChart} highcharts={Highcharts} />
+          <HighchartsReact
+            options={cardCharts?.ayuda}
+            highcharts={Highcharts}
+          />
         </ModuleCard>
       </div>
     </>

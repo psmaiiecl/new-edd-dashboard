@@ -1,6 +1,7 @@
 import { CustomBarChart } from "../../../../../../components/CustomBarChart";
 import { CustomDotLineChart } from "../../../../../../components/CustomDotLineChart";
 import { TabContent } from "../../../../../../components/Layout/TabContent";
+import { numberFormatter } from "../../../../../../utils/NumberFormatter";
 import useTabGeneral from "./hooks/useTabGeneral";
 
 function TabGeneral() {
@@ -27,7 +28,9 @@ function TabGeneral() {
                       fontWeight: "bold",
                     }}
                   >
-                    {chartData?.avance.table.tableTotals[col.key] ?? ""}
+                    {numberFormatter(
+                      chartData?.avance.table.tableTotals[col.key]
+                    )}
                   </th>
                 ))}
               </tr>
@@ -50,7 +53,7 @@ function TabGeneral() {
               {chartData?.avance.table.tableData.map((row, i) => (
                 <tr key={i}>
                   {chartData?.avance.table.tableColumns.map((col) => (
-                    <td key={col.key}>{row[col.key]}</td>
+                    <td key={col.key}>{numberFormatter(row[col.key])}</td>
                   ))}
                 </tr>
               ))}

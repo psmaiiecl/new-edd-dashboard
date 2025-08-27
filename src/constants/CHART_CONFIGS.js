@@ -134,7 +134,7 @@ export const BAR_CONFIG = {
     plotBorderWidth: null,
     plotShadow: false,
     plotBackgroundColor: null,
-    marginTop: 120,
+    // marginTop: 120,
     height: 600,
     // width: 1000,
   },

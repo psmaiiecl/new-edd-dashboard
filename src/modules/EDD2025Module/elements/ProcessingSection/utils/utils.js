@@ -1,3 +1,5 @@
+import { numberFormatter } from "../../../../../utils/NumberFormatter";
+
 export function buildEvolucionProcesamiento(data) {
   const fechas = data?.fechas || [];
 
@@ -51,6 +53,20 @@ export function buildEvolucionProcesamiento(data) {
       chart: {
         type: "area",
       },
+      lang: {
+        decimalPoint: ",",
+        thousandsSep: ".",
+      },
+      plotOptions: {
+        area: {
+          stacking: "normal",
+          marker: {
+            enabled: true,
+            radius: 3,
+            symbol: "circle",
+          },
+        },
+      },
       tooltip: {
         pointFormatter: function () {
           return `<span style="color:${this.color}">●</span> ${this.series.name}: <b>${this.y}</b><br/>`;
@@ -71,7 +87,7 @@ export function buildEvolucionProcesamiento(data) {
       name: cfg.name,
       data: data?.[cfg.key] || [],
       color: cfg.color,
-      marker: cfg.marker,
+      // marker: cfg.marker,
     })),
   };
 
@@ -110,9 +126,16 @@ export function mapGraphTable(dataset, config) {
 
     out.chart = {
       override: {
+        lang: {
+          decimalPoint: ",",
+          thousandsSep: ".",
+        },
         xAxis: { categories, ...(config.override?.xAxis || {}) },
         yAxis: { ...(config.override?.yAxis || {}) },
         tooltip: config.override?.tooltip,
+        chart: {
+          marginTop: 80,
+        },
       },
       series,
     };
@@ -155,7 +178,9 @@ export function mapGraphTable(dataset, config) {
         );
         row.porcentaje_avance =
           row.total > 0
-            ? ((revisionesFinalizadas / row.total) * 100).toFixed(2) + "%"
+            ? numberFormatter(
+                ((revisionesFinalizadas / row.total) * 100).toFixed(2)
+              ) + "%"
             : "0%";
         // row.porcentaje_avance =
         //   totalGlobal > 0
@@ -169,7 +194,7 @@ export function mapGraphTable(dataset, config) {
     for (const col of cols) {
       if (col.key === "fecha") continue;
       if (col.key === "porcentaje_avance") {
-        tableTotals[col.key] = "100%";
+        //tableTotals[col.key] = "100%";
         continue;
       }
       tableTotals[col.key] = tableData.reduce(
@@ -177,6 +202,18 @@ export function mapGraphTable(dataset, config) {
         0
       );
     }
+    const revisionesFinalizadasTotal =
+      numberOrZero(tableTotals["COMPLETA_SIN_INCIDENCIAS"]) +
+      numberOrZero(tableTotals["COMPLETA_CON_INCIDENCIAS"]);
+
+    const totalGlobal = numberOrZero(tableTotals["total"]);
+
+    tableTotals["porcentaje_avance"] =
+      totalGlobal > 0
+        ? numberFormatter(
+            ((revisionesFinalizadasTotal / totalGlobal) * 100).toFixed(2)
+          ) + "%"
+        : "0%";
 
     out.table = {
       tableColumns: cols.map((c) => ({
