@@ -1,11 +1,50 @@
 export function buildEvolucionProcesamiento(data) {
   const fechas = data?.fechas || [];
 
-  const grabacionRecibida = data?.CON_GRABACIONES_RECIBIDAS || [];
-  const QACritico = data?.QA_CON_INCIDENCIAS_CRITICAS || [];
-  const enPreQA = data?.EN_ESTADO_PRE_QA || [];
-  const enQA = data?.EN_ESTADO_QA || [];
-  const estadoOK = data?.QA_SIN_INCIDENCIAS || [];
+  const seriesConfig = [
+    {
+      name: "En espera PRE QA",
+      key: "EN_ESPERA_PREQA",
+      color: "#c9c9c9ff",
+      marker: { enabled: false },
+    },
+    {
+      name: "PRE QA con incidencias críticas",
+      key: "PRE_QA_CON_INCIDENCIAS_CRITICAS",
+      color: "#ff5880",
+      marker: { enabled: false },
+    },
+    {
+      name: "En QA pendiente de revisión",
+      key: "QA_PENDIENTE_DE_REVISION",
+      color: "#69eeeeff",
+      marker: { enabled: false },
+    },
+    {
+      name: "En QA con incidencias a revisar",
+      key: "QA_CON_INCIDENCIAS_A_REVISAR",
+      color: "#5b9bd5",
+      marker: { enabled: false },
+    },
+    {
+      name: "QA en revisión",
+      key: "QA_EN_REVISION",
+      color: "#c5a8ff",
+      marker: { enabled: false },
+    },
+    {
+      name: "Revisión completa con incidencias",
+      key: "COMPLETA_CON_INCIDENCIAS",
+      color: "#ffc710ff",
+      marker: { enabled: false },
+    },
+    {
+      name: "Revisión completa sin incidencias",
+      key: "COMPLETA_SIN_INCIDENCIAS",
+      color: "#b2de95",
+      marker: { enabled: false },
+    },
+  ];
 
   const res = {
     override: {
@@ -28,49 +67,14 @@ export function buildEvolucionProcesamiento(data) {
         categories: fechas,
       },
     },
-    series: [
-      {
-        name: "Grabaciones recibidas",
-        data: grabacionRecibida,
-        color: "#ff5880",
-        marker: {
-          enabled: false,
-        },
-      },
-      {
-        name: "En pre QA",
-        data: enPreQA,
-        color: "#ff8801ff",
-        marker: {
-          enabled: false,
-        },
-      },
-      {
-        name: "En QA",
-        data: enQA,
-        color: "#5b9bd5",
-        marker: {
-          enabled: false,
-        },
-      },
-      {
-        name: "QA con incidencias críticas",
-        data: QACritico,
-        color: "#c5a8ff",
-        marker: {
-          enabled: false,
-        },
-      },
-      {
-        name: "Revisión finalizada",
-        data: estadoOK,
-        color: "#b2de95",
-        marker: {
-          enabled: false,
-        },
-      },
-    ],
+    series: seriesConfig.map((cfg) => ({
+      name: cfg.name,
+      data: data?.[cfg.key] || [],
+      color: cfg.color,
+      marker: cfg.marker,
+    })),
   };
+
   return res;
 }
 
@@ -146,7 +150,9 @@ export function mapGraphTable(dataset, config) {
     // porcentaje respecto del total global
     if (config.showPercentOfGlobal) {
       for (const row of tableData) {
-        const revisionesFinalizadas = numberOrZero(row["QA_SIN_INCIDENCIAS"]);
+        const revisionesFinalizadas = numberOrZero(
+          row["COMPLETA_SIN_INCIDENCIAS"] + row["COMPLETA_CON_INCIDENCIAS"]
+        );
         row.porcentaje_avance =
           row.total > 0
             ? ((revisionesFinalizadas / row.total) * 100).toFixed(2) + "%"
