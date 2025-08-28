@@ -67,18 +67,7 @@ export function buildEvolucionProcesamiento(data) {
           },
         },
       },
-      tooltip: {
-        pointFormatter: function () {
-          return `<span style="color:${this.color}">●</span> ${this.series.name}: <b>${this.y}</b><br/>`;
-        },
-      },
-      yAxis: {
-        labels: {
-          formatter: function () {
-            return `${this.value}`;
-          },
-        },
-      },
+
       xAxis: {
         categories: fechas,
       },
