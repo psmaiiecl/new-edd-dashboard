@@ -58,7 +58,8 @@ export function buildAgendamientoModuleChart(data) {
 export function buildGrabacionesModuleChart(data) {
   const agendados = data.agendados ?? 0;
   const sinAgendar = data.sin_agendar ?? 0;
-  const pospuestos = data.pospuestos ?? 0;
+  const pospuestos_a = data.pospuestos_a ?? 0;
+  const pospuestos_na = data.pospuestos_na ?? 0;
   const grabados = data.grabados ?? 0;
   const noGrabados = data.no_grabados ?? 0;
   const total = data.todos;
@@ -97,12 +98,21 @@ export function buildGrabacionesModuleChart(data) {
             },
           },
           {
-            name: "Pospuestos",
-            y: pospuestos,
+            name: "Pospuestos Agendados",
+            y: pospuestos_a,
             color: "#FFD153",
             drilldown: {
-              categories: ["Pospuestos"],
-              data: [(pospuestos / total) * 100],
+              categories: ["Pospuestos Agendados"],
+              data: [(pospuestos_a / total) * 100],
+            },
+          },
+          {
+            name: "Pospuestos No Agendados",
+            y: pospuestos_na,
+            color: "#f3a239ff",
+            drilldown: {
+              categories: ["Pospuestos No Agendados"],
+              data: [(pospuestos_na / total) * 100],
             },
           },
           {
