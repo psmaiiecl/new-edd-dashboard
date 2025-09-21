@@ -15,11 +15,13 @@ import {
   getGrabacionesData,
   getInscriptionData,
   getProcesamientoData,
+  getRecuperacionData,
 } from "../services/menuAPIServices";
 import {
   buildAgendamientoModuleChart,
   buildGrabacionesModuleChart,
-  buildProcesamientoModuleChart
+  buildProcesamientoModuleChart,
+  buildRecuperacionModuleChart
 } from "../utils/menuChartMappers";
 export function useModules() {
   const { getToken } = useContext(AuthContext);
@@ -32,6 +34,7 @@ export function useModules() {
     agendamiento: { ...MODULE_CHART_SETUP },
     grabaciones: { ...MODULE_CHART_SETUP },
     procesamiento: { ...MODULE_CHART_SETUP },
+    recuperacion: { ...MODULE_CHART_SETUP },
   });
   const [loadingStatus, setLoadingStatus] = useState({});
   const changeLoadingStatus = (field, state) => {
@@ -108,6 +111,13 @@ export function useModules() {
         procesamiento: buildProcesamientoModuleChart(data.evolucion_diaria.normal),
       }));
       changeLoadingStatus("procesamiento", false);
+    });
+    getRecuperacionData(getToken()).then((data) => {
+      setCardCharts((prev) => ({
+        ...prev,
+        recuperacion: buildRecuperacionModuleChart(data.recuperacion_menu),
+      }));
+      changeLoadingStatus("recuperacion", false);
     });
   }, [getToken]);
   return {

@@ -4,7 +4,6 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { useModules } from "../../hooks/useModules";
 import { ModuleCard } from "../../../../components/ModuleCard";
-import sdIMG from "../../../../assets/icons/sd_recovery.svg";
 
 export function Menu() {
   const navigate = useNavigate();
@@ -88,9 +87,10 @@ export function Menu() {
           }
           loading={loadingStatus.recuperacion}
         >
-          <div className="mesa-ayuda-content">
-            <img src={sdIMG} />
-          </div>
+          <HighchartsReact
+            options={cardCharts?.recuperacion}
+            highcharts={Highcharts}
+          />
         </ModuleCard>
         <ModuleCard
           title={"Procesamiento de Grabaciones"}

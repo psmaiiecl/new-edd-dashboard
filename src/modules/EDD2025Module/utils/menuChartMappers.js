@@ -131,22 +131,22 @@ export function buildGrabacionesModuleChart(data) {
 }
 
 export function buildProcesamientoModuleChart(data) {
-  const COMPLETA_SIN_INCIDENCIAS = (data?.COMPLETA_SIN_INCIDENCIAS ?? []).reduce(
+  const COMPLETA_SIN_INCIDENCIAS = (
+    data?.COMPLETA_SIN_INCIDENCIAS ?? []
+  ).reduce((a, b) => a + b, 0);
+  const COMPLETA_CON_INCIDENCIAS = (
+    data?.COMPLETA_CON_INCIDENCIAS ?? []
+  ).reduce((a, b) => a + b, 0);
+  const QA_EN_REVISION = (data?.QA_EN_REVISION ?? []).reduce(
     (a, b) => a + b,
     0
   );
-  const COMPLETA_CON_INCIDENCIAS = (data?.COMPLETA_CON_INCIDENCIAS ?? []).reduce(
-    (a, b) => a + b,
-    0
-  );
-  const QA_EN_REVISION = (data?.QA_EN_REVISION ?? []).reduce((a, b) => a + b, 0);
   const QA_CON_INCIDENCIAS_A_REVISAR = (
     data?.QA_CON_INCIDENCIAS_A_REVISAR ?? []
   ).reduce((a, b) => a + b, 0);
-  const QA_PENDIENTE_DE_REVISION = (data?.QA_PENDIENTE_DE_REVISION ?? []).reduce(
-    (a, b) => a + b,
-    0
-  );
+  const QA_PENDIENTE_DE_REVISION = (
+    data?.QA_PENDIENTE_DE_REVISION ?? []
+  ).reduce((a, b) => a + b, 0);
   const PRE_QA_CON_INCIDENCIAS_CRITICAS = (
     data?.PRE_QA_CON_INCIDENCIAS_CRITICAS ?? []
   ).reduce((a, b) => a + b, 0);
@@ -231,6 +231,71 @@ export function buildProcesamientoModuleChart(data) {
             drilldown: {
               categories: ["En espera PRE QA"],
               data: [(EN_ESPERA_PREQA / total) * 100],
+            },
+          },
+        ],
+      },
+    ],
+  };
+}
+
+export function buildRecuperacionModuleChart(data) {
+  const gestionados = data.Gestionado ?? 0;
+  const revision = data['Para revisión'] ?? 0;
+  const contactado = data.Contactado ?? 0;
+  const recepcionados = data['Recepcionado - Cerrado'] ?? 0;
+  const transito = data['En tránsito'] ?? 0;
+  const total = recepcionados + gestionados + transito + revision + contactado;
+
+  return {
+    ...MODULE_CHART_SETUP,
+    series: [
+      {
+        ...MODULE_CHART_SETUP.series[0],
+        data: [
+          {
+            name: "Recepcionado - Cerrado",
+            y: recepcionados,
+            color: "#65D9AB",
+            drilldown: {
+              categories: ["Recepcionado - Cerrado"],
+              data: [(recepcionados / total) * 100],
+            },
+          },
+          {
+            name: "Gestionado",
+            color: "#C1D9CA",
+            y: gestionados,
+            drilldown: {
+              categories: ["Gestionado"],
+              data: [(gestionados / total) * 100],
+            },
+          },
+          {
+            name: "En tránsito",
+            y: transito,
+            color: "#FF5880",
+            drilldown: {
+              categories: ["En tránsito"],
+              data: [(transito / total) * 100],
+            },
+          },
+          {
+            name: "Para revisión",
+            y: revision,
+            color: "#FFD153",
+            drilldown: {
+              categories: ["Para revisión"],
+              data: [(revision / total) * 100],
+            },
+          },
+          {
+            name: "Contactado",
+            y: contactado,
+            color: "#f3a239ff",
+            drilldown: {
+              categories: ["Contactado"],
+              data: [(contactado / total) * 100],
             },
           },
         ],
