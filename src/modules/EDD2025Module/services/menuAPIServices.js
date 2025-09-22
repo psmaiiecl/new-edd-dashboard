@@ -80,3 +80,19 @@ export async function getRecuperacionData(token) {
   return data;
 }
 
+export async function getPostulacionData(token) {
+  const URL =
+    import.meta.env.VITE_BASE_URL +
+    BASE_API_URL_2025 +
+    "/2025-postulacion";
+  const response = await fetch(URL, {
+    method: "GET",
+    headers: {
+      t: token,
+    },
+  });
+
+  const data = await response.json();
+  return data;
+}
+

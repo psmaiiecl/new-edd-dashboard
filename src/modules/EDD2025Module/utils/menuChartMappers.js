@@ -303,3 +303,38 @@ export function buildRecuperacionModuleChart(data) {
     ],
   };
 }
+
+export function buildPostulacionModuleChart(data){
+  const postulaciones = data?.postulantes_totales || 0;
+  const requeridosRestantes = (data?.postulantes_requeridos - data?.postulantes_totales) || 0;
+  const total = data?.postulantes_requeridos || 0;
+
+  return {
+    ...MODULE_CHART_SETUP,
+    series: [
+      {
+        ...MODULE_CHART_SETUP.series[0],
+        data: [
+          {
+            name: "Postulaciones",
+            y: postulaciones,
+            color: "#c3ffb0",
+            drilldown: {
+              categories: ["Postulaciones"],
+              data: [(postulaciones / total) * 100],
+            },
+          },
+          {
+            name: "Restantes",
+            y: requeridosRestantes,
+            color: "#76767b",
+            drilldown: {
+              categories: ["Restantes"],
+              data: [(requeridosRestantes / total) * 100],
+            },
+          },
+        ],
+      },
+    ],
+  };
+}

@@ -106,8 +106,12 @@ export function Menu() {
           title={"Corrección Postulaciones"}
           action={() => navigate("correccion-postulaciones")}
           loading={loadingStatus.correccion_postulaciones}
-          locked
-        />
+        >
+          <HighchartsReact
+            options={cardCharts?.correccion_postulaciones}
+            highcharts={Highcharts}
+          />
+        </ModuleCard>
         <ModuleCard
           title={"Corrección Portafolios"}
           action={() => navigate("correccion-portafolios")}

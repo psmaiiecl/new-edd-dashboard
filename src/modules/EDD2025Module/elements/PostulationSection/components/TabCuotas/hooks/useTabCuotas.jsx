@@ -28,7 +28,7 @@ function useTabCuotas() {
       shouldCache: true,
       method: "GET",
     }).then((data) => {
-      const { tableData, centrosFiltros } = buildCdCSummaryData(data);
+      const { tableData, centrosFiltros } = buildCdCSummaryData(data);      
       setTableData((prevData) => ({
         ...prevData,
         resumen: tableData,

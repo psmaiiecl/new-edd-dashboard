@@ -14,12 +14,14 @@ import {
   getAgendamientoData,
   getGrabacionesData,
   getInscriptionData,
+  getPostulacionData,
   getProcesamientoData,
   getRecuperacionData,
 } from "../services/menuAPIServices";
 import {
   buildAgendamientoModuleChart,
   buildGrabacionesModuleChart,
+  buildPostulacionModuleChart,
   buildProcesamientoModuleChart,
   buildRecuperacionModuleChart
 } from "../utils/menuChartMappers";
@@ -35,6 +37,7 @@ export function useModules() {
     grabaciones: { ...MODULE_CHART_SETUP },
     procesamiento: { ...MODULE_CHART_SETUP },
     recuperacion: { ...MODULE_CHART_SETUP },
+    correccion_postulaciones: { ...MODULE_CHART_SETUP },
   });
   const [loadingStatus, setLoadingStatus] = useState({});
   const changeLoadingStatus = (field, state) => {
@@ -112,12 +115,21 @@ export function useModules() {
       }));
       changeLoadingStatus("procesamiento", false);
     });
+    changeLoadingStatus("recuperacion", true);
     getRecuperacionData(getToken()).then((data) => {
       setCardCharts((prev) => ({
         ...prev,
         recuperacion: buildRecuperacionModuleChart(data.recuperacion_menu),
       }));
       changeLoadingStatus("recuperacion", false);
+    });
+    changeLoadingStatus("correccion_postulaciones", true);
+    getPostulacionData(getToken()).then((data) => {
+      setCardCharts((prev) => ({
+        ...prev,
+        correccion_postulaciones: buildPostulacionModuleChart(data),
+      }));
+      changeLoadingStatus("correccion_postulaciones", false);
     });
   }, [getToken]);
   return {

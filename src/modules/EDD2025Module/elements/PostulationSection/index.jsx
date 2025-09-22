@@ -22,9 +22,9 @@ export function PostulationSection2025() {
       <div style={{ display: activeTab === "tab2" ? "block" : "none" }}>
         <TabCuotas />
       </div>
-      <div style={{ display: activeTab === "tab3" ? "block" : "none" }}>
+      {/* <div style={{ display: activeTab === "tab3" ? "block" : "none" }}>
         <TabPrecapacitacion />
-      </div>
+      </div> */}
     </ModulePageLayout>
   );
 }

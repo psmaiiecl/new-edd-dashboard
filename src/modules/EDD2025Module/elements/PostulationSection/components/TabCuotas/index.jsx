@@ -59,21 +59,21 @@ function TabCuotas() {
             <tbody>
               {tableData.resumen.map((item, index) => (
                 <tr key={index}>
-                  <td>{item.centro}</td>
-                  <td>{item.total_postulaciones}</td>
-                  <td>{item.c_30}</td>
-                  <td>{item.c_10}</td>
-                  <td>{item.c_correctores}</td>
-                  <td>{item.c_seleccionados}</td>
-                  <td style={{ backgroundColor: "#88ee84ff" }}>
-                    {item.c_porcentaje_seleccionados}
+                  <td>{item?.centro}</td>
+                  <td>{item?.cantidad_postulaciones_total}</td>
+                  <td>{item?.crr30}</td>
+                  <td>{item?.crr10}</td>
+                  <td>{item?.crr}</td>
+                  <td>{item?.cantidad_correctores_seleccionados}</td>
+                  <td style={{ backgroundColor: getBackgroundColor(item?.porcentaje_correctores) }}>
+                    {item?.porcentaje_correctores}%
                   </td>
-                  <td>{item.s_requeridos}</td>
-                  <td>{item.s_seleccionados}</td>
-                  <td style={{ backgroundColor: "#88ee84ff" }}>
-                    {item.s_porcentaje_seleccionados}
+                  <td>{item?.srr}</td>
+                  <td>{item?.cantidad_supervisores_seleccionados}</td>
+                  <td style={{ backgroundColor: getBackgroundColor(item?.porcentaje_supervisores) }}>
+                    {item?.porcentaje_supervisores}%
                   </td>
-                  <td>{item.lista_espera}</td>
+                  <td>{item?.lista_espera}</td>
                 </tr>
               ))}
             </tbody>
@@ -138,7 +138,7 @@ function TabCuotas() {
             <thead>
               <tr>
                 <th colSpan={3} style={{ backgroundColor: "#5197d1ff" }}>
-                  {tableData.filtrado?.centro || "Centro"}
+                  {"Centro: "+ filters?.centro.label}
                 </th>
                 <th rowSpan={2} style={{ backgroundColor: "#5197d1ff" }}>
                   Postulantes Totales
@@ -185,12 +185,40 @@ function TabCuotas() {
                 </th>
               </tr>
             </thead>
-            <tbody></tbody>
+            <tbody>
+               {tableData.filtrado.map((item, index) => (
+                <tr key={index}>
+                  <td>{item?.modulo}</td>
+                  <td>{item?.especialidad}</td>
+                  <td>{item?.cant_correcciones}</td>
+                  <td>{item?.cantidad_postulaciones_total}</td>
+                  <td>{item?.seleccionables}</td>
+                  <td>{item?.crr30}</td>
+                  <td>{item?.crr10}</td>
+                  <td>{item?.crr}</td>
+                  <td>{item?.cantidad_correctores_seleccionados}</td>
+                  <td>{item?.srr}</td>
+                  <td>{item?.cantidad_supervisores_seleccionados}</td>
+                  <td>{item?.lista_espera}</td>
+                  <td>{item?.eds}</td>
+                </tr>
+              ))}
+            </tbody>
           </table>
         </div>
       )}
     </TabContent>
   );
 }
+
+const getBackgroundColor = (percent) => {
+  const value = parseFloat(percent); 
+  if (isNaN(value)) return "#ffffff";
+
+  if (value < 25.0) return "#ff4d4d";   
+  if (value < 50.0)  return "#ffa64d";   
+  if (value < 75.0) return "#ffff66";   
+  return "#66cc66";                   
+};
 
 export default TabCuotas;

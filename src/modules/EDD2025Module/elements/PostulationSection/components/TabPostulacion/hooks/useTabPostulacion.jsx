@@ -13,7 +13,7 @@ function useTabPostulacion() {
       shouldCache: true,
     }).then((res) => {
       const mapped = buildPostulacionChart(
-        res?.postulacion.avance_diario_postulaciones
+        res
       );
 
       setData(mapped);

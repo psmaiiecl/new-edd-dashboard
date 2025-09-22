@@ -59,25 +59,29 @@ export function buildPostulacionChart(data) {
 }
 
 export function buildCdCSummaryData(data){
-  const tableData = [];
+  const tableData = data;
   const centrosFiltros = [];
   
-  Object.keys(data).forEach((key) => {
-    const item = {};
-    item.centro = key;
-    item.total_postulaciones = data[key]?.total_postulaciones || 0;
-    item.c_30 = data[key]?.correctores.treinta || 0;
-    item.c_10 = data[key]?.correctores.diez || 0;
-    item.c_correctores = data[key]?.correctores.correctores || 0;
-    item.c_seleccionados = data[key]?.correctores.seleccionados || 0;
-    item.c_porcentaje_seleccionados = (item.c_seleccionados / item.c_correctores * 100).toFixed(2) || 0;
-    item.s_requeridos = data[key]?.supervisores.requeridos || 0;
-    item.s_seleccionados = data[key]?.supervisores.seleccionados || 0;
-    item.s_porcentaje_seleccionados = (item.s_seleccionados / item.s_requeridos * 100).toFixed(2) || 0;
-    item.lista_espera = data[key]?.lista_espera || 0;
-    tableData.push(item);
-    centrosFiltros.push({id: key, label: key, value: key})
-  })
+  // Object.keys(data).forEach((key) => {
+  //   const item = {};
+  //   item.centro = key;
+  //   item.total_postulaciones = data[key]?.total_postulaciones || 0;
+  //   item.c_30 = data[key]?.correctores.treinta || 0;
+  //   item.c_10 = data[key]?.correctores.diez || 0;
+  //   item.c_correctores = data[key]?.correctores.correctores || 0;
+  //   item.c_seleccionados = data[key]?.correctores.seleccionados || 0;
+  //   item.c_porcentaje_seleccionados = (item.c_seleccionados / item.c_correctores * 100).toFixed(2) || 0;
+  //   item.s_requeridos = data[key]?.supervisores.requeridos || 0;
+  //   item.s_seleccionados = data[key]?.supervisores.seleccionados || 0;
+  //   item.s_porcentaje_seleccionados = (item.s_seleccionados / item.s_requeridos * 100).toFixed(2) || 0;
+  //   item.lista_espera = data[key]?.lista_espera || 0;
+  //   tableData.push(item);
+  //   centrosFiltros.push({id: key, label: key, value: key})
+  // })
+
+  data.forEach(element => {
+    centrosFiltros.push({id: element.centro, label: element.centro, value: element.centro})
+  });
 
   return {tableData, centrosFiltros};
 }
