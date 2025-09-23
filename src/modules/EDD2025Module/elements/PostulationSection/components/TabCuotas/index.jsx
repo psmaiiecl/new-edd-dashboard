@@ -134,6 +134,7 @@ function TabCuotas() {
       </div>
       {tableData.filtrado && (
         <div style={{ maxWidth: "100%", overflowX: "scroll" }}>
+          <span className="roboto-light"> *Seleccionable: postulante que aún no ha sido revisado/a, se mantiene en estado reclutado.</span>
           <table className="roboto-regular">
             <thead>
               <tr>

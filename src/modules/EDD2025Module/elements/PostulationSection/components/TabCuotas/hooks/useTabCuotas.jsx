@@ -48,8 +48,6 @@ function useTabCuotas() {
       shouldCache: true,
       method: "GET",
     }).then((data) => {
-      console.log("data", data);
-      
       setTableData((prevData) => ({
         ...prevData,
         filtrado: data,
