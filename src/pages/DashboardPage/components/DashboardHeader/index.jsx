@@ -3,6 +3,8 @@ import { useNavigate } from "react-router";
 import Select from "react-select";
 import { Button } from "../../../../components/Button";
 import { BackButton } from "../../../../components/BackButton";
+import { AuthContext } from "../../../../context/AuthContext";
+import { useContext } from "react";
 
 export function DashboardHeader({
   selectedModule,
@@ -10,7 +12,7 @@ export function DashboardHeader({
   moduleOptions,
 }) {
   const navigate = useNavigate();
-
+  const { getTipoUsuario } = useContext(AuthContext);
   return (
     <nav className="dashboard-header">
       <BackButton />
@@ -18,6 +20,7 @@ export function DashboardHeader({
         Evaluación del Desempeño Docente
       </span>
       <Select
+        isDisabled={getTipoUsuario()===5}
         className="roboto-regular"
         value={selectedModule}
         onChange={(option) => {

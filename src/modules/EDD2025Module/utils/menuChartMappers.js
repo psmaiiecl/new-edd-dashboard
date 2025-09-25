@@ -245,7 +245,8 @@ export function buildRecuperacionModuleChart(data) {
   const contactado = data.Contactado ?? 0;
   const recepcionados = data['Recepcionado - Cerrado'] ?? 0;
   const transito = data['En tránsito'] ?? 0;
-  const total = recepcionados + gestionados + transito + revision + contactado;
+  const porGestionar = data['Por gestionar'] ?? 0;
+  const total = recepcionados + porGestionar + gestionados + transito + revision + contactado;
 
   return {
     ...MODULE_CHART_SETUP,
@@ -260,6 +261,15 @@ export function buildRecuperacionModuleChart(data) {
             drilldown: {
               categories: ["Recepcionado - Cerrado"],
               data: [(recepcionados / total) * 100],
+            },
+          },
+          {
+            name: "Por Gestionar",
+            y: porGestionar,
+            color: "#64a5faff",
+            drilldown: {
+              categories: ["Por gestionar"],
+              data: [(porGestionar / total) * 100],
             },
           },
           {

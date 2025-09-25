@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useCustomFetch } from "../../../../../../../hooks/useCustomFetch";
 import { BASE_API_URL_2025 } from "../../../../../data/BASE_API_URL";
 import { buildCdCSummaryData } from "../../../utils/utils";
+import { AuthContext } from "../../../../../../../context/AuthContext";
 
 function useTabCuotas() {
   const customFetch = useCustomFetch();
+  const { getPayload } = useContext(AuthContext);  
   const [tableData, setTableData] = useState({
     resumen: null,
     filtrado: null,
@@ -23,8 +25,10 @@ function useTabCuotas() {
   };
 
   useEffect(() => {
+    const centro = getPayload()?.centro ?? null;
+    const cond = centro ? `?centro=${centro}` : "";
     customFetch({
-      route: BASE_API_URL_2025 + "/2025-cuotasCdcResumen",
+      route: BASE_API_URL_2025 + "/2025-cuotasCdcResumen" + cond,
       shouldCache: true,
       method: "GET",
     }).then((data) => {
@@ -35,7 +39,7 @@ function useTabCuotas() {
       }));
       setSelectorCentros(centrosFiltros);
     });
-  }, [customFetch]);
+  }, [customFetch, getPayload]);
 
   useEffect(() => {
     if (!filters.centro) return;
@@ -48,8 +52,6 @@ function useTabCuotas() {
       shouldCache: true,
       method: "GET",
     }).then((data) => {
-      console.log("data", data);
-      
       setTableData((prevData) => ({
         ...prevData,
         filtrado: data,

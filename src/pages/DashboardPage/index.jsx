@@ -16,6 +16,7 @@ import { PostulationCorrectionSection2025 } from "../../modules/EDD2025Module/el
 import { PortfolioCorrectionSection2025 } from "../../modules/EDD2025Module/elements/PortfolioCorrectionSection/Index";
 import { ProcessingSection2025 } from "../../modules/EDD2025Module/elements/ProcessingSection";
 import { PostulationSection2025 } from "../../modules/EDD2025Module/elements/PostulationSection";
+import { RouteProtector } from "../../components/RouteProtector";
 
 export function DashboardPage() {
   const { year } = useParams();
@@ -38,36 +39,97 @@ export function DashboardPage() {
       <article className="dashboard-module">
         <Routes>
           {selectedModule.value === "2024" && (
-            <Route path="/" element={<EDD2024Module />}></Route>
+            <Route
+              path="/"
+              element={
+                <RouteProtector excludedRoles={[5]}>
+                  <EDD2024Module />
+                </RouteProtector>
+              }
+            ></Route>
           )}
           {selectedModule.value === "2025" && (
             <Route path="/" element={<EDD2025Module />}>
-              <Route path="inscripcion" element={<InscriptionSection2025 />} />
-              <Route path="validacion" element={<ValidationSection2025 />} />
-              <Route path="portafolio" element={<PortfolioSection2025 />} />
-              <Route path="resultados" element={<ResultSection2025 />} />
+              <Route
+                path="inscripcion"
+                element={
+                  <RouteProtector excludedRoles={[5]}>
+                    <InscriptionSection2025 />
+                  </RouteProtector>
+                }
+              />
+              <Route
+                path="validacion"
+                element={
+                  <RouteProtector excludedRoles={[5]}>
+                    <ValidationSection2025 />
+                  </RouteProtector>
+                }
+              />
+              <Route
+                path="portafolio"
+                element={
+                  <RouteProtector excludedRoles={[5]}>
+                    <PortfolioSection2025 />
+                  </RouteProtector>
+                }
+              />
+              <Route
+                path="resultados"
+                element={
+                  <RouteProtector excludedRoles={[5]}>
+                    <ResultSection2025 />
+                  </RouteProtector>
+                }
+              />
               <Route
                 path="agendamiento-grabaciones"
-                element={<RecordSchedulingSection2025 />}
+                element={
+                  <RouteProtector excludedRoles={[5]}>
+                    <RecordSchedulingSection2025 />
+                  </RouteProtector>
+                }
               />
-              <Route path="grabaciones" element={<RecordSection2025 />} />
+              <Route
+                path="grabaciones"
+                element={
+                  <RouteProtector excludedRoles={[5]}>
+                    <RecordSection2025 />
+                  </RouteProtector>
+                }
+              />
               <Route
                 path="recuperacion-sd"
-                element={<SDRecoverySection2025 />}
+                element={
+                  <RouteProtector excludedRoles={[5]}>
+                    <SDRecoverySection2025 />
+                  </RouteProtector>
+                }
               />
               <Route
                 path="procesamiento-sd"
-                element={<ProcessingSection2025 />}
+                element={
+                  <RouteProtector excludedRoles={[5]}>
+                    <ProcessingSection2025 />
+                  </RouteProtector>
+                }
               />
               <Route
                 path="correccion-postulaciones"
-                element={<PostulationSection2025 />}
+                element={
+                  <RouteProtector>
+                    <PostulationSection2025 />
+                  </RouteProtector>
+                }
               />
               <Route
                 path="correccion-portafolios"
-                element={<PortfolioCorrectionSection2025 />}
+                element={
+                  <RouteProtector excludedRoles={[5]}>
+                    <PortfolioCorrectionSection2025 />
+                  </RouteProtector>
+                }
               />
-           
             </Route>
           )}
         </Routes>
