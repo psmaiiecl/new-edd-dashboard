@@ -26,13 +26,12 @@ function useTabCuotas() {
 
   useEffect(() => {
     const centro = getPayload()?.centro ?? null;
-    const cond = centro ? `?centro=${centro}` : "";
     customFetch({
-      route: BASE_API_URL_2025 + "/2025-cuotasCdcResumen" + cond,
+      route: BASE_API_URL_2025 + "/2025-cuotasCdcResumen",
       shouldCache: true,
       method: "GET",
     }).then((data) => {
-      const { tableData, centrosFiltros } = buildCdCSummaryData(data);      
+      const { tableData, centrosFiltros } = buildCdCSummaryData(data, centro);      
       setTableData((prevData) => ({
         ...prevData,
         resumen: tableData,
