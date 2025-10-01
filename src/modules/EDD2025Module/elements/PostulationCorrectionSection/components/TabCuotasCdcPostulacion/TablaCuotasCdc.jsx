@@ -97,9 +97,7 @@ export default function TablaCuotasCdc({ resumen, centro }) {
                 <td>{fila.corr10}</td>
                 <td>{fila.correctores}</td>
                 <td>{fila.sel_corr}</td>
-                <td
-                  style={{ backgroundColor: getColorByPercentage(perc_corr) }}
-                >
+                <td style={{ backgroundColor: getColorByPercentage(perc_corr) }}>
                   {perc_corr.toFixed(1)}%
                 </td>
                 <td>{fila.req_sup}</td>
