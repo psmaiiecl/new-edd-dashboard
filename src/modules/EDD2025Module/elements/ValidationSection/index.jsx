@@ -24,21 +24,23 @@ export function ValidationSection2025() {
         <Button
           text={"Excel Docente"}
           action={() => {
-            customDownload(
-              BASE_API_URL_2025 + "/2025-validacion-descarga-excel",
-              { method: "POST" },
-              "validacion-docentes.csv"
-            );
+            customDownload({
+              route: BASE_API_URL_2025 + "/2025-validacion-descarga-excel",
+              options: { method: "POST" },
+              filename: "validacion-docentes.csv",
+            });
           }}
         />
         <Button
           text={"Excel Sostenedor"}
           action={() => {
-            customDownload(
-              BASE_API_URL_2025 + "/2025-validacion-descarga-excel-sostenedor",
-              { method: "POST" },
-              "validacion-sostenedores.csv"
-            );
+            customDownload({
+              route:
+                BASE_API_URL_2025 +
+                "/2025-validacion-descarga-excel-sostenedor",
+              options: { method: "POST" },
+              filename: "validacion-sostenedores.csv",
+            });
           }}
         />
       </CustomTabs>

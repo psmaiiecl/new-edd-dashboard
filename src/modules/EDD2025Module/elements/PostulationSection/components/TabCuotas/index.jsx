@@ -64,13 +64,55 @@ function TabCuotas() {
                   <td>{item?.crr30}</td>
                   <td>{item?.crr10}</td>
                   <td>{item?.crr}</td>
-                  <td>{item?.cantidad_correctores_seleccionados}</td>
-                  <td style={{ backgroundColor: getBackgroundColor(item?.porcentaje_correctores) }}>
+                  <td>
+                    {item?.cantidad_correctores_seleccionados}{" "}
+                    <span
+                      style={{
+                        display: "inline-block",
+                        width: "10px",
+                        height: "10px",
+                        borderRadius: "50%",
+                        backgroundColor:
+                          item?.cantidad_correctores_seleccionados >= item?.crr
+                            ? "green"
+                            : "red",
+                        marginLeft: "6px",
+                      }}
+                    />
+                  </td>
+                  <td
+                    style={{
+                      backgroundColor: getBackgroundColor(
+                        item?.porcentaje_correctores
+                      ),
+                    }}
+                  >
                     {item?.porcentaje_correctores}%
                   </td>
                   <td>{item?.srr}</td>
-                  <td>{item?.cantidad_supervisores_seleccionados}</td>
-                  <td style={{ backgroundColor: getBackgroundColor(item?.porcentaje_supervisores) }}>
+                  <td>
+                    {item?.cantidad_supervisores_seleccionados}{" "}
+                    <span
+                      style={{
+                        display: "inline-block",
+                        width: "10px",
+                        height: "10px",
+                        borderRadius: "50%",
+                        backgroundColor:
+                          item?.cantidad_supervisores_seleccionados >= item?.srr
+                            ? "green"
+                            : "red",
+                        marginLeft: "6px",
+                      }}
+                    />
+                  </td>
+                  <td
+                    style={{
+                      backgroundColor: getBackgroundColor(
+                        item?.porcentaje_supervisores
+                      ),
+                    }}
+                  >
                     {item?.porcentaje_supervisores}%
                   </td>
                   <td>{item?.lista_espera}</td>
@@ -134,12 +176,16 @@ function TabCuotas() {
       </div>
       {tableData.filtrado && (
         <div style={{ maxWidth: "100%", overflowX: "scroll" }}>
-          <span className="roboto-light"> *Seleccionable: postulante que aún no ha sido revisado/a, se mantiene en estado reclutado.</span>
+          <span className="roboto-light">
+            {" "}
+            *Seleccionable: postulante que aún no ha sido revisado/a, se
+            mantiene en estado reclutado.
+          </span>
           <table className="roboto-regular">
             <thead>
               <tr>
                 <th colSpan={3} style={{ backgroundColor: "#5197d1ff" }}>
-                  {"Centro: "+ filters?.centro.label}
+                  {"Centro: " + filters?.centro.label}
                 </th>
                 <th rowSpan={2} style={{ backgroundColor: "#5197d1ff" }}>
                   Postulantes Totales
@@ -187,7 +233,7 @@ function TabCuotas() {
               </tr>
             </thead>
             <tbody>
-               {tableData.filtrado.map((item, index) => (
+              {tableData.filtrado.map((item, index) => (
                 <tr key={index}>
                   <td>{item?.modulo}</td>
                   <td>{item?.especialidad}</td>
@@ -213,13 +259,13 @@ function TabCuotas() {
 }
 
 const getBackgroundColor = (percent) => {
-  const value = parseFloat(percent); 
+  const value = parseFloat(percent);
   if (isNaN(value)) return "#ffffff";
 
-  if (value < 25.0) return "#ff4d4d";   
-  if (value < 50.0)  return "#ffa64d";   
-  if (value < 75.0) return "#ffff66";   
-  return "#66cc66";                   
+  if (value < 25.0) return "#ff4d4d";
+  if (value < 50.0) return "#ffa64d";
+  if (value < 75.0) return "#ffff66";
+  return "#66cc66";
 };
 
 export default TabCuotas;

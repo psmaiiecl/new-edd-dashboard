@@ -21,11 +21,11 @@ export function TabsPostulacion({ setActive, active }) {
         <Button
           text={"Descargar Excel"}
           action={() => {
-            customDownload(
-              BASE_API_URL_2025 + "/2025-postulacion-excel-docente",
-              { method: "POST" },
-              "Postulacion.csv"
-            );
+            customDownload({
+              route: BASE_API_URL_2025 + "/2025-postulacion-excel-docente",
+              options: { method: "POST" },
+              filename: "Postulacion.csv",
+            });
           }}
         />
       </div>

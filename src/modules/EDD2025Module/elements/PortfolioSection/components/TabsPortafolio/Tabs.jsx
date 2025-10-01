@@ -21,21 +21,21 @@ export function TabsPortafolio({ setActive, active }) {
         <Button
           text={"Excel Docente"}
           action={() => {
-            customDownload(
-              BASE_API_URL_2025 + "/2025-portafolio-excel-docente",
-              { method: "POST" },
-              "portafolio-docente.csv"
-            );
+            customDownload({
+              route: BASE_API_URL_2025 + "/2025-portafolio-excel-docente",
+              options: { method: "POST" },
+              filename: "portafolio-docente.csv",
+            });
           }}
         />
         <Button
           text={"Excel Sostenedor"}
           action={() => {
-            customDownload(
-              BASE_API_URL_2025 + "/2025-portafolio-excel-sostenedor",
-              { method: "POST" },
-              "portafolio-sostenedores.csv"
-            );
+            customDownload({
+              route: BASE_API_URL_2025 + "/2025-portafolio-excel-sostenedor",
+              options: { method: "POST" },
+              filename: "portafolio-sostenedores.csv",
+            });
           }}
         />
       </div>

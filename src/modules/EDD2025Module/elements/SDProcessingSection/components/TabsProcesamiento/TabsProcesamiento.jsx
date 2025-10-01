@@ -22,11 +22,11 @@ export function TabsProcesamiento({ setActive, active }) {
         <Button
           text={"Excel Docente"}
           action={() => {
-            customDownload(
-              BASE_API_URL_2025 + "/2025-procesamiento-excel",
-              { method: "POST" },
-              "procesamiento_sd.csv"
-            );
+            customDownload({
+              route: BASE_API_URL_2025 + "/2025-procesamiento-excel",
+              options: { method: "POST" },
+              filename: "procesamiento_sd.csv",
+            });
           }}
         />
       </div>

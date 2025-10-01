@@ -21,34 +21,37 @@ export function ResultSection2025() {
           text={"Excel Docente"}
           style={{ width: "500px", textAlign: "center" }}
           action={() => {
-            customDownload(
-              BASE_API_URL_2025 + "/2025-informes-resultados-excel-docente",
-              { method: "POST" },
-              "Entrega-resultados-docentes.csv"
-            );
+            customDownload({
+              route:
+                BASE_API_URL_2025 + "/2025-informes-resultados-excel-docente",
+              options: { method: "POST" },
+              filename: "Entrega-resultados-docentes.csv",
+            });
           }}
         />
         <Button
           text={"Excel Director EE"}
           style={{ width: "500px", textAlign: "center" }}
           action={() => {
-            customDownload(
-              BASE_API_URL_2025 + "/2025-informes-resultados-excel-director",
-              { method: "POST" },
-              "Entrega-resultados-director.csv"
-            );
+            customDownload({
+              route:
+                BASE_API_URL_2025 + "/2025-informes-resultados-excel-director",
+              options: { method: "POST" },
+              filename: "Entrega-resultados-director.csv",
+            });
           }}
         />
         <Button
           text={"Excel Sostenedor"}
           style={{ width: "500px", textAlign: "center" }}
           action={() => {
-            customDownload(
-              BASE_API_URL_2025 +
+            customDownload({
+              route:
+                BASE_API_URL_2025 +
                 "/2025-informes-resultados-excel-sostenedores",
-              { method: "POST" },
-              "Entrega-resultados-sostenedores.csv"
-            );
+              options: { method: "POST" },
+              filename: "Entrega-resultados-sostenedores.csv",
+            });
           }}
         />
       </CustomTabs>

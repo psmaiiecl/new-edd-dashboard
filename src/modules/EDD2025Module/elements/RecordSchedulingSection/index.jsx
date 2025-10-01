@@ -26,11 +26,11 @@ export function RecordSchedulingSection2025() {
         <Button
           text={"Excel Docente"}
           action={() => {
-            customDownload(
-              BASE_API_URL_2025 + "/2025-grabaciones-excel",
-              { method: "POST" },
-              "grabacion-docentes.csv"
-            );
+            customDownload({
+              route: BASE_API_URL_2025 + "/2025-grabaciones-excel",
+              options: { method: "POST" },
+              filename: "grabacion-docentes.csv"
+          });
           }}
         />
       </CustomTabs>

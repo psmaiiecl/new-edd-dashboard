@@ -25,20 +25,17 @@ export function PostulationCorrectionSection2025() {
         <Button
           text={"Excel Docente"}
           action={() => {
-            customDownload(
-              BASE_API_URL_2025 + "/2025-inscripcion-descarga-excel",
-              { method: "POST" },
-              "inscripcion-docentes.csv"
-            );
+            customDownload({
+              route: BASE_API_URL_2025 + "/2025-inscripcion-descarga-excel",
+              options: { method: "POST" },
+              filename: "inscripcion-docentes.csv",
+            });
           }}
         />
       </CustomTabs>
       {/* TAB 1 - General */}
       <div style={{ display: activeTab === "tab1" ? "block" : "none" }}>
-      
-          <TabGeneralPostulacion
-          />
-   
+        <TabGeneralPostulacion />
       </div>
       {/* TAB 2 - CuotasCdc */}
       <div style={{ display: activeTab === "tab2" ? "block" : "none" }}>
@@ -49,7 +46,7 @@ export function PostulationCorrectionSection2025() {
 
       <div style={{ display: activeTab === "tab3" ? "block" : "none" }}>
         <TabPrecapacitacionPostulacion isActive={activeTab === "tab3"} />
-      </div> 
+      </div>
     </ModulePageLayout>
   );
 }

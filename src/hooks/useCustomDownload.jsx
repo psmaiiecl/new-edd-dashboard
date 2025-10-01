@@ -9,9 +9,10 @@ export function useCustomDownload() {
   const { queueLoading, dequeueLoading } = useContext(LoadingContext);
 
   const customDownload = useCallback(
-    async (route, options, filename = "file.xlsx", hasLoadPanel = true) => {
+    async ({route, options, filename = "file.xlsx", hasLoadPanel = true, rawURL}) => {
       if (hasLoadPanel) queueLoading();
-      const URL = import.meta.env.VITE_BASE_URL + route;
+      let URL = import.meta.env.VITE_BASE_URL + route;
+      if(rawURL) URL = rawURL;
       try {
         const response = await fetch(URL, {
           ...options,
@@ -35,9 +36,10 @@ export function useCustomDownload() {
         a.click();
         a.remove();
         window.URL.revokeObjectURL(urlBlob);
-        if (hasLoadPanel) dequeueLoading();
       } catch (error) {
         notificate({ type: "error", message: error.message });
+      } finally {
+        if (hasLoadPanel) dequeueLoading();
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps

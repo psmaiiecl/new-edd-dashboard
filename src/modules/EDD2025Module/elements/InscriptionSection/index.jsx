@@ -24,21 +24,23 @@ export function InscriptionSection2025() {
         <Button
           text={"Excel Docente"}
           action={() => {
-            customDownload(
-              BASE_API_URL_2025 + "/2025-inscripcion-descarga-excel",
-              { method: "POST" },
-              "inscripcion-docentes.csv"
-            );
+            customDownload({
+              route: BASE_API_URL_2025 + "/2025-inscripcion-descarga-excel",
+              options: { method: "POST" },
+              filename: "inscripcion-docentes.csv",
+            });
           }}
         />
         <Button
           text={"Excel Sostenedor"}
           action={() => {
-            customDownload(
-              BASE_API_URL_2025 + "/2025-inscripcion-sostenedor-descarga-excel",
-              { method: "POST" },
-              "inscripcion-sostenedores.csv"
-            );
+            customDownload({
+              route:
+                BASE_API_URL_2025 +
+                "/2025-inscripcion-sostenedor-descarga-excel",
+              options: { method: "POST" },
+              filename: "inscripcion-sostenedores.csv",
+            });
           }}
         />
       </CustomTabs>
