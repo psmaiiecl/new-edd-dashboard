@@ -13,14 +13,19 @@ export default function TablaEstadoPrecapacitacion({ data }) {
   ];
 
   // Crea objetos vacíos por defecto
-  const defaultData = campos.reduce((acc, campo) => {
-    acc[campo.key] = 0;
-    return acc;
-  }, { total: 0 });
+  const defaultData = campos.reduce(
+    (acc, campo) => {
+      acc[campo.key] = 0;
+      return acc;
+    },
+    { total: 0 }
+  );
 
   // Busca datos y rellena con valores por defecto si no existen
-  const supervisor = data?.find((item) => item.tipo === "SUPERVISOR") ?? defaultData;
-  const corrector = data?.find((item) => item.tipo === "CORRECTOR") ?? defaultData;
+  const supervisor =
+    data?.find((item) => item.tipo === "SUPERVISOR") ?? defaultData;
+  const corrector =
+    data?.find((item) => item.tipo === "CORRECTOR") ?? defaultData;
 
   const renderRow = (titulo, item) => (
     <tr>
@@ -28,7 +33,9 @@ export default function TablaEstadoPrecapacitacion({ data }) {
       {campos.map((campo) => (
         <td key={campo.key}>{item[campo.key] ?? 0}</td>
       ))}
-      <td><strong>{item.total ?? 0}</strong></td>
+      <td>
+        <strong>{item.total ?? 0}</strong>
+      </td>
     </tr>
   );
 

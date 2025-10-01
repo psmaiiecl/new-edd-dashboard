@@ -78,14 +78,14 @@ export function AuthProvider({ children }) {
     const { nombre } = jwtDecode(token);
     return nombre;
   };
-  
+
   const getPayload = () => {
     const data = localStorage.getItem("user");
     if (!data) return null;
     const { payload } = JSON.parse(data);
     return payload;
   };
-  
+
   const getTipoUsuario = () => {
     const data = localStorage.getItem("user");
     if (!data) return null;
@@ -104,7 +104,7 @@ export function AuthProvider({ children }) {
         getRol,
         getNombre,
         getPayload,
-        getTipoUsuario
+        getTipoUsuario,
       }}
     >
       {children}

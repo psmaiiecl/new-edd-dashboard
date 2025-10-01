@@ -30,7 +30,7 @@ export function buildGrabacionesRecibidasDiarias(data) {
         name: "Grabaciones de Docentes que no Rinden Portafolio",
         data: avanceNoRinden,
         color: "#5b9bd5",
-      }
+      },
     ],
   };
   return res;

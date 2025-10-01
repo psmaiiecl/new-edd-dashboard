@@ -12,9 +12,7 @@ function useTabPostulacion() {
       method: "GET",
       shouldCache: true,
     }).then((res) => {
-      const mapped = buildPostulacionChart(
-        res
-      );
+      const mapped = buildPostulacionChart(res);
 
       setData(mapped);
     });

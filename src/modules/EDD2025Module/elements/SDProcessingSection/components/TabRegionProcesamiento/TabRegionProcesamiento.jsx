@@ -1,7 +1,7 @@
 import React from "react";
 import GraficoNormal from "../utils/GraficoNormal";
 import GraficoPorcentaje from "../utils/GraficoPorcentaje";
-import TablaTerciles from "../utils/TablaTerciles"
+import TablaTerciles from "../utils/TablaTerciles";
 import { useProcesamientoRegion } from "./hooks/useProcesamientoRegion";
 import { TabContent } from "../../../../../../components/Layout/TabContent";
 
@@ -14,14 +14,14 @@ export function TabRegionProcesamiento() {
   return (
     <TabContent>
       <div className="graficos-container">
-        <div style={{ display: 'flex' }}>
-        <GraficoPorcentaje data={data} />
-        <div style={{ flex: 1 }}>
-          <GraficoNormal data={data} />
+        <div style={{ display: "flex" }}>
+          <GraficoPorcentaje data={data} />
+          <div style={{ flex: 1 }}>
+            <GraficoNormal data={data} />
+          </div>
         </div>
+        <TablaTerciles data={data} />
       </div>
-      <TablaTerciles data={data} />
-      </div >
-    </TabContent >
+    </TabContent>
   );
 }

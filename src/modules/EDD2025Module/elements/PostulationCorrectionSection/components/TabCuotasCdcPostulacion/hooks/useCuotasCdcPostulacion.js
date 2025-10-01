@@ -10,7 +10,9 @@ export function useCuotasCdcPostulacion(centroCorreccion) {
   const fetchResumen = async () => {
     setLoading(true);
     try {
-      const { data } = await axiosInstance.get("/back/public/api2024/2024-cuotasCdcResumen"); 
+      const { data } = await axiosInstance.get(
+        "/back/public/api2024/2024-cuotasCdcResumen"
+      );
       setResumen(data);
       console.log("Resumen CDC:", data);
     } catch (err) {

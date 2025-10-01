@@ -1,10 +1,9 @@
-
 import React from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
 export default function GraficoNormal({ data }) {
-  if (!data) return null; 
+  if (!data) return null;
   const options = {
     chart: {
       type: "bar",
@@ -30,8 +29,10 @@ export default function GraficoNormal({ data }) {
         '<span style="font-size:12px;"><span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> </span><br/>',
       shared: true,
     },
-    plotOptions: { bar: { stacking: "normal", dataLabels: { enabled: false } } },
-    series: data.series.slice(1)
+    plotOptions: {
+      bar: { stacking: "normal", dataLabels: { enabled: false } },
+    },
+    series: data.series.slice(1),
   };
 
   return (

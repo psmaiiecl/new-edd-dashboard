@@ -13,7 +13,9 @@ export const useProcesamientoDiarioCompleto = () => {
   useEffect(() => {
     const fetchProcesamiento = async () => {
       try {
-        const response = await axios.post("/back/public/api2025/2025-procesamiento-diario");
+        const response = await axios.post(
+          "/back/public/api2025/2025-procesamiento-diario"
+        );
         const rawData = response.data;
 
         const fechasSet = new Set();
@@ -22,7 +24,7 @@ export const useProcesamientoDiarioCompleto = () => {
 
         rawData.forEach((serie) => {
           serie.data.forEach(([timestamp]) => {
-            fechasSet.add(new Date(timestamp).toLocaleDateString('es-CL'));
+            fechasSet.add(new Date(timestamp).toLocaleDateString("es-CL"));
             if (timestamp < min) min = timestamp;
             if (timestamp > max) max = timestamp;
           });

@@ -16,13 +16,12 @@ export const useCentrosCorreccion = () => {
         );
 
         // Si backend devuelve objeto { PUCV:{}, UDP:{} }
-        const lista =
-          Array.isArray(data)
-            ? data
-            : Object.entries(data).map(([key, value]) => ({
-                id: key,
-                nombre: value?.nombre || key,
-              }));
+        const lista = Array.isArray(data)
+          ? data
+          : Object.entries(data).map(([key, value]) => ({
+              id: key,
+              nombre: value?.nombre || key,
+            }));
 
         setCentros(lista);
       } catch (err) {

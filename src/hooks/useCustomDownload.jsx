@@ -9,10 +9,16 @@ export function useCustomDownload() {
   const { queueLoading, dequeueLoading } = useContext(LoadingContext);
 
   const customDownload = useCallback(
-    async ({route, options, filename = "file.xlsx", hasLoadPanel = true, rawURL}) => {
+    async ({
+      route,
+      options,
+      filename = "file.xlsx",
+      hasLoadPanel = true,
+      rawURL,
+    }) => {
       if (hasLoadPanel) queueLoading();
       let URL = import.meta.env.VITE_BASE_URL + route;
-      if(rawURL) URL = rawURL;
+      if (rawURL) URL = rawURL;
       try {
         const response = await fetch(URL, {
           ...options,

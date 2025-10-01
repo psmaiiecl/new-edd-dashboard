@@ -1,5 +1,5 @@
 // hooks/useProcesamientoConvocatoria.js
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import axiosInstance from "../../../../../services/axiosInstance";
 
 export function useProcesamientoConvocatoria() {
@@ -16,7 +16,7 @@ export function useProcesamientoConvocatoria() {
 
       try {
         const response = await axiosInstance.post(
-          '/back/public/api2025/2025-procesamiento-convocatoria'
+          "/back/public/api2025/2025-procesamiento-convocatoria"
         );
 
         if (!cancel) {
@@ -25,7 +25,7 @@ export function useProcesamientoConvocatoria() {
           if (result && result.categories && result.series) {
             setData(result);
           } else {
-            throw new Error('Estructura inesperada en datos de convocatoria');
+            throw new Error("Estructura inesperada en datos de convocatoria");
           }
         }
       } catch (err) {

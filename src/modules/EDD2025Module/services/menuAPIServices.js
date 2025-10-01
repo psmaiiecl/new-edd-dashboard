@@ -82,9 +82,7 @@ export async function getRecuperacionData(token) {
 
 export async function getPostulacionData(token) {
   const URL =
-    import.meta.env.VITE_BASE_URL +
-    BASE_API_URL_2025 +
-    "/2025-postulacion";
+    import.meta.env.VITE_BASE_URL + BASE_API_URL_2025 + "/2025-postulacion";
   const response = await fetch(URL, {
     method: "GET",
     headers: {
@@ -95,4 +93,3 @@ export async function getPostulacionData(token) {
   const data = await response.json();
   return data;
 }
-

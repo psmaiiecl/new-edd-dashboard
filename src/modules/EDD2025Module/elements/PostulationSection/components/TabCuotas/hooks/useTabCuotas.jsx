@@ -6,7 +6,7 @@ import { AuthContext } from "../../../../../../../context/AuthContext";
 
 function useTabCuotas() {
   const customFetch = useCustomFetch();
-  const { getPayload } = useContext(AuthContext);  
+  const { getPayload } = useContext(AuthContext);
   const [tableData, setTableData] = useState({
     resumen: null,
     filtrado: null,
@@ -31,7 +31,7 @@ function useTabCuotas() {
       shouldCache: true,
       method: "GET",
     }).then((data) => {
-      const { tableData, centrosFiltros } = buildCdCSummaryData(data, centro);      
+      const { tableData, centrosFiltros } = buildCdCSummaryData(data, centro);
       setTableData((prevData) => ({
         ...prevData,
         resumen: tableData,

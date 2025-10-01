@@ -3,7 +3,6 @@
   width: 100%;
   font-family: Arial, sans-serif;
   font-size: 10px;
- 
 }
 
 /* Cabecera */
@@ -12,7 +11,6 @@
   font-weight: bold;
   border-bottom: 1px solid #ddd;
   margin-bottom: 20px;
-
 }
 
 /* Fila */
@@ -25,7 +23,6 @@
 
 /* Columna de datos */
 .estado-procesamiento .datos {
- 
   flex: none;
   width: 50%;
 }

@@ -3,7 +3,7 @@ import { useProcesamientoDependencia } from "./hooks/useProcesamientoDependencia
 import { TabContent } from "../../../../../../components/Layout/TabContent";
 import GraficoNormal from "../utils/GraficoNormal";
 import GraficoPorcentaje from "../utils/GraficoPorcentaje";
-import TablaTerciles from "../utils/TablaTerciles"
+import TablaTerciles from "../utils/TablaTerciles";
 
 export function TabDependenciaProcesamiento() {
   const { data, loading, error } = useProcesamientoDependencia();
@@ -12,17 +12,16 @@ export function TabDependenciaProcesamiento() {
   if (error) return <p>Error al cargar los datos.</p>;
 
   return (
-     <TabContent>
+    <TabContent>
       <div className="graficos-container">
-        <div style={{ display: 'flex' }}>
-        <GraficoPorcentaje data={data} />
-        <div style={{ flex: 1 }}>
-          <GraficoNormal data={data} />
+        <div style={{ display: "flex" }}>
+          <GraficoPorcentaje data={data} />
+          <div style={{ flex: 1 }}>
+            <GraficoNormal data={data} />
+          </div>
         </div>
       </div>
-       </div >
       <TablaTerciles data={data} />
-       
-    </TabContent >
+    </TabContent>
   );
 }

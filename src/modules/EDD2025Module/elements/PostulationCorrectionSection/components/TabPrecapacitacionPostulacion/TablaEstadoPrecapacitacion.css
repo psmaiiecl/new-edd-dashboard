@@ -16,9 +16,21 @@
   font-weight: bold;
 }
 
-.tabla-estado-precapacitacion td:nth-child(2) { background-color: #ff4d6d33; }
-.tabla-estado-precapacitacion td:nth-child(3) { background-color: #ffd60a33; }
-.tabla-estado-precapacitacion td:nth-child(4) { background-color: #ffea0033; }
-.tabla-estado-precapacitacion td:nth-child(5) { background-color: #90e0ef33; }
-.tabla-estado-precapacitacion td:nth-child(6) { background-color: #00b4d833; }
-.tabla-estado-precapacitacion td:nth-child(7) { background-color: #80ed9933; }
+.tabla-estado-precapacitacion td:nth-child(2) {
+  background-color: #ff4d6d33;
+}
+.tabla-estado-precapacitacion td:nth-child(3) {
+  background-color: #ffd60a33;
+}
+.tabla-estado-precapacitacion td:nth-child(4) {
+  background-color: #ffea0033;
+}
+.tabla-estado-precapacitacion td:nth-child(5) {
+  background-color: #90e0ef33;
+}
+.tabla-estado-precapacitacion td:nth-child(6) {
+  background-color: #00b4d833;
+}
+.tabla-estado-precapacitacion td:nth-child(7) {
+  background-color: #80ed9933;
+}

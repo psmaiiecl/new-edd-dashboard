@@ -15,7 +15,7 @@ const mappers = {
     ],
   },
   recuperacion_sd: {
-    total_key: 'total',
+    total_key: "total",
     series: [
       {
         name: "En DOCENTEMÁS",

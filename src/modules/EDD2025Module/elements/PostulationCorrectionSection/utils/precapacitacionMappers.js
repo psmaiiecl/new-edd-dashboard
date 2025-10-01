@@ -10,7 +10,9 @@ const ESTADOS = [
 
 export function mapSupervisorData(data) {
   return ESTADOS.map((estado) => {
-    const found = data.find((item) => item.tipo === "Supervisor" && item.estado === estado);
+    const found = data.find(
+      (item) => item.tipo === "Supervisor" && item.estado === estado
+    );
     return {
       name: estado,
       y: found ? found.cantidad : 0,
@@ -20,7 +22,9 @@ export function mapSupervisorData(data) {
 
 export function mapCorrectorData(data) {
   return ESTADOS.map((estado) => {
-    const found = data.find((item) => item.tipo === "Corrector" && item.estado === estado);
+    const found = data.find(
+      (item) => item.tipo === "Corrector" && item.estado === estado
+    );
     return {
       name: estado,
       y: found ? found.cantidad : 0,

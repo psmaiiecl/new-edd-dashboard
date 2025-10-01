@@ -27,10 +27,18 @@ export default function TablaResumenCdc({ data }) {
           <tr>
             <th rowSpan="2">CdC</th>
             <th rowSpan="2">Total de Postulaciones</th>
-            <th colSpan="1" className="postulados">Postulados</th>
-            <th colSpan="4" className="correctores">Correctores</th>
-            <th colSpan="4" className="supervisores">Supervisores</th>
-            <th rowSpan="2" className="espera">Lista de Espera</th>
+            <th colSpan="1" className="postulados">
+              Postulados
+            </th>
+            <th colSpan="4" className="correctores">
+              Correctores
+            </th>
+            <th colSpan="4" className="supervisores">
+              Supervisores
+            </th>
+            <th rowSpan="2" className="espera">
+              Lista de Espera
+            </th>
           </tr>
           <tr>
             <th>Postulados</th>

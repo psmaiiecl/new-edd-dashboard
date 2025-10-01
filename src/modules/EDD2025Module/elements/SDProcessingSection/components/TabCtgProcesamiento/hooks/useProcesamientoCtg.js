@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import axiosInstance from "../../../../../services/axiosInstance";
 
 export function useProcesamientoCtg() {
@@ -14,7 +14,9 @@ export function useProcesamientoCtg() {
       setError(null);
 
       try {
-        const response = await axiosInstance.post('/back/public/api2025/2025-procesamiento-ctg');
+        const response = await axiosInstance.post(
+          "/back/public/api2025/2025-procesamiento-ctg"
+        );
 
         if (!cancel) {
           const data = response.data;
@@ -49,4 +51,3 @@ export function useProcesamientoCtg() {
 
   return { data, loading, error };
 }
-

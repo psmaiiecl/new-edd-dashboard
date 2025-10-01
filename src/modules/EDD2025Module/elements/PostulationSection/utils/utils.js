@@ -58,7 +58,7 @@ export function buildPostulacionChart(data) {
   return res;
 }
 
-export function buildCdCSummaryData(data, centro){
+export function buildCdCSummaryData(data, centro) {
   const tableData = data;
   const centrosFiltros = [];
 
@@ -77,7 +77,6 @@ export function buildCdCSummaryData(data, centro){
   return { tableData, centrosFiltros };
 }
 
-export function buildCdCFilteredData(data){
+export function buildCdCFilteredData(data) {
   console.log(data);
-  
 }

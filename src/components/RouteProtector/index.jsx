@@ -11,12 +11,12 @@ export function RouteProtector({ children, permittedRoles, excludedRoles }) {
 
   const tipoUsuario = getTipoUsuario();
 
-  if(permittedRoles && !permittedRoles.includes(tipoUsuario)){
-    return <Navigate to= "/"/>;
+  if (permittedRoles && !permittedRoles.includes(tipoUsuario)) {
+    return <Navigate to="/" />;
   }
-  
-  if(excludedRoles && excludedRoles.includes(tipoUsuario)){
-    return <Navigate to= "/"/>;
+
+  if (excludedRoles && excludedRoles.includes(tipoUsuario)) {
+    return <Navigate to="/" />;
   }
 
   return children;

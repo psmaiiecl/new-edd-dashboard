@@ -1,4 +1,3 @@
-
 export const resultadosTabList = [
   { index: "rtab1", label: "Distribución de Resultados" },
   { index: "rtab2", label: "Módulo 1" },
@@ -13,6 +12,6 @@ export const monitoreoTabList = [
 ];
 
 export const tabList = [
-  { index: "tab1", label: "Resultados", inner: resultadosTabList},
-  { index: "tab2", label: "Monitoreo", inner: monitoreoTabList }
+  { index: "tab1", label: "Resultados", inner: resultadosTabList },
+  { index: "tab2", label: "Monitoreo", inner: monitoreoTabList },
 ];

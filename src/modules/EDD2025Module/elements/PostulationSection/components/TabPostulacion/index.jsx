@@ -33,9 +33,9 @@ function TabPostulacion() {
           </tr>
         </thead>
         <tbody>
-          <tr  style={{ padding: "10px 0", width: "100%" }}>
-            <td >{data?.table.postulantes_requeridos}</td>
-            <td >{data?.table.postulantes_totales}</td>
+          <tr style={{ padding: "10px 0", width: "100%" }}>
+            <td>{data?.table.postulantes_requeridos}</td>
+            <td>{data?.table.postulantes_totales}</td>
           </tr>
         </tbody>
       </table>

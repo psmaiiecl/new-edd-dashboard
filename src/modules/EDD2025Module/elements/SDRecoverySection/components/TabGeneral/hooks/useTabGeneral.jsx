@@ -16,7 +16,10 @@ function useTabGeneral() {
       shouldCache: true,
     }).then((data) => {
       setRecuperacionGrabaciones(
-        mapPieData(data.recuperacion_grabaciones, mappers.recuperacion_grabaciones)
+        mapPieData(
+          data.recuperacion_grabaciones,
+          mappers.recuperacion_grabaciones
+        )
       );
       setRecuperacionSD(
         mapPieData(data.recuperacion_sd, mappers.recuperacion_sd)
@@ -29,7 +32,7 @@ function useTabGeneral() {
   return {
     recuperacionGrabaciones,
     recuperacionSD,
-    grabacionesRecibidas
+    grabacionesRecibidas,
   };
 }
 

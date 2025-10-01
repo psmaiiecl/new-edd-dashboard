@@ -29,9 +29,7 @@ export function PostulationSection2025() {
             let param = "";
             if (centro) param = `?centro=${centro}`;
             customDownload({
-              route:
-                BASE_API_URL_2025 + "/2025-excel-cuotas-cdc" +
-                param,
+              route: BASE_API_URL_2025 + "/2025-excel-cuotas-cdc" + param,
               options: { method: "GET" },
               filename: `CUOTAS-CENTRO-${centro ? centro : "TOTAL"}.csv`,
             });

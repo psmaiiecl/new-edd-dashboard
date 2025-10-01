@@ -25,9 +25,9 @@ export const agrupacionModulo = [
 ];
 
 export const nivelModulo = [
-  {value: "-1", label: "Todos"},
-  {value: "EB", label: "EB"},
-  {value: "EM", label: "EM"},
-  {value: "EA", label: "EPJA"},
+  { value: "-1", label: "Todos" },
+  { value: "EB", label: "EB" },
+  { value: "EM", label: "EM" },
+  { value: "EA", label: "EPJA" },
   // {value: "PC", label: "PC"},
 ];

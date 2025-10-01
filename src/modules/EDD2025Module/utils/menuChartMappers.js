@@ -241,12 +241,18 @@ export function buildProcesamientoModuleChart(data) {
 
 export function buildRecuperacionModuleChart(data) {
   const gestionados = data.Gestionado ?? 0;
-  const revision = data['Para revisión'] ?? 0;
+  const revision = data["Para revisión"] ?? 0;
   const contactado = data.Contactado ?? 0;
-  const recepcionados = data['Recepcionado - Cerrado'] ?? 0;
-  const transito = data['En tránsito'] ?? 0;
-  const porGestionar = data['Por gestionar'] ?? 0;
-  const total = recepcionados + porGestionar + gestionados + transito + revision + contactado;
+  const recepcionados = data["Recepcionado - Cerrado"] ?? 0;
+  const transito = data["En tránsito"] ?? 0;
+  const porGestionar = data["Por gestionar"] ?? 0;
+  const total =
+    recepcionados +
+    porGestionar +
+    gestionados +
+    transito +
+    revision +
+    contactado;
 
   return {
     ...MODULE_CHART_SETUP,
@@ -314,9 +320,10 @@ export function buildRecuperacionModuleChart(data) {
   };
 }
 
-export function buildPostulacionModuleChart(data){
+export function buildPostulacionModuleChart(data) {
   const postulaciones = data?.postulantes_totales || 0;
-  const requeridosRestantes = (data?.postulantes_requeridos - data?.postulantes_totales) || 0;
+  const requeridosRestantes =
+    data?.postulantes_requeridos - data?.postulantes_totales || 0;
   const total = data?.postulantes_requeridos || 0;
 
   return {

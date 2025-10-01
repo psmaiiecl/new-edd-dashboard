@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import axiosInstance from "../../../../../services/axiosInstance";
 
 export function useProcesamientoRegion() {
@@ -14,7 +14,9 @@ export function useProcesamientoRegion() {
       setError(null);
 
       try {
-        const response = await axiosInstance.post('/back/public/api2025/2025-procesamiento-region');
+        const response = await axiosInstance.post(
+          "/back/public/api2025/2025-procesamiento-region"
+        );
 
         if (!cancel) {
           const responseData = response.data;

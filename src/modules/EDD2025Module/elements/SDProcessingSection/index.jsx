@@ -31,8 +31,7 @@ export function SDProcessingSection2025() {
       {/* TAB 1 - General */}
       <div style={{ display: activeTab === "tab1" ? "block" : "none" }}>
         <TabContent>
-          <TabGeneralProcesamiento
-          />
+          <TabGeneralProcesamiento />
         </TabContent>
       </div>
 
@@ -55,8 +54,6 @@ export function SDProcessingSection2025() {
       <div style={{ display: activeTab === "tab5" ? "block" : "none" }}>
         <TabRegionProcesamiento isActive={activeTab === "tab5"} />
       </div>
-
-
     </ModulePageLayout>
   );
 }

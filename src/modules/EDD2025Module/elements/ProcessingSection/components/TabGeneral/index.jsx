@@ -29,7 +29,8 @@ function TabGeneral() {
                     }}
                   >
                     {numberFormatter(
-                      chartData?.avance.table.tableTotals[col.key], chartData?.avance.table.tableTotals[col.key]
+                      chartData?.avance.table.tableTotals[col.key],
+                      chartData?.avance.table.tableTotals[col.key]
                     )}
                   </th>
                 ))}
@@ -53,7 +54,9 @@ function TabGeneral() {
               {chartData?.avance.table.tableData.map((row, i) => (
                 <tr key={i}>
                   {chartData?.avance.table.tableColumns.map((col) => (
-                    <td key={col.key}>{numberFormatter(row[col.key], row[col.key])}</td>
+                    <td key={col.key}>
+                      {numberFormatter(row[col.key], row[col.key])}
+                    </td>
                   ))}
                 </tr>
               ))}

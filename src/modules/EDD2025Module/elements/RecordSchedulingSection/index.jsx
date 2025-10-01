@@ -29,8 +29,8 @@ export function RecordSchedulingSection2025() {
             customDownload({
               route: BASE_API_URL_2025 + "/2025-grabaciones-excel",
               options: { method: "POST" },
-              filename: "grabacion-docentes.csv"
-          });
+              filename: "grabacion-docentes.csv",
+            });
           }}
         />
       </CustomTabs>

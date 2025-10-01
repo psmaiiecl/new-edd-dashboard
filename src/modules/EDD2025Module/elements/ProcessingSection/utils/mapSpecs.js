@@ -49,7 +49,6 @@ const mappers = {
         pointFormat:
           '<span style="font-size:13px;"><span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b></span><br/>',
       },
-     
     },
   },
 

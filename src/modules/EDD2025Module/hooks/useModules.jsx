@@ -23,7 +23,7 @@ import {
   buildGrabacionesModuleChart,
   buildPostulacionModuleChart,
   buildProcesamientoModuleChart,
-  buildRecuperacionModuleChart
+  buildRecuperacionModuleChart,
 } from "../utils/menuChartMappers";
 export function useModules() {
   const { getToken } = useContext(AuthContext);
@@ -111,7 +111,9 @@ export function useModules() {
     getProcesamientoData(getToken()).then((data) => {
       setCardCharts((prev) => ({
         ...prev,
-        procesamiento: buildProcesamientoModuleChart(data.evolucion_diaria.normal),
+        procesamiento: buildProcesamientoModuleChart(
+          data.evolucion_diaria.normal
+        ),
       }));
       changeLoadingStatus("procesamiento", false);
     });

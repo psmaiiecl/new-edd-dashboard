@@ -10,7 +10,9 @@ export const useProcesamientoEvolucion = () => {
   useEffect(() => {
     const fetchEvolucion = async () => {
       try {
-        const response = await axiosInstance.post("/back/public/api2025/2025-procesamiento-evolucion");
+        const response = await axiosInstance.post(
+          "/back/public/api2025/2025-procesamiento-evolucion"
+        );
 
         const rawSeries = response.data?.series || [];
         console.log("Datos crudos evolución:", response.data);
@@ -21,9 +23,12 @@ export const useProcesamientoEvolucion = () => {
 
         const formattedSeries = rawSeries.map((serie) => ({
           name: serie.name,
-          data: serie.data.map(([timestamp, value]) => [Number(timestamp), Number(value)]),
+          data: serie.data.map(([timestamp, value]) => [
+            Number(timestamp),
+            Number(value),
+          ]),
         }));
-        
+
         setData({ series: formattedSeries });
       } catch (err) {
         console.error("Error al obtener evolución:", err);

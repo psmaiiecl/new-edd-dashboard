@@ -20,7 +20,7 @@ export default function PrecapacitacionPieChart({ title, data }) {
       name: estado.name,
       y: valor,
       color: estado.color,
-      showInLegend: true
+      showInLegend: true,
     };
   });
 

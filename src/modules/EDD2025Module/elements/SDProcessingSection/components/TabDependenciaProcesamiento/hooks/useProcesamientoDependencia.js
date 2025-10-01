@@ -1,5 +1,5 @@
 // hooks/useProcesamientoDependencia.js
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import axiosInstance from "../../../../../services/axiosInstance";
 
 export function useProcesamientoDependencia() {
@@ -16,7 +16,7 @@ export function useProcesamientoDependencia() {
 
       try {
         const response = await axiosInstance.post(
-          '/back/public/api2025/2025-procesamiento-dependencia'
+          "/back/public/api2025/2025-procesamiento-dependencia"
         );
 
         if (!cancel) {
@@ -25,13 +25,16 @@ export function useProcesamientoDependencia() {
           console.log("✅ Respuesta Dependencia:", raw);
 
           // Revisa que venga en la forma esperada
-          if (!raw.procesamientoPorDependencia?.categories || !raw.procesamientoPorDependencia?.series) {
+          if (
+            !raw.procesamientoPorDependencia?.categories ||
+            !raw.procesamientoPorDependencia?.series
+          ) {
             throw new Error("Formato de datos inesperado del backend");
           }
 
           setData({
             categories: raw.procesamientoPorDependencia.categories,
-            series: raw.procesamientoPorDependencia.series
+            series: raw.procesamientoPorDependencia.series,
           });
         }
       } catch (err) {
@@ -45,7 +48,9 @@ export function useProcesamientoDependencia() {
     };
 
     fetchData();
-    return () => { cancel = true; };
+    return () => {
+      cancel = true;
+    };
   }, []);
 
   return { data, loading, error };

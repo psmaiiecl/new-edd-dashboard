@@ -18,7 +18,9 @@ export default function TabCuotasCdcPostulacion() {
     : [];
 
   // Obtener lista de especialidades únicas para el select
-  const especialidades = [...new Set(detalleFiltrado.map((r) => r.especialidad))];
+  const especialidades = [
+    ...new Set(detalleFiltrado.map((r) => r.especialidad)),
+  ];
 
   return (
     <div className="tab-cdc-container">

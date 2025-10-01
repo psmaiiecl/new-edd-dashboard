@@ -18,10 +18,22 @@ export function usePostulacionData(url, filtros = null) {
         setData({
           fechas: d?.fechas || [],
           series: [
-            { name: "Postulantes Totales", total_postulantes: d?.postulantes_totales || 0 },
-            { name: "Pueden ser Supervisores", total_correctores: d?.total_correctores || 0 },
-            { name: "Supervisores Requeridos", total_supervisores: d?.total_supervisores || 0 },
-            { name: "Total de Seleccionados Requeridos", data: d?.correctores || [] },
+            {
+              name: "Postulantes Totales",
+              total_postulantes: d?.postulantes_totales || 0,
+            },
+            {
+              name: "Pueden ser Supervisores",
+              total_correctores: d?.total_correctores || 0,
+            },
+            {
+              name: "Supervisores Requeridos",
+              total_supervisores: d?.total_supervisores || 0,
+            },
+            {
+              name: "Total de Seleccionados Requeridos",
+              data: d?.correctores || [],
+            },
           ],
           resumen: {
             total_postulantes: d?.postulantes_totales || 0,

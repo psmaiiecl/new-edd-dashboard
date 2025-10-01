@@ -5,7 +5,8 @@ import AvanceDiarioChartPostulacion from "./AvanceDiarioChartPostulacion";
 import { usePostulacionData } from "./hooks/usePostulacionData";
 import { useAvanceDiarioPostulacion } from "./hooks/useAvanceDiarioPostulacion";
 export default function TabGeneralPostulacion() {
-  const { fechas, series, resumen, loading, error } = useAvanceDiarioPostulacion();
+  const { fechas, series, resumen, loading, error } =
+    useAvanceDiarioPostulacion();
 
   if (loading) return <div>Cargando...</div>;
   if (error) return <div>Error al cargar los datos</div>;
@@ -17,6 +18,3 @@ export default function TabGeneralPostulacion() {
     </>
   );
 }
-
-
-

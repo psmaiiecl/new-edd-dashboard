@@ -10,21 +10,25 @@ export function useProcesamientoDiarioChart() {
   useEffect(() => {
     const fetchChart = async () => {
       try {
-        const response = await axiosInstance.post("/back/public/api2025/2025-procesamiento-diario");
+        const response = await axiosInstance.post(
+          "/back/public/api2025/2025-procesamiento-diario"
+        );
         const rawData = response.data;
 
-        const formattedSeries = rawData.map(serie => {
+        const formattedSeries = rawData.map((serie) => {
           const valoresPorFecha = Object.fromEntries(
             serie.data.map(([timestamp, valor]) => {
               const f = new Date(Number(timestamp));
-              const fecha = `${f.getDate().toString().padStart(2, '0')}-${(f.getMonth() + 1)
+              const fecha = `${f.getDate().toString().padStart(2, "0")}-${(
+                f.getMonth() + 1
+              )
                 .toString()
-                .padStart(2, '0')}-${f.getFullYear()}`;
+                .padStart(2, "0")}-${f.getFullYear()}`;
               return [fecha, valor];
             })
           );
 
-          const data = categories.map(fecha => valoresPorFecha[fecha] ?? 0);
+          const data = categories.map((fecha) => valoresPorFecha[fecha] ?? 0);
           return { name: serie.name, data };
         });
 
@@ -39,5 +43,10 @@ export function useProcesamientoDiarioChart() {
     if (categories.length) fetchChart();
   }, [categories]);
 
-  return { series, categories, loading: loading || loadingFechas, error: errorFechas };
+  return {
+    series,
+    categories,
+    loading: loading || loadingFechas,
+    error: errorFechas,
+  };
 }

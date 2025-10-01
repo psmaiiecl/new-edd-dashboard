@@ -47,7 +47,7 @@ function TabGeneral() {
       <CustomColumnChart
         data={grabacionesSemanales}
         title={"GRABACIONES <b>SEMANALES</b>"}
-         overrideConfig={{
+        overrideConfig={{
           yAxis: {
             min: 0,
             title: {

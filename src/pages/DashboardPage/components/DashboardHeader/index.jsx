@@ -20,7 +20,7 @@ export function DashboardHeader({
         Evaluación del Desempeño Docente
       </span>
       <Select
-        isDisabled={getTipoUsuario()===5}
+        isDisabled={getTipoUsuario() === 5}
         className="roboto-regular"
         value={selectedModule}
         onChange={(option) => {

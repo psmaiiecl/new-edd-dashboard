@@ -1,6 +1,6 @@
 // components/GraficoProcesamientoCtg.jsx
-import Highcharts from 'highcharts';
-import HighchartsReact from 'highcharts-react-official';
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
 
 export default function GraficoPorcentaje({ data }) {
   if (!data) return null; // ⛔️ Previene crash por data null
@@ -26,11 +26,12 @@ export default function GraficoPorcentaje({ data }) {
       labels: { format: "{value}%", style: { fontSize: "12px" } },
     },
     tooltip: {
-      pointFormat: '<span style="font-size:12px;"><span style="color:{series.color}">{series.name}</span>: {point.percentage:.0f}%</span><br/>',
-      shared: true
+      pointFormat:
+        '<span style="font-size:12px;"><span style="color:{series.color}">{series.name}</span>: {point.percentage:.0f}%</span><br/>',
+      shared: true,
     },
     plotOptions: { bar: { stacking: "percent" } },
-    series: data.series.slice(1)
+    series: data.series.slice(1),
   };
 
   return (
