@@ -4,6 +4,7 @@ import { CustomTabs } from "../../../../components/CustomTabs";
 import { monitoreoTabList, resultadosTabList, tabList } from "./data/TabList";
 import { TabDistribucionResultados } from "./components/TabDistribucionResultados";
 import { TabModulo } from "./components/TabModulo";
+import { TabCorreccionesGrupales } from "./components/TabCorreccionesGrupales";
 
 export function PortfolioCorrectionSection2025() {
   const [activeTab, setActiveTab] = useState("tab1");
@@ -48,7 +49,7 @@ export function PortfolioCorrectionSection2025() {
           tabArray={monitoreoTabList}
         ></CustomTabs>
         <div style={{ display: innerTab === "mtab1" ? "block" : "none" }}>
-          Calibracion correcciones grupales
+          <TabCorreccionesGrupales />
         </div>
         <div style={{ display: innerTab === "mtab2" ? "block" : "none" }}>
           Calibracion terceras correcciones
