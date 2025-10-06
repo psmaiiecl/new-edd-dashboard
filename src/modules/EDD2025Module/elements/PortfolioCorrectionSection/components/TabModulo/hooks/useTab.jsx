@@ -40,6 +40,7 @@ export function useTab(module) {
   useEffect(() => {
     setFiltersLoaded(false); // Reset filters loaded state
     customFetch({
+      hasLoadPanel: false,
       route:
         BASE_API_URL_2024 +
         `/2024-correccion_portafolios/resultados/filtro-especialidad`,

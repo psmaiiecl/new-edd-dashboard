@@ -5,6 +5,7 @@ import { monitoreoTabList, resultadosTabList, tabList } from "./data/TabList";
 import { TabDistribucionResultados } from "./components/TabDistribucionResultados";
 import { TabModulo } from "./components/TabModulo";
 import { TabCorreccionesGrupales } from "./components/TabCorreccionesGrupales";
+import "./style.css"
 
 export function PortfolioCorrectionSection2025() {
   const [activeTab, setActiveTab] = useState("tab1");

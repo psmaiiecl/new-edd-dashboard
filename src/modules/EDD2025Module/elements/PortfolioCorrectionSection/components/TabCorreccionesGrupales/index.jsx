@@ -1,6 +1,17 @@
 import { TabContent } from "../../../../../../components/Layout/TabContent";
 import Select from "react-select";
 import { useTab } from "./hooks/useTab";
+import {
+  AutoSizer,
+  Table,
+  Column,
+  defaultTableHeaderRenderer as defHeadRender,
+  defaultTableCellRenderer as defCellRenderer,
+  defaultTableCellDataGetter as defCellDataGetter,
+} from "react-virtualized";
+import "react-virtualized/styles.css";
+import "./style.css";
+
 
 export function TabCorreccionesGrupales() {
   const indicadorIndex = Array.from({ length: 12 }, (_, i) => i + 1);
@@ -80,7 +91,92 @@ export function TabCorreccionesGrupales() {
         </div>
       </div>
       <div className="normal-container">
-        <table>
+        {correccionTable.length > 0 && (
+          <div style={{ height: "500px", width: "100%", overflowX: "auto" , overflowY: "hidden" }}>
+            <AutoSizer>
+              {({ height }) => (
+                <Table
+                  gridStyle={{ outline: "none" }}
+                  width={1285}
+                  height={height}
+                  headerHeight={25}
+                  rowHeight={25}
+                  rowCount={correccionTable.length}
+                  rowGetter={({ index }) => {
+                    return correccionTable[index];
+                  }}
+                >
+                  <Column 
+                    label="Corrector"
+                    width={300}
+                    dataKey="corrector"
+                    headerRenderer={defHeadRender}
+                    cellDataGetter={defCellDataGetter}
+                    cellRenderer={defCellRenderer}
+                    minWidth={300}
+                    maxWidth={300}
+                  />
+                  <Column
+                    label="Tipo de Portafolio"
+                    width={100}
+                    maxWidth={100}
+                    minWidth={100}
+                    dataKey="tipo_de"
+                    headerRenderer={defHeadRender}
+                    cellDataGetter={defCellDataGetter}
+                    cellRenderer={defCellRenderer}
+                  />
+                  <Column
+                    label="Rol"
+                    width={100}
+                    maxWidth={100}
+                    minWidth={100}
+                    dataKey="rol"
+                    headerRenderer={defHeadRender}
+                    cellDataGetter={defCellDataGetter}
+                    cellRenderer={defCellRenderer}
+                  />
+                  <Column
+                    label="Count"
+                    width={50}
+                    maxWidth={50}
+                    minWidth={50}
+                    dataKey="co"
+                    headerRenderer={defHeadRender}
+                    cellDataGetter={defCellDataGetter}
+                    cellRenderer={defCellRenderer}
+                  />
+                  {indicadorIndex.map((i) => {
+                    return (
+                      <Column
+                        label={`% I${i}`}
+                        width={60}
+                        maxWidth={60}
+                        minWidth={60}
+                        dataKey={`ind_${i}`}
+                        headerRenderer={defHeadRender}
+                        cellDataGetter={defCellDataGetter}
+                        cellRenderer={({ cellData }) => (
+                          <div
+                            style={{
+                              textAlign: "center",
+                              backgroundColor: getBackgroundColor(
+                                cellData || 0
+                              ),
+                            }}
+                          >
+                            {cellData || 0}
+                          </div>
+                        )}
+                      />
+                    );
+                  })}
+                </Table>
+              )}
+            </AutoSizer>
+          </div>
+        )}
+        {/* <table>
           <thead>
             <tr>
               <th>Corrector</th>
@@ -117,7 +213,7 @@ export function TabCorreccionesGrupales() {
               );
             })}
           </tbody>
-        </table>
+        </table> */}
       </div>
     </TabContent>
   );

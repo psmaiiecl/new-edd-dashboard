@@ -41,7 +41,9 @@ export function TabDistribucionResultados() {
             subtitle={"CORRECCION DE <b>PORTAFOLIOS 2025</b>"}
             data={correccionChart}
           />
-          <table>
+          <div className="distribucion-table-container">
+
+          <table className="roboto-regular distribucion-table">
             <thead>
               <tr>
                 <th style={{ backgroundColor: "#cccccc" }}>CC</th>
@@ -120,6 +122,7 @@ export function TabDistribucionResultados() {
               </tr>
             </tbody>
           </table>
+          </div>
         </div>
       </div>
     </TabContent>
