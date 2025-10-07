@@ -6,6 +6,8 @@ import { TabDistribucionResultados } from "./components/TabDistribucionResultado
 import { TabModulo } from "./components/TabModulo";
 import { TabCorreccionesGrupales } from "./components/TabCorreccionesGrupales";
 import "./style.css"
+import { TabTercerasCorrecciones } from "./components/TabTercerasCorrecciones";
+import { TabDistribucionPuntaje } from "./components/TabDistribucionPuntaje";
 
 export function PortfolioCorrectionSection2025() {
   const [activeTab, setActiveTab] = useState("tab1");
@@ -53,10 +55,10 @@ export function PortfolioCorrectionSection2025() {
           <TabCorreccionesGrupales />
         </div>
         <div style={{ display: innerTab === "mtab2" ? "block" : "none" }}>
-          Calibracion terceras correcciones
+          <TabTercerasCorrecciones />
         </div>
         <div style={{ display: innerTab === "mtab3" ? "block" : "none" }}>
-          Distribucion porcentajes
+          <TabDistribucionPuntaje />
         </div>
       </div>
     </ModulePageLayout>

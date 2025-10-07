@@ -1,6 +1,6 @@
-import { TabContent } from "../../../../../../components/Layout/TabContent";
 import Select from "react-select";
 import { useTab } from "./hooks/useTab";
+import { TabContent } from "../../../../../../components/Layout/TabContent";
 import {
   AutoSizer,
   Table,
@@ -10,13 +10,12 @@ import {
   defaultTableCellDataGetter as defCellDataGetter,
 } from "react-virtualized";
 import "react-virtualized/styles.css";
-import "./style.css";
 
-
-export function TabCorreccionesGrupales() {
+export function TabTercerasCorrecciones() {
   const indicadorIndex = Array.from({ length: 12 }, (_, i) => i + 1);
 
   const { selectedFilter, handleFilter, correccionTable } = useTab();
+
   return (
     <TabContent>
       <div className="tab-general-filter-row">
@@ -92,12 +91,19 @@ export function TabCorreccionesGrupales() {
       </div>
       <div className="normal-container">
         {correccionTable.length > 0 && (
-          <div style={{ height: "475px", width: "100%" , overflowX: "auto" , overflowY: "hidden" }}>
+          <div
+            style={{
+              height: "475px",
+              width: "100%",
+              overflowX: "auto",
+              overflowY: "hidden",
+            }}
+          >
             <AutoSizer>
               {() => (
                 <Table
                   gridStyle={{ outline: "none" }}
-                  width={1285}
+                  width={1500}
                   height={450}
                   headerHeight={25}
                   rowHeight={25}
@@ -106,7 +112,7 @@ export function TabCorreccionesGrupales() {
                     return correccionTable[index];
                   }}
                 >
-                  <Column 
+                  <Column
                     label="Corrector"
                     width={300}
                     dataKey="corrector"
@@ -117,31 +123,61 @@ export function TabCorreccionesGrupales() {
                     maxWidth={300}
                   />
                   <Column
-                    label="Tipo de Portafolio"
+                    label="RUT"
                     width={100}
-                    maxWidth={100}
-                    minWidth={100}
-                    dataKey="tipo_de"
+                    dataKey="rut"
                     headerRenderer={defHeadRender}
                     cellDataGetter={defCellDataGetter}
                     cellRenderer={defCellRenderer}
+                    minWidth={100}
+                    maxWidth={100}
                   />
                   <Column
-                    label="Rol"
-                    width={100}
-                    maxWidth={100}
-                    minWidth={100}
-                    dataKey="rol"
+                    label="Centro de Correccion"
+                    width={65}
+                    dataKey="centroCc"
                     headerRenderer={defHeadRender}
                     cellDataGetter={defCellDataGetter}
                     cellRenderer={defCellRenderer}
+                    minWidth={65}
+                    maxWidth={65}
                   />
                   <Column
-                    label="Count"
+                    label="Grupo de Trabajo"
+                    width={70}
+                    dataKey="grupoTrabajo"
+                    headerRenderer={defHeadRender}
+                    cellDataGetter={defCellDataGetter}
+                    cellRenderer={defCellRenderer}
+                    minWidth={70}
+                    maxWidth={70}
+                  />
+                  <Column
+                    label="Módulo"
                     width={50}
-                    maxWidth={50}
+                    dataKey="modulo"
+                    headerRenderer={defHeadRender}
+                    cellDataGetter={defCellDataGetter}
+                    cellRenderer={defCellRenderer}
                     minWidth={50}
-                    dataKey="co"
+                    maxWidth={50}
+                  />
+                  <Column
+                    label="Especialidad"
+                    width={80}
+                    dataKey="especialidad"
+                    headerRenderer={defHeadRender}
+                    cellDataGetter={defCellDataGetter}
+                    cellRenderer={defCellRenderer}
+                    minWidth={80}
+                    maxWidth={80}
+                  />
+                  <Column
+                    label="Tipo de Correccion"
+                    width={150}
+                    maxWidth={150}
+                    minWidth={150}
+                    dataKey="tipoCorreccion"
                     headerRenderer={defHeadRender}
                     cellDataGetter={defCellDataGetter}
                     cellRenderer={defCellRenderer}
@@ -149,82 +185,33 @@ export function TabCorreccionesGrupales() {
                   {indicadorIndex.map((i) => {
                     return (
                       <Column
-                        label={`% I${i}`}
-                        width={60}
-                        maxWidth={60}
-                        minWidth={60}
+                        label={`I${i}`}
+                        width={50}
+                        maxWidth={50}
+                        minWidth={50}
                         dataKey={`ind_${i}`}
                         headerRenderer={defHeadRender}
                         cellDataGetter={defCellDataGetter}
-                        cellRenderer={({ cellData }) => (
-                          <div
-                            style={{
-                              textAlign: "center",
-                              backgroundColor: getBackgroundColor(
-                                cellData || 0
-                              ),
-                            }}
-                          >
-                            {cellData || 0}
-                          </div>
-                        )}
+                        cellRenderer={defCellRenderer}
                       />
                     );
                   })}
+                  <Column
+                    label="AVG"
+                    width={50}
+                    maxWidth={50}
+                    minWidth={50}
+                    dataKey="promedio"
+                    headerRenderer={defHeadRender}
+                    cellDataGetter={defCellDataGetter}
+                    cellRenderer={defCellRenderer}
+                  />
                 </Table>
               )}
             </AutoSizer>
           </div>
         )}
-        {/* <table>
-          <thead>
-            <tr>
-              <th>Corrector</th>
-              <th>Tipo de Portafolio</th>
-              <th>Rol</th>
-              <th>Count</th>
-              {indicadorIndex.map((i) => {
-                return <th>% Ind {i}</th>;
-              })}
-            </tr>
-          </thead>
-          <tbody>
-            {correccionTable.map((row) => {
-              return (
-                <tr>
-                  <td>{row?.corrector}</td>
-                  <td>{row?.tipo_de}</td>
-                  <td>{row?.rol}</td>
-                  <td>{row?.co}</td>
-                  {indicadorIndex.map((i) => {
-                    return (
-                      <td
-                        style={{
-                          backgroundColor: getBackgroundColor(
-                            row[`ind_${i}`] || 0
-                          ),
-                        }}
-                      >
-                        {row[`ind_${i}`] || 0}
-                      </td>
-                    );
-                  })}
-                </tr>
-              );
-            })}
-          </tbody>
-        </table> */}
       </div>
     </TabContent>
   );
 }
-
-const getBackgroundColor = (number) => {
-  const value = parseFloat(number);
-  if (isNaN(value)) return "#ffffff";
-
-  if (value < 11.1) return "#fff";
-  if (value <= 22.0) return "#fff1cd";
-  if (value <= 43.0) return "#f3cccb";
-  return "#db3b0f";
-};

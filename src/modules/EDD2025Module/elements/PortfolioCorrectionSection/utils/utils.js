@@ -159,3 +159,53 @@ export function buildGraficoCohen(data, module) {
     },
   };
 }
+
+export function getModuloIndices(dataset, moduloKey) {
+  const años = Object.keys(dataset || {});
+  const set = new Set();
+  años.forEach((año) => {
+    const y = dataset[año] || {};
+    ["i", "b", "c", "d"].forEach((g) => {
+      const mod = y[g]?.[moduloKey] || {};
+      Object.keys(mod).forEach((k) => set.add(String(k)));
+    });
+  });
+  return Array.from(set).map(Number).sort((a, b) => a - b);
+}
+
+export function safeVal(v) {
+  if (v === null || v === undefined) return null;
+  const r = Math.round(v * 10) / 10;
+  return r === 0 ? 0 : r;
+}
+
+export function getVal(dataset, año, grupo, moduloKey, indice) {
+  const raw = dataset?.[año]?.[grupo]?.[moduloKey]?.[String(indice)];
+  return raw === undefined ? null : safeVal(raw);
+}
+
+export function getCD(dataset, año, moduloKey, indices) {
+  const out = {};
+  indices.forEach((i) => {
+    const c = getVal(dataset, año, "c", moduloKey, i) ?? 0;
+    const d = getVal(dataset, año, "d", moduloKey, i) ?? 0;
+    out[i] = safeVal(c + d);
+  });
+  return out;
+}
+
+export function getDif24vs23(cd2024, cd2023, indices) {
+  const out = {};
+  indices.forEach((i) => {
+    const v24 = cd2024[i] ?? 0;
+    const v23 = cd2023[i] ?? 0;
+    out[i] = safeVal(v24 - v23);
+  });
+  return out;
+}
+
+export function shouldHighlightDiff(v, umbralAbs = 10) {
+  if (v === null || v === undefined) return false;
+  return Math.abs(v) >= umbralAbs;
+}
+

@@ -19,6 +19,9 @@ function TabCuotas() {
                 <th rowSpan={2} style={{ backgroundColor: "#5197d1ff" }}>
                   Total de Postulaciones
                 </th>
+                <th rowSpan={2} style={{ backgroundColor: "#5197d1ff" }}>
+                  Preseleccionados
+                </th>
                 <th colSpan={5} style={{ backgroundColor: "#5197d1ff" }}>
                   Correctores
                 </th>
@@ -61,6 +64,7 @@ function TabCuotas() {
                 <tr key={index}>
                   <td>{item?.centro}</td>
                   <td>{item?.cantidad_postulaciones_total}</td>
+                  <td>{item?.preseleccionados}</td>
                   <td>{item?.crr30}</td>
                   <td>{item?.crr10}</td>
                   <td>{item?.crr}</td>
@@ -193,6 +197,9 @@ function TabCuotas() {
                 <th rowSpan={2} style={{ backgroundColor: "#5197d1ff" }}>
                   Seleccionables
                 </th>
+                <th rowSpan={2} style={{ backgroundColor: "#5197d1ff" }}>
+                  Preseleccionados
+                </th>
                 <th colSpan={4} style={{ backgroundColor: "#5197d1ff" }}>
                   Correctores
                 </th>
@@ -240,6 +247,7 @@ function TabCuotas() {
                   <td>{item?.cant_correcciones}</td>
                   <td>{item?.cantidad_postulaciones_total}</td>
                   <td>{item?.seleccionables}</td>
+                  <td>{item?.preseleccionados}</td>
                   <td>{item?.crr30}</td>
                   <td>{item?.crr10}</td>
                   <td>{item?.crr}</td>
