@@ -1,0 +1,19 @@
+.tab-panel {
+  /* transition: opacity 0.25s ease; */
+  position: relative;
+  width: 100%;
+}
+
+.tab-panel.hidden {
+  opacity: 0;
+  pointer-events: none; /* no se puede interactuar */
+  position: absolute; /* saca del flujo visual */
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.tab-panel.active {
+  opacity: 1;
+  position: relative;
+}

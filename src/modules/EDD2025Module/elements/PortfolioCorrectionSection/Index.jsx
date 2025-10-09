@@ -5,9 +5,10 @@ import { monitoreoTabList, resultadosTabList, tabList } from "./data/TabList";
 import { TabDistribucionResultados } from "./components/TabDistribucionResultados";
 import { TabModulo } from "./components/TabModulo";
 import { TabCorreccionesGrupales } from "./components/TabCorreccionesGrupales";
-import "./style.css"
+import "./style.css";
 import { TabTercerasCorrecciones } from "./components/TabTercerasCorrecciones";
 import { TabDistribucionPuntaje } from "./components/TabDistribucionPuntaje";
+import { TabPanel } from "../../../../components/TabPanel";
 
 export function PortfolioCorrectionSection2025() {
   const [activeTab, setActiveTab] = useState("tab1");
@@ -26,41 +27,35 @@ export function PortfolioCorrectionSection2025() {
         currentActive={activeTab}
         tabArray={tabList}
       ></CustomTabs>
-      <div style={{ display: activeTab === "tab1" ? "block" : "none" }}>
+      <TabPanel isActive={activeTab === "tab1"}>
         <CustomTabs
           setActiveFn={setInnerTab}
           currentActive={innerTab}
           tabArray={resultadosTabList}
         ></CustomTabs>
-        <div style={{ display: innerTab === "rtab1" ? "block" : "none" }}>
+        <TabPanel isActive={innerTab === "rtab1"}>
           <TabDistribucionResultados />
-        </div>
-        <div style={{ display: innerTab === "rtab2" ? "block" : "none" }}>
+        </TabPanel>
+        <TabPanel isActive={innerTab === "rtab2"}>
           <TabModulo module={"Módulo 1"} />
-        </div>
-        <div style={{ display: innerTab === "rtab3" ? "block" : "none" }}>
+        </TabPanel>
+        <TabPanel isActive={innerTab === "rtab3"}>
           <TabModulo module={"Módulo 2"} />
-        </div>
-        <div style={{ display: innerTab === "rtab4" ? "block" : "none" }}>
+        </TabPanel>
+        <TabPanel isActive={innerTab === "rtab4"}>
           <TabModulo module={"Módulo 3"} />
-        </div>
-      </div>
-      <div style={{ display: activeTab === "tab2" ? "block" : "none" }}>
+        </TabPanel>
+      </TabPanel>
+      <TabPanel isActive={activeTab === "tab2"}>
         <CustomTabs
           setActiveFn={setInnerTab}
           currentActive={innerTab}
           tabArray={monitoreoTabList}
         ></CustomTabs>
-        <div style={{ display: innerTab === "mtab1" ? "block" : "none" }}>
-          <TabCorreccionesGrupales />
-        </div>
-        <div style={{ display: innerTab === "mtab2" ? "block" : "none" }}>
-          <TabTercerasCorrecciones />
-        </div>
-        <div style={{ display: innerTab === "mtab3" ? "block" : "none" }}>
-          <TabDistribucionPuntaje />
-        </div>
-      </div>
+        {innerTab === "mtab1" && <TabCorreccionesGrupales />}
+        {innerTab === "mtab2" && <TabTercerasCorrecciones />}
+        {innerTab === "mtab3" && <TabDistribucionPuntaje />}
+      </TabPanel>
     </ModulePageLayout>
   );
 }

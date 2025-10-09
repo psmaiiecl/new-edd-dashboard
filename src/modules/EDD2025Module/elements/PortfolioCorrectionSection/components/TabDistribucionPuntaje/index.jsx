@@ -4,21 +4,15 @@ import Select from "react-select";
 import { getVal, safeVal, shouldHighlightDiff } from "../../utils/utils";
 import { Fragment } from "react";
 
-function Cell({ value, className = "" }) {
+function Cell({ value }) {
   const v = value;
-  return (
-    <td className={`border border-gray-300 px-2 py-1 ${className}`}>
-      {v === null || v === undefined ? "-" : v.toFixed(1)}
-    </td>
-  );
+  return <td>{v === null || v === undefined ? "-" : v.toFixed(1)}</td>;
 }
 
 function FilaGrupo({ dataset, año, grupo, modulos, moduloIndices }) {
   return (
     <>
-      <td className="border border-gray-300 px-2 py-1 w-14 text-center uppercase bg-gray-50 sticky left-20 z-10">
-        {grupo}
-      </td>
+      <td>{grupo}</td>
       {modulos.map((m) =>
         moduloIndices[m.key].map((i) => (
           <Cell
@@ -34,9 +28,7 @@ function FilaGrupo({ dataset, año, grupo, modulos, moduloIndices }) {
 function FilaCD({ valoresPorModulo, modulos, moduloIndices }) {
   return (
     <>
-      <td className="border border-gray-300 px-2 py-1 w-14 text-center uppercase bg-gray-50 sticky left-20 z-10">
-        C+D
-      </td>
+      <td>C+D</td>
       {modulos.map((m) =>
         moduloIndices[m.key].map((i) => (
           <Cell key={`${m.key}-${i}`} value={valoresPorModulo[m.key][i]} />
@@ -49,9 +41,7 @@ function FilaCD({ valoresPorModulo, modulos, moduloIndices }) {
 function FilaDif({ difPorModulo, modulos, moduloIndices }) {
   return (
     <>
-      <td className="border border-gray-300 px-2 py-1 w-14 text-center uppercase bg-gray-50 sticky left-20 z-10">
-        C+D
-      </td>
+      <td>C+D</td>
       {modulos.map((m) =>
         moduloIndices[m.key].map((i) => {
           const v = difPorModulo[m.key][i];
@@ -127,8 +117,8 @@ export function TabDistribucionPuntaje() {
       </div>
       <div className="normal-container">
         {correccionTable && (
-          <div className="overflow-x-auto">
-            <table className="border-collapse w-[1400px] min-w-full text-sm">
+          <div style={{ maxWidth: "100%", overflowX: "scroll" }}>
+            <table className="roboto-regular">
               <thead>
                 <tr>
                   <th rowSpan={2}></th>
@@ -137,13 +127,12 @@ export function TabDistribucionPuntaje() {
                   {correccionTable?.modulos.map((m) => (
                     <th
                       key={m.key}
+                      style={{ backgroundColor: "#5197d1ff" }}
                       colSpan={correccionTable?.moduloIndices[m.key].length}
                     >
                       {m.title}
                       {m.note ? (
-                        <div className="text-[11px] font-normal italic mt-1">
-                          *{m.note}
-                        </div>
+                        <div className="roboto-light">*{m.note}</div>
                       ) : null}
                     </th>
                   ))}
@@ -151,7 +140,10 @@ export function TabDistribucionPuntaje() {
                 <tr>
                   {correccionTable?.modulos.map((m) =>
                     correccionTable?.moduloIndices[m.key].map((i) => (
-                      <th key={`${m.key}-i-${i}`}>
+                      <th
+                        key={`${m.key}-i-${i}`}
+                        style={{ backgroundColor: "#5197d1ff" }}
+                      >
                         <div className="font-medium">I{i}</div>
                         <div>(%)</div>
                       </th>
@@ -166,10 +158,7 @@ export function TabDistribucionPuntaje() {
                   <Fragment key={año}>
                     {/* Fila I (con rowSpan del año = 4) */}
                     <tr>
-                      <td
-                        rowSpan={4}
-                        className={`border border-gray-300 font-semibold bg-gray-50 `}
-                      >
+                      <td rowSpan={4} className="roboto-bold">
                         {año}
                       </td>
                       <FilaGrupo

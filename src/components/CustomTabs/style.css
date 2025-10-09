@@ -1,52 +1,72 @@
 .tab-container {
-  border-bottom: 1px solid #e7e7e7;
   display: flex;
-  width: 100%;
-  overflow-x: hidden;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 25px;
+  border-bottom: 1px solid #e7e7e7;
+  padding: 10px 20px;
   box-sizing: border-box;
+  background-color: #fff;
+  gap: 1rem;
 }
 
+/* Zona de pestañas */
 .tabs {
   display: flex;
   align-items: center;
-  width: auto;
-  box-sizing: border-box;
-  font-size: 14px;
-  justify-content: space-evenly;
-  padding: 0;
-  gap: 2%;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #ccc transparent;
+  gap: 0.5rem;
+  padding: 4px 0;
+  flex: 1;
+}
+
+.tabs::-webkit-scrollbar {
+  height: 6px;
+}
+.tabs::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 3px;
 }
 
 .tabs__tab {
-  width: 100%;
-  min-height: 50px;
-  text-align: center;
-  align-items: center;
-  padding: 5px 10px;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: center;
+  flex-shrink: 0;
+  font-size: 14px;
+  padding: 10px 16px;
+  border-radius: 6px 6px 0 0;
   cursor: pointer;
-  transition-duration: 150ms;
-  white-space: nowrap;
-  color: #484646;
-}
-
-.tabs__tab.active {
-  color: #0f69b5;
-  /* border-bottom: 1px inset #0f69b5; */
+  color: #555;
+  transition: all 0.2s ease;
+  position: relative;
 }
 
 .tabs__tab:hover {
   color: #0f69b5;
+  background-color: rgba(15, 105, 181, 0.08);
+}
+
+.tabs__tab.active {
+  color: #0f69b5;
+  font-weight: 600;
+}
+
+.tabs__tab.active::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #0f69b5;
+  border-radius: 3px 3px 0 0;
 }
 
 .tab__addOns {
-  min-width: 300px;
-  height: fit-content;
   display: flex;
-  gap: 20px;
+  align-items: center;
+  justify-content: flex-end;
+  /* flex-wrap: wrap; */
+  gap: 12px;
+  min-width: 200px;
 }
