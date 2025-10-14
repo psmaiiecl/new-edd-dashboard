@@ -26,7 +26,7 @@ function TabCuotas() {
                   Correctores
                 </th>
                 <th colSpan={3} style={{ backgroundColor: "#5197d1ff" }}>
-                  Supervisdores
+                  Supervisores
                 </th>
                 <th rowSpan={2} style={{ backgroundColor: "#f5f831ff" }}>
                   Lista de Espera
