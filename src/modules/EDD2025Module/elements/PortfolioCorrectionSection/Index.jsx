@@ -9,10 +9,11 @@ import "./style.css";
 import { TabTercerasCorrecciones } from "./components/TabTercerasCorrecciones";
 import { TabDistribucionPuntaje } from "./components/TabDistribucionPuntaje";
 import { TabPanel } from "../../../../components/TabPanel";
+import { TabProductividad } from "./components/TabProductividad";
 
 export function PortfolioCorrectionSection2025() {
   const [activeTab, setActiveTab] = useState("tab1");
-  const [innerTab, setInnerTab] = useState("rtab1");
+  const [innerTab, setInnerTab] = useState("rtab4");
 
   useEffect(() => {
     const outer = tabList.find((tab) => tab.index === activeTab);
@@ -55,6 +56,7 @@ export function PortfolioCorrectionSection2025() {
         {innerTab === "mtab1" && <TabCorreccionesGrupales />}
         {innerTab === "mtab2" && <TabTercerasCorrecciones />}
         {innerTab === "mtab3" && <TabDistribucionPuntaje />}
+        {innerTab === "mtab4" && <TabProductividad />}
       </TabPanel>
     </ModulePageLayout>
   );

@@ -6,10 +6,10 @@ export const resultadosTabList = [
 ];
 
 export const monitoreoTabList = [
+  { index: "mtab4", label: "Avance de Productividad" },
   { index: "mtab1", label: "Calibración de correcciones grupales" },
   { index: "mtab2", label: "Calibración de terceras correcciones" },
   { index: "mtab3", label: "Distribución de porcentajes por indicador" },
-  { index: "mtab4", label: "Avance de Productividad" },
 ];
 
 export const tabList = [
