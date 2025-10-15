@@ -10,7 +10,7 @@ const mappers = {
         sliced: true,
       },
       {
-        name: "No Grabados",
+        name: "No Agendados en Plazo",
         key: "no_grabados",
         color: "#8FB8FF",
       },

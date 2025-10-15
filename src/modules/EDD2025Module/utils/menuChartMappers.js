@@ -80,11 +80,11 @@ export function buildGrabacionesModuleChart(data) {
             },
           },
           {
-            name: "No Grabados",
+            name: "No Agendados en Plazo",
             y: noGrabados,
             color: "#FF5880",
             drilldown: {
-              categories: ["No Grabados"],
+              categories: ["No Agendados en Plazo"],
               data: [(noGrabados / total) * 100],
             },
           },
