@@ -4,9 +4,13 @@ import Select from "react-select";
 import { getVal, safeVal, shouldHighlightDiff } from "../../utils/utils";
 import { Fragment } from "react";
 
-function Cell({ value }) {
+function Cell({ value, color }) {
   const v = value;
-  return <td>{v === null || v === undefined ? "-" : v.toFixed(1)}</td>;
+  return (
+    <td style={{ backgroundColor: color }}>
+      {v === null || v === undefined ? "-" : v.toFixed(1)}
+    </td>
+  );
 }
 
 function FilaGrupo({ dataset, año, grupo, modulos, moduloIndices }) {
@@ -17,6 +21,7 @@ function FilaGrupo({ dataset, año, grupo, modulos, moduloIndices }) {
         moduloIndices[m.key].map((i) => (
           <Cell
             key={`${m.key}-${i}`}
+            color={m.color}
             value={safeVal(getVal(dataset, año, grupo.toLowerCase(), m.key, i))}
           />
         ))
@@ -31,7 +36,11 @@ function FilaCD({ valoresPorModulo, modulos, moduloIndices }) {
       <td>C+D</td>
       {modulos.map((m) =>
         moduloIndices[m.key].map((i) => (
-          <Cell key={`${m.key}-${i}`} value={valoresPorModulo[m.key][i]} />
+          <Cell
+            key={`${m.key}-${i}`}
+            color={m.color}
+            value={valoresPorModulo[m.key][i]}
+          />
         ))
       )}
     </>
@@ -49,6 +58,7 @@ function FilaDif({ difPorModulo, modulos, moduloIndices }) {
           return (
             <td
               key={`${m.key}-${i}`}
+              style={{ backgroundColor: m.color }}
               className={`border border-gray-300 px-2 py-1 ${
                 hl ? "bg-yellow-100 font-semibold" : ""
               }`}
@@ -127,7 +137,7 @@ export function TabDistribucionPuntaje() {
                   {correccionTable?.modulos.map((m) => (
                     <th
                       key={m.key}
-                      style={{ backgroundColor: "#5197d1ff" }}
+                      style={{ backgroundColor: m.color }}
                       colSpan={correccionTable?.moduloIndices[m.key].length}
                     >
                       {m.title}
@@ -142,7 +152,7 @@ export function TabDistribucionPuntaje() {
                     correccionTable?.moduloIndices[m.key].map((i) => (
                       <th
                         key={`${m.key}-i-${i}`}
-                        style={{ backgroundColor: "#5197d1ff" }}
+                        style={{ backgroundColor: m.color }}
                       >
                         <div className="font-medium">I{i}</div>
                         <div>(%)</div>

@@ -204,7 +204,18 @@ export function TabTercerasCorrecciones() {
                     dataKey="promedio"
                     headerRenderer={defHeadRender}
                     cellDataGetter={defCellDataGetter}
-                    cellRenderer={defCellRenderer}
+                    cellRenderer={({ cellData }) => (
+                          <div
+                            style={{
+                              textAlign: "center",
+                              backgroundColor: getBackgroundColor(
+                                cellData || 0
+                              ),
+                            }}
+                          >
+                            {cellData || 0}
+                          </div>
+                        )}
                   />
                 </Table>
               )}
@@ -215,3 +226,11 @@ export function TabTercerasCorrecciones() {
     </TabContent>
   );
 }
+
+const getBackgroundColor = (number) => {
+  const value = parseFloat(number);
+  if (isNaN(value)) return "#ffffff";
+
+  if (value >= 10.0) return "#e65b5bff";
+  return "#fff";
+};

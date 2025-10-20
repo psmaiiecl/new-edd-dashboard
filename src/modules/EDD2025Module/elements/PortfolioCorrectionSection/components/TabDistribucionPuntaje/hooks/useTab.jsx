@@ -27,9 +27,9 @@ export function useTab() {
       shouldCache: true,
     }).then((data) => {
       const modulos = [
-        { key: "m1", title: "M1" },
-        { key: "m2", title: "M2*", note: "Este módulo se compara con M2/2022" },
-        { key: "m3", title: "M3" },
+        { key: "m1", title: "M1", color: "#c7d8fc" },
+        { key: "m2", title: "M2*", color: "#fdedcc", note: "Este módulo se compara con M2/2022" },
+        { key: "m3", title: "M3", color: "#d8e9d3" },
       ];
       const moduloIndices = Object.fromEntries(
         modulos.map((m) => [m.key, getModuloIndices(data, m.key)])
