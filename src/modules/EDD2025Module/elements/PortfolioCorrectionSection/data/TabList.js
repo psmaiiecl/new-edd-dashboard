@@ -10,9 +10,12 @@ export const monitoreoTabList = [
   { index: "mtab1", label: "Calibración de correcciones grupales" },
   { index: "mtab2", label: "Calibración de terceras correcciones" },
   { index: "mtab3", label: "Distribución de porcentajes por indicador" },
+  { index: "mtab5", label: "Marca 1" },
+  { index: "mtab6", label: "Marca 2" },
 ];
 
 export const tabList = [
   { index: "tab1", label: "Resultados", inner: resultadosTabList },
   { index: "tab2", label: "Monitoreo", inner: monitoreoTabList },
+  { index: "tab3", label: "AI (Beta)"},
 ];

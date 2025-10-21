@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { ModulePageLayout } from "../../../../components/Layout/ModulePageLayout";
 import { CustomTabs } from "../../../../components/CustomTabs";
 import { monitoreoTabList, resultadosTabList, tabList } from "./data/TabList";
@@ -10,6 +10,7 @@ import { TabTercerasCorrecciones } from "./components/TabTercerasCorrecciones";
 import { TabDistribucionPuntaje } from "./components/TabDistribucionPuntaje";
 import { TabPanel } from "../../../../components/TabPanel";
 import { TabProductividad } from "./components/TabProductividad";
+import { TabMarca1 } from "./components/TabMarca1";
 
 export function PortfolioCorrectionSection2025() {
   const [activeTab, setActiveTab] = useState("tab1");
@@ -57,6 +58,8 @@ export function PortfolioCorrectionSection2025() {
         {innerTab === "mtab2" && <TabTercerasCorrecciones />}
         {innerTab === "mtab3" && <TabDistribucionPuntaje />}
         {innerTab === "mtab4" && <TabProductividad />}
+        {innerTab === "mtab5" && <TabMarca1 />}
+        {innerTab === "mtab6" && <Fragment />}
       </TabPanel>
     </ModulePageLayout>
   );

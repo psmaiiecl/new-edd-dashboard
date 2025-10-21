@@ -1,0 +1,29 @@
+.big-counter-container{
+    display: flex ;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;  
+    gap: 15px;  
+    width: 100%;
+    padding: 15px 25px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.big-counter-number{
+    display: flex;
+    border-radius: 4px;
+    border: 1px solid #000;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    width: 100%;
+    font-size: 30px;
+    box-sizing: border-box;
+}
+
+.big-counter-button{
+    box-sizing: border-box;
+    align-self: flex-start;
+}
+
