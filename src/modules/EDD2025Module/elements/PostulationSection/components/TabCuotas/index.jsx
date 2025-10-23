@@ -20,7 +20,7 @@ function TabCuotas() {
                   Total de Postulaciones
                 </th>
                 <th rowSpan={2} style={{ backgroundColor: "#5197d1ff" }}>
-                  Preseleccionados
+                  Preseleccionados + Aprobados
                 </th>
                 <th colSpan={5} style={{ backgroundColor: "#5197d1ff" }}>
                   Correctores
@@ -198,7 +198,7 @@ function TabCuotas() {
                   Seleccionables
                 </th>
                 <th rowSpan={2} style={{ backgroundColor: "#5197d1ff" }}>
-                  Preseleccionados
+                  Preseleccionados + Aprobados
                 </th>
                 <th colSpan={4} style={{ backgroundColor: "#5197d1ff" }}>
                   Correctores
