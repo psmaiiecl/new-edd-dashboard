@@ -19,6 +19,6 @@ export const flujosTabList = [
 export const tabList = [
   { index: "tab1", label: "Resultados", inner: resultadosTabList },
   { index: "tab2", label: "Monitoreo", inner: monitoreoTabList },
-  { index: "tab3", label: "Monitoreso Flujos"},
-  { index: "tab4", label: "Monitoreso IA"},
+  { index: "tab3", label: "Monitoreo Flujos"},
+  { index: "tab4", label: "Monitoreo IA"},
 ];

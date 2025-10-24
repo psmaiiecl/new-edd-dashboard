@@ -1,7 +1,12 @@
 import { Fragment, useEffect, useState } from "react";
 import { ModulePageLayout } from "../../../../components/Layout/ModulePageLayout";
 import { CustomTabs } from "../../../../components/CustomTabs";
-import { flujosTabList, monitoreoTabList, resultadosTabList, tabList } from "./data/TabList";
+import {
+  flujosTabList,
+  monitoreoTabList,
+  resultadosTabList,
+  tabList,
+} from "./data/TabList";
 import { TabDistribucionResultados } from "./components/TabDistribucionResultados";
 import { TabModulo } from "./components/TabModulo";
 import { TabCorreccionesGrupales } from "./components/TabCorreccionesGrupales";
@@ -60,13 +65,7 @@ export function PortfolioCorrectionSection2025() {
         {innerTab === "mtab4" && <TabProductividad />}
       </TabPanel>
       <TabPanel isActive={activeTab === "tab3"}>
-        <CustomTabs
-          setActiveFn={setInnerTab}
-          currentActive={innerTab}
-          tabArray={flujosTabList}
-        ></CustomTabs>
-        
-        {innerTab === "ftab1" && <TabMarca1 />}
+        <TabMarca1 />
       </TabPanel>
     </ModulePageLayout>
   );
