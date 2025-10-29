@@ -9,6 +9,7 @@ import { Button } from "../../../../components/Button";
 import { AuthContext } from "../../../../context/AuthContext";
 import { useCustomDownload } from "../../../../hooks/useCustomDownload";
 import { BASE_API_URL_2025 } from "../../data/BASE_API_URL";
+import './style.css'
 
 export function PostulationSection2025() {
   const customDownload = useCustomDownload();

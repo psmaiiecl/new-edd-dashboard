@@ -87,9 +87,13 @@ export function TabModulo({ module }) {
       </div>
       <div className="normal-container">
         <div className="pie-grid-2">
-          <CustomColumnChart title={module} data={data.comparacion} />
-          <div className="column-chart-container">
-            <HighchartsReact options={data.cohen} highcharts={Highcharts} />
+          <div style={{ maxWidth: "500px", margin: "auto" }}>
+            <CustomColumnChart title={module} data={data.comparacion} />
+          </div>
+          <div style={{ maxWidth: "500px", margin: "auto" }}>
+            <div className="column-chart-container">
+              <HighchartsReact options={data.cohen} highcharts={Highcharts} />
+            </div>
           </div>
         </div>
       </div>

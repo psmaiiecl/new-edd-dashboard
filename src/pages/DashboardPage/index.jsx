@@ -12,7 +12,7 @@ import { SDRecoverySection2025 } from "../../modules/EDD2025Module/elements/SDRe
 import { RecordSchedulingSection2025 } from "../../modules/EDD2025Module/elements/RecordSchedulingSection";
 import { RecordSection2025 } from "../../modules/EDD2025Module/elements/RecordSection";
 // import { SDProcessingSection2025 } from "../../modules/EDD2025Module/elements/SDProcessingSection";
-import { PostulationCorrectionSection2025 } from "../../modules/EDD2025Module/elements/PostulationCorrectionSection";
+// import { PostulationCorrectionSection2025 } from "../../modules/EDD2025Module/elements/PostulationCorrectionSection";
 import { PortfolioCorrectionSection2025 } from "../../modules/EDD2025Module/elements/PortfolioCorrectionSection/Index";
 import { ProcessingSection2025 } from "../../modules/EDD2025Module/elements/ProcessingSection";
 import { PostulationSection2025 } from "../../modules/EDD2025Module/elements/PostulationSection";
