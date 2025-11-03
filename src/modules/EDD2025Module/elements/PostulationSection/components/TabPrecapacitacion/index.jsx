@@ -2,9 +2,11 @@ import { CustomPieChart } from "../../../../../../components/CustomPieChart";
 import { TabContent } from "../../../../../../components/Layout/TabContent";
 import Select from "react-select";
 import useTabPrecapacitacion from "./hooks/useTabPrecapacitacion";
+import { SelectorItems } from "../../data/SelectorItems";
 
 function TabPrecapacitacion() {
-  const { selectedFilter, handleFilter, chartData } = useTabPrecapacitacion();
+  const { selectedFilter, handleFilter, chartData, selectorEspecialidades } =
+    useTabPrecapacitacion();
 
   return (
     <TabContent>
@@ -12,9 +14,9 @@ function TabPrecapacitacion() {
         <div className="tab-general-filter">
           <span>Centro de Corrección: </span>
           <Select
-            // value={selectedFilter.convocatoria}
-            // onChange={(option) => handleFilter("convocatoria", option)}
-            // options={CONVOCATORIA_LIST}
+            value={selectedFilter.cdc}
+            onChange={(option) => handleFilter("cdc", option)}
+            options={SelectorItems.cdc}
             isSearchable
             noOptionsMessage={() => "Ninguna CdC"}
             placeholder="Seleccione un CdC"
@@ -35,9 +37,9 @@ function TabPrecapacitacion() {
         <div className="tab-general-filter">
           <span>Especialidad: </span>
           <Select
-            // value={selectedFilter.estado}
-            // onChange={(option) => handleFilter("estado", option)}
-            // options={ESTADO_LIST}
+            value={selectedFilter.especialidad}
+            onChange={(option) => handleFilter("especialidad", option)}
+            options={SelectorItems.especialidades}
             isSearchable
             noOptionsMessage={() => "Ningun especialidad"}
             placeholder="Seleccione una especialidad"
@@ -58,9 +60,9 @@ function TabPrecapacitacion() {
         <div className="tab-general-filter">
           <span>Módulo: </span>
           <Select
-            // value={selectedFilter.nivel}
-            // onChange={(option) => handleFilter("nivel", option)}
-            // options={CAMBIO_LIST}
+            value={selectedFilter.modulo}
+            onChange={(option) => handleFilter("modulo", option)}
+            options={SelectorItems.modulos}
             isSearchable
             noOptionsMessage={() => "Ninguna módulo"}
             placeholder="Seleccione un módulo"

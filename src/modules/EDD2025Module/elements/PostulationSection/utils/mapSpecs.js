@@ -1,5 +1,6 @@
 export const mappers = {
   supervisores: {
+    total_key: "total",
     series: [
       {
         name: "Terminada",
@@ -30,6 +31,7 @@ export const mappers = {
     ],
   },
   correctores: {
+    total_key: "total",
     series: [
       {
         name: "Terminada",

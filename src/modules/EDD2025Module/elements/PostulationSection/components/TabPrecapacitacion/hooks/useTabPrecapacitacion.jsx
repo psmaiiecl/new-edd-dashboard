@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
 import { useCustomFetch } from "../../../../../../../hooks/useCustomFetch";
-import { BASE_API_URL_2024 } from "../../../../../data/BASE_API_URL";
 import { mapPieData } from "../../../../../../../utils/ChartMapperFactory";
 import { mappers } from "../../../utils/mapSpecs";
+import { SelectorItems } from "../../../data/SelectorItems";
+import { BASE_API_URL_2025 } from "../../../../../data/BASE_API_URL";
 
 function useTabPrecapacitacion() {
   const customFetch = useCustomFetch();
   const [selectedFilter, setSelectedFilter] = useState({
-    cdc: null,
+    cdc: SelectorItems.cdc[0],
     especialidad: null,
-    modulo: null,
+    modulo: SelectorItems.modulos[0],
   });
+
   const [chartData, setChartData] = useState({
     correctores: null,
     supervisores: null,
@@ -24,39 +26,18 @@ function useTabPrecapacitacion() {
   };
 
   useEffect(() => {
-    // customFetch({
-    //   route: BASE_API_URL_2024 + "/2024-precapacitacion/-1/-1/-1",
-    //   method: "GET",
-    //   shouldCache: true,
-    // }).then((data) => {
-    //   const correctores = mapPieData(data.corrector, mappers.correctores);
-    //   const supervisores = mapPieData(data.supervisor, mappers.supervisores);
-    //   setChartData({correctores, supervisores});
-    // });
-    const data = {
-      corrector: {
-        no_iniciada: 0,
-        en_unidad_1: 0,
-        en_unidad_2: 0,
-        en_unidad_3: 0,
-        en_unidad_4: 0,
-        terminada: 0,
-        total_seleccionados: 0,
-      },
-      supervisor: {
-        no_iniciada: 0,
-        en_unidad_1: 0,
-        en_unidad_2: 0,
-        en_unidad_3: 0,
-        en_unidad_4: 0,
-        terminada: 0,
-        total_seleccionados: 0,
-      },
-    };
-    const correctores = mapPieData(data.corrector, mappers.correctores);
-    const supervisores = mapPieData(data.supervisor, mappers.supervisores);
-    setChartData({ correctores, supervisores });
-  }, [customFetch]);
+    customFetch({
+      route:
+        BASE_API_URL_2025 +
+        `/2025-precapacitacion?=centro${selectedFilter.cdc?.value}&especialidad=${selectedFilter.especialidad?.value}&modulo=${selectedFilter.modulo?.value}`,
+      method: "GET",
+      shouldCache: true,
+    }).then((data) => {
+      const correctores = mapPieData(data.correctores, mappers.correctores);
+      const supervisores = mapPieData(data.supervisores, mappers.supervisores);
+      setChartData({ correctores, supervisores });
+    });
+  }, [customFetch, selectedFilter]);
 
   return { selectedFilter, handleFilter, chartData };
 }
