@@ -251,9 +251,39 @@ function TabCuotas() {
                   <td>{item?.crr30}</td>
                   <td>{item?.crr10}</td>
                   <td>{item?.crr}</td>
-                  <td>{item?.cantidad_correctores_seleccionados}</td>
+                  <td>
+                    {item?.cantidad_correctores_seleccionados}
+                    <span
+                      style={{
+                        display: "inline-block",
+                        width: "10px",
+                        height: "10px",
+                        borderRadius: "50%",
+                        backgroundColor:
+                          item?.cantidad_correctores_seleccionados >= item?.crr
+                            ? "green"
+                            : "red",
+                        marginLeft: "6px",
+                      }}
+                    />
+                  </td>
                   <td>{item?.srr}</td>
-                  <td>{item?.cantidad_supervisores_seleccionados}</td>
+                  <td>
+                    {item?.cantidad_supervisores_seleccionados}
+                    <span
+                      style={{
+                        display: "inline-block",
+                        width: "10px",
+                        height: "10px",
+                        borderRadius: "50%",
+                        backgroundColor:
+                          item?.cantidad_supervisores_seleccionados >= item?.srr
+                            ? "green"
+                            : "red",
+                        marginLeft: "6px",
+                      }}
+                    />
+                  </td>
                   <td>{item?.lista_espera}</td>
                   <td>{item?.eds}</td>
                 </tr>

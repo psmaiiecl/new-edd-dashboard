@@ -279,6 +279,27 @@ const mappers = {
       },
     ]
   ),
+  avanceEncuesta: createMapper(
+    "AVANCE <b> ENCUESTA </b>",
+    "total",
+    [
+      {
+        name: "Completado",
+        key: "completados",
+        color: "#65d9ab",
+      },
+      {
+        name: "Iniciado",
+        key: "iniciados",
+        color: "#ff8e53",
+      },
+      {
+        name: "No Iniciado",
+        key: "no_iniciados",
+        color: "#ff5880",
+      },
+    ]
+  ),
   avanceDescargaPortafolio: createMapper(
     "<b>DESCARGA DE PORTAFOLIO</b>",
     "total",
@@ -384,7 +405,7 @@ export function TabGeneralPortafolio({ filtros }) {
           />
         </div>
 
-        <div className="pie-grid-2">
+        <div className="pie-grid-3">
           <PieChartContainer
             subtitle="AVANCE <b>MÓDULO 3</b>"
             dataKey={dataGeneral?.["portafolio-avance-modulo-tres"]?.docentes}
@@ -394,6 +415,11 @@ export function TabGeneralPortafolio({ filtros }) {
             subtitle="AVANCE <b> REPORTE M3 DIRECTORES"
             dataKey={dataGeneral?.["portafolio-reporte-directores"]?.docentes}
             mapper={mappers.avanceReporteDirectores}
+          />
+          <PieChartContainer
+            subtitle="AVANCE <b>ENCUESTA</b>"
+            dataKey={dataGeneral?.["portafolio-avance-encuesta"]}
+            mapper={mappers.avanceEncuesta}
           />
         </div>
 
