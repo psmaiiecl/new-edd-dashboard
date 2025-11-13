@@ -80,7 +80,7 @@ export function useTab(module) {
       shouldCache: true,
     }).then((data) => {
       if (data) {
-        console.log("cohen", buildGraficoCohen(data.grafico_dcohen, module));
+        // console.log("cohen", buildGraficoCohen(data.grafico_dcohen, module));
 
         setData({
           comparacion: buildGraficoCD(data.grafico_comparacion, module) || null,

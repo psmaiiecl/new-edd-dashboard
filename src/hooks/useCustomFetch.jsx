@@ -64,6 +64,10 @@ export function useCustomFetch() {
       try {
         const response = await fetch(URL, options);
 
+        if(response.status === 429){
+          throw new Error("Demasiadas solicitudes al servidor, espere unos momentos");
+
+        }
         if (!response.ok) {
           throw new Error("Error en la solicitud");
         }

@@ -46,11 +46,11 @@ export function TabDistribucionResultados() {
           <table className="roboto-regular distribucion-table">
             <thead>
               <tr>
-                <th style={{ backgroundColor: "#cccccc" }}>CC</th>
-                <th style={{ backgroundColor: "#f9a8b9" }}>Corregidos 2023</th>
-                <th style={{ backgroundColor: "#f9a8b9" }}>% 2023</th>
-                <th style={{ backgroundColor: "#8fc475" }}>Corregidos 2024</th>
-                <th style={{ backgroundColor: "#8fc475" }}>% 2024</th>
+                <th style={{ backgroundColor: "#0059ffff" }}>CC</th>
+                <th style={{ backgroundColor: "#fd9800ff" }}>Corregidos 2023</th>
+                <th style={{ backgroundColor: "#ffbe69ff" }}>% 2023</th>
+                <th style={{ backgroundColor: "#a0ff71ff" }}>Corregidos 2024</th>
+                <th style={{ backgroundColor: "#c7faaeff" }}>% 2024</th>
               </tr>
             </thead>
             <tbody>

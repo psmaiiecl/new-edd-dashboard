@@ -4,9 +4,12 @@ import { TabContent } from "../../../../../../components/Layout/TabContent";
 import Select from "react-select";
 import { flujos } from "./data/selectorLists";
 import { useTab } from "./hooks/useTab";
+import { useCustomDownload } from "../../../../../../hooks/useCustomDownload";
+import { BASE_API_URL_2025 } from "../../../../data/BASE_API_URL";
 
 export function TabMarca1() {
-  const { selectedFilter, handleFilter, data } = useTab();
+  const { selectedFilter, handleFilter, data, resetFilter } = useTab();
+  const customDownload = useCustomDownload();
   return (
     <TabContent>
       <div className="tab-general-filter-row">
@@ -41,8 +44,14 @@ export function TabMarca1() {
             alignSelf: "end",
           }}
         >
-          <Button text={"Limpiar Filtros"} action={() => {}} />
-          <Button text={"Excel"} action={() => {}} />
+          <Button text={"Limpiar Filtros"} action={resetFilter} />
+          <Button text={"Excel"} action={() => {
+                      customDownload({
+                        route: BASE_API_URL_2025 + "/2025-correccion-pf-excel-discrepancias",
+                        options: { method: "GET" },
+                        filename: `HISTORIAL_DISCREPANCIAS.csv`,
+                      });
+                    }} />
         </div>
       </div>
       <div className="counter-title-container roboto-regular">
@@ -52,44 +61,38 @@ export function TabMarca1() {
       <div className="normal-container">
         <div
           className={
-            selectedFilter.flujo.value == "GENERAL_M2" ? "pie-grid-2" : ""
+            data.detalles?.[selectedFilter.flujo.value] ? "pie-grid-2" : ""
           }
         >
-          {selectedFilter.flujo.value == "GENERAL_M2" && (
-            <div className="roboto-regular">
-              <span> Por Centro </span>
-              <table>
+          {data.detalles?.[selectedFilter.flujo.value] && (
+            <div className="roboto-regular flujo-centros-container">
+              <span> Conteo por Centro </span>
+              <table className="flujo-centros-container-table">
                 <thead className="roboto-regular">
                   <tr>
                     <th>Centro</th>
-                    <th>Conteo</th>
+                    <th>Cantidad Discrepancias</th>
                   </tr>
                 </thead>
                 <tbody className="roboto-regular">
-                  <tr>
-                    <th>UDP</th>
-                    <th>2</th>
-                  </tr>
-                  <tr>
-                    <th>UDEC</th>
-                    <th>5</th>
-                  </tr>
-                  <tr>
-                    <th>ULS</th>
-                    <th>3</th>
-                  </tr>
+                  {data.detalles?.[selectedFilter.flujo.value].map((item, index) => (
+                    <tr key={selectedFilter.flujo.value+index}>
+                      <td>{item?.cdc ?? "-"}</td>
+                      <td>{item?.cantidad_discrepancias ?? "-"}</td>
+                      
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
           )}
           <div className="big-counter-container">
-            <span className="roboto-regular">
-              Total Discrepancias
-            </span>
+            <span className="roboto-regular">Total Incidencias</span>
             <div className="big-counter-number ">
-              <span className="roboto-bold">32</span>
+              <span className="roboto-bold">
+                {data.totales?.[selectedFilter.flujo.value] ?? "-"}
+              </span>
             </div>
-            
           </div>
         </div>
       </div>

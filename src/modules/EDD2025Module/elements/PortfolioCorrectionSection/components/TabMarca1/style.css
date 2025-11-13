@@ -6,6 +6,23 @@
     gap: 5px;
 }
 
+.flujo-centros-container{
+    display: flex ;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;  
+    gap: 15px;  
+    width: 100%;
+    padding: 15px 25px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.flujo-centros-container-table th{
+    background-color: var(--blue-80);
+    color: #fff;
+}
+
 .big-counter-container{
     display: flex ;
     flex-direction: column;
@@ -28,6 +45,7 @@
     width: 100%;
     font-size: 30px;
     box-sizing: border-box;
+    background-color: var(--blue-80);
 }
 
 .big-counter-button{
