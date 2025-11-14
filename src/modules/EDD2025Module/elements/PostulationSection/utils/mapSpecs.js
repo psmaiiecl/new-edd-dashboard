@@ -9,17 +9,17 @@ export const mappers = {
         color: "#65D9AB",
       },
       {
-        name: "En Unidad 3",
+        name: "En Unidad 2",
         key: "en_unidad_3",
         color: "#8fb8ff",
       },
       {
-        name: "En Unidad 2",
+        name: "En Unidad 1",
         key: "en_unidad_2",
         color: "#ffd153",
       },
       {
-        name: "En Unidad 1",
+        name: "En Unidad 0",
         key: "en_unidad_1",
         color: "#ff8e53",
       },
@@ -40,17 +40,17 @@ export const mappers = {
         color: "#65D9AB",
       },
       {
-        name: "En Unidad 3",
+        name: "En Unidad 2",
         key: "en_unidad_3",
         color: "#8fb8ff",
       },
       {
-        name: "En Unidad 2",
+        name: "En Unidad 1",
         key: "en_unidad_2",
         color: "#ffd153",
       },
       {
-        name: "En Unidad 1",
+        name: "En Unidad 0",
         key: "en_unidad_1",
         color: "#ff8e53",
       },
