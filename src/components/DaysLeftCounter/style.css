@@ -1,0 +1,21 @@
+.contador-banner {
+  opacity: 0.9;
+  color: #484747;
+  align-items: right;
+  padding: 0.5rem 0;
+  font-family: Arial, sans-serif;
+  font-size: 0.8rem;
+  text-align: right;
+}
+
+.contador-banner p {
+  width: fit-content;
+  white-space: nowrap;
+  text-align: right;
+  margin-right: 0;
+}
+
+.contador-banner strong {
+  font-size: 0.8rem;
+  color: #0f69b5;
+}

@@ -1,57 +1,63 @@
-import "./index.css";
 import { useState } from "react";
-import { TabGeneralPortafolio } from "./components/TabGeneralPortafolio";
-import { TabDependenciaPortafolio } from "./components/TabDependenciaPortafolio";
-import { TabConvocatoriaPortafolio } from "./components/TabConvocatoriaPortafolio";
-import { TabRegionPortafolio } from "./components/TabRegionPortafolio";
-import { TabAgrupacionPortafolio } from "./components/TabAgrupacionPortafolio";
-import { TabsPortafolio } from "../PortfolioSection/components/TabsPortafolio/Tabs";
-import FiltrosPortfolioSection from "./components/FiltrosPortfolioSection";
+import { useCustomDownload } from "../../../../hooks/useCustomDownload";
 import { ModulePageLayout } from "../../../../components/Layout/ModulePageLayout";
-import { TabContent } from "../../../../components/Layout/TabContent";
+import { tabList } from "./data/TabList";
+import { BASE_API_URL_2025 } from "../../data/BASE_API_URL";
+import { CustomTabs } from "../../../../components/CustomTabs";
+import { Button } from "../../../../components/Button";
+import { TabGeneral } from "./components/TabGeneral";
+import { TabDependencia } from "./components/TabDependencia";
+import { TabConvocatoria } from "./components/TabConvocatoria";
+import { TabRegion } from "./components/TabRegion";
+import { TabAgrupacion } from "./components/TabAgrupacion";
 
 export function PortfolioSection2025() {
   const [activeTab, setActiveTab] = useState("tab1");
-
-  const [filtros, setFiltros] = useState({
-    dependencia: "",
-    region: "",
-  });
-
-  const handleFiltroChange = (dependencia, valor) => {
-    setFiltros((prev) => ({
-      ...prev,
-      [dependencia]: valor,
-    }));
-  };
+  const customDownload = useCustomDownload();
 
   return (
     <ModulePageLayout>
-      <TabsPortafolio setActive={setActiveTab} active={activeTab} />
+      <CustomTabs
+        setActiveFn={setActiveTab}
+        currentActive={activeTab}
+        tabArray={tabList}
+      >
+        <div style={{ width: 100 }}></div>
+        <Button
+          text={"Excel Docente"}
+          action={() => {
+            customDownload({
+              route: BASE_API_URL_2025 + "/2025-portafolio-excel-docente",
+              options: { method: "POST" },
+              filename: "portafolio-docente.csv",
+            });
+          }}
+        />
+        <Button
+          text={"Excel Sostenedor"}
+          action={() => {
+            customDownload({
+              route: BASE_API_URL_2025 + "/2025-portafolio-excel-sostenedor",
+              options: { method: "POST" },
+              filename: "portafolio-sostenedores.csv",
+            });
+          }}
+        />
+      </CustomTabs>
       <div style={{ display: activeTab === "tab1" ? "block" : "none" }}>
-        <TabContent>
-          <FiltrosPortfolioSection
-            filtros={filtros}
-            onFiltroChange={handleFiltroChange}
-          />
-
-          <TabGeneralPortafolio
-            filtros={filtros}
-            onFiltroChange={handleFiltroChange}
-          />
-        </TabContent>
+        <TabGeneral/>
       </div>
       <div style={{ display: activeTab === "tab2" ? "block" : "none" }}>
-        <TabDependenciaPortafolio isActive={activeTab === "tab2"} />
+        <TabDependencia/>
       </div>
       <div style={{ display: activeTab === "tab3" ? "block" : "none" }}>
-        <TabConvocatoriaPortafolio isActive={activeTab === "tab3"} />
+        <TabConvocatoria/>
       </div>
       <div style={{ display: activeTab === "tab4" ? "block" : "none" }}>
-        <TabRegionPortafolio isActive={activeTab === "tab4"} />
+        <TabRegion/>
       </div>
       <div style={{ display: activeTab === "tab5" ? "block" : "none" }}>
-        <TabAgrupacionPortafolio isActive={activeTab === "tab5"} />
+        <TabAgrupacion/>
       </div>
     </ModulePageLayout>
   );
