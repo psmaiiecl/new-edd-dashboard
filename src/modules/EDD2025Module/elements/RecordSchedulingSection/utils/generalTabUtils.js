@@ -118,18 +118,18 @@ export function buildAvanceSemanalPortafolio(data) {
   let categorias = [];
 
   for (let i = 0; i < fechas.length; i++) {
-    noIniciados.push(data?.m1NoIniciado[i]);
-    noIniciados.push(data?.m2NoIniciado[i]);
-    noIniciados.push(data?.m3NoIniciado[i]);
-    noIniciados.push(data?.pfNoIniciados[i]);
-    iniciados.push(data?.m1Iniciado[i]);
-    iniciados.push(data?.m2Iniciado[i]);
-    iniciados.push(data?.m3Iniciado[i]);
-    iniciados.push(data?.pfIniciados[i]);
-    completados.push(data?.m1Completado[i]);
-    completados.push(data?.m2Completado[i]);
-    completados.push(data?.m3Completado[i]);
-    completados.push(data?.pfCompletado[i]);
+    noIniciados.push(data?.m1NoIniciado[i] ?? noIniciados[i-1]);
+    noIniciados.push(data?.m2NoIniciado[i] ?? noIniciados[i-1]);
+    noIniciados.push(data?.m3NoIniciado[i] ?? noIniciados[i-1]);
+    noIniciados.push(data?.pfNoIniciados[i] ?? noIniciados[i-1]);
+    iniciados.push(data?.m1Iniciado[i] ?? iniciados[i-1]);
+    iniciados.push(data?.m2Iniciado[i] ?? iniciados[i-1]);
+    iniciados.push(data?.m3Iniciado[i] ?? iniciados[i-1]);
+    iniciados.push(data?.pfIniciados[i] ?? iniciados[i-1]);
+    completados.push(data?.m1Completado[i] ?? iniciados[i-1]);
+    completados.push(data?.m2Completado[i] ?? iniciados[i-1]);
+    completados.push(data?.m3Completado[i] ?? iniciados[i-1]);
+    completados.push(data?.pfCompletado[i] ?? iniciados[i-1]);
 
     categorias.push({
       name: fechas[i],
