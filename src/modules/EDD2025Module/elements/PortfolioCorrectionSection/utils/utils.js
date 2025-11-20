@@ -170,7 +170,9 @@ export function getModuloIndices(dataset, moduloKey) {
       Object.keys(mod).forEach((k) => set.add(String(k)));
     });
   });
-  return Array.from(set).map(Number).sort((a, b) => a - b);
+  return Array.from(set)
+    .map(Number)
+    .sort((a, b) => a - b);
 }
 
 export function safeVal(v) {
@@ -209,3 +211,33 @@ export function shouldHighlightDiff(v, umbralAbs = 10) {
   return Math.abs(v) >= umbralAbs;
 }
 
+export function formatDataForTable(data) {
+  if (!data) return [];
+
+  const categorias = ["a", "b", "c", "d", "e"];
+  const result = categorias.map((cat) => {
+    const cat23 = data[`cat23_${cat}`] || 0;
+    const cat24 = data[`cat24_${cat}`] || 0;
+    const pct23 = ((cat23 / data.total_2023) * 100).toFixed(2);
+    const pct24 = ((cat24 / data.total_2024) * 100).toFixed(2);
+
+    return {
+      categoria: cat.toUpperCase(),
+      cat23,
+      pct23,
+      cat24,
+      pct24,
+    };
+  });
+
+  // opcional: agregar sin cc o totales
+  result.push({
+    categoria: "Total Portafolios",
+    cat23: data.total_2023,
+    pct23: "100.00",
+    cat24: data.total_2024,
+    pct24: "100.00",
+  });
+
+  return result;
+}

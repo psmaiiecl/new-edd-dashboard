@@ -4,6 +4,7 @@ import { useTab } from "./hooks/useTab";
 import { useCustomDownload } from "../../../../../../hooks/useCustomDownload";
 import { BASE_API_URL_2025 } from "../../../../data/BASE_API_URL";
 import { Button } from "../../../../../../components/Button";
+import { SELECT_STYLES } from "../../../../../../constants/CONST";
 
 export function TabProductividad() {
   const customDownload = useCustomDownload();
@@ -21,18 +22,7 @@ export function TabProductividad() {
             isSearchable
             noOptionsMessage={() => "Ningun módulo"}
             placeholder="Seleccione un módulo"
-            styles={{
-              control: (base) => ({
-                ...base,
-                fontSize: "13px",
-                padding: "0px 10px ",
-              }),
-              option: (base) => ({
-                ...base,
-                fontSize: "13px",
-                color: "black",
-              }),
-            }}
+            styles={SELECT_STYLES}
           />
         </div>
         <div className="tab-general-filter">
@@ -44,18 +34,7 @@ export function TabProductividad() {
             isSearchable
             noOptionsMessage={() => "Ninguna fecha"}
             placeholder="Seleccione una fecha"
-            styles={{
-              control: (base) => ({
-                ...base,
-                fontSize: "13px",
-                padding: "0px 10px ",
-              }),
-              option: (base) => ({
-                ...base,
-                fontSize: "13px",
-                color: "black",
-              }),
-            }}
+            styles={SELECT_STYLES}
           />
         </div>
         <div

@@ -136,7 +136,6 @@ export function Menu() {
             title={"Corrección Portafolios"}
             action={() => navigate("correccion-portafolios")}
             loading={loadingStatus.correccion_portafolios}
-            locked
           />
         )}
         {getTipoUsuario() != 5 && (

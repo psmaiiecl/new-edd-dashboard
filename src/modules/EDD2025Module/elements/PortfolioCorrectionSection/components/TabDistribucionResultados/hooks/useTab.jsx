@@ -4,14 +4,17 @@ import { BASE_API_URL_2024 } from "../../../../../data/BASE_API_URL";
 import { mapPieData } from "../../../../../../../utils/ChartMapperFactory";
 import { agrupacionesDistRes } from "../../../data/selectorLists";
 import { mappers } from "../../../utils/mapSpecs";
+import { formatDataForTable } from "../../../utils/utils";
 
 export function useTab() {
   const customFetch = useCustomFetch();
   const [selectedFilter, setSelectedFilter] = useState({
     agrupacion: agrupacionesDistRes[0],
   });
-  const [correccionChart, setCorreccionChart] = useState(null);
-
+  const [data, setData] = useState({
+    chart: null,
+    table: [],
+  });
   const handleFilter = (key, option) => {
     setSelectedFilter((prev) => ({
       ...prev,
@@ -27,17 +30,22 @@ export function useTab() {
       formData: selectedFilter,
       shouldCache: true,
     }).then((data) => {
+      console.log(data);
+
       const dataTorta = {
         completa: data.completa.cantidad ?? 0,
         incompleta: data.incompleta.cantidad ?? 0,
       };
-      setCorreccionChart(mapPieData(dataTorta, mappers.correccion_portafolios));
+      setData({
+        chart: mapPieData(dataTorta, mappers.correccion_portafolios),
+        table: formatDataForTable(data?.tabla),
+      });
     });
   }, [selectedFilter, customFetch]);
 
   return {
     selectedFilter,
     handleFilter,
-    correccionChart,
+    data,
   };
 }

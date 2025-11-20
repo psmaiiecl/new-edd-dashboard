@@ -3,6 +3,7 @@ import { useTab } from "./hooks/useTab";
 import Select from "react-select";
 import { getVal, safeVal, shouldHighlightDiff } from "../../utils/utils";
 import { Fragment } from "react";
+import { SELECT_STYLES } from "../../../../../../constants/CONST";
 
 function Cell({ value, color }) {
   const v = value;
@@ -87,18 +88,7 @@ export function TabDistribucionPuntaje() {
             isSearchable
             noOptionsMessage={() => "Ningun grupo de trabajo"}
             placeholder="Seleccione un grupo de trabajo"
-            styles={{
-              control: (base) => ({
-                ...base,
-                fontSize: "13px",
-                padding: "0px 10px ",
-              }),
-              option: (base) => ({
-                ...base,
-                fontSize: "13px",
-                color: "black",
-              }),
-            }}
+            styles={SELECT_STYLES}
           />
         </div>
         <div className="tab-general-filter">
@@ -110,18 +100,7 @@ export function TabDistribucionPuntaje() {
             isSearchable
             noOptionsMessage={() => "Ningun especialidad"}
             placeholder="Seleccione un especialidad"
-            styles={{
-              control: (base) => ({
-                ...base,
-                fontSize: "13px",
-                padding: "0px 10px ",
-              }),
-              option: (base) => ({
-                ...base,
-                fontSize: "13px",
-                color: "black",
-              }),
-            }}
+            styles={SELECT_STYLES}
           />
         </div>
       </div>

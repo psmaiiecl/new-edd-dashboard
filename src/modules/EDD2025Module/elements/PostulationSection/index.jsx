@@ -10,6 +10,7 @@ import { AuthContext } from "../../../../context/AuthContext";
 import { useCustomDownload } from "../../../../hooks/useCustomDownload";
 import { BASE_API_URL_2025 } from "../../data/BASE_API_URL";
 import './style.css'
+import { TabAsistencias } from "./components/TabAsistencias";
 
 export function PostulationSection2025() {
   const customDownload = useCustomDownload();
@@ -45,6 +46,9 @@ export function PostulationSection2025() {
       </div>
       <div style={{ display: activeTab === "tab3" ? "block" : "none" }}>
         <TabPrecapacitacion />
+      </div>
+      <div style={{ display: activeTab === "tab4" ? "block" : "none" }}>
+        <TabAsistencias />
       </div>
     </ModulePageLayout>
   );

@@ -3,20 +3,9 @@ export const mappers = {
     total_key: "total",
     series: [
       {
-        name: "Terminada",
-        key: "terminada",
-        sliced: true,
-        color: "#65D9AB",
-      },
-      {
-        name: "En Unidad 2",
-        key: "en_unidad_3",
-        color: "#8fb8ff",
-      },
-      {
-        name: "En Unidad 1",
-        key: "en_unidad_2",
-        color: "#ffd153",
+        name: "No iniciada",
+        key: "no_iniciada",
+        color: "#ff5880",
       },
       {
         name: "En Unidad 0",
@@ -24,9 +13,20 @@ export const mappers = {
         color: "#ff8e53",
       },
       {
-        name: "No iniciada",
-        key: "no_iniciada",
-        color: "#ff5880",
+        name: "En Unidad 1",
+        key: "en_unidad_2",
+        color: "#ffd153",
+      },
+      {
+        name: "En Unidad 2",
+        key: "en_unidad_3",
+        color: "#8fb8ff",
+      },
+      {
+        name: "Terminada",
+        key: "terminada",
+        sliced: true,
+        color: "#65D9AB",
       },
     ],
   },
@@ -34,20 +34,9 @@ export const mappers = {
     total_key: "total",
     series: [
       {
-        name: "Terminada",
-        key: "terminada",
-        sliced: true,
-        color: "#65D9AB",
-      },
-      {
-        name: "En Unidad 2",
-        key: "en_unidad_3",
-        color: "#8fb8ff",
-      },
-      {
-        name: "En Unidad 1",
-        key: "en_unidad_2",
-        color: "#ffd153",
+        name: "No iniciada",
+        key: "no_iniciada",
+        color: "#ff5880",
       },
       {
         name: "En Unidad 0",
@@ -55,10 +44,43 @@ export const mappers = {
         color: "#ff8e53",
       },
       {
-        name: "No iniciada",
-        key: "no_iniciada",
-        color: "#ff5880",
+        name: "En Unidad 1",
+        key: "en_unidad_2",
+        color: "#ffd153",
+      },
+      {
+        name: "En Unidad 2",
+        key: "en_unidad_3",
+        color: "#8fb8ff",
+      },
+      {
+        name: "Terminada",
+        key: "terminada",
+        sliced: true,
+        color: "#65D9AB",
       },
     ],
   },
+  asistencias: {
+    total_key: "total",
+
+    series: [
+      {
+        name: "Ausentes Injustificados",
+        key: "ausente_injustificado",
+        color: "#ff5880",
+      },
+      {
+        name: "Ausentes Justificados",
+        key: "ausente_justificado",
+        color: "#ffd153",
+      },
+      {
+        name: "Presentes",
+        key: "presente",
+        sliced: true,
+        color: "#65D9AB",
+      },
+    ],
+  }
 };

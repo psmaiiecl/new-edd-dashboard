@@ -3,9 +3,10 @@ import { TabContent } from "../../../../../../components/Layout/TabContent";
 import Select from "react-select";
 import { agrupacionesDistRes } from "../../data/selectorLists";
 import { useTab } from "./hooks/useTab";
+import { SELECT_STYLES } from "../../../../../../constants/CONST";
 
 export function TabDistribucionResultados() {
-  const { selectedFilter, handleFilter, correccionChart } = useTab();
+  const { selectedFilter, handleFilter, data } = useTab();
 
   return (
     <TabContent>
@@ -19,18 +20,7 @@ export function TabDistribucionResultados() {
             isSearchable
             noOptionsMessage={() => "Ninguna agrupacion"}
             placeholder="Seleccione una agrupacion"
-            styles={{
-              control: (base) => ({
-                ...base,
-                fontSize: "13px",
-                padding: "0px 10px ",
-              }),
-              option: (base) => ({
-                ...base,
-                fontSize: "13px",
-                color: "black",
-              }),
-            }}
+            styles={SELECT_STYLES}
           />
         </div>
         <div style={{ width: "100%" }}></div>
@@ -39,7 +29,7 @@ export function TabDistribucionResultados() {
         <div className="pie-grid-2">
           <CustomPieChart
             subtitle={"CORRECCION DE <b>PORTAFOLIOS 2025</b>"}
-            data={correccionChart}
+            data={data.chart}
           />
           <div className="distribucion-table-container">
 
@@ -47,16 +37,16 @@ export function TabDistribucionResultados() {
             <thead>
               <tr>
                 <th style={{ backgroundColor: "#0059ffff" }}>CC</th>
-                <th style={{ backgroundColor: "#fd9800ff" }}>Corregidos 2023</th>
-                <th style={{ backgroundColor: "#ffbe69ff" }}>% 2023</th>
-                <th style={{ backgroundColor: "#a0ff71ff" }}>Corregidos 2024</th>
-                <th style={{ backgroundColor: "#c7faaeff" }}>% 2024</th>
+                <th style={{ backgroundColor: "#fd9800ff" }}>Corregidos 2024</th>
+                <th style={{ backgroundColor: "#ffbe69ff" }}>% 2024</th>
+                <th style={{ backgroundColor: "#a0ff71ff" }}>Corregidos 2025</th>
+                <th style={{ backgroundColor: "#c7faaeff" }}>% 2025</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>A</td>
-                <td>5295</td>
+                <td>{data.table?.cat23_a || '-'}</td>
                 <td>11,2%</td>
                 <td>1433</td>
                 <td>5,78%</td>

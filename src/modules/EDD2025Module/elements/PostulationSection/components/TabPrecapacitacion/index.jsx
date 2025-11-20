@@ -3,10 +3,15 @@ import { TabContent } from "../../../../../../components/Layout/TabContent";
 import Select from "react-select";
 import useTabPrecapacitacion from "./hooks/useTabPrecapacitacion";
 import { SelectorItems } from "../../data/SelectorItems";
+import { SELECT_STYLES } from "../../../../../../constants/CONST";
+import { useCustomDownload } from "../../../../../../hooks/useCustomDownload";
+import { BASE_API_URL_2025 } from "../../../../data/BASE_API_URL";
+import { Button } from "../../../../../../components/Button";
 
 function TabPrecapacitacion() {
-  const { selectedFilter, handleFilter, chartData, selectorEspecialidades } =
+  const { selectedFilter, handleFilter, chartData } =
     useTabPrecapacitacion();
+  const customDownload = useCustomDownload();
 
   return (
     <TabContent>
@@ -18,20 +23,9 @@ function TabPrecapacitacion() {
             onChange={(option) => handleFilter("cdc", option)}
             options={SelectorItems.cdc}
             isSearchable
-            noOptionsMessage={() => "Ninguna CdC"}
+            noOptionsMessage={() => "Ningun CdC"}
             placeholder="Seleccione un CdC"
-            styles={{
-              control: (base) => ({
-                ...base,
-                fontSize: "13px",
-                padding: "0px 10px ",
-              }),
-              option: (base) => ({
-                ...base,
-                fontSize: "13px",
-                color: "black",
-              }),
-            }}
+            styles={SELECT_STYLES}
           />
         </div>
         <div className="tab-general-filter">
@@ -43,18 +37,7 @@ function TabPrecapacitacion() {
             isSearchable
             noOptionsMessage={() => "Ningun especialidad"}
             placeholder="Seleccione una especialidad"
-            styles={{
-              control: (base) => ({
-                ...base,
-                fontSize: "13px",
-                padding: "0px 10px ",
-              }),
-              option: (base) => ({
-                ...base,
-                fontSize: "13px",
-                color: "black",
-              }),
-            }}
+            styles={SELECT_STYLES}
           />
         </div>
         <div className="tab-general-filter">
@@ -66,17 +49,25 @@ function TabPrecapacitacion() {
             isSearchable
             noOptionsMessage={() => "Ninguna módulo"}
             placeholder="Seleccione un módulo"
-            styles={{
-              control: (base) => ({
-                ...base,
-                fontSize: "13px",
-                padding: "0px 10px ",
-              }),
-              option: (base) => ({
-                ...base,
-                fontSize: "13px",
-                color: "black",
-              }),
+            styles={SELECT_STYLES}
+          />
+        </div>
+        <div
+          style={{
+            display: "flex",
+            boxSizing: "border-box",
+            alignSelf: "end",
+          }}
+        >
+          {/* <Button text={"Limpiar Filtros"} action={() => clearFilters()} /> */}
+          <Button
+            text={"Descargar Excel"}
+            action={() => {
+              customDownload({
+                route: BASE_API_URL_2025 + "/2025-precapacitacion-excel",
+                options: { method: "GET" },
+                filename: "precapacitacion_excel.xlsx",
+              });
             }}
           />
         </div>

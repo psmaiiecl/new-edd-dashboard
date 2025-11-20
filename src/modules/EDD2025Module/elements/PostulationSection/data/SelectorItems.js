@@ -322,4 +322,49 @@ export const SelectorItems = {
       value: "Tecnología",
     },
   ],
+  cargos: [
+    { id: "CARGOALL", value: "", label: "Todos" },
+    { id: "CARGO1", value: "corrector", label: "Corrector" },
+    { id: "CARGO2", value: "supervisor", label: "Supervisor" },
+  ],
 };
+
+export function getSalas() {
+  const salas = [
+    {
+      id: "SALAALL",
+      label: "Todas",
+      value: "",
+    },
+  ];
+  for (let index = 0; index <= 20; index++) {
+    salas.push({
+      id: "SALA" + index,
+      label: "Sala " + index,
+      value: index,
+    });
+  }
+  return salas;
+}
+
+export function getFechas() {
+  const today = new Date();
+  const start = new Date(today.getFullYear() + 1, 0, 2);
+  start.setHours(0, 0, 0, 0);
+  today.setHours(0, 0, 0, 0);
+
+  if (today < start) return [];
+
+  const dates = [];
+  for (let d = new Date(start); d <= today; d.setDate(d.getDate() + 1)) {
+    const day = String(d.getDate()).padStart(2, "0");
+    const month = String(d.getMonth() + 1).padStart(2, "0");
+    const year = d.getFullYear();
+    dates.push({
+      id: "FECHA" + `${day}-${month}-${year}`,
+      label: `${day}-${month}-${year}`,
+      value: `${day}-${month}-${year}`
+    });
+  }
+  return dates;
+}
