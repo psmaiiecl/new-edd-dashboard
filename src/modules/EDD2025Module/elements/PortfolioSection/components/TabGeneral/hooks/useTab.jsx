@@ -64,6 +64,10 @@ export function useTab() {
           data["portafolio-avance-descarga-portafolio"]?.docentes,
           mappers.avance_descarga_portafolio
         ),
+        descarga_reporte_director: mapPieData(
+          data["portafolio-avance-descarga-reporte-director"],
+          mappers.avance_descarga_reporte_director
+        ),
         visualizacion_clase: mapPieData(
           data["portafolio-avance-visualizacion"]?.docentes,
           mappers.avance_visualizacion

@@ -43,6 +43,16 @@ export function PortfolioSection2025() {
             });
           }}
         />
+        <Button
+          text={"Excel Director"}
+          action={() => {
+            customDownload({
+              route: BASE_API_URL_2025 + "/2025-portafolio-excel-director",
+              options: { method: "POST" },
+              filename: "portafolio-directores.csv",
+            });
+          }}
+        />
       </CustomTabs>
       <div style={{ display: activeTab === "tab1" ? "block" : "none" }}>
         <TabGeneral/>

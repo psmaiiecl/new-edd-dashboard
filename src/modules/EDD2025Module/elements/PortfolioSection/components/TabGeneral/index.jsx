@@ -7,6 +7,7 @@ import { DaysLeftCounter } from "../../../../../../components/DaysLeftCounter";
 import { CustomDotLineChart } from "../../../../../../components/CustomDotLineChart";
 import { numberFormatter } from "../../../../../../utils/NumberFormatter";
 import { CustomColumnChart } from "../../../../../../components/CustomColumnChart";
+import { SELECT_STYLES } from "../../../../../../constants/CONST";
 
 export function TabGeneral() {
   const { data, handleFilter, filters } = useTab();
@@ -24,18 +25,7 @@ export function TabGeneral() {
             isSearchable
             noOptionsMessage={() => "Ninguna dependencia"}
             placeholder="Seleccione una dependencia"
-            styles={{
-              control: (base) => ({
-                ...base,
-                fontSize: "13px",
-                padding: "0px 10px ",
-              }),
-              option: (base) => ({
-                ...base,
-                fontSize: "13px",
-                color: "black",
-              }),
-            }}
+            styles={SELECT_STYLES}
           />
         </div>
         <div className="tab-general-filter">
@@ -48,18 +38,7 @@ export function TabGeneral() {
             isSearchable
             noOptionsMessage={() => "Ninguna region"}
             placeholder="Seleccione una region"
-            styles={{
-              control: (base) => ({
-                ...base,
-                fontSize: "13px",
-                padding: "0px 10px ",
-              }),
-              option: (base) => ({
-                ...base,
-                fontSize: "13px",
-                color: "black",
-              }),
-            }}
+            styles={SELECT_STYLES}
           />
         </div>
       </div>
@@ -103,11 +82,17 @@ export function TabGeneral() {
             data={data?.avance_encuesta}
           />
         </div>
-        <div className="pie-grid-3">
+        <div className="pie-grid-2">
           <CustomPieChart
             subtitle={"DESCARGA <b>PORTAFOLIO</b>"}
             data={data?.descarga_portafolio}
           />
+          <CustomPieChart
+            subtitle={"DESCARGA <b>REPORTE DIRECTORES</b>"}
+            data={data?.descarga_reporte_director}
+          />
+        </div>
+        <div className="pie-grid-2">
           <CustomPieChart
             subtitle={"VISUALIZACIÓN <b>CLASE GRABADA</b>"}
             data={data?.visualizacion_clase}

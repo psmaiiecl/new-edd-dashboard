@@ -183,6 +183,22 @@ export const mappers = {
       },
     ],
   },
+  avance_descarga_reporte_director: {
+    total_key: "total",
+    series: [
+      {
+        name: "Descargado",
+        key: "descargados",
+        sliced: true,
+        color: "#65D9AB",
+      },
+      {
+        name: "No Descargado",
+        key: "no_descargados",
+        color: "#ff5880",
+      },
+    ],
+  },
   avance_visualizacion: {
     total_key: "total",
     series: [
