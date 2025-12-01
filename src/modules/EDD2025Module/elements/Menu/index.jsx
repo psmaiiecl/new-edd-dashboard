@@ -18,7 +18,7 @@ export function Menu() {
         <hr />
       </div>
       <div className="module-menu">
-        {getTipoUsuario() != 5 && (
+        {![5, 6].includes(getTipoUsuario()) && (
           <ModuleCard
             title={"Inscripción"}
             action={() => navigate("inscripcion")}
@@ -30,7 +30,7 @@ export function Menu() {
             />
           </ModuleCard>
         )}
-        {getTipoUsuario() != 5 && (
+        {![5, 6].includes(getTipoUsuario()) && (
           <ModuleCard
             title={"Validación"}
             loading={loadingStatus.validation}
@@ -42,7 +42,7 @@ export function Menu() {
             />
           </ModuleCard>
         )}
-        {getTipoUsuario() != 5 && (
+        {![5, 6].includes(getTipoUsuario()) && (
           <ModuleCard
             title={"Entrega de Resultados"}
             action={() => navigate("resultados")}
@@ -54,7 +54,7 @@ export function Menu() {
             />
           </ModuleCard>
         )}
-        {getTipoUsuario() != 5 && (
+        {![5, 6].includes(getTipoUsuario()) && (
           <ModuleCard
             title={"Portafolio"}
             action={() => navigate("portafolio")}
@@ -66,7 +66,7 @@ export function Menu() {
             />
           </ModuleCard>
         )}
-        {getTipoUsuario() != 5 && (
+        {![5, 6].includes(getTipoUsuario()) && (
           <ModuleCard
             title={"Agendamiento de Grabaciones"}
             action={() => navigate("agendamiento-grabaciones")}
@@ -78,7 +78,7 @@ export function Menu() {
             />
           </ModuleCard>
         )}
-        {getTipoUsuario() != 5 && (
+        {![5, 6].includes(getTipoUsuario()) && (
           <ModuleCard
             title={"Grabaciones"}
             loading={loadingStatus.grabaciones}
@@ -90,7 +90,7 @@ export function Menu() {
             />
           </ModuleCard>
         )}
-        {getTipoUsuario() != 5 && (
+        {![5, 6].includes(getTipoUsuario()) && (
           <ModuleCard
             title={"Recuperación de SD's"}
             // action={() => navigate("recuperacion-sd")}
@@ -108,7 +108,7 @@ export function Menu() {
             />
           </ModuleCard>
         )}
-        {getTipoUsuario() != 5 && (
+        {![5, 6].includes(getTipoUsuario()) && (
           <ModuleCard
             title={"Procesamiento de Grabaciones"}
             action={() => navigate("procesamiento-sd")}
@@ -120,25 +120,27 @@ export function Menu() {
             />
           </ModuleCard>
         )}
+        {![6].includes(getTipoUsuario()) && (
+          <ModuleCard
+            title={"Corrección Postulaciones"}
+            action={() => navigate("correccion-postulaciones")}
+            loading={loadingStatus.correccion_postulaciones}
+          >
+            <HighchartsReact
+              options={cardCharts?.correccion_postulaciones}
+              highcharts={Highcharts}
+            />
+          </ModuleCard>
+        )}
 
-        <ModuleCard
-          title={"Corrección Postulaciones"}
-          action={() => navigate("correccion-postulaciones")}
-          loading={loadingStatus.correccion_postulaciones}
-        >
-          <HighchartsReact
-            options={cardCharts?.correccion_postulaciones}
-            highcharts={Highcharts}
-          />
-        </ModuleCard>
-        {getTipoUsuario() != 5 && (
+        {![5].includes(getTipoUsuario()) && (
           <ModuleCard
             title={"Corrección Portafolios"}
             action={() => navigate("correccion-portafolios")}
             loading={loadingStatus.correccion_portafolios}
           />
         )}
-        {getTipoUsuario() != 5 && (
+        {![5, 6].includes(getTipoUsuario()) && (
           <ModuleCard
             title={"Mesa de Ayuda - Tickets"}
             loading={loadingStatus.help}

@@ -6,20 +6,31 @@ export const resultadosTabList = [
 ];
 
 export const monitoreoTabList = [
-  { index: "mtab4", label: "Avance de Productividad" },
+  { index: "mtab4", label: "Avance de Productividad", excludeFor: [6] },
   { index: "mtab1", label: "Calibración de correcciones grupales" },
-  { index: "mtab2", label: "Calibración de terceras correcciones" },
-  { index: "mtab3", label: "Distribución de porcentajes por indicador" },
+  {
+    index: "mtab2",
+    label: "Calibración de terceras correcciones",
+    excludeFor: [6],
+  },
+  {
+    index: "mtab3",
+    label: "Distribución de porcentajes por indicador",
+    excludeFor: [6],
+  },
 ];
 
-export const flujosTabList = [
-  { index: "ftab1", label: "GENERAL M2" },
-];
+export const flujosTabList = [{ index: "ftab1", label: "GENERAL M2" }];
 
 export const tabList = [
-  { index: "tab1", label: "Resultados", inner: resultadosTabList },
+  {
+    index: "tab1",
+    label: "Resultados",
+    inner: resultadosTabList,
+    excludeFor: [6],
+  },
   { index: "tab2", label: "Monitoreo", inner: monitoreoTabList },
-  { index: "tab3", label: "Monitoreo Flujos"},
-  { index: "tab4", label: "Monitoreo IA"},
-  { index: "tab5", label: "Monitoreo B/C"},
+  { index: "tab3", label: "Monitoreo Flujos", excludeFor: [6] },
+  { index: "tab4", label: "Monitoreo IA", excludeFor: [6] },
+  { index: "tab5", label: "Monitoreo B/C", excludeFor: [6] },
 ];

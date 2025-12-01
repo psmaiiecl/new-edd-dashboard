@@ -1,229 +1,247 @@
-import { TabContent } from "../../../../../../components/Layout/TabContent";
+import { useMemo, useRef } from "react";
 import Select from "react-select";
-import { useTab } from "./hooks/useTab";
 import {
-  AutoSizer,
-  Table,
-  Column,
-  defaultTableHeaderRenderer as defHeadRender,
-  defaultTableCellRenderer as defCellRenderer,
-  defaultTableCellDataGetter as defCellDataGetter,
-} from "react-virtualized";
-import "react-virtualized/styles.css";
+  useReactTable,
+  getCoreRowModel,
+  flexRender,
+} from "@tanstack/react-table";
+import { useVirtualizer } from "@tanstack/react-virtual";
+import { TabContent } from "../../../../../../components/Layout/TabContent";
+import { useTab } from "./hooks/useTab";
+import { SELECT_STYLES } from "../../../../../../constants/CONST";
 import "./style.css";
-
+import { GRUPOS_TRABAJO, TIPO_PORTAFOLIO } from "./data/filters";
+import { Button } from "../../../../../../components/Button";
 
 export function TabCorreccionesGrupales() {
-  const indicadorIndex = Array.from({ length: 12 }, (_, i) => i + 1);
+  const indicadorIndex = useMemo(
+    () => Array.from({ length: 12 }, (_, i) => i + 1),
+    []
+  );
 
-  const { selectedFilter, handleFilter, correccionTable } = useTab();
+  const { selectedFilter, handleFilter, correccionTable, cleanFilters } =
+    useTab();
+
+  const data = useMemo(() => correccionTable || [], [correccionTable]);
+
+  const columns = useMemo(() => {
+    const baseCols = [
+      {
+        id: "corrector",
+        header: "Corrector",
+        accessorKey: "corrector",
+        size: 300,
+      },
+      {
+        id: "tipo_de",
+        header: "Tipo de Portafolio",
+        accessorKey: "tipo_de",
+        size: 100,
+      },
+      {
+        id: "rol",
+        header: "Rol",
+        accessorKey: "rol",
+        size: 100,
+      },
+      {
+        id: "co",
+        header: "Count",
+        accessorKey: "co",
+        size: 50,
+      },
+    ];
+
+    const indicadorCols = indicadorIndex.map((i) => ({
+      id: `ind_${i}`,
+      header: `% I${i}`,
+      accessorKey: `ind_${i}`,
+      size: 60,
+      cell: ({ getValue }) => {
+        const value = getValue() ?? 0;
+        return (
+          <div
+            style={{
+              textAlign: "center",
+              backgroundColor: getBackgroundColor(value),
+            }}
+          >
+            {value}
+          </div>
+        );
+      },
+    }));
+
+    return [...baseCols, ...indicadorCols];
+  }, [indicadorIndex]);
+
+  const table = useReactTable({
+    data,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+    columnResizeMode: "onChange",
+  });
+
+  const parentRef = useRef(null);
+
+  const rowVirtualizer = useVirtualizer({
+    count: table.getRowModel().rows.length,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => 32.5,
+    overscan: 10,
+  });
+
+  const virtualRows = rowVirtualizer.getVirtualItems();
+  const totalSize = rowVirtualizer.getTotalSize();
+  const paddingTop = virtualRows.length > 0 ? virtualRows[0].start : 0;
+  const paddingBottom =
+    virtualRows.length > 0
+      ? totalSize - virtualRows[virtualRows.length - 1].end
+      : 0;
+
   return (
     <TabContent>
       <div className="tab-general-filter-row">
         <div className="tab-general-filter">
           <span>Seleccione grupo de trabajo: </span>
           <Select
-            value={""}
-            // onChange={(option) => handleFilter("agrupacion", option)}
-            options={[]}
+            value={selectedFilter?.grupo_trabajo || ""}
+            onChange={(option) => handleFilter("grupo_trabajo", option)}
+            options={GRUPOS_TRABAJO}
             isSearchable
-            noOptionsMessage={() => "Ningun grupo de trabajo"}
+            noOptionsMessage={() => "Ningún grupo de trabajo"}
             placeholder="Seleccione un grupo de trabajo"
-            styles={{
-              control: (base) => ({
-                ...base,
-                fontSize: "13px",
-                padding: "0px 10px ",
-              }),
-              option: (base) => ({
-                ...base,
-                fontSize: "13px",
-                color: "black",
-              }),
-            }}
+            styles={SELECT_STYLES}
           />
         </div>
-        <div className="tab-general-filter">
+        {/* <div className="tab-general-filter">
           <span>Seleccione especialidad: </span>
           <Select
-            value={""}
-            // onChange={(option) => handleFilter("agrupacion", option)}
+            value={selectedFilter?.especialidad || ""}
+            onChange={(option) => handleFilter("especialidad", option)}
             options={[]}
             isSearchable
-            noOptionsMessage={() => "Ningun especialidad"}
-            placeholder="Seleccione un especialidad"
-            styles={{
-              control: (base) => ({
-                ...base,
-                fontSize: "13px",
-                padding: "0px 10px ",
-              }),
-              option: (base) => ({
-                ...base,
-                fontSize: "13px",
-                color: "black",
-              }),
-            }}
+            noOptionsMessage={() => "Ninguna especialidad"}
+            placeholder="Seleccione una especialidad"
+            styles={SELECT_STYLES}
           />
-        </div>
+        </div> */}
         <div className="tab-general-filter">
           <span>Seleccione tipo de portafolio: </span>
           <Select
-            value={""}
-            // onChange={(option) => handleFilter("agrupacion", option)}
-            options={[]}
+            value={selectedFilter?.tipo_portafolio || ""}
+            onChange={(option) => handleFilter("tipo_portafolio", option)}
+            options={TIPO_PORTAFOLIO}
             isSearchable
-            noOptionsMessage={() => "Ningun tipo de portafolio"}
+            noOptionsMessage={() => "Ningún tipo de portafolio"}
             placeholder="Seleccione un tipo de portafolio"
-            styles={{
-              control: (base) => ({
-                ...base,
-                fontSize: "13px",
-                padding: "0px 10px ",
-              }),
-              option: (base) => ({
-                ...base,
-                fontSize: "13px",
-                color: "black",
-              }),
-            }}
+            styles={SELECT_STYLES}
           />
         </div>
+        <div
+          style={{
+            display: "flex",
+            gap: "5px",
+            boxSizing: "border-box",
+            alignSelf: "end",
+          }}
+        >
+          <Button text={"Limpiar Filtros"} action={cleanFilters} />
+        </div>
       </div>
+
       <div className="normal-container">
-        {correccionTable.length > 0 && (
-          <div style={{ height: "475px", width: "100%" , overflowX: "auto" , overflowY: "hidden" }}>
-            <AutoSizer>
-              {() => (
-                <Table
-                  gridStyle={{ outline: "none" }}
-                  width={1285}
-                  height={450}
-                  headerHeight={25}
-                  rowHeight={25}
-                  rowCount={correccionTable.length}
-                  rowGetter={({ index }) => {
-                    return correccionTable[index];
-                  }}
-                >
-                  <Column 
-                    label="Corrector"
-                    width={300}
-                    dataKey="corrector"
-                    headerRenderer={defHeadRender}
-                    cellDataGetter={defCellDataGetter}
-                    cellRenderer={defCellRenderer}
-                    minWidth={300}
-                    maxWidth={300}
-                  />
-                  <Column
-                    label="Tipo de Portafolio"
-                    width={100}
-                    maxWidth={100}
-                    minWidth={100}
-                    dataKey="tipo_de"
-                    headerRenderer={defHeadRender}
-                    cellDataGetter={defCellDataGetter}
-                    cellRenderer={defCellRenderer}
-                  />
-                  <Column
-                    label="Rol"
-                    width={100}
-                    maxWidth={100}
-                    minWidth={100}
-                    dataKey="rol"
-                    headerRenderer={defHeadRender}
-                    cellDataGetter={defCellDataGetter}
-                    cellRenderer={defCellRenderer}
-                  />
-                  <Column
-                    label="Count"
-                    width={50}
-                    maxWidth={50}
-                    minWidth={50}
-                    dataKey="co"
-                    headerRenderer={defHeadRender}
-                    cellDataGetter={defCellDataGetter}
-                    cellRenderer={defCellRenderer}
-                  />
-                  {indicadorIndex.map((i) => {
-                    return (
-                      <Column
-                        label={`% I${i}`}
-                        width={60}
-                        maxWidth={60}
-                        minWidth={60}
-                        dataKey={`ind_${i}`}
-                        headerRenderer={defHeadRender}
-                        cellDataGetter={defCellDataGetter}
-                        cellRenderer={({ cellData }) => (
-                          <div
-                            style={{
-                              textAlign: "center",
-                              backgroundColor: getBackgroundColor(
-                                cellData || 0
-                              ),
-                            }}
-                          >
-                            {cellData || 0}
-                          </div>
-                        )}
-                      />
-                    );
-                  })}
-                </Table>
-              )}
-            </AutoSizer>
-          </div>
-        )}
-        {/* <table>
-          <thead>
-            <tr>
-              <th>Corrector</th>
-              <th>Tipo de Portafolio</th>
-              <th>Rol</th>
-              <th>Count</th>
-              {indicadorIndex.map((i) => {
-                return <th>% Ind {i}</th>;
-              })}
-            </tr>
-          </thead>
-          <tbody>
-            {correccionTable.map((row) => {
-              return (
-                <tr>
-                  <td>{row?.corrector}</td>
-                  <td>{row?.tipo_de}</td>
-                  <td>{row?.rol}</td>
-                  <td>{row?.co}</td>
-                  {indicadorIndex.map((i) => {
-                    return (
-                      <td
+        {data.length > 0 && (
+          <div
+            ref={parentRef}
+            style={{
+              height: 475,
+              width: "100%",
+              overflowX: "auto",
+              overflowY: "auto",
+            }}
+          >
+            <table
+              className="tab-table"
+              style={{ width: 1200, borderCollapse: "collapse" }}
+            >
+              <thead>
+                {table.getHeaderGroups().map((headerGroup) => (
+                  <tr key={headerGroup.id}>
+                    {headerGroup.headers.map((header) => (
+                      <th
+                        key={header.id}
                         style={{
-                          backgroundColor: getBackgroundColor(
-                            row[`ind_${i}`] || 0
-                          ),
+                          position: "sticky",
+                          top: 0,
+
+                          background: "rgb(81, 151, 209)",
+                          zIndex: 1,
+                          minWidth: header.getSize(),
+                          maxWidth: header.getSize(),
+
+                          borderBottom: "2px solid #ddd",
                         }}
                       >
-                        {row[`ind_${i}`] || 0}
-                      </td>
-                    );
-                  })}
-                </tr>
-              );
-            })}
-          </tbody>
-        </table> */}
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
+                      </th>
+                    ))}
+                  </tr>
+                ))}
+              </thead>
+              <tbody>
+                {paddingTop > 0 && (
+                  <tr>
+                    <td style={{ height: paddingTop }} />
+                  </tr>
+                )}
+
+                {virtualRows.map((virtualRow) => {
+                  const row = table.getRowModel().rows[virtualRow.index];
+                  return (
+                    <tr key={row.id}>
+                      {row.getVisibleCells().map((cell) => (
+                        <td
+                          key={cell.id}
+                          style={{
+                            minWidth: cell.column.getSize(),
+                            maxWidth: cell.column.getSize(),
+                            borderBottom: "1px solid #f0f0f0",
+                          }}
+                        >
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        </td>
+                      ))}
+                    </tr>
+                  );
+                })}
+
+                {paddingBottom > 0 && (
+                  <tr>
+                    <td style={{ height: paddingBottom }} />
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
     </TabContent>
   );
 }
-
 const getBackgroundColor = (number) => {
   const value = parseFloat(number);
-  if (isNaN(value)) return "#ffffff";
+  if (isNaN(value)) return "transparent";
 
-  if (value < 11.1) return "#fff";
+  if (value < 11.1) return "transparent";
   if (value <= 22.0) return "#fff1cd";
   if (value <= 43.0) return "#f3cccb";
   return "#db3b0f";

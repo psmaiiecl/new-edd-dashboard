@@ -12,8 +12,7 @@ import { SDRecoverySection2025 } from "../../modules/EDD2025Module/elements/SDRe
 import { RecordSchedulingSection2025 } from "../../modules/EDD2025Module/elements/RecordSchedulingSection";
 import { RecordSection2025 } from "../../modules/EDD2025Module/elements/RecordSection";
 // import { SDProcessingSection2025 } from "../../modules/EDD2025Module/elements/SDProcessingSection";
-// import { PostulationCorrectionSection2025 } from "../../modules/EDD2025Module/elements/PostulationCorrectionSection";
-import { PortfolioCorrectionSection2025 } from "../../modules/EDD2025Module/elements/PortfolioCorrectionSection/Index";
+import { PortfolioCorrectionSection2025 } from "../../modules/EDD2025Module/elements/PortfolioCorrectionSection";
 import { ProcessingSection2025 } from "../../modules/EDD2025Module/elements/ProcessingSection";
 import { PostulationSection2025 } from "../../modules/EDD2025Module/elements/PostulationSection";
 import { RouteProtector } from "../../components/RouteProtector";
@@ -42,7 +41,7 @@ export function DashboardPage() {
             <Route
               path="/"
               element={
-                <RouteProtector excludedRoles={[5]}>
+                <RouteProtector excludedRoles={[5, 6]}>
                   <EDD2024Module />
                 </RouteProtector>
               }
@@ -53,7 +52,7 @@ export function DashboardPage() {
               <Route
                 path="inscripcion"
                 element={
-                  <RouteProtector excludedRoles={[5]}>
+                  <RouteProtector excludedRoles={[5, 6]}>
                     <InscriptionSection2025 />
                   </RouteProtector>
                 }
@@ -61,7 +60,7 @@ export function DashboardPage() {
               <Route
                 path="validacion"
                 element={
-                  <RouteProtector excludedRoles={[5]}>
+                  <RouteProtector excludedRoles={[5, 6]}>
                     <ValidationSection2025 />
                   </RouteProtector>
                 }
@@ -69,7 +68,7 @@ export function DashboardPage() {
               <Route
                 path="portafolio"
                 element={
-                  <RouteProtector excludedRoles={[5]}>
+                  <RouteProtector excludedRoles={[5, 6]}>
                     <PortfolioSection2025 />
                   </RouteProtector>
                 }
@@ -77,7 +76,7 @@ export function DashboardPage() {
               <Route
                 path="resultados"
                 element={
-                  <RouteProtector excludedRoles={[5]}>
+                  <RouteProtector excludedRoles={[5, 6]}>
                     <ResultSection2025 />
                   </RouteProtector>
                 }
@@ -85,7 +84,7 @@ export function DashboardPage() {
               <Route
                 path="agendamiento-grabaciones"
                 element={
-                  <RouteProtector excludedRoles={[5]}>
+                  <RouteProtector excludedRoles={[5, 6]}>
                     <RecordSchedulingSection2025 />
                   </RouteProtector>
                 }
@@ -93,7 +92,7 @@ export function DashboardPage() {
               <Route
                 path="grabaciones"
                 element={
-                  <RouteProtector excludedRoles={[5]}>
+                  <RouteProtector excludedRoles={[5, 6]}>
                     <RecordSection2025 />
                   </RouteProtector>
                 }
@@ -101,7 +100,7 @@ export function DashboardPage() {
               <Route
                 path="recuperacion-sd"
                 element={
-                  <RouteProtector excludedRoles={[5]}>
+                  <RouteProtector excludedRoles={[5, 6]}>
                     <SDRecoverySection2025 />
                   </RouteProtector>
                 }
@@ -109,7 +108,7 @@ export function DashboardPage() {
               <Route
                 path="procesamiento-sd"
                 element={
-                  <RouteProtector excludedRoles={[5]}>
+                  <RouteProtector excludedRoles={[5, 6]}>
                     <ProcessingSection2025 />
                   </RouteProtector>
                 }
@@ -117,7 +116,7 @@ export function DashboardPage() {
               <Route
                 path="correccion-postulaciones"
                 element={
-                  <RouteProtector>
+                  <RouteProtector excludedRoles={[6]}>
                     <PostulationSection2025 />
                   </RouteProtector>
                 }
