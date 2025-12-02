@@ -135,10 +135,15 @@ export function Menu() {
 
         {![5].includes(getTipoUsuario()) && (
           <ModuleCard
-            title={"Corrección Portafolios"}
-            action={() => navigate("correccion-portafolios")}
-            loading={loadingStatus.correccion_portafolios}
-          />
+          title={"Corrección Portafolios"}
+          action={() => navigate("correccion-portafolios")}
+          loading={loadingStatus.correccion_portafolios}
+          >
+            <HighchartsReact
+              options={cardCharts?.correccion_portafolios}
+              highcharts={Highcharts}
+            />
+          </ModuleCard>
         )}
         {![5, 6].includes(getTipoUsuario()) && (
           <ModuleCard

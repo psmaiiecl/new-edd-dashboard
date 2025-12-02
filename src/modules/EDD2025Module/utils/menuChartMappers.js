@@ -355,3 +355,38 @@ export function buildPostulacionModuleChart(data) {
     ],
   };
 }
+
+export function buildPortfolioCorrectionModuleChart(data){
+  const completas = data?.completa?.cantidad || 0;
+  const incompletas = data?.incompleta?.cantidad || 0;
+  const total = completas + incompletas;
+
+  return {
+    ...MODULE_CHART_SETUP,
+    series: [
+      {
+        ...MODULE_CHART_SETUP.series[0],
+        data: [
+          {
+            name: "Correcciones Completas",
+            y: completas,
+            color: "#c3ffb0",
+            drilldown: {
+              categories: ["Completas"],
+              data: [(completas / total) * 100],
+            },
+          },
+          {
+            name: "Correcciones Incompletas",
+            y: incompletas,
+            color: "#76767b",
+            drilldown: {
+              categories: ["Incompletas"],
+              data: [(incompletas / total) * 100],
+            },
+          },
+        ],
+      },
+    ],
+  };
+}

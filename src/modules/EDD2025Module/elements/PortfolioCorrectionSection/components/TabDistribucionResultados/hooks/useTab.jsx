@@ -30,8 +30,7 @@ export function useTab() {
       formData: selectedFilter,
       shouldCache: true,
     }).then((data) => {
-      console.log(data);
-
+      //console.log(data);
       const dataTorta = {
         completa: data.completa.cantidad ?? 0,
         incompleta: data.incompleta.cantidad ?? 0,

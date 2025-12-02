@@ -12,8 +12,12 @@ import { SELECT_STYLES } from "../../../../../../constants/CONST";
 import "./style.css";
 import { GRUPOS_TRABAJO, TIPO_PORTAFOLIO } from "./data/filters";
 import { Button } from "../../../../../../components/Button";
+import { useCustomDownload } from "../../../../../../hooks/useCustomDownload";
+import { BASE_API_URL_2025 } from "../../../../data/BASE_API_URL";
 
 export function TabCorreccionesGrupales() {
+  const customDownload = useCustomDownload();
+
   const indicadorIndex = useMemo(
     () => Array.from({ length: 12 }, (_, i) => i + 1),
     []
@@ -147,6 +151,18 @@ export function TabCorreccionesGrupales() {
           }}
         >
           <Button text={"Limpiar Filtros"} action={cleanFilters} />
+          <Button
+            text={"Excel"}
+            action={() => {
+              customDownload({
+                route:
+                  BASE_API_URL_2025 +
+                  `/2025-cpf-calibracion-grupal?tipo_portafolio=${selectedFilter.tipo_portafolio?.value ?? ''}&grupo_trabajo=${selectedFilter.grupo_trabajo?.value ?? ''}&excel=1`,
+                options: { method: "GET" },
+                filename: `CALIBRACION_GRUPAL.xlsx`,
+              });
+            }}
+          />
         </div>
       </div>
 
