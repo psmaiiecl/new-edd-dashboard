@@ -12,7 +12,7 @@ export function TabDependencia() {
           data={data?.estado_portafolio}
           title={"ESTADO DE AVANCE DEL PORTAFOLIO <b>POR DEPENDENCIA</b>"}
         />
-        <hr/>
+        <hr />
         <ColumnChartLegend mappedData={data?.estado_portafolio} />
       </div>
       <div className="general-pie-chart-container">
@@ -20,7 +20,7 @@ export function TabDependencia() {
           data={data?.estado_m1}
           title={"ESTADO DE AVANCE DEL MÓDULO 1 <b>POR DEPENDENCIA</b>"}
         />
-        <hr/>
+        <hr />
         <ColumnChartLegend mappedData={data?.estado_m1} />
       </div>
       <div className="general-pie-chart-container">
@@ -28,7 +28,7 @@ export function TabDependencia() {
           data={data?.estado_m2}
           title={"ESTADO DE AVANCE DEL MÓDULO 2 <b>POR DEPENDENCIA</b>"}
         />
-        <hr/>
+        <hr />
         <ColumnChartLegend mappedData={data?.estado_m2} />
       </div>
       <div className="general-pie-chart-container">
@@ -36,7 +36,7 @@ export function TabDependencia() {
           data={data?.estado_m3}
           title={"ESTADO DE AVANCE DEL MÓDULO 3 <b>POR DEPENDENCIA</b>"}
         />
-        <hr/>
+        <hr />
         <ColumnChartLegend mappedData={data?.estado_m3} />
       </div>
     </TabContent>

@@ -8,19 +8,28 @@ export function RouteProtector({ children, permittedRoles, excludedRoles }) {
   const { notificate } = useContext(NotificationContext);
 
   if (!getToken()) {
-    notificate({ type: "error", message: `Token de acceso expirado, inicie sesion nuevamente` });
+    notificate({
+      type: "error",
+      message: `Token de acceso expirado, inicie sesion nuevamente`,
+    });
     return <Navigate to="/" />;
   }
-  
+
   const tipoUsuario = getTipoUsuario();
-  
+
   if (permittedRoles && !permittedRoles.includes(tipoUsuario)) {
-    notificate({ type: "error", message: `No tiene permisos para acceder aquí` });
+    notificate({
+      type: "error",
+      message: `No tiene permisos para acceder aquí`,
+    });
     return <Navigate to="/" />;
   }
-  
+
   if (excludedRoles && excludedRoles.includes(tipoUsuario)) {
-    notificate({ type: "error", message: `No tiene permisos para acceder aquí` });
+    notificate({
+      type: "error",
+      message: `No tiene permisos para acceder aquí`,
+    });
     return <Navigate to="/" />;
   }
 

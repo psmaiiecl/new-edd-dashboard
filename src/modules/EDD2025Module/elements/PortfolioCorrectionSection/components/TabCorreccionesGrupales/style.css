@@ -1,9 +1,10 @@
 .tab-table {
-  all: unset; 
+  all: unset;
   display: table;
   width: 100%;
   border-collapse: collapse;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
   font-size: 13px;
   background-color: #ffffff;
 }

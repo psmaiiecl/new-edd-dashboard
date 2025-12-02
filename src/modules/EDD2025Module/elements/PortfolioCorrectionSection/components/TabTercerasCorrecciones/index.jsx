@@ -205,17 +205,15 @@ export function TabTercerasCorrecciones() {
                     headerRenderer={defHeadRender}
                     cellDataGetter={defCellDataGetter}
                     cellRenderer={({ cellData }) => (
-                          <div
-                            style={{
-                              textAlign: "center",
-                              backgroundColor: getBackgroundColor(
-                                cellData || 0
-                              ),
-                            }}
-                          >
-                            {cellData || 0}
-                          </div>
-                        )}
+                      <div
+                        style={{
+                          textAlign: "center",
+                          backgroundColor: getBackgroundColor(cellData || 0),
+                        }}
+                      >
+                        {cellData || 0}
+                      </div>
+                    )}
                   />
                 </Table>
               )}

@@ -356,7 +356,7 @@ export function buildPostulacionModuleChart(data) {
   };
 }
 
-export function buildPortfolioCorrectionModuleChart(data){
+export function buildPortfolioCorrectionModuleChart(data) {
   const completas = data?.completa?.cantidad || 0;
   const incompletas = data?.incompleta?.cantidad || 0;
   const total = completas + incompletas;

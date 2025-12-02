@@ -81,7 +81,12 @@ export function TabProductividad() {
             <tbody>
               {tableData.map((row, index) => {
                 return (
-                  <tr key={(row?.especialidad + row?.modulo + row?.fecha)||index+"prod"}>
+                  <tr
+                    key={
+                      row?.especialidad + row?.modulo + row?.fecha ||
+                      index + "prod"
+                    }
+                  >
                     <td>{row?.especialidad}</td>
                     <td>{row?.modulo}</td>
                     <td>{row?.total}</td>

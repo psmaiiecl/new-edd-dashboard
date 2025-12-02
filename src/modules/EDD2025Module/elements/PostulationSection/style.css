@@ -1,4 +1,4 @@
- table {
+table {
   width: 100%;
   border-collapse: collapse;
   font-family: Arial, sans-serif;
@@ -26,4 +26,4 @@ tbody tr:nth-child(even) td {
 th,
 td {
   border: 1px solid #ddd;
-} 
+}

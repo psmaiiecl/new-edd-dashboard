@@ -26,13 +26,13 @@ export function useTab() {
       formData: selectedFilter,
       shouldCache: true,
     }).then((data) => {
-        setCorreccionTable(data?.datos || []);
+      setCorreccionTable(data?.datos || []);
     });
   }, [selectedFilter, customFetch]);
 
   return {
     selectedFilter,
     handleFilter,
-    correccionTable
+    correccionTable,
   };
 }

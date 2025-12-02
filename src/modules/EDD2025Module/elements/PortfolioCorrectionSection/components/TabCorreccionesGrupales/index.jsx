@@ -157,7 +157,11 @@ export function TabCorreccionesGrupales() {
               customDownload({
                 route:
                   BASE_API_URL_2025 +
-                  `/2025-cpf-calibracion-grupal?tipo_portafolio=${selectedFilter.tipo_portafolio?.value ?? ''}&grupo_trabajo=${selectedFilter.grupo_trabajo?.value ?? ''}&excel=1`,
+                  `/2025-cpf-calibracion-grupal?tipo_portafolio=${
+                    selectedFilter.tipo_portafolio?.value ?? ""
+                  }&grupo_trabajo=${
+                    selectedFilter.grupo_trabajo?.value ?? ""
+                  }&excel=1`,
                 options: { method: "GET" },
                 filename: `CALIBRACION_GRUPAL.xlsx`,
               });

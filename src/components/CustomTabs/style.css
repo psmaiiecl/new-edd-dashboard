@@ -71,13 +71,12 @@
   min-width: 200px;
 }
 
-
 @media (max-width: 550px) {
   .tab-container {
     flex-wrap: wrap;
-}
-.tab__addOns {
-  min-width: 100%;
-  flex-wrap: wrap;
-}
+  }
+  .tab__addOns {
+    min-width: 100%;
+    flex-wrap: wrap;
+  }
 }

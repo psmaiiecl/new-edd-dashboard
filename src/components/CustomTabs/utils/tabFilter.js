@@ -1,9 +1,9 @@
 export function filterTabsByUserRole(tabArray, tipoUsuario) {
-  return tabArray.map(tab => {
+  return tabArray.map((tab) => {
     if (tab.restrictedTo && Array.isArray(tab.restrictedTo)) {
       return {
         ...tab,
-        exclude: !tab.restrictedTo.includes(tipoUsuario), 
+        exclude: !tab.restrictedTo.includes(tipoUsuario),
       };
     }
 
@@ -13,7 +13,7 @@ export function filterTabsByUserRole(tabArray, tipoUsuario) {
         exclude: tab.excludeFor.includes(tipoUsuario),
       };
     }
-    if(tab.inner){
+    if (tab.inner) {
       tab.inner = filterTabsByUserRole(tab.inner, tipoUsuario);
     }
     return tab;

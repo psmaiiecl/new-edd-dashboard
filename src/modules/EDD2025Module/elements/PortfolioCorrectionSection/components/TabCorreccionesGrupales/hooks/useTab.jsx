@@ -30,7 +30,9 @@ export function useTab() {
     customFetch({
       route:
         BASE_API_URL_2025 +
-        `/2025-cpf-calibracion-grupal?tipo_portafolio=${selectedFilter?.tipo_portafolio?.value ?? ''}&grupo_trabajo=${selectedFilter?.grupo_trabajo?.value ??''}`,
+        `/2025-cpf-calibracion-grupal?tipo_portafolio=${
+          selectedFilter?.tipo_portafolio?.value ?? ""
+        }&grupo_trabajo=${selectedFilter?.grupo_trabajo?.value ?? ""}`,
       method: "GET",
       shouldCache: true,
     }).then((data) => {
@@ -42,6 +44,6 @@ export function useTab() {
     selectedFilter,
     handleFilter,
     correccionTable,
-    cleanFilters
+    cleanFilters,
   };
 }

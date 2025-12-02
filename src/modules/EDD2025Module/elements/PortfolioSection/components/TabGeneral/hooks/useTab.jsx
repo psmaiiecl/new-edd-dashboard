@@ -4,7 +4,11 @@ import { useCustomFetch } from "../../../../../../../hooks/useCustomFetch";
 import { BASE_API_URL_2025 } from "../../../../../data/BASE_API_URL";
 import { mapPieData } from "../../../../../../../utils/ChartMapperFactory";
 import { mappers } from "../../../utils/mapSpecs";
-import { buildAvanceSemanalPortafolio, mapPortafolioAvanceDiario, mapPortafolioAvanceIniciados } from "../../../utils/utils";
+import {
+  buildAvanceSemanalPortafolio,
+  mapPortafolioAvanceDiario,
+  mapPortafolioAvanceIniciados,
+} from "../../../utils/utils";
 
 export function useTab() {
   const customFetch = useCustomFetch();

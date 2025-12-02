@@ -45,13 +45,17 @@ export function TabMarca1() {
           }}
         >
           <Button text={"Limpiar Filtros"} action={resetFilter} />
-          <Button text={"Excel"} action={() => {
-                      customDownload({
-                        route: BASE_API_URL_2025 + "/2025-correccion-pf-excel-discrepancias",
-                        options: { method: "GET" },
-                        filename: `HISTORIAL_DISCREPANCIAS.csv`,
-                      });
-                    }} />
+          <Button
+            text={"Excel"}
+            action={() => {
+              customDownload({
+                route:
+                  BASE_API_URL_2025 + "/2025-correccion-pf-excel-discrepancias",
+                options: { method: "GET" },
+                filename: `HISTORIAL_DISCREPANCIAS.csv`,
+              });
+            }}
+          />
         </div>
       </div>
       <div className="counter-title-container roboto-regular">
@@ -75,13 +79,14 @@ export function TabMarca1() {
                   </tr>
                 </thead>
                 <tbody className="roboto-regular">
-                  {data.detalles?.[selectedFilter.flujo.value].map((item, index) => (
-                    <tr key={selectedFilter.flujo.value+index}>
-                      <td>{item?.cdc ?? "-"}</td>
-                      <td>{item?.cantidad_discrepancias ?? "-"}</td>
-                      
-                    </tr>
-                  ))}
+                  {data.detalles?.[selectedFilter.flujo.value].map(
+                    (item, index) => (
+                      <tr key={selectedFilter.flujo.value + index}>
+                        <td>{item?.cdc ?? "-"}</td>
+                        <td>{item?.cantidad_discrepancias ?? "-"}</td>
+                      </tr>
+                    )
+                  )}
                 </tbody>
               </table>
             </div>

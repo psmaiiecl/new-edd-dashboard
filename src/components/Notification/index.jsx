@@ -15,4 +15,3 @@ export function Notification({ type, message, isClosing, closeFn }) {
     </div>
   );
 }
-

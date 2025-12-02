@@ -363,7 +363,7 @@ export function getFechas() {
     dates.push({
       id: "FECHA" + `${day}-${month}-${year}`,
       label: `${day}-${month}-${year}`,
-      value: `${day}-${month}-${year}`
+      value: `${day}-${month}-${year}`,
     });
   }
   return dates;

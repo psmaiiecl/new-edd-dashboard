@@ -3,7 +3,7 @@ export const SELECT_STYLES = {
     ...base,
     fontSize: "13px",
     padding: "0px 10px ",
-    zIndex: "2"
+    zIndex: "2",
   }),
   option: (base) => ({
     ...base,
@@ -12,6 +12,6 @@ export const SELECT_STYLES = {
   }),
   menu: (base) => ({
     ...base,
-    zIndex: "10"
+    zIndex: "10",
   }),
 };

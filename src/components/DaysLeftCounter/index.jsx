@@ -1,4 +1,4 @@
-import './style.css'
+import "./style.css";
 
 export function DaysLeftCounter({ dueDate }) {
   const diasRestantes = calculateDueDate(dueDate);

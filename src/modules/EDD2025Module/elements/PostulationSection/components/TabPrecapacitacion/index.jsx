@@ -9,8 +9,7 @@ import { BASE_API_URL_2025 } from "../../../../data/BASE_API_URL";
 import { Button } from "../../../../../../components/Button";
 
 function TabPrecapacitacion() {
-  const { selectedFilter, handleFilter, chartData } =
-    useTabPrecapacitacion();
+  const { selectedFilter, handleFilter, chartData } = useTabPrecapacitacion();
   const customDownload = useCustomDownload();
 
   return (

@@ -8,8 +8,8 @@ import Select from "react-select";
 import { AuthContext } from "../../../../../../context/AuthContext";
 
 export function TabAsistencias() {
-    const { data, handleFilter, selectedFilter } = useTab();
-    const { getPayload } = useContext(AuthContext);
+  const { data, handleFilter, selectedFilter } = useTab();
+  const { getPayload } = useContext(AuthContext);
   return (
     <TabContent>
       <div className="tab-general-filter-row">
@@ -19,7 +19,7 @@ export function TabAsistencias() {
             value={selectedFilter.cdc}
             onChange={(option) => handleFilter("cdc", option)}
             options={SelectorItems.cdc}
-            isDisabled = {getPayload()?.centro}
+            isDisabled={getPayload()?.centro}
             isSearchable
             noOptionsMessage={() => "Ninguna CdC"}
             placeholder="Seleccione"
@@ -88,9 +88,12 @@ export function TabAsistencias() {
         </div>
       </div>
       <div className="normal-container">
-            <div className="pie-grid-1">
-                <CustomPieChart subtitle={"ASISTENCIA <b>CORRECTORES</b>"} data={data}/>
-            </div>
+        <div className="pie-grid-1">
+          <CustomPieChart
+            subtitle={"ASISTENCIA <b>CORRECTORES</b>"}
+            data={data}
+          />
+        </div>
       </div>
     </TabContent>
   );

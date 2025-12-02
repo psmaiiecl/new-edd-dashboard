@@ -112,7 +112,7 @@ export function TabGeneral() {
       <CustomDotLineChart
         data={data?.avance_iniciados}
         title={"AVANCE DIARIO <b>PORTAFOLIO INICIADO</b>"}
-        />
+      />
       <hr />
       <CustomColumnChart
         data={data?.avance_semanal}

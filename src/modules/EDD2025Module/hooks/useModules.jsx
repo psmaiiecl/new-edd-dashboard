@@ -185,7 +185,7 @@ export function useModules() {
       route: BASE_API_URL_2025 + "/2025-postulacion",
       shouldCache: true,
       hasLoadPanel: false,
-      method: "GET"
+      method: "GET",
     })
       .then((data) => {
         setCardCharts((prev) => ({

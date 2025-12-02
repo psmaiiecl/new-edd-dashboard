@@ -82,5 +82,5 @@ export const mappers = {
         color: "#65D9AB",
       },
     ],
-  }
+  },
 };

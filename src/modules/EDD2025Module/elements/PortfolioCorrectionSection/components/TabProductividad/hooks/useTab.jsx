@@ -30,7 +30,7 @@ export function useTab() {
       fecha: null,
       modulo: null,
     });
-    setTableData([])
+    setTableData([]);
   };
 
   useEffect(() => {

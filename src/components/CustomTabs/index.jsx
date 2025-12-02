@@ -12,14 +12,17 @@ export function CustomTabs({ setActiveFn, currentActive, tabArray, children }) {
   return (
     <div className="tab-container">
       <div className="tabs">
-        {tabArray.map((tab) => (!(tab?.exclude === true) &&
-          <TabItem
-            key={tab.index}
-            isActive={tab.index === currentActive}
-            text={tab.label}
-            setAsActive={() => setActiveFn(tab.index)}
-          />
-        ))}
+        {tabArray.map(
+          (tab) =>
+            !(tab?.exclude === true) && (
+              <TabItem
+                key={tab.index}
+                isActive={tab.index === currentActive}
+                text={tab.label}
+                setAsActive={() => setActiveFn(tab.index)}
+              />
+            )
+        )}
       </div>
       <div className="tab__addOns">{children}</div>
     </div>

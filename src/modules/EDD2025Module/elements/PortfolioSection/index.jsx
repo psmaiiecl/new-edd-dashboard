@@ -55,19 +55,19 @@ export function PortfolioSection2025() {
         />
       </CustomTabs>
       <div style={{ display: activeTab === "tab1" ? "block" : "none" }}>
-        <TabGeneral/>
+        <TabGeneral />
       </div>
       <div style={{ display: activeTab === "tab2" ? "block" : "none" }}>
-        <TabDependencia/>
+        <TabDependencia />
       </div>
       <div style={{ display: activeTab === "tab3" ? "block" : "none" }}>
-        <TabConvocatoria/>
+        <TabConvocatoria />
       </div>
       <div style={{ display: activeTab === "tab4" ? "block" : "none" }}>
-        <TabRegion/>
+        <TabRegion />
       </div>
       <div style={{ display: activeTab === "tab5" ? "block" : "none" }}>
-        <TabAgrupacion/>
+        <TabAgrupacion />
       </div>
     </ModulePageLayout>
   );
