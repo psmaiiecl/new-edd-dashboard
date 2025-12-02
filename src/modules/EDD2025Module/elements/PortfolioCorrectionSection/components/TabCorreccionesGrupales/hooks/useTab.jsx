@@ -8,6 +8,7 @@ export function useTab() {
     grupo_trabajo: null,
     especialidad: null,
     tipo_portafolio: null,
+    periodo: null,
   });
   const [correccionTable, setCorreccionTable] = useState([]);
 
@@ -32,7 +33,9 @@ export function useTab() {
         BASE_API_URL_2025 +
         `/2025-cpf-calibracion-grupal?tipo_portafolio=${
           selectedFilter?.tipo_portafolio?.value ?? ""
-        }&grupo_trabajo=${selectedFilter?.grupo_trabajo?.value ?? ""}`,
+        }&grupo_trabajo=${selectedFilter?.grupo_trabajo?.value ?? ""}&periodo=${
+          selectedFilter?.periodo?.value ?? ""
+        }`,
       method: "GET",
       shouldCache: true,
     }).then((data) => {

@@ -77,6 +77,7 @@ export function useTab(module) {
         BASE_API_URL_2024 +
         `/2024-correccion_portafolios/resultados/por-modulo`,
       formData: filters,
+      hasLoadPanel: false,
       shouldCache: true,
     }).then((data) => {
       if (data) {

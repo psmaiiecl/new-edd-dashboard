@@ -10,7 +10,7 @@ import { TabContent } from "../../../../../../components/Layout/TabContent";
 import { useTab } from "./hooks/useTab";
 import { SELECT_STYLES } from "../../../../../../constants/CONST";
 import "./style.css";
-import { GRUPOS_TRABAJO, TIPO_PORTAFOLIO } from "./data/filters";
+import { GRUPOS_TRABAJO, PERIODO, TIPO_PORTAFOLIO } from "./data/filters";
 import { Button } from "../../../../../../components/Button";
 import { useCustomDownload } from "../../../../../../hooks/useCustomDownload";
 import { BASE_API_URL_2025 } from "../../../../data/BASE_API_URL";
@@ -47,6 +47,12 @@ export function TabCorreccionesGrupales() {
         header: "Rol",
         accessorKey: "rol",
         size: 100,
+      },
+      {
+        id: "periodo",
+        header: "Periodo",
+        accessorKey: "periodo",
+        size: 75,
       },
       {
         id: "co",
@@ -142,6 +148,18 @@ export function TabCorreccionesGrupales() {
             styles={SELECT_STYLES}
           />
         </div>
+        <div className="tab-general-filter">
+          <span>Seleccione periodo: </span>
+          <Select
+            value={selectedFilter?.periodo || ""}
+            onChange={(option) => handleFilter("periodo", option)}
+            options={PERIODO}
+            isSearchable
+            noOptionsMessage={() => "Ningún periodo"}
+            placeholder="Seleccione un periodo"
+            styles={SELECT_STYLES}
+          />
+        </div>
         <div
           style={{
             display: "flex",
@@ -161,6 +179,8 @@ export function TabCorreccionesGrupales() {
                     selectedFilter.tipo_portafolio?.value ?? ""
                   }&grupo_trabajo=${
                     selectedFilter.grupo_trabajo?.value ?? ""
+                  }&periodo=${
+                    selectedFilter.periodo?.value ?? ""
                   }&excel=1`,
                 options: { method: "GET" },
                 filename: `CALIBRACION_GRUPAL.xlsx`,
