@@ -1,10 +1,10 @@
 export const agrupacionesDistRes = [
-  { value: "-1", label: "Todas" },
+  { value: "", label: "Todas" },
   { value: "EA", label: "EA" },
   { value: "EB", label: "EB" },
   { value: "ECE", label: "ECE" },
-  { value: "NEET", label: "NEET" },
-  { value: "NEEP", label: "NEEP" },
+  { value: "EEER-NEET", label: "EEER" },
+  { value: "EEEE-NEEP", label: "EEEE" },
   { value: "EM", label: "EM" },
   { value: "EMTP", label: "EMTP" },
   { value: "EP", label: "EP" },

@@ -16,6 +16,7 @@ export const SelectorItems = {
     { id: "ULS", value: "ULS", label: "ULS" },
   ],
   especialidades: [
+    { id: "ESPECIALIDADALL", value: "", label: "Todos" },
     {
       id: "ESPECIALIDAD1",
       label: "Artes Visuales",
@@ -348,23 +349,44 @@ export function getSalas() {
 }
 
 export function getFechas() {
+  const fechaInicio = new Date("2025-12-10");
+  const fechaFin = new Date("2025-12-31");
+
+  fechaInicio.setHours(0, 0, 0, 0);
+  fechaFin.setHours(0, 0, 0, 0);
+
   const today = new Date();
-  const start = new Date(today.getFullYear() + 1, 0, 2);
-  start.setHours(0, 0, 0, 0);
   today.setHours(0, 0, 0, 0);
 
-  if (today < start) return [];
+  let fechaBase;
+  if (today < fechaInicio) {
+    fechaBase = fechaInicio;
+  } else if (today > fechaFin) {
+    fechaBase = fechaFin;
+  } else {
+    fechaBase = today;
+  }
 
   const dates = [];
-  for (let d = new Date(start); d <= today; d.setDate(d.getDate() + 1)) {
+
+  for (
+    let d = new Date(fechaInicio);
+    d <= fechaFin;
+    d.setDate(d.getDate() + 1)
+  ) {
     const day = String(d.getDate()).padStart(2, "0");
     const month = String(d.getMonth() + 1).padStart(2, "0");
     const year = d.getFullYear();
+
+    const value = `${year}-${month}-${day}`;
+
     dates.push({
-      id: "FECHA" + `${day}-${month}-${year}`,
+      id: `FECHA-${value}`,
       label: `${day}-${month}-${year}`,
       value: `${day}-${month}-${year}`,
+      selected: d.getTime() === fechaBase.getTime(),
     });
   }
+
   return dates;
 }

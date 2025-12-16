@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useCustomFetch } from "../../../../../../../hooks/useCustomFetch";
-import { BASE_API_URL_2024 } from "../../../../../data/BASE_API_URL";
+import { BASE_API_URL_2025 } from "../../../../../data/BASE_API_URL";
 
 export function useTab() {
   const customFetch = useCustomFetch();
   const [selectedFilter, setSelectedFilter] = useState({
-    grupo_trabajo: "",
-    especialidad: "",
-    tipo_portafolio: "",
+    grupo_trabajo: null,
+    especialidad: null,
+    tipo_portafolio: null,
   });
   const [correccionTable, setCorreccionTable] = useState([]);
 
@@ -18,15 +18,27 @@ export function useTab() {
     }));
   };
 
+  const cleanFilters = () => {
+    setSelectedFilter({
+      grupo_trabajo: null,
+      especialidad: null,
+      tipo_portafolio: null,
+    });
+  };
+
   useEffect(() => {
     customFetch({
       route:
-        BASE_API_URL_2024 +
-        "/2024-correccion_portafolios/monitoreo/calibracion_terceras",
-      formData: selectedFilter,
+        BASE_API_URL_2025 +
+        `/2025-cpf-calibracion-terceras?tipo_portafolio=${
+          selectedFilter?.tipo_portafolio?.value ?? ""
+        }&grupo_trabajo=${
+          selectedFilter?.grupo_trabajo?.value ?? ""
+        }&especialidad=${selectedFilter?.especialidad?.value ?? ""}`,
       shouldCache: true,
+      method: "GET",
     }).then((data) => {
-      setCorreccionTable(data?.datos || []);
+      setCorreccionTable(data || []);
     });
   }, [selectedFilter, customFetch]);
 
@@ -34,5 +46,6 @@ export function useTab() {
     selectedFilter,
     handleFilter,
     correccionTable,
+    cleanFilters
   };
 }

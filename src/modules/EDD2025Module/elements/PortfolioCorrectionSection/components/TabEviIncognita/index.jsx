@@ -9,13 +9,12 @@ import { useVirtualizer } from "@tanstack/react-virtual";
 import { TabContent } from "../../../../../../components/Layout/TabContent";
 import { useTab } from "./hooks/useTab";
 import { SELECT_STYLES } from "../../../../../../constants/CONST";
-import "./style.css";
 import { PERIODO } from "./data/filters";
 import { Button } from "../../../../../../components/Button";
 import { useCustomDownload } from "../../../../../../hooks/useCustomDownload";
 import { BASE_API_URL_2025 } from "../../../../data/BASE_API_URL";
 
-export function TabCorreccionesGrupales({selectors}) {
+export function TabEviIncognita({selectors}) {
   const customDownload = useCustomDownload();
 
   const indicadorIndex = useMemo(

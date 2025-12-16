@@ -209,11 +209,6 @@ export const mappers = {
         color: "#65D9AB",
       },
       {
-        name: "Incompleta",
-        key: "incompleto",
-        color: "#ffd153",
-      },
-      {
         name: "No Visualizada",
         key: "no_visualizado",
         color: "#ff5880",

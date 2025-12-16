@@ -1,20 +1,126 @@
 import Select from "react-select";
 import { useTab } from "./hooks/useTab";
 import { TabContent } from "../../../../../../components/Layout/TabContent";
-import {
-  AutoSizer,
-  Table,
-  Column,
-  defaultTableHeaderRenderer as defHeadRender,
-  defaultTableCellRenderer as defCellRenderer,
-  defaultTableCellDataGetter as defCellDataGetter,
-} from "react-virtualized";
+import { useVirtualizer } from "@tanstack/react-virtual";
 import "react-virtualized/styles.css";
+import { useCustomDownload } from "../../../../../../hooks/useCustomDownload";
+import { useMemo, useRef } from "react";
+import {
+  useReactTable,
+  getCoreRowModel,
+  flexRender,
+} from "@tanstack/react-table";
+import { SELECT_STYLES } from "../../../../../../constants/CONST";
+import { BASE_API_URL_2025 } from "../../../../data/BASE_API_URL";
+import { Button } from "../../../../../../components/Button";
 
-export function TabTercerasCorrecciones() {
-  const indicadorIndex = Array.from({ length: 12 }, (_, i) => i + 1);
+export function TabTercerasCorrecciones({selectors}) {
+  const customDownload = useCustomDownload();
+  const indicadorIndex = useMemo(
+    () => Array.from({ length: 12 }, (_, i) => i + 1),
+    []
+  );
 
-  const { selectedFilter, handleFilter, correccionTable } = useTab();
+  const { selectedFilter, handleFilter, correccionTable, cleanFilters } =
+    useTab();
+
+  const data = useMemo(() => correccionTable || [], [correccionTable]);
+
+  const columns = useMemo(() => {
+    const baseCols = [
+      {
+        id: "cc",
+        header: "CC",
+        accessorKey: "cc",
+        size: 50,
+      },
+      {
+        id: "modulo",
+        header: "M",
+        accessorKey: "modulo",
+        size: 35,
+      },
+      {
+        id: "corrector",
+        header: "Corrector",
+        accessorKey: "corrector",
+        size: 300,
+      },
+      {
+        id: "rut",
+        header: "RUT",
+        accessorKey: "rut",
+        size: 100,
+      },
+      {
+        id: "tipo_de",
+        header: "Tipo de Portafolio",
+        accessorKey: "tipo_de",
+        size: 100,
+      },
+      {
+        id: "especialidad",
+        header: "Especialidad",
+        accessorKey: "especialidad",
+        size: 75,
+      },
+    ];
+
+    const indicadorCols = indicadorIndex.map((i) => ({
+      id: `ind_${i}`,
+      header: `% I${i}`,
+      accessorKey: `ind_${i}`,
+      size: 50,
+    }));
+
+    return [
+      ...baseCols,
+      ...indicadorCols,
+      {
+        id: "promedio",
+        header: "Promedio",
+        accessorKey: "promedio",
+        size: 50,
+        cell: ({ getValue }) => {
+          const value = getValue() ?? 0;
+          return (
+            <div
+              style={{
+                textAlign: "center",
+                backgroundColor: getBackgroundColor(value),
+              }}
+            >
+              {value}
+            </div>
+          );
+        },
+      },
+    ];
+  }, [indicadorIndex]);
+
+  const table = useReactTable({
+    data,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+    columnResizeMode: "onChange",
+  });
+
+  const parentRef = useRef(null);
+
+  const rowVirtualizer = useVirtualizer({
+    count: table.getRowModel().rows.length,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => 32.5,
+    overscan: 10,
+  });
+
+  const virtualRows = rowVirtualizer.getVirtualItems();
+  const totalSize = rowVirtualizer.getTotalSize();
+  const paddingTop = virtualRows.length > 0 ? virtualRows[0].start : 0;
+  const paddingBottom =
+    virtualRows.length > 0
+      ? totalSize - virtualRows[virtualRows.length - 1].end
+      : 0;
 
   return (
     <TabContent>
@@ -22,202 +128,147 @@ export function TabTercerasCorrecciones() {
         <div className="tab-general-filter">
           <span>Seleccione grupo de trabajo: </span>
           <Select
-            value={""}
-            // onChange={(option) => handleFilter("agrupacion", option)}
-            options={[]}
+            value={selectedFilter?.grupo_trabajo || ""}
+            onChange={(option) => handleFilter("grupo_trabajo", option)}
+            options={selectors?.grupo_trabajo || []}
             isSearchable
-            noOptionsMessage={() => "Ningun grupo de trabajo"}
+            noOptionsMessage={() => "Ningún grupo de trabajo"}
             placeholder="Seleccione un grupo de trabajo"
-            styles={{
-              control: (base) => ({
-                ...base,
-                fontSize: "13px",
-                padding: "0px 10px ",
-              }),
-              option: (base) => ({
-                ...base,
-                fontSize: "13px",
-                color: "black",
-              }),
-            }}
+            styles={SELECT_STYLES}
           />
         </div>
         <div className="tab-general-filter">
           <span>Seleccione especialidad: </span>
           <Select
-            value={""}
-            // onChange={(option) => handleFilter("agrupacion", option)}
-            options={[]}
+            value={selectedFilter?.especialidad || ""}
+            onChange={(option) => handleFilter("especialidad", option)}
+            options={selectors?.especialidad || []}
             isSearchable
-            noOptionsMessage={() => "Ningun especialidad"}
-            placeholder="Seleccione un especialidad"
-            styles={{
-              control: (base) => ({
-                ...base,
-                fontSize: "13px",
-                padding: "0px 10px ",
-              }),
-              option: (base) => ({
-                ...base,
-                fontSize: "13px",
-                color: "black",
-              }),
-            }}
+            noOptionsMessage={() => "Ninguna especialidad"}
+            placeholder="Seleccione una especialidad"
+            styles={SELECT_STYLES}
           />
         </div>
         <div className="tab-general-filter">
           <span>Seleccione tipo de portafolio: </span>
           <Select
-            value={""}
-            // onChange={(option) => handleFilter("agrupacion", option)}
-            options={[]}
+            value={selectedFilter?.tipo_portafolio || ""}
+            onChange={(option) => handleFilter("tipo_portafolio", option)}
+            options={selectors?.tipo_portafolio || []}
             isSearchable
-            noOptionsMessage={() => "Ningun tipo de portafolio"}
+            noOptionsMessage={() => "Ningún tipo de portafolio"}
             placeholder="Seleccione un tipo de portafolio"
-            styles={{
-              control: (base) => ({
-                ...base,
-                fontSize: "13px",
-                padding: "0px 10px ",
-              }),
-              option: (base) => ({
-                ...base,
-                fontSize: "13px",
-                color: "black",
-              }),
+            styles={SELECT_STYLES}
+          />
+        </div>
+        <div
+          style={{
+            display: "flex",
+            gap: "5px",
+            boxSizing: "border-box",
+            alignSelf: "end",
+          }}
+        >
+          <Button text={"Limpiar Filtros"} action={cleanFilters} />
+          <Button
+            text={"Excel"}
+            action={() => {
+              customDownload({
+                route:
+                  BASE_API_URL_2025 +
+                  `/2025-cpf-calibracion-terceras?tipo_portafolio=${
+                    selectedFilter.tipo_portafolio?.value ?? ""
+                  }&grupo_trabajo=${
+                    selectedFilter.grupo_trabajo?.value ?? ""
+                  }&excel=1`,
+                options: { method: "GET" },
+                filename: `CALIBRACION_TERCERAS.xlsx`,
+              });
             }}
           />
         </div>
       </div>
       <div className="normal-container">
-        {correccionTable.length > 0 && (
+        {data.length > 0 && (
           <div
+            ref={parentRef}
             style={{
-              height: "475px",
+              height: 475,
               width: "100%",
               overflowX: "auto",
-              overflowY: "hidden",
+              overflowY: "auto",
             }}
           >
-            <AutoSizer>
-              {() => (
-                <Table
-                  gridStyle={{ outline: "none" }}
-                  width={1500}
-                  height={450}
-                  headerHeight={25}
-                  rowHeight={25}
-                  rowCount={correccionTable.length}
-                  rowGetter={({ index }) => {
-                    return correccionTable[index];
-                  }}
-                >
-                  <Column
-                    label="Corrector"
-                    width={300}
-                    dataKey="corrector"
-                    headerRenderer={defHeadRender}
-                    cellDataGetter={defCellDataGetter}
-                    cellRenderer={defCellRenderer}
-                    minWidth={300}
-                    maxWidth={300}
-                  />
-                  <Column
-                    label="RUT"
-                    width={100}
-                    dataKey="rut"
-                    headerRenderer={defHeadRender}
-                    cellDataGetter={defCellDataGetter}
-                    cellRenderer={defCellRenderer}
-                    minWidth={100}
-                    maxWidth={100}
-                  />
-                  <Column
-                    label="Centro de Correccion"
-                    width={65}
-                    dataKey="centroCc"
-                    headerRenderer={defHeadRender}
-                    cellDataGetter={defCellDataGetter}
-                    cellRenderer={defCellRenderer}
-                    minWidth={65}
-                    maxWidth={65}
-                  />
-                  <Column
-                    label="Grupo de Trabajo"
-                    width={70}
-                    dataKey="grupoTrabajo"
-                    headerRenderer={defHeadRender}
-                    cellDataGetter={defCellDataGetter}
-                    cellRenderer={defCellRenderer}
-                    minWidth={70}
-                    maxWidth={70}
-                  />
-                  <Column
-                    label="Módulo"
-                    width={50}
-                    dataKey="modulo"
-                    headerRenderer={defHeadRender}
-                    cellDataGetter={defCellDataGetter}
-                    cellRenderer={defCellRenderer}
-                    minWidth={50}
-                    maxWidth={50}
-                  />
-                  <Column
-                    label="Especialidad"
-                    width={80}
-                    dataKey="especialidad"
-                    headerRenderer={defHeadRender}
-                    cellDataGetter={defCellDataGetter}
-                    cellRenderer={defCellRenderer}
-                    minWidth={80}
-                    maxWidth={80}
-                  />
-                  <Column
-                    label="Tipo de Correccion"
-                    width={150}
-                    maxWidth={150}
-                    minWidth={150}
-                    dataKey="tipoCorreccion"
-                    headerRenderer={defHeadRender}
-                    cellDataGetter={defCellDataGetter}
-                    cellRenderer={defCellRenderer}
-                  />
-                  {indicadorIndex.map((i) => {
-                    return (
-                      <Column
-                        label={`I${i}`}
-                        width={50}
-                        maxWidth={50}
-                        minWidth={50}
-                        dataKey={`ind_${i}`}
-                        headerRenderer={defHeadRender}
-                        cellDataGetter={defCellDataGetter}
-                        cellRenderer={defCellRenderer}
-                      />
-                    );
-                  })}
-                  <Column
-                    label="AVG"
-                    width={50}
-                    maxWidth={50}
-                    minWidth={50}
-                    dataKey="promedio"
-                    headerRenderer={defHeadRender}
-                    cellDataGetter={defCellDataGetter}
-                    cellRenderer={({ cellData }) => (
-                      <div
+            <table
+              className="tab-table"
+              style={{ width: 1200, borderCollapse: "collapse" }}
+            >
+              <thead>
+                {table.getHeaderGroups().map((headerGroup) => (
+                  <tr key={headerGroup.id}>
+                    {headerGroup.headers.map((header) => (
+                      <th
+                        key={header.id}
                         style={{
-                          textAlign: "center",
-                          backgroundColor: getBackgroundColor(cellData || 0),
+                          position: "sticky",
+                          top: 0,
+
+                          background: "rgb(81, 151, 209)",
+                          zIndex: 1,
+                          minWidth: header.getSize(),
+                          maxWidth: header.getSize(),
+
+                          borderBottom: "2px solid #ddd",
                         }}
                       >
-                        {cellData || 0}
-                      </div>
-                    )}
-                  />
-                </Table>
-              )}
-            </AutoSizer>
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
+                      </th>
+                    ))}
+                  </tr>
+                ))}
+              </thead>
+              <tbody>
+                {paddingTop > 0 && (
+                  <tr>
+                    <td style={{ height: paddingTop }} />
+                  </tr>
+                )}
+
+                {virtualRows.map((virtualRow) => {
+                  const row = table.getRowModel().rows[virtualRow.index];
+                  return (
+                    <tr key={row.id}>
+                      {row.getVisibleCells().map((cell) => (
+                        <td
+                          key={cell.id}
+                          style={{
+                            minWidth: cell.column.getSize(),
+                            maxWidth: cell.column.getSize(),
+                            borderBottom: "1px solid #f0f0f0",
+                          }}
+                        >
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        </td>
+                      ))}
+                    </tr>
+                  );
+                })}
+
+                {paddingBottom > 0 && (
+                  <tr>
+                    <td style={{ height: paddingBottom }} />
+                  </tr>
+                )}
+              </tbody>
+            </table>
           </div>
         )}
       </div>

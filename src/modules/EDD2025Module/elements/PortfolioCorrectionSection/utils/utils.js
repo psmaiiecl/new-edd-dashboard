@@ -1,10 +1,10 @@
 export function buildTablaCorreccionPortafolios() {}
 
 export function buildGraficoCD(data, module) {
-  let anioComparacion = 2023;
-  if (module == "Módulo 2") {
-    anioComparacion = 2022;
-  }
+  let anioComparacion = 2024;
+  // if (module == "Módulo 2") {
+  //   anioComparacion = 2022;
+  // }
   return {
     override: {
       subtitle: {
@@ -46,7 +46,7 @@ export function buildGraficoCD(data, module) {
             if (point.series.name.includes(anioComparacion)) {
               total2023 += point.y;
               detalles2023 += `<span style="font-size:13px;color:${point.color}"> \u25CF</span> ${point.series.name}: <b>${point.y}</b><br/>`;
-            } else if (point.series.name.includes("2024")) {
+            } else if (point.series.name.includes("2025")) {
               total2024 += point.y;
               detalles2024 += `<span style="font-size:13px;color:${point.color}"> \u25CF</span> ${point.series.name}: <b>${point.y}</b><br/>`;
             }
@@ -58,7 +58,7 @@ export function buildGraficoCD(data, module) {
                     ${detalles2023}
                     <b style="color: #2d8cff;">Total C+D ${anioComparacion}</b> = ${total2023}<br/><br/>
                     ${detalles2024}
-                    <b style="color: #ff8422;">Total C+D 2024</b> = ${total2024}
+                    <b style="color: #ff8422;">Total C+D 2025</b> = ${total2024}
                 `;
         },
       },
@@ -68,15 +68,12 @@ export function buildGraficoCD(data, module) {
 }
 
 export function buildGraficoCohen(data, module) {
-  let anioComparacion = 2023;
-  if (module == "Módulo 2") {
-    anioComparacion = 2022;
-  }
+  let anioComparacion = 2024;
 
   let categ = data.categ;
   let d_cohen = data.d_cohen;
-  let media2023 = data.media2023;
-  let media2024 = data.media2024;
+  let media2023 = data.media2024;
+  let media2024 = data.media2025;
 
   const lineasVerticales = categ.flatMap((_, i) => [
     { x: i, y: media2023[i] },
@@ -160,6 +157,81 @@ export function buildGraficoCohen(data, module) {
   };
 }
 
+export function buildTablaComparacion(data) {
+  const categories = data.categories;
+  const series = data.series;
+
+  const c2024 = series.find(s => s.name === "C-2024")?.data ?? [];
+  const d2024 = series.find(s => s.name === "D-2024")?.data ?? [];
+  const c2025 = series.find(s => s.name === "C-2025")?.data ?? [];
+  const d2025 = series.find(s => s.name === "D-2025")?.data ?? [];
+
+  const rows = categories.map((cat, i) => {
+    const total2024 = (c2024[i] ?? 0) + (d2024[i] ?? 0);
+    const total2025 = (c2025[i] ?? 0) + (d2025[i] ?? 0);
+
+    return {
+      indicador: cat,
+      v2025: Number(total2025.toFixed(1)),
+      v2024: Number(total2024.toFixed(1)),
+      diff: Number((total2025 - total2024).toFixed(1)),
+    };
+  });
+
+  rows.push({
+    indicador: "Total evidencias corregidas",
+    v2025: data.totales2025?.[0] ?? 0,
+    v2024: data.totales2024?.[0] ?? 0,
+    diff: "",
+  });
+
+  return {
+    rows: rows,
+    columns: [
+      { key: "indicador", label: "Indicador" },
+      { key: "v2025", label: "2025", color:'#ff8422' },
+      { key: "v2024", label: "2024", color:'#2d8cff' },
+      { key: "diff", label: "Diferencia" },
+    ]
+  };
+}
+
+export function buildTablaCohen(data) {
+  const rows = data.categ.map((c, i) => {
+    const m2024 = data.media2024[i] ?? 0;
+    const m2025 = data.media2025[i] ?? 0;
+
+    return {
+      indicador: `I${c}`,
+      dcohen: Number((data.d_cohen[i] ?? 0).toFixed(2)),
+      v2025: Number(m2025.toFixed(2)),
+      v2024: Number(m2024.toFixed(2)),
+      diff: Number((m2025 - m2024).toFixed(2)),
+    };
+  });
+
+  rows.push({
+    indicador: "Total evidencias corregidas",
+    dcohen: "",
+    v2025: data.total2025?.[0] ?? 0,
+    v2024: data.total2024?.[0] ?? 0,
+    diff: "",
+  });
+
+  return {
+    rows: rows,
+    columns: [
+      { key: "indicador", label: "Indicador" },
+      { key: "dcohen", label: "D de Cohen", color: '#FFC72A' },
+      { key: "v2025", label: "2025", color:'#ff8422' },
+      { key: "v2024", label: "2024", color:'#2d8cff' },
+      { key: "diff", label: "Diferencia" },
+    ]
+  };
+}
+
+//MONITOREO DISTRIBUCION DE INDICADORES
+
 export function getModuloIndices(dataset, moduloKey) {
   const años = Object.keys(dataset || {});
   const set = new Set();
@@ -211,33 +283,69 @@ export function shouldHighlightDiff(v, umbralAbs = 10) {
   return Math.abs(v) >= umbralAbs;
 }
 
-export function formatDataForTable(data) {
-  if (!data) return [];
+export function formatDataForTable(tabla) {
+  if (!tabla) {
+    return { anioActual: null, anioComparacion: null, rows: [] };
+  }
+
+  const {
+    anio_actual: anioActual,
+    anio_comparacion: anioComparacion,
+    data_actual: dataActual = {},
+    data_comparacion: dataComparacion = {},
+  } = tabla;
+
+  const totalPrev = Number(dataComparacion.total) || 0;
+  const totalCurr = Number(dataActual.total) || 0;
+
+  const safePct = (value, total) => {
+    const v = Number(value) || 0;
+    const t = Number(total) || 0;
+    if (!t) return "0.00%";
+    return ((v / t) * 100).toFixed(2) + "%";
+  };
 
   const categorias = ["a", "b", "c", "d", "e"];
-  const result = categorias.map((cat) => {
-    const cat23 = data[`cat23_${cat}`] || 0;
-    const cat24 = data[`cat24_${cat}`] || 0;
-    const pct23 = ((cat23 / data.total_2023) * 100).toFixed(2);
-    const pct24 = ((cat24 / data.total_2024) * 100).toFixed(2);
+
+  const rows = categorias.map((cat) => {
+    const key = `cat_${cat}`;
+
+    const prevVal = Number(dataComparacion[key]) || 0;
+    const currVal = Number(dataActual[key]) || 0;
 
     return {
       categoria: cat.toUpperCase(),
-      cat23,
-      pct23,
-      cat24,
-      pct24,
+      prev: prevVal,
+      prevPct: safePct(prevVal, totalPrev),
+      curr: currVal,
+      currPct: safePct(currVal, totalCurr),
     };
   });
 
-  // opcional: agregar sin cc o totales
-  result.push({
-    categoria: "Total Portafolios",
-    cat23: data.total_2023,
-    pct23: "100.00",
-    cat24: data.total_2024,
-    pct24: "100.00",
+  const sinCcPrev = Number(dataComparacion.cat_sincc) || 0;
+  const sinCcCurr = Number(dataActual.cat_sincc) || 0;
+
+  const corregidosPrev = totalPrev - sinCcPrev;
+  const corregidosCurr = totalCurr - sinCcCurr;
+
+  rows.push({
+    border: true,
+    bold: true,
+    categoria: "Total Corregidos",
+    prev: corregidosPrev,
+    prevPct: safePct(corregidosPrev, totalPrev),
+    curr: corregidosCurr,
+    currPct: safePct(corregidosCurr, totalCurr),
   });
 
-  return result;
+  rows.push({
+    bold: true,
+    categoria: "Total Portafolios",
+    prev: totalPrev,
+    prevPct: totalPrev ? "100.00%" : "0.00%",
+    curr: totalCurr,
+    currPct: totalCurr ? "100.00%" : "0.00%",
+  });
+
+  return { anioActual, anioComparacion, rows };
 }

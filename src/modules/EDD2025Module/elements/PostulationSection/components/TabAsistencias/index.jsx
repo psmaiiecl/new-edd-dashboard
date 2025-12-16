@@ -6,9 +6,10 @@ import { getFechas, getSalas, SelectorItems } from "../../data/SelectorItems";
 import { useTab } from "./hooks/useTab";
 import Select from "react-select";
 import { AuthContext } from "../../../../../../context/AuthContext";
+import { Button } from "../../../../../../components/Button";
 
 export function TabAsistencias() {
-  const { data, handleFilter, selectedFilter } = useTab();
+  const { data, handleFilter, selectedFilter, clearFilters } = useTab();
   const { getPayload } = useContext(AuthContext);
   return (
     <TabContent>
@@ -85,6 +86,15 @@ export function TabAsistencias() {
             placeholder="Seleccione"
             styles={SELECT_STYLES}
           />
+        </div>
+        <div
+          style={{
+            display: "flex",
+            boxSizing: "border-box",
+            alignSelf: "end",
+          }}
+        >
+          <Button text={"Limpiar Filtros"} action={() => clearFilters()} />
         </div>
       </div>
       <div className="normal-container">

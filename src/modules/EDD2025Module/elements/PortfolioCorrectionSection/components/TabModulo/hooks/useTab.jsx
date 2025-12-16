@@ -1,106 +1,114 @@
-import { useCallback, useEffect, useState } from "react";
-import { agrupacionModulo, nivelModulo } from "../../../data/selectorLists";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useCustomFetch } from "../../../../../../../hooks/useCustomFetch";
-import { BASE_API_URL_2024 } from "../../../../../data/BASE_API_URL";
-import { buildGraficoCD, buildGraficoCohen } from "../../../utils/utils";
+import { BASE_API_URL_2025 } from "../../../../../data/BASE_API_URL";
+import { buildGraficoCD, buildGraficoCohen, buildTablaCohen, buildTablaComparacion } from "../../../utils/utils";
 
-export function useTab(module) {
+export function useTab(module, selectors) {
   const customFetch = useCustomFetch();
-  const [filterItems, setFilterItems] = useState({
-    nivel: nivelModulo,
-    especialidad: [],
-  });
-  const [filtersLoaded, setFiltersLoaded] = useState(false);
 
-  //SI cambia el primer filtro se trae para el segundo fuiltro
+  const safeSelectors = useMemo(() => selectors ?? [], [selectors]);
+
   const [selectedFilter, setSelectedFilter] = useState({
-    agrupacion: agrupacionModulo[0],
-    modulo: module,
-    nivel: nivelModulo[0],
+    grupo: null,
+    agrupacion: null,
     especialidad: null,
+    modulo: module,
   });
+
   const [data, setData] = useState({
     comparacion: null,
     cohen: {},
   });
 
-  const handleFilter = (key, option) => {
-    setSelectedFilter((prev) => ({
-      ...prev,
-      [key]: option,
-    }));
-  };
-
-  const fixFilters = useCallback((filters) => {
-    const fixed = { ...filters };
-    if (fixed.agrupacion.value !== "General") delete fixed.nivel;
-    return fixed;
+  const handleFilter = useCallback((key, option) => {
+    setSelectedFilter((prev) => ({ ...prev, [key]: option }));
   }, []);
 
   useEffect(() => {
-    setFiltersLoaded(false); // Reset filters loaded state
-    customFetch({
-      hasLoadPanel: false,
-      route:
-        BASE_API_URL_2024 +
-        `/2024-correccion_portafolios/resultados/filtro-especialidad`,
-      formData: {
-        agrupacion: selectedFilter?.agrupacion,
-        filtroAgrupacion: -1,
-      },
-      shouldCache: true,
-    }).then((data) => {
-      if (data) {
-        const nuevasEspecialidades = [{ value: -1, label: "Todas" }].concat(
-          data?.especialidades.map((e) => parseEspecialidad(e)) || []
-        );
-        setFilterItems((prev) => ({
-          ...prev,
-          especialidad: nuevasEspecialidades,
-        }));
-        setSelectedFilter((prev) => ({
-          ...prev,
-          especialidad: nuevasEspecialidades[0],
-        }));
-        setFiltersLoaded(true); // Mark filters as loaded
-      }
+    if (!safeSelectors.length) return;
+
+    setSelectedFilter((prev) => {
+      if (prev.grupo) return prev;
+      return { ...prev, grupo: safeSelectors[5] };
     });
-  }, [selectedFilter?.agrupacion, customFetch]);
+  }, [safeSelectors]);
 
   useEffect(() => {
-    if (!filtersLoaded) return;
+    const grupo = selectedFilter.grupo;
+    if (!grupo) return;
+
+    const defaultAgr = null;
+    const defaultEsp = null;
+
+    setSelectedFilter((prev) => {
+      const agrIsValid =
+        prev.agrupacion &&
+        grupo.agrupaciones?.some((a) => a.value === prev.agrupacion.value);
+      const espIsValid =
+        prev.especialidad &&
+        grupo.especialidades?.some((e) => e.value === prev.especialidad.value);
+
+      return {
+        ...prev,
+        agrupacion: agrIsValid ? prev.agrupacion : defaultAgr,
+        especialidad: espIsValid ? prev.especialidad : defaultEsp,
+      };
+    });
+  }, [selectedFilter.grupo]);
+
+  const fixFilters = useCallback((filters) => {
+    const params = new URLSearchParams();
+
+    if (filters.modulo) {
+      params.append("modulo", (filters.modulo).replace('ódulo ', ''));
+    }
+
+    if (filters.grupo?.value) {
+      params.append("grupo", filters.grupo.value);
+    }
+
+    if (filters.especialidad?.value) {
+      params.append("especialidad", filters.especialidad.value);
+    }
+
+    if (filters.agrupacion?.value === "General" && filters.agrupacion?.value) {
+      params.append("agrupacion", filters.agrupacion.value);
+    }
+
+    const query = params.toString();
+    return query ? `?${query}` : "";
+  }, []);
+
+  useEffect(() => {
+    const ready = !!selectedFilter.grupo;
+
+    if (!ready) return;
 
     const filters = fixFilters(selectedFilter);
 
     customFetch({
       route:
-        BASE_API_URL_2024 +
-        `/2024-correccion_portafolios/resultados/por-modulo`,
-      formData: filters,
-      hasLoadPanel: false,
+        BASE_API_URL_2025 +
+        `/2025-cpf-distribucion-resultados-modulos${filters}`,
+      method: "GET",
+      // hasLoadPanel: false,
       shouldCache: true,
-    }).then((data) => {
-      if (data) {
-        // console.log("cohen", buildGraficoCohen(data.grafico_dcohen, module));
+    }).then((resp) => {
+      if (!resp) return;
 
-        setData({
-          comparacion: buildGraficoCD(data.grafico_comparacion, module) || null,
-          cohen: buildGraficoCohen(data.grafico_dcohen, module) || null,
-        });
-      }
+      setData({
+        comparacion: buildGraficoCD(resp.grafico_comparacion, module) || null,
+        cohen: buildGraficoCohen(resp.grafico_dcohen, module) || null,
+        tabla_comparacion: buildTablaComparacion(resp.grafico_comparacion),
+        tabla_cohen: buildTablaCohen(resp.grafico_dcohen),
+      });
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedFilter, customFetch, fixFilters, filtersLoaded]);
+  }, [selectedFilter, customFetch, fixFilters, module]);
 
   return {
     selectedFilter,
     handleFilter,
     data,
-    filterItems,
   };
 }
 
-function parseEspecialidad(value) {
-  if (typeof value === "string") return { value: value, label: value };
-  return value;
-}

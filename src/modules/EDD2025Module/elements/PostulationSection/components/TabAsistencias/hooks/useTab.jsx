@@ -3,7 +3,7 @@ import { useCustomFetch } from "../../../../../../../hooks/useCustomFetch";
 import { BASE_API_URL_2025 } from "../../../../../data/BASE_API_URL";
 import { mapPieData } from "../../../../../../../utils/ChartMapperFactory";
 import { mappers } from "../../../utils/mapSpecs";
-import { SelectorItems } from "../../../data/SelectorItems";
+import { getFechas, SelectorItems } from "../../../data/SelectorItems";
 import { AuthContext } from "../../../../../../../context/AuthContext";
 
 export function useTab() {
@@ -18,7 +18,7 @@ export function useTab() {
     modulo: null,
     sala: null,
     cargo: null,
-    fecha: null,
+    fecha: getFechas().find((f) => f.selected) ?? null,
   });
 
   const [data, setData] = useState(null);
@@ -30,11 +30,28 @@ export function useTab() {
     }));
   };
 
+  const clearFilters = () => {
+    setSelectedFilter({
+      cdc: currentCdC,
+      especialidad: null,
+      modulo: null,
+      sala: null,
+      cargo: null,
+      fecha: getFechas().find((f) => f.selected) ?? null,
+    });
+  };
+
   useEffect(() => {
     customFetch({
       route:
         BASE_API_URL_2025 +
-        `/2025-asistencias-correctores?=centro${selectedFilter.cdc?.value}&especialidad=${selectedFilter.especialidad?.value}&modulo=${selectedFilter.modulo?.value}`,
+        `/2025-asistencias-correctores?centro=${
+          selectedFilter.cdc?.value ?? ""
+        }&especialidad=${selectedFilter.especialidad?.value ?? ""}&modulo=${
+          selectedFilter.modulo?.value ?? ""
+        }&fecha=${selectedFilter.fecha?.value ?? ""}&sala=${
+          selectedFilter.sala?.value ?? ""
+        }&cargo=${selectedFilter.cargo?.value ?? ""}`,
       method: "GET",
       shouldCache: true,
     }).then((data) => {
@@ -42,5 +59,5 @@ export function useTab() {
     });
   }, [customFetch, selectedFilter]);
 
-  return { selectedFilter, handleFilter, data };
+  return { selectedFilter, handleFilter, data, clearFilters };
 }
