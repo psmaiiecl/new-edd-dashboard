@@ -16,6 +16,8 @@ import { filterTabsByUserRole } from "../../../../components/CustomTabs/utils/ta
 import { useCustomFetch } from "../../../../hooks/useCustomFetch";
 import { BASE_API_URL_2025 } from "../../data/BASE_API_URL";
 import { TabEviIncognita } from "./components/TabEviIncognita";
+import { TabMIDE } from "./components/TabMIDE";
+import { TabBC } from "./components/TabBC";
 
 export function PortfolioCorrectionSection2025() {
   const { getTipoUsuario } = useContext(AuthContext);
@@ -63,15 +65,15 @@ export function PortfolioCorrectionSection2025() {
     }
   }, [activeTab, tipoUsuario, filteredTabList]);
 
-  useEffect(()=>{
+  useEffect(() => {
     customFetch({
       route: BASE_API_URL_2025 + "/2025-cpf-filtros",
       method: "GET",
-      shouldCache: true
-    }).then(data => {
-      setSelectors(data)
-    })
-  },[customFetch]);
+      shouldCache: true,
+    }).then((data) => {
+      setSelectors(data);
+    });
+  }, [customFetch]);
 
   return (
     <ModulePageLayout>
@@ -91,13 +93,22 @@ export function PortfolioCorrectionSection2025() {
             <TabDistribucionResultados />
           </TabPanel>
           <TabPanel isActive={innerTab === "rtab2"}>
-            <TabModulo module={"Módulo 1"} selectors={selectors?.anidamiento||[]}/>
+            <TabModulo
+              module={"Módulo 1"}
+              selectors={selectors?.anidamiento || []}
+            />
           </TabPanel>
           <TabPanel isActive={innerTab === "rtab3"}>
-            <TabModulo module={"Módulo 2"} selectors={selectors?.anidamiento||[]}/>
+            <TabModulo
+              module={"Módulo 2"}
+              selectors={selectors?.anidamiento || []}
+            />
           </TabPanel>
           <TabPanel isActive={innerTab === "rtab4"}>
-            <TabModulo module={"Módulo 3"} selectors={selectors?.anidamiento||[]}/>
+            <TabModulo
+              module={"Módulo 3"}
+              selectors={selectors?.anidamiento || []}
+            />
           </TabPanel>
         </TabPanel>
       )}
@@ -107,8 +118,12 @@ export function PortfolioCorrectionSection2025() {
           currentActive={innerTab}
           tabArray={filteredMonitoreoTabList}
         ></CustomTabs>
-        {innerTab === "mtab1" && <TabCorreccionesGrupales selectors={selectors}/>}
-        {innerTab === "mtab2" && <TabTercerasCorrecciones selectors={selectors}/>}
+        {innerTab === "mtab1" && (
+          <TabCorreccionesGrupales selectors={selectors} />
+        )}
+        {innerTab === "mtab2" && (
+          <TabTercerasCorrecciones selectors={selectors} />
+        )}
         {innerTab === "mtab3" && <TabDistribucionPuntaje />}
         {innerTab === "mtab4" && <TabProductividad />}
       </TabPanel>
@@ -117,6 +132,12 @@ export function PortfolioCorrectionSection2025() {
       </TabPanel>
       <TabPanel isActive={activeTab === "tab3"}>
         <TabMarca1 />
+      </TabPanel>
+      <TabPanel isActive={activeTab === "tab5"}>
+        <TabBC selectors={selectors} />
+      </TabPanel>
+      <TabPanel isActive={activeTab === "tab7"}>
+        {activeTab === "tab7" && <TabMIDE selectors={selectors} />}
       </TabPanel>
     </ModulePageLayout>
   );

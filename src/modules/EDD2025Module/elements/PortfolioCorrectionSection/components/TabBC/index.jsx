@@ -9,13 +9,11 @@ import { useVirtualizer } from "@tanstack/react-virtual";
 import { TabContent } from "../../../../../../components/Layout/TabContent";
 import { useTab } from "./hooks/useTab";
 import { SELECT_STYLES } from "../../../../../../constants/CONST";
-import "./style.css";
-import { PERIODO } from "./data/filters";
 import { Button } from "../../../../../../components/Button";
 import { useCustomDownload } from "../../../../../../hooks/useCustomDownload";
 import { BASE_API_URL_2025 } from "../../../../data/BASE_API_URL";
 
-export function TabCorreccionesGrupales({selectors}) {
+export function TabBC({selectors}) {
   const customDownload = useCustomDownload();
 
   const indicadorIndex = useMemo(
@@ -43,15 +41,9 @@ export function TabCorreccionesGrupales({selectors}) {
         size: 300,
       },
       {
-        id: "tipo_de",
-        header: "Tipo de Portafolio",
-        accessorKey: "tipo_de",
-        size: 100,
-      },
-      {
-        id: "grupo_trabajo",
-        header: "Grupo de Trabajo",
-        accessorKey: "grupo_trabajo",
+        id: "grupo",
+        header: "Rúbrica",
+        accessorKey: "grupo",
         size: 100,
       },
       {
@@ -61,16 +53,22 @@ export function TabCorreccionesGrupales({selectors}) {
         size: 100,
       },
       {
-        id: "periodo",
-        header: "Periodo",
-        accessorKey: "periodo",
-        size: 75,
+        id: "modulo",
+        header: "Módulo",
+        accessorKey: "modulo",
+        size: 50,
       },
       {
-        id: "co",
-        header: "Count",
-        accessorKey: "co",
-        size: 50,
+        id: "especialidad",
+        header: "Especialidad",
+        accessorKey: "especialidad",
+        size: 100,
+      },
+      {
+        id: "conteo",
+        header: "Conteo Dobles",
+        accessorKey: "conteo",
+        size: 100,
       },
     ];
 
@@ -80,12 +78,12 @@ export function TabCorreccionesGrupales({selectors}) {
       accessorKey: `ind_${i}`,
       size: 60,
       cell: ({ getValue }) => {
-        const value = getValue() ?? 0;
+        const value = getValue() ?? '-';
         return (
           <div
             style={{
               textAlign: "center",
-              backgroundColor: getBackgroundColor(value),
+            //   backgroundColor: getBackgroundColor(value),
             }}
           >
             {value}
@@ -124,7 +122,7 @@ export function TabCorreccionesGrupales({selectors}) {
   return (
     <TabContent>
       <div className="tab-general-filter-row">
-        <div className="tab-general-filter">
+        {/* <div className="tab-general-filter">
           <span>Seleccione grupo de trabajo: </span>
           <Select
             value={selectedFilter?.grupo_trabajo || ""}
@@ -135,7 +133,7 @@ export function TabCorreccionesGrupales({selectors}) {
             placeholder="Seleccione un grupo de trabajo"
             styles={SELECT_STYLES}
           />
-        </div>
+        </div> */}
         <div className="tab-general-filter">
           <span>Seleccione especialidad: </span>
           <Select
@@ -148,7 +146,7 @@ export function TabCorreccionesGrupales({selectors}) {
             styles={SELECT_STYLES}
           />
         </div>
-        <div className="tab-general-filter">
+        {/* <div className="tab-general-filter">
           <span>Seleccione tipo de portafolio: </span>
           <Select
             value={selectedFilter?.tipo_portafolio || ""}
@@ -171,7 +169,7 @@ export function TabCorreccionesGrupales({selectors}) {
             placeholder="Seleccione un periodo"
             styles={SELECT_STYLES}
           />
-        </div>
+        </div> */}
         <div
           style={{
             display: "flex",
@@ -187,7 +185,7 @@ export function TabCorreccionesGrupales({selectors}) {
               customDownload({
                 route:
                   BASE_API_URL_2025 +
-                  `/2025-cpf-calibracion-grupal?tipo_portafolio=${
+                  `/2025-cpf-monitoreo-bc?tipo_portafolio=${
                     selectedFilter.tipo_portafolio?.value ?? ""
                   }&grupo_trabajo=${
                     selectedFilter.grupo_trabajo?.value ?? ""
@@ -195,7 +193,7 @@ export function TabCorreccionesGrupales({selectors}) {
                     selectedFilter.periodo?.value ?? ""
                   }&excel=1`,
                 options: { method: "GET" },
-                filename: `CALIBRACION_GRUPAL.xlsx`,
+                filename: `MONITOREO_BC.xlsx`,
               });
             }}
           />

@@ -78,7 +78,7 @@ export function TabDistribucionPuntaje() {
 
   return (
     <TabContent>
-      <div className="tab-general-filter-row">
+      {/* <div className="tab-general-filter-row">
         <div className="tab-general-filter">
           <span>Seleccione grupo de trabajo: </span>
           <Select
@@ -103,7 +103,7 @@ export function TabDistribucionPuntaje() {
             styles={SELECT_STYLES}
           />
         </div>
-      </div>
+      </div> */}
       <div className="normal-container">
         {correccionTable && (
           <div style={{ maxWidth: "100%", overflowX: "scroll" }}>
@@ -142,8 +142,8 @@ export function TabDistribucionPuntaje() {
               </thead>
 
               <tbody>
-                {/* 2023: I/B/C/D con rowSpan en la celda Año */}
-                {["2023", "2024"].map((año) => (
+                {/* 2024: I/B/C/D con rowSpan en la celda Año */}
+                {["2024", "2025"].map((año) => (
                   <Fragment key={año}>
                     {/* Fila I (con rowSpan del año = 4) */}
                     <tr>
@@ -194,23 +194,23 @@ export function TabDistribucionPuntaje() {
                   </Fragment>
                 ))}
 
-                {/* 2023 C+D */}
-                <tr>
-                  <td>2023</td>
-                  <FilaCD
-                    añoLabel="2023"
-                    valoresPorModulo={correccionTable?.cd["2023"]}
-                    modulos={correccionTable?.modulos}
-                    moduloIndices={correccionTable?.moduloIndices}
-                  />
-                </tr>
-
                 {/* 2024 C+D */}
                 <tr>
                   <td>2024</td>
                   <FilaCD
                     añoLabel="2024"
                     valoresPorModulo={correccionTable?.cd["2024"]}
+                    modulos={correccionTable?.modulos}
+                    moduloIndices={correccionTable?.moduloIndices}
+                  />
+                </tr>
+
+                {/* 2025 C+D */}
+                <tr>
+                  <td>2025</td>
+                  <FilaCD
+                    añoLabel="2025"
+                    valoresPorModulo={correccionTable?.cd["2025"]}
                     modulos={correccionTable?.modulos}
                     moduloIndices={correccionTable?.moduloIndices}
                   />

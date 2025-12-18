@@ -1,7 +1,7 @@
 export const agrupacionesDistRes = [
   { value: "", label: "Todas" },
   { value: "EA", label: "EA" },
-  { value: "EB", label: "EB" },
+  { value: "M", label: "EB" },
   { value: "ECE", label: "ECE" },
   { value: "EEER-NEET", label: "EEER" },
   { value: "EEEE-NEEP", label: "EEEE" },
@@ -30,4 +30,11 @@ export const nivelModulo = [
   { value: "EM", label: "EM" },
   { value: "EA", label: "EPJA" },
   // {value: "PC", label: "PC"},
+];
+
+export const modulos = [
+  { value: "", label: "Todos" },
+  { value: "M1", label: "M1" },
+  { value: "M2", label: "M2" },
+  { value: "M3", label: "M3" },
 ];
