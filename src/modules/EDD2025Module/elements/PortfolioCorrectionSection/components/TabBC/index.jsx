@@ -13,7 +13,7 @@ import { Button } from "../../../../../../components/Button";
 import { useCustomDownload } from "../../../../../../hooks/useCustomDownload";
 import { BASE_API_URL_2025 } from "../../../../data/BASE_API_URL";
 
-export function TabBC({selectors}) {
+export function TabBC({ selectors }) {
   const customDownload = useCustomDownload();
 
   const indicadorIndex = useMemo(
@@ -72,25 +72,39 @@ export function TabBC({selectors}) {
       },
     ];
 
-    const indicadorCols = indicadorIndex.map((i) => ({
-      id: `ind_${i}`,
-      header: `% I${i}`,
-      accessorKey: `ind_${i}`,
-      size: 60,
-      cell: ({ getValue }) => {
-        const value = getValue() ?? '-';
-        return (
-          <div
-            style={{
-              textAlign: "center",
-            //   backgroundColor: getBackgroundColor(value),
-            }}
-          >
-            {value}
-          </div>
-        );
+    const indicadorCols = indicadorIndex.flatMap((i) => [
+      {
+        id: `c${i}`,
+        header: `C${i}`,
+        accessorKey: `c${i}`,
+        size: 45,
+        cell: ({ getValue }) => {
+          const value = getValue();
+          return <div style={{ textAlign: "center" }}>{value ?? ""}</div>;
+        },
       },
-    }));
+      {
+        id: `ind_${i}`,
+        header: `% I${i}`,
+        accessorKey: `ind_${i}`,
+        size: 60,
+        cell: ({ getValue }) => {
+          const value = getValue();
+          if (value == null) return "";
+
+          return (
+            <div
+              style={{
+                textAlign: "center",
+                // backgroundColor: getBackgroundColor(value),
+              }}
+            >
+              {value}%
+            </div>
+          );
+        },
+      },
+    ]);
 
     return [...baseCols, ...indicadorCols];
   }, [indicadorIndex]);
@@ -189,9 +203,7 @@ export function TabBC({selectors}) {
                     selectedFilter.tipo_portafolio?.value ?? ""
                   }&grupo_trabajo=${
                     selectedFilter.grupo_trabajo?.value ?? ""
-                  }&periodo=${
-                    selectedFilter.periodo?.value ?? ""
-                  }&excel=1`,
+                  }&periodo=${selectedFilter.periodo?.value ?? ""}&excel=1`,
                 options: { method: "GET" },
                 filename: `MONITOREO_BC.xlsx`,
               });

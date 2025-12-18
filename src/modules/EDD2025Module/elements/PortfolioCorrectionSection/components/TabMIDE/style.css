@@ -41,6 +41,6 @@
 
 .tolerancia-control input[type="range"] {
   width: 50%;
-   accent-color: var(--blue-100);
-   outline: none;
+  accent-color: var(--blue-100);
+  outline: none;
 }

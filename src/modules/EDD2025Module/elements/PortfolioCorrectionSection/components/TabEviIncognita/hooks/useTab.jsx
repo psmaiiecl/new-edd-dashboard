@@ -24,7 +24,7 @@ export function useTab() {
       grupo_trabajo: null,
       especialidad: null,
       tipo_portafolio: null,
-      periodo: null
+      periodo: null,
     });
   };
 

@@ -1,7 +1,12 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useCustomFetch } from "../../../../../../../hooks/useCustomFetch";
 import { BASE_API_URL_2025 } from "../../../../../data/BASE_API_URL";
-import { buildGraficoCD, buildGraficoCohen, buildTablaCohen, buildTablaComparacion } from "../../../utils/utils";
+import {
+  buildGraficoCD,
+  buildGraficoCohen,
+  buildTablaCohen,
+  buildTablaComparacion,
+} from "../../../utils/utils";
 
 export function useTab(module, selectors) {
   const customFetch = useCustomFetch();
@@ -60,7 +65,7 @@ export function useTab(module, selectors) {
     const params = new URLSearchParams();
 
     if (filters.modulo) {
-      params.append("modulo", (filters.modulo).replace('ódulo ', ''));
+      params.append("modulo", filters.modulo.replace("ódulo ", ""));
     }
 
     if (filters.grupo?.value) {
@@ -111,4 +116,3 @@ export function useTab(module, selectors) {
     data,
   };
 }
-

@@ -46,6 +46,6 @@ export function useTab() {
     selectedFilter,
     handleFilter,
     correccionTable,
-    cleanFilters
+    cleanFilters,
   };
 }

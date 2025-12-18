@@ -20,10 +20,8 @@ export function useTab() {
 
   useEffect(() => {
     customFetch({
-      route:
-        BASE_API_URL_2025 +
-        "/2025-cpf-distribucion-indicadores",
-      method: 'GET',
+      route: BASE_API_URL_2025 + "/2025-cpf-distribucion-indicadores",
+      method: "GET",
       shouldCache: true,
     }).then((data) => {
       const modulos = [

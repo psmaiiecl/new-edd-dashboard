@@ -71,7 +71,7 @@ export function TabModulo({ module, selectors }) {
           </div>
         </div>
         <div className="pie-grid-2">
-          <div style={{width: "80%", margin: "auto"}}>
+          <div style={{ width: "80%", margin: "auto" }}>
             {data.tabla_comparacion && (
               <table className="roboto-regular">
                 <thead>
@@ -79,7 +79,7 @@ export function TabModulo({ module, selectors }) {
                     {data.tabla_comparacion.columns.map((col) => (
                       <th
                         key={col.key}
-                        style={{ backgroundColor: col?.color || '#e7e7e7ff' }}
+                        style={{ backgroundColor: col?.color || "#e7e7e7ff" }}
                       >
                         {col.label}
                       </th>
@@ -100,7 +100,7 @@ export function TabModulo({ module, selectors }) {
               </table>
             )}
           </div>
-          <div style={{width: "80%", margin: "auto"}}>
+          <div style={{ width: "80%", margin: "auto" }}>
             {data.tabla_cohen && (
               <table className="roboto-regular">
                 <thead>
@@ -108,7 +108,7 @@ export function TabModulo({ module, selectors }) {
                     {data.tabla_cohen.columns.map((col) => (
                       <th
                         key={col.key}
-                        style={{ backgroundColor: col?.color || '#e7e7e7ff' }}
+                        style={{ backgroundColor: col?.color || "#e7e7e7ff" }}
                       >
                         {col.label}
                       </th>

@@ -15,7 +15,7 @@ import { Button } from "../../../../../../components/Button";
 import { useCustomDownload } from "../../../../../../hooks/useCustomDownload";
 import { BASE_API_URL_2025 } from "../../../../data/BASE_API_URL";
 
-export function TabCorreccionesGrupales({selectors}) {
+export function TabCorreccionesGrupales({ selectors }) {
   const customDownload = useCustomDownload();
 
   const indicadorIndex = useMemo(
@@ -191,9 +191,7 @@ export function TabCorreccionesGrupales({selectors}) {
                     selectedFilter.tipo_portafolio?.value ?? ""
                   }&grupo_trabajo=${
                     selectedFilter.grupo_trabajo?.value ?? ""
-                  }&periodo=${
-                    selectedFilter.periodo?.value ?? ""
-                  }&excel=1`,
+                  }&periodo=${selectedFilter.periodo?.value ?? ""}&excel=1`,
                 options: { method: "GET" },
                 filename: `CALIBRACION_GRUPAL.xlsx`,
               });

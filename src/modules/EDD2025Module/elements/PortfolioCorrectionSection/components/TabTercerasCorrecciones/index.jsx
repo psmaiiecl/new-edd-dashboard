@@ -14,7 +14,7 @@ import { SELECT_STYLES } from "../../../../../../constants/CONST";
 import { BASE_API_URL_2025 } from "../../../../data/BASE_API_URL";
 import { Button } from "../../../../../../components/Button";
 
-export function TabTercerasCorrecciones({selectors}) {
+export function TabTercerasCorrecciones({ selectors }) {
   const customDownload = useCustomDownload();
   const indicadorIndex = useMemo(
     () => Array.from({ length: 12 }, (_, i) => i + 1),

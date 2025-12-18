@@ -24,7 +24,7 @@ export function useTab() {
       grupo_trabajo: null,
       especialidad: null,
       tipo_portafolio: null,
-      periodo: null
+      periodo: null,
     });
   };
 
@@ -36,9 +36,7 @@ export function useTab() {
           selectedFilter?.tipo_portafolio?.value ?? ""
         }&grupo_trabajo=${selectedFilter?.grupo_trabajo?.value ?? ""}&periodo=${
           selectedFilter?.periodo?.value ?? ""
-        }&especialidad=${
-          selectedFilter?.especialidad?.value ?? ""
-        }`,
+        }&especialidad=${selectedFilter?.especialidad?.value ?? ""}`,
       method: "GET",
       shouldCache: true,
     }).then((data) => {

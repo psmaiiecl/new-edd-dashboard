@@ -26,7 +26,9 @@ export function useTab() {
     customFetch({
       route:
         BASE_API_URL_2025 +
-        `/2025-cpf-distribucion-resultados?agrupacion=${selectedFilter.agrupacion?.value ?? ''}`,
+        `/2025-cpf-distribucion-resultados?agrupacion=${
+          selectedFilter.agrupacion?.value ?? ""
+        }`,
       method: "GET",
       shouldCache: true,
     }).then((data) => {
@@ -35,7 +37,7 @@ export function useTab() {
         completa: data.completa.cantidad ?? 0,
         incompleta: data.incompleta.cantidad ?? 0,
       };
-      
+
       setData({
         chart: mapPieData(dataTorta, mappers.correccion_portafolios),
         table: formatDataForTable(data?.tabla),

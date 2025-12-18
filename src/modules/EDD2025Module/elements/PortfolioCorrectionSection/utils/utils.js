@@ -161,10 +161,10 @@ export function buildTablaComparacion(data) {
   const categories = data.categories;
   const series = data.series;
 
-  const c2024 = series.find(s => s.name === "C-2024")?.data ?? [];
-  const d2024 = series.find(s => s.name === "D-2024")?.data ?? [];
-  const c2025 = series.find(s => s.name === "C-2025")?.data ?? [];
-  const d2025 = series.find(s => s.name === "D-2025")?.data ?? [];
+  const c2024 = series.find((s) => s.name === "C-2024")?.data ?? [];
+  const d2024 = series.find((s) => s.name === "D-2024")?.data ?? [];
+  const c2025 = series.find((s) => s.name === "C-2025")?.data ?? [];
+  const d2025 = series.find((s) => s.name === "D-2025")?.data ?? [];
 
   const rows = categories.map((cat, i) => {
     const total2024 = (c2024[i] ?? 0) + (d2024[i] ?? 0);
@@ -189,10 +189,10 @@ export function buildTablaComparacion(data) {
     rows: rows,
     columns: [
       { key: "indicador", label: "Indicador" },
-      { key: "v2025", label: "2025", color:'#ff8422' },
-      { key: "v2024", label: "2024", color:'#2d8cff' },
+      { key: "v2025", label: "2025", color: "#ff8422" },
+      { key: "v2024", label: "2024", color: "#2d8cff" },
       { key: "diff", label: "Diferencia" },
-    ]
+    ],
   };
 }
 
@@ -222,11 +222,11 @@ export function buildTablaCohen(data) {
     rows: rows,
     columns: [
       { key: "indicador", label: "Indicador" },
-      { key: "dcohen", label: "D de Cohen", color: '#FFC72A' },
-      { key: "v2025", label: "2025", color:'#ff8422' },
-      { key: "v2024", label: "2024", color:'#2d8cff' },
+      { key: "dcohen", label: "D de Cohen", color: "#FFC72A" },
+      { key: "v2025", label: "2025", color: "#ff8422" },
+      { key: "v2024", label: "2024", color: "#2d8cff" },
       { key: "diff", label: "Diferencia" },
-    ]
+    ],
   };
 }
 

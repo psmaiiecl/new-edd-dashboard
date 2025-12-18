@@ -71,7 +71,7 @@ export function useTab() {
     cleanFilters,
     handleDraftTolerancia,
     applyTolerancia,
-    toleranciaDraft
+    toleranciaDraft,
   };
 }
 

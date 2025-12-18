@@ -46,8 +46,8 @@ export function TabMIDE({ selectors }) {
             step={1}
             value={toleranciaDraft}
             onChange={(e) => handleDraftTolerancia(Number(e.target.value))}
-            onMouseUp={applyTolerancia} 
-            onTouchEnd={applyTolerancia} 
+            onMouseUp={applyTolerancia}
+            onTouchEnd={applyTolerancia}
           />
           <input
             type="number"
@@ -57,7 +57,7 @@ export function TabMIDE({ selectors }) {
             step={1}
             value={toleranciaDraft}
             onChange={(e) => handleDraftTolerancia(Number(e.target.value))}
-            onBlur={applyTolerancia} 
+            onBlur={applyTolerancia}
           />
         </div>
         <div
@@ -68,7 +68,7 @@ export function TabMIDE({ selectors }) {
             alignSelf: "center",
           }}
         >
-          <Button text={"Limpiar Filtros"} action={cleanFilters}/>
+          <Button text={"Limpiar Filtros"} action={cleanFilters} />
         </div>
       </div>
       <div className="normal-container">
