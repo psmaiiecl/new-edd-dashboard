@@ -6,8 +6,9 @@ export function useTab() {
   const customFetch = useCustomFetch();
   const [selectedFilter, setSelectedFilter] = useState({
     grupo_trabajo: null,
-    modulo: null,
     tolerancia: 5,
+    eds: null,
+    especialidad: null,
   });
   const [data, setData] = useState([]);
   const [toleranciaDraft, setToleranciaDraft] = useState(5);
@@ -32,8 +33,9 @@ export function useTab() {
   const cleanFilters = () => {
     setSelectedFilter({
       grupo_trabajo: null,
-      modulo: null,
       tolerancia: 5,
+      eds: null,
+      especialidad: null,
     });
     setToleranciaDraft(5);
   };
@@ -52,7 +54,7 @@ export function useTab() {
       const grupoKey = Object.keys(data)[0];
       const indicadores = data[grupoKey];
 
-      const charts = Object.values(indicadores).map((indicador) =>
+      const charts = Object.values(data).map((indicador) =>
         buildIndicadorChart(indicador)
       );
       console.log(charts);

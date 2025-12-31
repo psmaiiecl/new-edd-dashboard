@@ -6,8 +6,8 @@ import { getCD, getDif24vs23, getModuloIndices } from "../../../utils/utils";
 export function useTab() {
   const customFetch = useCustomFetch();
   const [selectedFilter, setSelectedFilter] = useState({
-    grupo_trabajo: "",
-    especialidad: "",
+    grupo: null,
+    especialidad: null,
   });
   const [correccionTable, setCorreccionTable] = useState(null);
 
@@ -18,9 +18,20 @@ export function useTab() {
     }));
   };
 
+  const cleanFilters = () => {
+    setSelectedFilter({
+      grupo: null,
+      especialidad: null,
+    });
+  };
+
   useEffect(() => {
     customFetch({
-      route: BASE_API_URL_2025 + "/2025-cpf-distribucion-indicadores",
+      route:
+        BASE_API_URL_2025 +
+        `/2025-cpf-distribucion-indicadores?grupo=${
+          selectedFilter?.grupo?.value ?? ""
+        }&especialidad=${selectedFilter?.especialidad?.value ?? ""}`,
       method: "GET",
       shouldCache: true,
     }).then((data) => {
@@ -64,5 +75,6 @@ export function useTab() {
     selectedFilter,
     handleFilter,
     correccionTable,
+    cleanFilters,
   };
 }

@@ -41,6 +41,12 @@ export function TabTercerasCorrecciones({ selectors }) {
         size: 35,
       },
       {
+        id: "rut",
+        header: "RUT",
+        accessorKey: "rut",
+        size: 100,
+      },
+      {
         id: "corrector",
         header: "Corrector",
         accessorKey: "corrector",
@@ -53,9 +59,9 @@ export function TabTercerasCorrecciones({ selectors }) {
         size: 100,
       },
       {
-        id: "tipo_de",
+        id: "tipo_portafolio",
         header: "Tipo de Portafolio",
-        accessorKey: "tipo_de",
+        accessorKey: "tipo_portafolio",
         size: 100,
       },
       {
@@ -125,6 +131,18 @@ export function TabTercerasCorrecciones({ selectors }) {
   return (
     <TabContent>
       <div className="tab-general-filter-row">
+        <div className="tab-general-filter">
+          <span>Seleccione EDS: </span>
+          <Select
+            value={selectedFilter?.eds || ""}
+            onChange={(option) => handleFilter("eds", option)}
+            options={selectors?.eds || []}
+            isSearchable
+            noOptionsMessage={() => "Ningún EDS"}
+            placeholder="Seleccione un EDS"
+            styles={SELECT_STYLES}
+          />
+        </div>
         <div className="tab-general-filter">
           <span>Seleccione grupo de trabajo: </span>
           <Select

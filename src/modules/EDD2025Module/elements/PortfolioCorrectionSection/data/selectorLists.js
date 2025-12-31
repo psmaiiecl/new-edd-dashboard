@@ -13,7 +13,7 @@ export const agrupacionesDistRes = [
   { value: "SLI", label: "SLI" },
 ];
 
-export const agrupacionModulo = [
+export const grupos = [
   { value: "General", label: "General" },
   { value: "EMTP", label: "EMTP" },
   { value: "EP", label: "EP" },

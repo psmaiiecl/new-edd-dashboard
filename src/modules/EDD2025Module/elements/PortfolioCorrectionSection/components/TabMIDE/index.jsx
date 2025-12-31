@@ -24,14 +24,38 @@ export function TabMIDE({ selectors }) {
     <TabContent>
       <div className="tab-general-filter-row">
         <div className="tab-general-filter">
+          <span>Seleccione EDS: </span>
+          <Select
+            value={selectedFilter?.eds || ""}
+            onChange={(option) => handleFilter("eds", option)}
+            options={selectors?.eds || []}
+            isSearchable
+            noOptionsMessage={() => "Ningún EDS"}
+            placeholder="Seleccione un EDS"
+            styles={SELECT_STYLES}
+          />
+        </div>
+        <div className="tab-general-filter">
           <span>Seleccione grupo de trabajo: </span>
           <Select
-            // value={selectedFilter?.grupo_trabajo || ""}
-            //onChange={(option) => handleFilter("grupo_trabajo", option)}
+            value={selectedFilter?.grupo_trabajo || ""}
+            onChange={(option) => handleFilter("grupo_trabajo", option)}
             options={selectors?.grupo_trabajo || []}
             isSearchable
             noOptionsMessage={() => "Ningún grupo de trabajo"}
             placeholder="Seleccione un grupo de trabajo"
+            styles={SELECT_STYLES}
+          />
+        </div>
+        <div className="tab-general-filter">
+          <span>Seleccione especialidad: </span>
+          <Select
+            value={selectedFilter?.especialidad || ""}
+            onChange={(option) => handleFilter("especialidad", option)}
+            options={selectors?.especialidad || []}
+            isSearchable
+            noOptionsMessage={() => "Ninguna especialidad"}
+            placeholder="Seleccione una especialidad"
             styles={SELECT_STYLES}
           />
         </div>

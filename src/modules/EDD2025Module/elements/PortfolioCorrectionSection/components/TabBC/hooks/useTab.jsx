@@ -5,10 +5,9 @@ import { BASE_API_URL_2025 } from "../../../../../data/BASE_API_URL";
 export function useTab() {
   const customFetch = useCustomFetch();
   const [selectedFilter, setSelectedFilter] = useState({
-    grupo_trabajo: null,
+    grupo: null,
     especialidad: null,
-    tipo_portafolio: null,
-    periodo: null,
+    modulo: null,
   });
   const [correccionTable, setCorreccionTable] = useState([]);
 
@@ -21,10 +20,9 @@ export function useTab() {
 
   const cleanFilters = () => {
     setSelectedFilter({
-      grupo_trabajo: null,
+      grupo: null,
       especialidad: null,
-      tipo_portafolio: null,
-      periodo: null,
+      modulo: null,
     });
   };
 
@@ -32,11 +30,11 @@ export function useTab() {
     customFetch({
       route:
         BASE_API_URL_2025 +
-        `/2025-cpf-monitoreo-bc?tipo_portafolio=${
-          selectedFilter?.tipo_portafolio?.value ?? ""
-        }&grupo_trabajo=${selectedFilter?.grupo_trabajo?.value ?? ""}&periodo=${
-          selectedFilter?.periodo?.value ?? ""
-        }&especialidad=${selectedFilter?.especialidad?.value ?? ""}`,
+        `/2025-cpf-monitoreo-bc?grupo=${
+          selectedFilter?.grupo?.value ?? ""
+        }&modulo=${selectedFilter?.modulo?.value ?? ""}&especialidad=${
+          selectedFilter?.especialidad?.value ?? ""
+        }`,
       method: "GET",
       shouldCache: true,
     }).then((data) => {

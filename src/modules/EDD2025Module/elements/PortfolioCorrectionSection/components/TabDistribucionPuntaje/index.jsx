@@ -4,6 +4,8 @@ import Select from "react-select";
 import { getVal, safeVal, shouldHighlightDiff } from "../../utils/utils";
 import { Fragment } from "react";
 import { SELECT_STYLES } from "../../../../../../constants/CONST";
+import { grupos } from "../../data/selectorLists";
+import { Button } from "../../../../../../components/Button";
 
 function Cell({ value, color }) {
   const v = value;
@@ -73,37 +75,48 @@ function FilaDif({ difPorModulo, modulos, moduloIndices }) {
   );
 }
 
-export function TabDistribucionPuntaje() {
-  const { selectedFilter, handleFilter, correccionTable } = useTab();
+export function TabDistribucionPuntaje({ selectors }) {
+  const { selectedFilter, handleFilter, correccionTable, cleanFilters } =
+    useTab();
 
   return (
     <TabContent>
-      {/* <div className="tab-general-filter-row">
+      <div className="tab-general-filter-row">
         <div className="tab-general-filter">
-          <span>Seleccione grupo de trabajo: </span>
+          <span>Seleccione grupo: </span>
           <Select
-            value={""}
-            // onChange={(option) => handleFilter("agrupacion", option)}
-            options={[]}
+            value={selectedFilter?.grupo || ""}
+            onChange={(option) => handleFilter("grupo", option)}
+            options={grupos}
             isSearchable
-            noOptionsMessage={() => "Ningun grupo de trabajo"}
-            placeholder="Seleccione un grupo de trabajo"
+            noOptionsMessage={() => "Ningun grupo"}
+            placeholder="Seleccione un grupo"
             styles={SELECT_STYLES}
           />
         </div>
         <div className="tab-general-filter">
           <span>Seleccione especialidad: </span>
           <Select
-            value={""}
-            // onChange={(option) => handleFilter("agrupacion", option)}
-            options={[]}
+            value={selectedFilter?.especialidad || ""}
+            onChange={(option) => handleFilter("especialidad", option)}
+            options={selectors?.especialidad || []}
             isSearchable
-            noOptionsMessage={() => "Ningun especialidad"}
-            placeholder="Seleccione un especialidad"
+            noOptionsMessage={() => "Ninguna especialidad"}
+            placeholder="Seleccione una especialidad"
             styles={SELECT_STYLES}
           />
         </div>
-      </div> */}
+        <div
+          style={{
+            display: "flex",
+            gap: "5px",
+            boxSizing: "border-box",
+            alignSelf: "end",
+          }}
+        >
+          <Button text={"Limpiar Filtros"} action={cleanFilters} />
+        </div>
+      </div>
       <div className="normal-container">
         {correccionTable && (
           <div style={{ maxWidth: "100%", overflowX: "scroll" }}>

@@ -12,6 +12,7 @@ import { SELECT_STYLES } from "../../../../../../constants/CONST";
 import { Button } from "../../../../../../components/Button";
 import { useCustomDownload } from "../../../../../../hooks/useCustomDownload";
 import { BASE_API_URL_2025 } from "../../../../data/BASE_API_URL";
+import { grupos, modulos } from "../../data/selectorLists";
 
 export function TabBC({ selectors }) {
   const customDownload = useCustomDownload();
@@ -136,18 +137,18 @@ export function TabBC({ selectors }) {
   return (
     <TabContent>
       <div className="tab-general-filter-row">
-        {/* <div className="tab-general-filter">
-          <span>Seleccione grupo de trabajo: </span>
+        <div className="tab-general-filter">
+          <span>Seleccione grupo: </span>
           <Select
-            value={selectedFilter?.grupo_trabajo || ""}
-            onChange={(option) => handleFilter("grupo_trabajo", option)}
-            options={selectors?.grupo_trabajo || []}
+            value={selectedFilter?.grupo || ""}
+            onChange={(option) => handleFilter("grupo", option)}
+            options={grupos}
             isSearchable
-            noOptionsMessage={() => "Ningún grupo de trabajo"}
-            placeholder="Seleccione un grupo de trabajo"
+            noOptionsMessage={() => "Ningún grupo"}
+            placeholder="Seleccione un grupo"
             styles={SELECT_STYLES}
           />
-        </div> */}
+        </div>
         <div className="tab-general-filter">
           <span>Seleccione especialidad: </span>
           <Select
@@ -160,30 +161,18 @@ export function TabBC({ selectors }) {
             styles={SELECT_STYLES}
           />
         </div>
-        {/* <div className="tab-general-filter">
-          <span>Seleccione tipo de portafolio: </span>
+        <div className="tab-general-filter">
+          <span>Seleccione módulo: </span>
           <Select
-            value={selectedFilter?.tipo_portafolio || ""}
-            onChange={(option) => handleFilter("tipo_portafolio", option)}
-            options={selectors?.tipo_portafolio || []}
+            value={selectedFilter?.modulo || ""}
+            onChange={(option) => handleFilter("modulo", option)}
+            options={modulos}
             isSearchable
-            noOptionsMessage={() => "Ningún tipo de portafolio"}
-            placeholder="Seleccione un tipo de portafolio"
+            noOptionsMessage={() => "Ningún módulo"}
+            placeholder="Seleccione un módulo"
             styles={SELECT_STYLES}
           />
         </div>
-        <div className="tab-general-filter">
-          <span>Seleccione periodo: </span>
-          <Select
-            value={selectedFilter?.periodo || ""}
-            onChange={(option) => handleFilter("periodo", option)}
-            options={PERIODO}
-            isSearchable
-            noOptionsMessage={() => "Ningún periodo"}
-            placeholder="Seleccione un periodo"
-            styles={SELECT_STYLES}
-          />
-        </div> */}
         <div
           style={{
             display: "flex",

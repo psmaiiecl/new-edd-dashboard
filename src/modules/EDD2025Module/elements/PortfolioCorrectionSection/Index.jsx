@@ -1,7 +1,7 @@
 import { useContext, useEffect, useMemo, useState } from "react";
 import { ModulePageLayout } from "../../../../components/Layout/ModulePageLayout";
 import { CustomTabs } from "../../../../components/CustomTabs";
-import { monitoreoTabList, resultadosTabList, tabList } from "./data/TabList";
+import { IATabList, monitoreoTabList, resultadosTabList, tabList } from "./data/TabList";
 import { TabDistribucionResultados } from "./components/TabDistribucionResultados";
 import { TabModulo } from "./components/TabModulo";
 import { TabCorreccionesGrupales } from "./components/TabCorreccionesGrupales";
@@ -32,6 +32,9 @@ export function PortfolioCorrectionSection2025() {
   }, [tipoUsuario]);
   const filteredMonitoreoTabList = useMemo(() => {
     return filterTabsByUserRole(monitoreoTabList, tipoUsuario);
+  }, [tipoUsuario]);
+  const filteredIATabList = useMemo(() => {
+    return filterTabsByUserRole(IATabList, tipoUsuario);
   }, [tipoUsuario]);
 
   const [activeTab, setActiveTab] = useState(null);
@@ -82,36 +85,34 @@ export function PortfolioCorrectionSection2025() {
         currentActive={activeTab}
         tabArray={filteredTabList}
       ></CustomTabs>
-      {![6].includes(tipoUsuario) && (
-        <TabPanel isActive={activeTab === "tab1"}>
-          <CustomTabs
-            setActiveFn={setInnerTab}
-            currentActive={innerTab}
-            tabArray={filteredResultadosTabList}
-          ></CustomTabs>
-          <TabPanel isActive={innerTab === "rtab1"}>
-            <TabDistribucionResultados />
-          </TabPanel>
-          <TabPanel isActive={innerTab === "rtab2"}>
-            <TabModulo
-              module={"Módulo 1"}
-              selectors={selectors?.anidamiento || []}
-            />
-          </TabPanel>
-          <TabPanel isActive={innerTab === "rtab3"}>
-            <TabModulo
-              module={"Módulo 2"}
-              selectors={selectors?.anidamiento || []}
-            />
-          </TabPanel>
-          <TabPanel isActive={innerTab === "rtab4"}>
-            <TabModulo
-              module={"Módulo 3"}
-              selectors={selectors?.anidamiento || []}
-            />
-          </TabPanel>
+      <TabPanel isActive={activeTab === "tab1"}>
+        <CustomTabs
+          setActiveFn={setInnerTab}
+          currentActive={innerTab}
+          tabArray={filteredResultadosTabList}
+        ></CustomTabs>
+        <TabPanel isActive={innerTab === "rtab1"}>
+          <TabDistribucionResultados />
         </TabPanel>
-      )}
+        <TabPanel isActive={innerTab === "rtab2"}>
+          <TabModulo
+            module={"Módulo 1"}
+            selectors={selectors?.anidamiento || []}
+          />
+        </TabPanel>
+        <TabPanel isActive={innerTab === "rtab3"}>
+          <TabModulo
+            module={"Módulo 2"}
+            selectors={selectors?.anidamiento || []}
+          />
+        </TabPanel>
+        <TabPanel isActive={innerTab === "rtab4"}>
+          <TabModulo
+            module={"Módulo 3"}
+            selectors={selectors?.anidamiento || []}
+          />
+        </TabPanel>
+      </TabPanel>
       <TabPanel isActive={activeTab === "tab2"}>
         <CustomTabs
           setActiveFn={setInnerTab}
@@ -124,11 +125,13 @@ export function PortfolioCorrectionSection2025() {
         {innerTab === "mtab2" && (
           <TabTercerasCorrecciones selectors={selectors} />
         )}
-        {innerTab === "mtab3" && <TabDistribucionPuntaje />}
-        {innerTab === "mtab4" && <TabProductividad />}
+        {innerTab === "mtab3" && (
+          <TabDistribucionPuntaje selectors={selectors} />
+        )}
+        {innerTab === "mtab4" && <TabProductividad selectors={selectors} />}
       </TabPanel>
       <TabPanel isActive={activeTab === "tab6"}>
-        <TabEviIncognita />
+        <TabEviIncognita selectors={selectors} />
       </TabPanel>
       <TabPanel isActive={activeTab === "tab3"}>
         <TabMarca1 />
@@ -138,6 +141,21 @@ export function PortfolioCorrectionSection2025() {
       </TabPanel>
       <TabPanel isActive={activeTab === "tab7"}>
         {activeTab === "tab7" && <TabMIDE selectors={selectors} />}
+      </TabPanel>
+      <TabPanel isActive={activeTab === "tab4"}>
+        <CustomTabs
+          setActiveFn={setInnerTab}
+          currentActive={innerTab}
+          tabArray={filteredIATabList}
+        ></CustomTabs>
+        <TabPanel isActive={innerTab === "itab1"}>
+        </TabPanel>
+        <TabPanel isActive={innerTab === "itab2"}>
+        </TabPanel>
+        <TabPanel isActive={innerTab === "itab3"}>
+        </TabPanel>
+        <TabPanel isActive={innerTab === "itab4"}>
+        </TabPanel>
       </TabPanel>
     </ModulePageLayout>
   );

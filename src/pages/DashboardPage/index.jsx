@@ -41,7 +41,7 @@ export function DashboardPage() {
             <Route
               path="/"
               element={
-                <RouteProtector excludedRoles={[5, 6]}>
+                <RouteProtector excludedRoles={[5, 6, 7, 8, 9]}>
                   <EDD2024Module />
                 </RouteProtector>
               }

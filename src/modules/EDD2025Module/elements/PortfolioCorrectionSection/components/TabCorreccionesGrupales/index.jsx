@@ -125,6 +125,18 @@ export function TabCorreccionesGrupales({ selectors }) {
     <TabContent>
       <div className="tab-general-filter-row">
         <div className="tab-general-filter">
+          <span>Seleccione EDS: </span>
+          <Select
+            value={selectedFilter?.eds || ""}
+            onChange={(option) => handleFilter("eds", option)}
+            options={selectors?.eds || []}
+            isSearchable
+            noOptionsMessage={() => "Ningún EDS"}
+            placeholder="Seleccione un EDS"
+            styles={SELECT_STYLES}
+          />
+        </div>
+        <div className="tab-general-filter">
           <span>Seleccione grupo de trabajo: </span>
           <Select
             value={selectedFilter?.grupo_trabajo || ""}
