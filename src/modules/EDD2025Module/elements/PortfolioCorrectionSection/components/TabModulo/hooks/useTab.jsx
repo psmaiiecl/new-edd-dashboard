@@ -13,12 +13,31 @@ export function useTab(module, selectors) {
 
   const safeSelectors = useMemo(() => selectors ?? [], [selectors]);
 
+  const todayOption = useMemo(() => {
+    const today = new Date();
+    return {
+      value: today.toISOString().slice(0, 10),
+      label: today.toLocaleDateString("es-CL"),
+    };
+  }, []);
+
   const [selectedFilter, setSelectedFilter] = useState({
     grupo: null,
     agrupacion: null,
     especialidad: null,
     modulo: module,
+    fecha: todayOption,
   });
+
+  const cleanFilters = useCallback(() => {
+    setSelectedFilter({
+      grupo: safeSelectors.length ? safeSelectors[5] : null,
+      agrupacion: null,
+      especialidad: null,
+      modulo: module,
+      fecha: todayOption,
+    });
+  }, [safeSelectors, module, todayOption]);
 
   const [data, setData] = useState({
     comparacion: null,
@@ -76,8 +95,12 @@ export function useTab(module, selectors) {
       params.append("especialidad", filters.especialidad.value);
     }
 
-    if (filters.agrupacion?.value === "General" && filters.agrupacion?.value) {
+    if (filters.grupo?.value === "General" && filters.agrupacion?.value) {
       params.append("agrupacion", filters.agrupacion.value);
+    }
+
+    if (filters.fecha?.value) {
+      params.append("fecha", filters.fecha.value);
     }
 
     const query = params.toString();
@@ -114,5 +137,6 @@ export function useTab(module, selectors) {
     selectedFilter,
     handleFilter,
     data,
+    cleanFilters,
   };
 }

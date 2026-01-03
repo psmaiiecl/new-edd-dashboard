@@ -8,7 +8,6 @@ export function useTab() {
     grupo_trabajo: null,
     especialidad: null,
     tipo_portafolio: null,
-    periodo: null,
   });
   const [correccionTable, setCorreccionTable] = useState([]);
 
@@ -24,7 +23,7 @@ export function useTab() {
       grupo_trabajo: null,
       especialidad: null,
       tipo_portafolio: null,
-      periodo: null,
+
     });
   };
 
@@ -34,8 +33,8 @@ export function useTab() {
         BASE_API_URL_2025 +
         `/2025-cpf-incognita?tipo_portafolio=${
           selectedFilter?.tipo_portafolio?.value ?? ""
-        }&grupo_trabajo=${selectedFilter?.grupo_trabajo?.value ?? ""}&periodo=${
-          selectedFilter?.periodo?.value ?? ""
+        }&grupo_trabajo=${selectedFilter?.grupo_trabajo?.value ?? ""}&modulo=${
+          selectedFilter?.modulo?.value ?? ""
         }`,
       method: "GET",
       shouldCache: true,

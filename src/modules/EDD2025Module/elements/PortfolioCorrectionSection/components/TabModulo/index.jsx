@@ -5,13 +5,38 @@ import { CustomColumnChart } from "../../../../../../components/CustomColumnChar
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { SELECT_STYLES } from "../../../../../../constants/CONST";
+import { Button } from "../../../../../../components/Button";
+import { useMemo } from "react";
 
 export function TabModulo({ module, selectors }) {
-  const { selectedFilter, handleFilter, data } = useTab(module, selectors);
+  const { selectedFilter, handleFilter, data, cleanFilters } = useTab(
+    module,
+    selectors
+  );
 
   const grupo = selectedFilter.grupo;
   const agrupaciones = grupo?.agrupaciones ?? [];
   const especialidades = grupo?.especialidades ?? [];
+  const dateOptions = useMemo(() => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth(); // 0-based
+
+    const options = [];
+    const endDay = today.getDate();
+
+    for (let day = 3; day <= endDay; day++) {
+      const d = new Date(year, month, day);
+      const value = d.toISOString().slice(0, 10); 
+
+      options.push({
+        value,
+        label: d.toLocaleDateString("es-CL"),
+      });
+    }
+
+    return options;
+  }, []);
 
   return (
     <TabContent>
@@ -58,6 +83,30 @@ export function TabModulo({ module, selectors }) {
             isDisabled={!grupo}
           />
         </div>
+        <div className="tab-general-filter">
+          <span>Seleccione fecha: </span>
+          <Select
+            value={selectedFilter.fecha}
+            onChange={(option) => handleFilter("fecha", option)}
+            options={dateOptions}
+            isSearchable
+            noOptionsMessage={() => "Ninguna fecha"}
+            placeholder="Seleccione una fecha"
+            styles={SELECT_STYLES}
+            isDisabled={!grupo}
+          />
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            gap: "5px",
+            boxSizing: "border-box",
+            alignSelf: "end",
+          }}
+        >
+          <Button text={"Limpiar Filtros"} action={cleanFilters} />
+        </div>
       </div>
       <div className="normal-container">
         <div className="pie-grid-2">
@@ -90,7 +139,14 @@ export function TabModulo({ module, selectors }) {
                   {data.tabla_comparacion.rows.map((row, i) => (
                     <tr key={i}>
                       {data.tabla_comparacion.columns.map((col) => (
-                        <td key={col.key}>
+                        <td
+                          key={col.key}
+                          style={{
+                            backgroundColor: row?.paint
+                              ? "#f29292ff"
+                              : "transparent",
+                          }}
+                        >
                           {row[col.key] !== undefined ? row[col.key] : "-"}
                         </td>
                       ))}
@@ -119,7 +175,14 @@ export function TabModulo({ module, selectors }) {
                   {data.tabla_cohen.rows.map((row, i) => (
                     <tr key={i}>
                       {data.tabla_cohen.columns.map((col) => (
-                        <td key={col.key}>
+                        <td
+                          key={col.key}
+                          style={{
+                            backgroundColor: row?.paint
+                              ? "#f29292ff"
+                              : "transparent",
+                          }}
+                        >
                           {row[col.key] !== undefined ? row[col.key] : "-"}
                         </td>
                       ))}

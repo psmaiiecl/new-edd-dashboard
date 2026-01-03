@@ -6,12 +6,12 @@ export function useTab() {
   const customFetch = useCustomFetch();
   const [selectedFilter, setSelectedFilter] = useState({
     grupo_trabajo: null,
-    tolerancia: 5,
+    tolerancia: 20,
     eds: null,
     especialidad: null,
   });
   const [data, setData] = useState([]);
-  const [toleranciaDraft, setToleranciaDraft] = useState(5);
+  const [toleranciaDraft, setToleranciaDraft] = useState(20);
   const handleDraftTolerancia = (value) => {
     setToleranciaDraft(value);
   };
@@ -33,20 +33,22 @@ export function useTab() {
   const cleanFilters = () => {
     setSelectedFilter({
       grupo_trabajo: null,
-      tolerancia: 5,
+      tolerancia: 20,
       eds: null,
       especialidad: null,
     });
-    setToleranciaDraft(5);
+    setToleranciaDraft(20);
   };
 
   useEffect(() => {
     customFetch({
       route:
         BASE_API_URL_2025 +
-        `/2025-cpf-monitoreo-mide?grupo_trabajo1=${
+        `/2025-cpf-monitoreo-mide?grupo_trabajo=${
           selectedFilter?.grupo_trabajo?.value ?? ""
-        }&tolerancia=${selectedFilter?.tolerancia ?? 5}&grupo_trabajo=TELEEM1`,
+        }&tolerancia=${selectedFilter?.tolerancia ?? 5}&especialidad=${
+          selectedFilter?.especialidad?.value ?? 5
+        }&grupo_trabajo1=TELEEM1&eds=${selectedFilter?.eds?.value ?? ""}`,
       method: "GET",
       shouldCache: true,
     }).then((data) => {

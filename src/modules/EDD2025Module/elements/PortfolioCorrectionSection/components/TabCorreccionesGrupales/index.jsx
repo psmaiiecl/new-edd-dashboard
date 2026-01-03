@@ -1,4 +1,4 @@
-import { useMemo, useRef } from "react";
+import { useContext, useMemo, useRef } from "react";
 import Select from "react-select";
 import {
   useReactTable,
@@ -14,9 +14,13 @@ import { PERIODO } from "./data/filters";
 import { Button } from "../../../../../../components/Button";
 import { useCustomDownload } from "../../../../../../hooks/useCustomDownload";
 import { BASE_API_URL_2025 } from "../../../../data/BASE_API_URL";
+import { AuthContext } from "../../../../../../context/AuthContext";
+import { modulos } from "../../data/selectorLists";
 
 export function TabCorreccionesGrupales({ selectors }) {
   const customDownload = useCustomDownload();
+  const { getTipoUsuario } = useContext(AuthContext);
+  const tipoUsuario = getTipoUsuario();
 
   const indicadorIndex = useMemo(
     () => Array.from({ length: 12 }, (_, i) => i + 1),
@@ -124,18 +128,20 @@ export function TabCorreccionesGrupales({ selectors }) {
   return (
     <TabContent>
       <div className="tab-general-filter-row">
-        <div className="tab-general-filter">
-          <span>Seleccione EDS: </span>
-          <Select
-            value={selectedFilter?.eds || ""}
-            onChange={(option) => handleFilter("eds", option)}
-            options={selectors?.eds || []}
-            isSearchable
-            noOptionsMessage={() => "Ningún EDS"}
-            placeholder="Seleccione un EDS"
-            styles={SELECT_STYLES}
-          />
-        </div>
+        {![6, 7].includes(tipoUsuario) && (
+          <div className="tab-general-filter">
+            <span>Seleccione EDS: </span>
+            <Select
+              value={selectedFilter?.eds || ""}
+              onChange={(option) => handleFilter("eds", option)}
+              options={selectors?.eds || []}
+              isSearchable
+              noOptionsMessage={() => "Ningún EDS"}
+              placeholder="Seleccione un EDS"
+              styles={SELECT_STYLES}
+            />
+          </div>
+        )}
         <div className="tab-general-filter">
           <span>Seleccione grupo de trabajo: </span>
           <Select
@@ -169,6 +175,18 @@ export function TabCorreccionesGrupales({ selectors }) {
             isSearchable
             noOptionsMessage={() => "Ningún tipo de portafolio"}
             placeholder="Seleccione un tipo de portafolio"
+            styles={SELECT_STYLES}
+          />
+        </div>
+        <div className="tab-general-filter">
+          <span>Seleccione módulo: </span>
+          <Select
+            value={selectedFilter?.modulo || ""}
+            onChange={(option) => handleFilter("modulo", option)}
+            options={selectors?.modulo || []}
+            isSearchable
+            noOptionsMessage={() => "Ningún módulo"}
+            placeholder="Seleccione un módulo"
             styles={SELECT_STYLES}
           />
         </div>

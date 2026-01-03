@@ -170,11 +170,18 @@ export function buildTablaComparacion(data) {
     const total2024 = (c2024[i] ?? 0) + (d2024[i] ?? 0);
     const total2025 = (c2025[i] ?? 0) + (d2025[i] ?? 0);
 
+    const v2024 = Number(total2024.toFixed(1));
+    const v2025 = Number(total2025.toFixed(1));
+    const diffValue = Number((total2025 - total2024).toFixed(1));
+
+    const sinBase = v2024 === 0;
+
     return {
       indicador: cat,
-      v2025: Number(total2025.toFixed(1)),
-      v2024: Number(total2024.toFixed(1)),
-      diff: Number((total2025 - total2024).toFixed(1)),
+      v2025,
+      v2024: sinBase ? "-" : v2024,
+      diff: sinBase ? "-" : diffValue,
+      paint: !sinBase && (diffValue > 10 || diffValue < -10),
     };
   });
 
@@ -184,6 +191,17 @@ export function buildTablaComparacion(data) {
     v2024: data.totales2024?.[0] ?? 0,
     diff: "",
   });
+
+  console.log({
+    rows: rows,
+    columns: [
+      { key: "indicador", label: "Indicador" },
+      { key: "v2025", label: "2025", color: "#ff8422" },
+      { key: "v2024", label: "2024", color: "#2d8cff" },
+      { key: "diff", label: "Diferencia" },
+    ],
+  });
+  
 
   return {
     rows: rows,

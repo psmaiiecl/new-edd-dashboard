@@ -42,17 +42,23 @@ export function TabEviIncognita({ selectors }) {
         size: 100,
       },
       {
+        id: "grupo_trabajo",
+        header: "Grupo de Trabajo",
+        accessorKey: "grupo_trabajo",
+        size: 100,
+      },
+      {
         id: "rol",
         header: "Rol",
         accessorKey: "rol",
         size: 100,
       },
-      {
-        id: "periodo",
-        header: "Periodo",
-        accessorKey: "periodo",
-        size: 75,
-      },
+      // {
+      //   id: "periodo",
+      //   header: "Periodo",
+      //   accessorKey: "periodo",
+      //   size: 75,
+      // },
       {
         id: "co",
         header: "Count",
@@ -148,6 +154,18 @@ export function TabEviIncognita({ selectors }) {
           />
         </div>
         <div className="tab-general-filter">
+          <span>Seleccione módulo: </span>
+          <Select
+            value={selectedFilter?.modulo || ""}
+            onChange={(option) => handleFilter("modulo", option)}
+            options={selectors?.modulo || []}
+            isSearchable
+            noOptionsMessage={() => "Ningún módulo"}
+            placeholder="Seleccione un módulo"
+            styles={SELECT_STYLES}
+          />
+        </div>
+        {/* <div className="tab-general-filter">
           <span>Seleccione periodo: </span>
           <Select
             value={selectedFilter?.periodo || ""}
@@ -158,7 +176,7 @@ export function TabEviIncognita({ selectors }) {
             placeholder="Seleccione un periodo"
             styles={SELECT_STYLES}
           />
-        </div>
+        </div> */}
         <div
           style={{
             display: "flex",

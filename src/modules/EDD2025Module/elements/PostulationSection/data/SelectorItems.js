@@ -350,7 +350,7 @@ export function getSalas() {
 
 export function getFechas() {
   const fechaInicio = new Date("2025-12-10");
-  const fechaFin = new Date("2025-12-31");
+  const fechaFin = new Date("2026-01-31");
 
   fechaInicio.setHours(0, 0, 0, 0);
   fechaFin.setHours(0, 0, 0, 0);

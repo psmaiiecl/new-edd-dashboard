@@ -9,6 +9,7 @@ export function useTab() {
     especialidad: null,
     tipo_portafolio: null,
     periodo: null,
+    modulo: null,
     eds: null,
   });
   const [correccionTable, setCorreccionTable] = useState([]);
@@ -26,6 +27,7 @@ export function useTab() {
       especialidad: null,
       tipo_portafolio: null,
       periodo: null,
+      modulo: null,
       eds: null,
     });
   };
@@ -38,9 +40,9 @@ export function useTab() {
           selectedFilter?.tipo_portafolio?.value ?? ""
         }&grupo_trabajo=${selectedFilter?.grupo_trabajo?.value ?? ""}&periodo=${
           selectedFilter?.periodo?.value ?? ""
-        }&especialidad=${
-          selectedFilter?.especialidad?.value ?? ""
-        }&eds=${selectedFilter?.eds?.value ?? ""}`,
+        }&especialidad=${selectedFilter?.especialidad?.value ?? ""}&eds=${
+          selectedFilter?.eds?.value ?? ""
+        }&modulo=${selectedFilter?.modulo?.value ?? ""}`,
       method: "GET",
       shouldCache: true,
     }).then((data) => {
