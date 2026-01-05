@@ -20,7 +20,7 @@ export function TabModulo({ module, selectors }) {
   const dateOptions = useMemo(() => {
     const today = new Date();
     const year = today.getFullYear();
-    const month = today.getMonth(); // 0-based
+    const month = today.getMonth(); 
 
     const options = [];
     const endDay = today.getDate();

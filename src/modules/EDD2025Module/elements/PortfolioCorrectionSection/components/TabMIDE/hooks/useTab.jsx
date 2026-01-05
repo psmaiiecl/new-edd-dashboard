@@ -16,6 +16,14 @@ export function useTab() {
     setToleranciaDraft(value);
   };
 
+  const hasActiveFilters = () => {
+    return (
+      selectedFilter?.grupo_trabajo?.value ||
+      selectedFilter?.eds?.value ||
+      selectedFilter?.especialidad?.value
+    );
+  };
+
   const applyTolerancia = () => {
     setSelectedFilter((prev) => ({
       ...prev,
@@ -41,13 +49,14 @@ export function useTab() {
   };
 
   useEffect(() => {
+    if (!hasActiveFilters()) return;
     customFetch({
       route:
         BASE_API_URL_2025 +
         `/2025-cpf-monitoreo-mide?grupo_trabajo=${
           selectedFilter?.grupo_trabajo?.value ?? ""
         }&tolerancia=${selectedFilter?.tolerancia ?? 5}&especialidad=${
-          selectedFilter?.especialidad?.value ?? 5
+          selectedFilter?.especialidad?.value ?? ""
         }&grupo_trabajo1=TELEEM1&eds=${selectedFilter?.eds?.value ?? ""}`,
       method: "GET",
       shouldCache: true,
@@ -66,6 +75,7 @@ export function useTab() {
         title: grupoKey,
       });
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedFilter, customFetch]);
 
   return {

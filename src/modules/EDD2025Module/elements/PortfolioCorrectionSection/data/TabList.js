@@ -21,7 +21,7 @@ export const monitoreoTabList = [
     label: "Distribución de porcentajes por indicador",
     excludeFor: [6, 9, 7],
   },
-  // { index: "mtab4", label: "Avance de Productividad", excludeFor: [6, 9] },
+  { index: "mtab4", label: "Avance de Productividad", excludeFor: [6, 9, 7] },
 ];
 
 export const IATabList = [

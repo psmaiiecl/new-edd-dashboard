@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useCustomFetch } from "../../../../../../../hooks/useCustomFetch";
 import { BASE_API_URL_2025 } from "../../../../../data/BASE_API_URL";
 
@@ -12,8 +12,17 @@ export function useTab() {
       { id: "PRODM3", label: "Módulo 3", value: "M3" },
     ],
   });
+
+  const todayOption = useMemo(() => {
+    const today = new Date();
+    return {
+      value: today.toISOString().slice(0, 10),
+      label: today.toLocaleDateString("es-CL"),
+    };
+  }, []);
+
   const [selectedFilter, setSelectedFilter] = useState({
-    fecha: null,
+    fecha: todayOption,
     modulo: null,
   });
   const [tableData, setTableData] = useState([]);
@@ -27,7 +36,7 @@ export function useTab() {
 
   const clearFilters = () => {
     setSelectedFilter({
-      fecha: null,
+      fecha: todayOption,
       modulo: null,
     });
     setTableData([]);
@@ -45,11 +54,13 @@ export function useTab() {
   }, [customFetch]);
 
   useEffect(() => {
-    if (!selectedFilter.fecha || !selectedFilter.modulo) return;
+    //if (!selectedFilter.fecha || !selectedFilter.modulo) return;
     customFetch({
       route:
         BASE_API_URL_2025 +
-        `/2025-cpf-monitoreo-productividad-avance?modulo=${selectedFilter.modulo?.value}&fecha=${selectedFilter.fecha?.value}`,
+        `/2025-cpf-estimacion-correcciones?modulo=${
+          selectedFilter.modulo?.value || ""
+        }&fecha=${selectedFilter.fecha?.value || ""}`,
       shouldCache: true,
       method: "GET",
     }).then((data) => {
