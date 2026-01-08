@@ -53,5 +53,5 @@ export const tabList = [
   //   inner: IATabList,
   // },
   { index: "tab5", label: "Monitoreo B/C", excludeFor: [6, 9, 7] },
-  { index: "tab7", label: "Monitoreo MIDE", excludeFor: [6, 9, 7] },
+  { index: "tab7", label: "Correctores Divergentes", excludeFor: [6, 9, 7] },
 ];
