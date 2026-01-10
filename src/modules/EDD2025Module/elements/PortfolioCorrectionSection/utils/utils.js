@@ -201,7 +201,6 @@ export function buildTablaComparacion(data) {
       { key: "diff", label: "Diferencia" },
     ],
   });
-  
 
   return {
     rows: rows,
@@ -316,6 +315,12 @@ export function formatDataForTable(tabla) {
   const totalPrev = Number(dataComparacion.total) || 0;
   const totalCurr = Number(dataActual.total) || 0;
 
+  const sinCcPrev = Number(dataComparacion.cat_sincc) || 0;
+  const sinCcCurr = Number(dataActual.cat_sincc) || 0;
+
+  const corregidosPrev = totalPrev - sinCcPrev;
+  const corregidosCurr = totalCurr - sinCcCurr;
+
   const safePct = (value, total) => {
     const v = Number(value) || 0;
     const t = Number(total) || 0;
@@ -334,26 +339,24 @@ export function formatDataForTable(tabla) {
     return {
       categoria: cat.toUpperCase(),
       prev: prevVal,
-      prevPct: safePct(prevVal, totalPrev),
+      // prevPct: safePct(prevVal, totalPrev),
+      prevPct: safePct(prevVal, corregidosPrev),
       curr: currVal,
-      currPct: safePct(currVal, totalCurr),
+      // currPct: safePct(currVal, totalCurr),
+      currPct: safePct(currVal, corregidosCurr),
     };
   });
-
-  const sinCcPrev = Number(dataComparacion.cat_sincc) || 0;
-  const sinCcCurr = Number(dataActual.cat_sincc) || 0;
-
-  const corregidosPrev = totalPrev - sinCcPrev;
-  const corregidosCurr = totalCurr - sinCcCurr;
 
   rows.push({
     border: true,
     bold: true,
     categoria: "Total Corregidos",
     prev: corregidosPrev,
-    prevPct: safePct(corregidosPrev, totalPrev),
+    // prevPct: safePct(corregidosPrev, totalPrev),
+    prevPct: safePct(corregidosPrev, corregidosPrev),
     curr: corregidosCurr,
-    currPct: safePct(corregidosCurr, totalCurr),
+    // currPct: safePct(corregidosCurr, totalCurr),
+    currPct: safePct(corregidosCurr, corregidosCurr),
   });
 
   rows.push({
