@@ -4,11 +4,12 @@ import { TabContent } from "../../../../../../components/Layout/TabContent";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import "react-virtualized/styles.css";
 import { useCustomDownload } from "../../../../../../hooks/useCustomDownload";
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, useState } from "react";
 import {
   useReactTable,
   getCoreRowModel,
   flexRender,
+  getSortedRowModel,
 } from "@tanstack/react-table";
 import { SELECT_STYLES } from "../../../../../../constants/CONST";
 import { BASE_API_URL_2025 } from "../../../../data/BASE_API_URL";
@@ -23,6 +24,8 @@ export function TabTercerasCorrecciones({ selectors }) {
 
   const { selectedFilter, handleFilter, correccionTable, cleanFilters } =
     useTab();
+
+  const [sorting, setSorting] = useState([]);
 
   const data = useMemo(() => correccionTable || [], [correccionTable]);
 
@@ -51,12 +54,6 @@ export function TabTercerasCorrecciones({ selectors }) {
         header: "Corrector",
         accessorKey: "corrector",
         size: 300,
-      },
-      {
-        id: "rut",
-        header: "RUT",
-        accessorKey: "rut",
-        size: 100,
       },
       {
         id: "tipo_portafolio",
@@ -108,6 +105,12 @@ export function TabTercerasCorrecciones({ selectors }) {
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    state: {
+      sorting,
+    },
+    onSortingChange: setSorting,
+
     columnResizeMode: "onChange",
   });
 
@@ -227,6 +230,7 @@ export function TabTercerasCorrecciones({ selectors }) {
                     {headerGroup.headers.map((header) => (
                       <th
                         key={header.id}
+                        onClick={header.column.getToggleSortingHandler()}
                         style={{
                           position: "sticky",
                           top: 0,
@@ -237,14 +241,29 @@ export function TabTercerasCorrecciones({ selectors }) {
                           maxWidth: header.getSize(),
 
                           borderBottom: "2px solid #ddd",
+                          cursor: header.column.getCanSort()
+                            ? "pointer"
+                            : "default",
+                          userSelect: "none",
                         }}
                       >
-                        {header.isPlaceholder
-                          ? null
-                          : flexRender(
-                              header.column.columnDef.header,
-                              header.getContext()
-                            )}
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: 4,
+                          }}
+                        >
+                          {flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+
+                          {{
+                            asc: "▴",
+                            desc: "▾",
+                          }[header.column.getIsSorted()] ?? null}
+                        </div>
                       </th>
                     ))}
                   </tr>

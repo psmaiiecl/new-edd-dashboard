@@ -1,15 +1,15 @@
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, useState } from "react";
 import Select from "react-select";
 import {
   useReactTable,
   getCoreRowModel,
   flexRender,
+  getSortedRowModel,
 } from "@tanstack/react-table";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { TabContent } from "../../../../../../components/Layout/TabContent";
 import { useTab } from "./hooks/useTab";
 import { SELECT_STYLES } from "../../../../../../constants/CONST";
-import { PERIODO } from "./data/filters";
 import { Button } from "../../../../../../components/Button";
 import { useCustomDownload } from "../../../../../../hooks/useCustomDownload";
 import { BASE_API_URL_2025 } from "../../../../data/BASE_API_URL";
@@ -21,6 +21,8 @@ export function TabEviIncognita({ selectors }) {
     () => Array.from({ length: 12 }, (_, i) => i + 1),
     []
   );
+
+  const [sorting, setSorting] = useState([]);
 
   const { selectedFilter, handleFilter, correccionTable, cleanFilters } =
     useTab();
@@ -94,6 +96,12 @@ export function TabEviIncognita({ selectors }) {
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    state: {
+      sorting,
+    },
+    onSortingChange: setSorting,
+
     columnResizeMode: "onChange",
   });
 
@@ -226,6 +234,7 @@ export function TabEviIncognita({ selectors }) {
                     {headerGroup.headers.map((header) => (
                       <th
                         key={header.id}
+                        onClick={header.column.getToggleSortingHandler()}
                         style={{
                           position: "sticky",
                           top: 0,
@@ -236,14 +245,29 @@ export function TabEviIncognita({ selectors }) {
                           maxWidth: header.getSize(),
 
                           borderBottom: "2px solid #ddd",
+                          cursor: header.column.getCanSort()
+                            ? "pointer"
+                            : "default",
+                          userSelect: "none",
                         }}
                       >
-                        {header.isPlaceholder
-                          ? null
-                          : flexRender(
-                              header.column.columnDef.header,
-                              header.getContext()
-                            )}
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: 4,
+                          }}
+                        >
+                          {flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+
+                          {{
+                            asc: "▴",
+                            desc: "▾",
+                          }[header.column.getIsSorted()] ?? null}
+                        </div>
                       </th>
                     ))}
                   </tr>

@@ -1,9 +1,10 @@
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, useState } from "react";
 import Select from "react-select";
 import {
   useReactTable,
   getCoreRowModel,
   flexRender,
+  getSortedRowModel,
 } from "@tanstack/react-table";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { TabContent } from "../../../../../../components/Layout/TabContent";
@@ -24,6 +25,8 @@ export function TabBC({ selectors }) {
 
   const { selectedFilter, handleFilter, correccionTable, cleanFilters } =
     useTab();
+
+  const [sorting, setSorting] = useState([]);
 
   const data = useMemo(() => correccionTable || [], [correccionTable]);
 
@@ -114,6 +117,12 @@ export function TabBC({ selectors }) {
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    state: {
+      sorting,
+    },
+    onSortingChange: setSorting,
+
     columnResizeMode: "onChange",
   });
 
@@ -222,6 +231,7 @@ export function TabBC({ selectors }) {
                     {headerGroup.headers.map((header) => (
                       <th
                         key={header.id}
+                        onClick={header.column.getToggleSortingHandler()}
                         style={{
                           position: "sticky",
                           top: 0,
@@ -232,14 +242,29 @@ export function TabBC({ selectors }) {
                           maxWidth: header.getSize(),
 
                           borderBottom: "2px solid #ddd",
+                          cursor: header.column.getCanSort()
+                            ? "pointer"
+                            : "default",
+                          userSelect: "none",
                         }}
                       >
-                        {header.isPlaceholder
-                          ? null
-                          : flexRender(
-                              header.column.columnDef.header,
-                              header.getContext()
-                            )}
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: 4,
+                          }}
+                        >
+                          {flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+
+                          {{
+                            asc: "▴",
+                            desc: "▾",
+                          }[header.column.getIsSorted()] ?? null}
+                        </div>
                       </th>
                     ))}
                   </tr>
@@ -288,12 +313,3 @@ export function TabBC({ selectors }) {
     </TabContent>
   );
 }
-const getBackgroundColor = (number) => {
-  const value = parseFloat(number);
-  if (isNaN(value)) return "transparent";
-
-  if (value < 11.1) return "transparent";
-  if (value <= 22.0) return "#fff1cd";
-  if (value <= 43.0) return "#f3cccb";
-  return "#db3b0f";
-};
