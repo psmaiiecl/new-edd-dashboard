@@ -18,13 +18,13 @@ export const mappers = {
     total_key: "informes_establecimiento",
     series: [
       {
-        name: "Informes Descargados",
+        name: "Informes con Acceso Descargados",
         key: "informes_establecimiento_descargados",
         color: "#65D9AB",
         sliced: true,
       },
       {
-        name: "Informes no Descargados",
+        name: "Informes sin Acceso",
         key: "informes_establecimiento_no_descargados",
         color: "#FF8E53",
       },
@@ -39,13 +39,13 @@ export const mappers = {
     total_key: "informes_sostenedor",
     series: [
       {
-        name: "Informes Descargados",
+        name: "Informes con Acceso Descargados",
         key: "informes_sostenedor_descargados",
         color: "#65D9AB",
         sliced: true,
       },
       {
-        name: "Informes no Descargados",
+        name: "Informes sin Acceso",
         key: "informes_sostenedor_no_descargados",
         color: "#FF8E53",
       },
