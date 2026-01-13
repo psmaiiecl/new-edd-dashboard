@@ -18,6 +18,8 @@ import { BASE_API_URL_2025 } from "../../data/BASE_API_URL";
 import { TabEviIncognita } from "./components/TabEviIncognita";
 import { TabMIDE } from "./components/TabMIDE";
 import { TabBC } from "./components/TabBC";
+import { TabIAModulo } from "./components/TabIAModulo";
+import { TabIACalibracion } from "./components/TabIACalibracion";
 
 export function PortfolioCorrectionSection2025() {
   const { getTipoUsuario } = useContext(AuthContext);
@@ -148,13 +150,20 @@ export function PortfolioCorrectionSection2025() {
           currentActive={innerTab}
           tabArray={filteredIATabList}
         ></CustomTabs>
-        <TabPanel isActive={innerTab === "itab1"}>
-        </TabPanel>
         <TabPanel isActive={innerTab === "itab2"}>
-        </TabPanel>
-        <TabPanel isActive={innerTab === "itab3"}>
+          <TabIAModulo
+            module={"Módulo 1"}
+            selectors={selectors?.anidamientoIA || []}
+          />
         </TabPanel>
         <TabPanel isActive={innerTab === "itab4"}>
+          <TabIAModulo
+            module={"Módulo 3"}
+            selectors={selectors?.anidamientoIA || []}
+          />
+        </TabPanel>
+        <TabPanel isActive={innerTab === "itab5"}>
+          <TabIACalibracion selectors={selectors} />
         </TabPanel>
       </TabPanel>
     </ModulePageLayout>

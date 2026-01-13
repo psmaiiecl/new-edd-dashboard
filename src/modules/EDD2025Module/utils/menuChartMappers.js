@@ -379,7 +379,7 @@ export function buildPortfolioCorrectionModuleChart(data) {
           {
             name: "Correcciones Incompletas",
             y: incompletas,
-            color: "#76767b",
+            color: "#ff5880",
             drilldown: {
               categories: ["Incompletas"],
               data: [(incompletas / total) * 100],

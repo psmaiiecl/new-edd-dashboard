@@ -123,7 +123,7 @@ export function buildGraficoCohen(data, module) {
         },
       },
       {
-        name: "2024",
+        name: "2025",
         type: "scatter",
         color: "red",
         marker: { symbol: "circle", radius: 5 },
@@ -137,7 +137,7 @@ export function buildGraficoCohen(data, module) {
         data: media2023,
       },
       {
-        name: `Comparación ${anioComparacion}-2024`,
+        name: `Comparación ${anioComparacion}-2025`,
         type: "line",
         color: "gray",
         lineWidth: 1,
@@ -192,16 +192,6 @@ export function buildTablaComparacion(data) {
     diff: "",
   });
 
-  console.log({
-    rows: rows,
-    columns: [
-      { key: "indicador", label: "Indicador" },
-      { key: "v2025", label: "2025", color: "#ff8422" },
-      { key: "v2024", label: "2024", color: "#2d8cff" },
-      { key: "diff", label: "Diferencia" },
-    ],
-  });
-
   return {
     rows: rows,
     columns: [
@@ -242,6 +232,176 @@ export function buildTablaCohen(data) {
       { key: "dcohen", label: "D de Cohen", color: "#FFC72A" },
       { key: "v2025", label: "2025", color: "#ff8422" },
       { key: "v2024", label: "2024", color: "#2d8cff" },
+      { key: "diff", label: "Diferencia" },
+    ],
+  };
+}
+
+export function buildTablaComparacionIA(data) {
+  const categories = data.categories;
+  const series = data.series;
+
+  const cia = series.find((s) => s.name === "C-ia")?.data ?? [];
+  const dia = series.find((s) => s.name === "D-ia")?.data ?? [];
+  const c2025 = series.find((s) => s.name === "C-2025")?.data ?? [];
+  const d2025 = series.find((s) => s.name === "D-2025")?.data ?? [];
+
+  const rows = categories.map((cat, i) => {
+    const totalia = (cia[i] ?? 0) + (dia[i] ?? 0);
+    const total2025 = (c2025[i] ?? 0) + (d2025[i] ?? 0);
+
+    const via = Number(totalia.toFixed(1));
+    const v2025 = Number(total2025.toFixed(1));
+    const diffValue = Number((total2025 - totalia).toFixed(1));
+
+    const sinBase = via === 0;
+
+    return {
+      indicador: cat,
+      v2025,
+      via: sinBase ? "-" : via,
+      diff: sinBase ? "-" : diffValue,
+      paint: !sinBase && (diffValue > 10 || diffValue < -10),
+    };
+  });
+
+  rows.push({
+    indicador: "Total evidencias corregidas",
+    v2025: data.totales2025?.[0] ?? 0,
+    via: data.totalesia?.[0] ?? 0,
+    diff: "",
+  });
+
+  return {
+    rows: rows,
+    columns: [
+      { key: "indicador", label: "Indicador" },
+      { key: "v2025", label: "2025", color: "#ff8422" },
+      { key: "via", label: "IA", color: "#2d8cff" },
+      { key: "diff", label: "Diferencia" },
+    ],
+  };
+}
+
+export function buildGraficoCohenIA(data, module) {
+  let anioComparacion = 'IA';
+
+  let categ = data.categ;
+  let d_cohen = data.d_cohen;
+  let media2023 = data.mediaia;
+  let media2024 = data.media2025;
+
+  const lineasVerticales = categ.flatMap((_, i) => [
+    { x: i, y: media2023[i] },
+    { x: i, y: media2024[i] },
+    // { x: null, y: null },
+    null,
+  ]);
+
+  return {
+    chart: { zoomType: "xy" },
+    title: {
+      text: module,
+      align: "center",
+      style: {
+        fontWeight: "300",
+        fontSize: "15px",
+        color: "#666666",
+      },
+    },
+    subtitle: {
+      text: "Comparación de promedios de puntaje por indicador General",
+    },
+    xAxis: {
+      categories: categ,
+      crosshair: true,
+      title: { text: "INDICADOR" },
+    },
+    yAxis: {
+      max: 4,
+      title: null,
+      tickInterval: 0.15,
+    },
+    tooltip: { shared: true },
+    legend: { align: "center", verticalAlign: "bottom" },
+    series: [
+      {
+        name: "D de Cohen",
+        type: "column",
+        color: "gold",
+        data: d_cohen.map((v) => v),
+        tooltip: {
+          pointFormatter: function () {
+            return `<span style="color:${
+              this.color
+            }">\u25CF</span> D de Cohen: ${this.y.toFixed(2)}<br/>`;
+          },
+        },
+      },
+      {
+        name: "2025",
+        type: "scatter",
+        color: "red",
+        marker: { symbol: "circle", radius: 5 },
+        data: media2024,
+      },
+      {
+        name: anioComparacion,
+        type: "scatter",
+        color: "green",
+        marker: { symbol: "circle", radius: 5 },
+        data: media2023,
+      },
+      {
+        name: `Comparación ${anioComparacion}-2025`,
+        type: "line",
+        color: "gray",
+        lineWidth: 1,
+        pointPlacement: 0,
+        marker: { enabled: false },
+        enableMouseTracking: false,
+        data: lineasVerticales,
+      },
+    ],
+    lang: {
+      decimalPoint: ",",
+      thousandsSep: ".",
+    },
+    credits: {
+      enabled: false,
+    },
+  };
+}
+
+export function buildTablaCohenIA(data) {
+  const rows = data.categ.map((c, i) => {
+    const mia = data.mediaia[i] ?? 0;
+    const m2025 = data.media2025[i] ?? 0;
+
+    return {
+      indicador: `I${c}`,
+      dcohen: Number((data.d_cohen[i] ?? 0).toFixed(2)),
+      v2025: Number(m2025.toFixed(2)),
+      via: Number(mia.toFixed(2)),
+      diff: Number((m2025 - mia).toFixed(2)),
+    };
+  });
+
+  rows.push({
+    indicador: "Total evidencias corregidas",
+    dcohen: "",
+    v2025: data.total2025?.[0] ?? 0,
+    via: data.totalia?.[0] ?? 0,
+    diff: "",
+  });
+
+  return {
+    rows: rows,
+    columns: [
+      { key: "indicador", label: "Indicador" },
+      { key: "dcohen", label: "D de Cohen", color: "#FFC72A" },
+      { key: "v2025", label: "2025", color: "#ff8422" },
+      { key: "via", label: "IA", color: "#2d8cff" },
       { key: "diff", label: "Diferencia" },
     ],
   };

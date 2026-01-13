@@ -216,10 +216,11 @@ export function useModules(userType) {
       changeLoadingStatus("correccion_portafolios", true);
       customFetch({
         route:
-          BASE_API_URL_2024 +
-          "/2024-correccion_portafolios/resultados/distribucion",
+          BASE_API_URL_2025 +
+          "/2025-cpf-distribucion-resultados",
         shouldCache: true,
         hasLoadPanel: false,
+        method: "GET",
       })
         .then((data) => {
           setCardCharts((prev) => ({

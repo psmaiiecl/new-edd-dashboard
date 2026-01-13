@@ -42,7 +42,7 @@ export function Menu() {
     {
       key: "agendamiento",
       title: "Agendamiento de Grabaciones",
-      action: () => navigate("agendamiento"),
+      action: () => navigate("agendamiento-grabaciones"),
       chartKey: "agendamiento",
     },
     {

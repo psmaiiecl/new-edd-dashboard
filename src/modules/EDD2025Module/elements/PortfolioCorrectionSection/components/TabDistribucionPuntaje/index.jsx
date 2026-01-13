@@ -233,7 +233,7 @@ export function TabDistribucionPuntaje({ selectors }) {
                 <tr>
                   <td>
                     Dif
-                    <div className="text-[11px]">24/23</div>
+                    <div className="text-[11px]">25/24</div>
                   </td>
                   <FilaDif
                     difPorModulo={correccionTable?.dif}

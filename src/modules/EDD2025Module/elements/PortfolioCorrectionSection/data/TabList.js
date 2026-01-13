@@ -25,9 +25,9 @@ export const monitoreoTabList = [
 ];
 
 export const IATabList = [
-  { index: "itab1", label: "Distribución de Resultados" },
+  // { index: "itab1", label: "Distribución de Resultados" },
   { index: "itab2", label: "Módulo 1" },
-  { index: "itab3", label: "Módulo 2" },
+  // { index: "itab3", label: "Módulo 2" },
   { index: "itab4", label: "Módulo 3" },
   { index: "itab5", label: "Calibración" },
 ];
@@ -46,12 +46,12 @@ export const tabList = [
   },
   { index: "tab6", label: "Evidencia Incógnita", excludeFor: [9] },
   { index: "tab3", label: "Monitoreo Flujos", excludeFor: [6, 9, 7] },
-  // {
-  //   index: "tab4",
-  //   label: "Monitoreo IA",
-  //   excludeFor: [6, 9, 7],
-  //   inner: IATabList,
-  // },
+  {
+    index: "tab4",
+    label: "Monitoreo IA",
+    excludeFor: [6, 9, 7],
+    inner: IATabList,
+  },
   { index: "tab5", label: "Monitoreo B/C", excludeFor: [6, 9, 7] },
   { index: "tab7", label: "Correctores Divergentes", excludeFor: [6, 9, 7] },
 ];
