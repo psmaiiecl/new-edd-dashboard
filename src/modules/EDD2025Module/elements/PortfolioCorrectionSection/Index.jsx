@@ -1,7 +1,12 @@
 import { useContext, useEffect, useMemo, useState } from "react";
 import { ModulePageLayout } from "../../../../components/Layout/ModulePageLayout";
 import { CustomTabs } from "../../../../components/CustomTabs";
-import { IATabList, monitoreoTabList, resultadosTabList, tabList } from "./data/TabList";
+import {
+  IATabList,
+  monitoreoTabList,
+  resultadosTabList,
+  tabList,
+} from "./data/TabList";
 import { TabDistribucionResultados } from "./components/TabDistribucionResultados";
 import { TabModulo } from "./components/TabModulo";
 import { TabCorreccionesGrupales } from "./components/TabCorreccionesGrupales";
@@ -162,9 +167,7 @@ export function PortfolioCorrectionSection2025() {
             selectors={selectors?.anidamientoIA || []}
           />
         </TabPanel>
-        <TabPanel isActive={innerTab === "itab5"}>
-          <TabIACalibracion selectors={selectors} />
-        </TabPanel>
+        {innerTab === "itab5" && <TabIACalibracion selectors={selectors} />}
       </TabPanel>
     </ModulePageLayout>
   );

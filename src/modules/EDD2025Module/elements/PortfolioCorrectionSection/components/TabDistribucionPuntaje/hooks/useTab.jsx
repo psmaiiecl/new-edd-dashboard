@@ -59,13 +59,6 @@ export function useTab() {
         cd["2025"][m.key] = getCD(data, "2025", m.key, idx);
         dif[m.key] = getDif24vs23(cd["2025"][m.key], cd["2024"][m.key], idx);
       });
-      console.log("tabledasta", {
-        modulos,
-        moduloIndices,
-        cd,
-        dif,
-        dataset: data,
-      });
 
       setCorreccionTable({ modulos, moduloIndices, cd, dif, dataset: data });
     });
