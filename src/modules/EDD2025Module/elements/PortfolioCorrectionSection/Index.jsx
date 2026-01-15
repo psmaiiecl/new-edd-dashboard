@@ -92,82 +92,93 @@ export function PortfolioCorrectionSection2025() {
         currentActive={activeTab}
         tabArray={filteredTabList}
       ></CustomTabs>
-      <TabPanel isActive={activeTab === "tab1"}>
+      {/* Resultados */}
+      <TabPanel isActive={activeTab === "tab1"} keepAlive>
         <CustomTabs
           setActiveFn={setInnerTab}
           currentActive={innerTab}
           tabArray={filteredResultadosTabList}
         ></CustomTabs>
-        <TabPanel isActive={innerTab === "rtab1"}>
+        <TabPanel isActive={innerTab === "rtab1"} keepAlive>
           <TabDistribucionResultados />
         </TabPanel>
-        <TabPanel isActive={innerTab === "rtab2"}>
+        <TabPanel isActive={innerTab === "rtab2"} keepAlive>
           <TabModulo
             module={"Módulo 1"}
             selectors={selectors?.anidamiento || []}
           />
         </TabPanel>
-        <TabPanel isActive={innerTab === "rtab3"}>
+        <TabPanel isActive={innerTab === "rtab3"} keepAlive>
           <TabModulo
             module={"Módulo 2"}
             selectors={selectors?.anidamiento || []}
           />
         </TabPanel>
-        <TabPanel isActive={innerTab === "rtab4"}>
+        <TabPanel isActive={innerTab === "rtab4"} keepAlive>
           <TabModulo
             module={"Módulo 3"}
             selectors={selectors?.anidamiento || []}
           />
         </TabPanel>
       </TabPanel>
+      {/* Monitoreo */}
       <TabPanel isActive={activeTab === "tab2"}>
         <CustomTabs
           setActiveFn={setInnerTab}
           currentActive={innerTab}
           tabArray={filteredMonitoreoTabList}
         ></CustomTabs>
-        {innerTab === "mtab1" && (
+        <TabPanel isActive={innerTab === "mtab1"}>
           <TabCorreccionesGrupales selectors={selectors} />
-        )}
-        {innerTab === "mtab2" && (
+        </TabPanel>
+        <TabPanel isActive={innerTab === "mtab2"}>
           <TabTercerasCorrecciones selectors={selectors} />
-        )}
-        {innerTab === "mtab3" && (
+        </TabPanel>
+        <TabPanel isActive={innerTab === "mtab3"}>
           <TabDistribucionPuntaje selectors={selectors} />
-        )}
-        {innerTab === "mtab4" && <TabProductividad selectors={selectors} />}
+        </TabPanel>
+        <TabPanel isActive={innerTab === "mtab4"}>
+          <TabProductividad selectors={selectors} />
+        </TabPanel>
       </TabPanel>
+      {/* Monitoreo Incognitas */}
       <TabPanel isActive={activeTab === "tab6"}>
         <TabEviIncognita selectors={selectors} />
       </TabPanel>
-      <TabPanel isActive={activeTab === "tab3"}>
+      {/* Monitoreo Flujos */}
+      <TabPanel isActive={activeTab === "tab3"} keepAlive>
         <TabMarca1 />
       </TabPanel>
+      {/* Monitoreo BC */}
       <TabPanel isActive={activeTab === "tab5"}>
         <TabBC selectors={selectors} />
       </TabPanel>
+      {/* Monitoreo MIDE */}
       <TabPanel isActive={activeTab === "tab7"}>
-        {activeTab === "tab7" && <TabMIDE selectors={selectors} />}
+        <TabMIDE selectors={selectors} />
       </TabPanel>
-      <TabPanel isActive={activeTab === "tab4"}>
+      {/* Monitoreo IA */}
+      <TabPanel isActive={activeTab === "tab4"} keepAlive>
         <CustomTabs
           setActiveFn={setInnerTab}
           currentActive={innerTab}
           tabArray={filteredIATabList}
         ></CustomTabs>
-        <TabPanel isActive={innerTab === "itab2"}>
-          <TabIAModulo
-            module={"Módulo 1"}
-            selectors={selectors?.anidamientoIA || []}
-          />
+        <TabPanel isActive={innerTab === "itab2"} keepAlive>
+            <TabIAModulo
+              module={"Módulo 1"}
+              selectors={selectors?.anidamientoIA || []}
+            />
         </TabPanel>
-        <TabPanel isActive={innerTab === "itab4"}>
-          <TabIAModulo
-            module={"Módulo 3"}
-            selectors={selectors?.anidamientoIA || []}
-          />
+        <TabPanel isActive={innerTab === "itab4"} keepAlive>
+            <TabIAModulo
+              module={"Módulo 3"}
+              selectors={selectors?.anidamientoIA || []}
+            />
         </TabPanel>
-        {innerTab === "itab5" && <TabIACalibracion selectors={selectors} />}
+        <TabPanel isActive={innerTab === "itab5"} >
+            <TabIACalibracion selectors={selectors} />
+        </TabPanel>
       </TabPanel>
     </ModulePageLayout>
   );
