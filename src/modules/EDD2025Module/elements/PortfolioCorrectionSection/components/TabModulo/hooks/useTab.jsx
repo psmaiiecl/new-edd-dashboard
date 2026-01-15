@@ -127,7 +127,7 @@ export function useTab(module, selectors) {
       setData({
         comparacion: buildGraficoCD(resp.grafico_comparacion, module) || null,
         cohen: buildGraficoCohen(resp.grafico_dcohen, module) || null,
-        tabla_comparacion: buildTablaComparacion(resp.grafico_comparacion),
+        tabla_comparacion: buildTablaComparacion(resp.grafico_comparacion, module),
         tabla_cohen: buildTablaCohen(resp.grafico_dcohen),
       });
     });

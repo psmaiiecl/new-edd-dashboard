@@ -157,7 +157,8 @@ export function buildGraficoCohen(data, module) {
   };
 }
 
-export function buildTablaComparacion(data) {
+export function buildTablaComparacion(data, module) {
+  const isM3 = module === "Módulo 3" || module === "M3";
   const categories = data.categories;
   const series = data.series;
 
@@ -167,6 +168,9 @@ export function buildTablaComparacion(data) {
   const d2025 = series.find((s) => s.name === "D-2025")?.data ?? [];
 
   const rows = categories.map((cat, i) => {
+    const nIndicadores2024 = data.totales2024[i];
+    const nIndicadores2025 = data.totales2025[i];
+
     const total2024 = (c2024[i] ?? 0) + (d2024[i] ?? 0);
     const total2025 = (c2025[i] ?? 0) + (d2025[i] ?? 0);
 
@@ -177,6 +181,8 @@ export function buildTablaComparacion(data) {
     const sinBase = v2024 === 0;
 
     return {
+      n2024: nIndicadores2024,
+      n2025: nIndicadores2025,
       indicador: cat,
       v2025,
       v2024: sinBase ? "-" : v2024,
@@ -187,19 +193,39 @@ export function buildTablaComparacion(data) {
 
   rows.push({
     indicador: "Total evidencias corregidas",
-    v2025: data.totales2025?.[0] ?? 0,
-    v2024: data.totales2024?.[0] ?? 0,
+    v2025: Math.max(...data.totales2025) ?? 0,
+    v2024: Math.max(...data.totales2024) ?? 0,
     diff: "",
   });
 
+  const baseColumns = [
+    { key: "indicador", label: "Indicador" },
+    { key: "v2025", label: "2025", color: "#ff8422" },
+  ];
+
+  if (isM3) {
+    baseColumns.push({
+      key: "n2025",
+      label: "N-2025",
+      color: "#ff8422",
+    });
+  }
+
+  baseColumns.push({ key: "v2024", label: "2024", color: "#2d8cff" });
+
+  if (isM3) {
+    baseColumns.push({
+      key: "n2024",
+      label: "N-2024",
+      color: "#2d8cff",
+    });
+  }
+
+  baseColumns.push({ key: "diff", label: "Diferencia" });
+
   return {
-    rows: rows,
-    columns: [
-      { key: "indicador", label: "Indicador" },
-      { key: "v2025", label: "2025", color: "#ff8422" },
-      { key: "v2024", label: "2024", color: "#2d8cff" },
-      { key: "diff", label: "Diferencia" },
-    ],
+    rows,
+    columns: baseColumns,
   };
 }
 
@@ -284,7 +310,7 @@ export function buildTablaComparacionIA(data) {
 }
 
 export function buildGraficoCohenIA(data, module) {
-  let anioComparacion = 'IA';
+  let anioComparacion = "IA";
 
   let categ = data.categ;
   let d_cohen = data.d_cohen;
