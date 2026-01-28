@@ -200,13 +200,13 @@ export function TabIACalibracion({ selectors }) {
               customDownload({
                 route:
                   BASE_API_URL_2025 +
-                  `/2025-cpf-incognita?tipo_portafolio=${
+                  `/2025-cpf-ia-monitoreo?tipo_portafolio=${
                     selectedFilter.tipo_portafolio?.value ?? ""
                   }&grupo_trabajo=${
                     selectedFilter.grupo_trabajo?.value ?? ""
                   }&periodo=${selectedFilter.periodo?.value ?? ""}&excel=1`,
                 options: { method: "GET" },
-                filename: `CALIBRACION_INCOGNITAS.xlsx`,
+                filename: `CALIBRACION_IA.xlsx`,
               });
             }}
           />
