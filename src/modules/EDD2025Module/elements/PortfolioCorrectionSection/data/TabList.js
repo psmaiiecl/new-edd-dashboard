@@ -26,9 +26,9 @@ export const monitoreoTabList = [
 
 export const IATabList = [
   // { index: "itab1", label: "Distribución de Resultados" },
-  { index: "itab2", label: "Módulo 1" },
   // { index: "itab3", label: "Módulo 2" },
-  { index: "itab4", label: "Módulo 3" },
+  { index: "itab2", label: "Resultados Módulo 1" },
+  { index: "itab4", label: "Resultados Módulo 3" },
   { index: "itab5", label: "Calibración" },
 ];
 
