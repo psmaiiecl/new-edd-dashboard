@@ -11,31 +11,31 @@ import { useMemo } from "react";
 export function TabModulo({ module, selectors }) {
   const { selectedFilter, handleFilter, data, cleanFilters } = useTab(
     module,
-    selectors
+    selectors,
   );
 
   const grupo = selectedFilter.grupo;
   const agrupaciones = grupo?.agrupaciones ?? [];
   const especialidades = grupo?.especialidades ?? [];
   const dateOptions = useMemo(() => {
+    const startDate = new Date(2026, 0, 3);
     const today = new Date();
-    const year = today.getFullYear();
-    const month = today.getMonth(); 
 
     const options = [];
-    const endDay = today.getDate();
+    const current = new Date(startDate);
 
-    for (let day = 3; day <= endDay; day++) {
-      const d = new Date(year, month, day);
-      const value = d.toISOString().slice(0, 10); 
+    while (current <= today) {
+      const value = current.toISOString().slice(0, 10);
 
       options.push({
         value,
-        label: d.toLocaleDateString("es-CL"),
+        label: current.toLocaleDateString("es-CL"),
       });
+
+      current.setDate(current.getDate() + 1);
     }
 
-    return options;
+    return options.reverse();
   }, []);
 
   return (
