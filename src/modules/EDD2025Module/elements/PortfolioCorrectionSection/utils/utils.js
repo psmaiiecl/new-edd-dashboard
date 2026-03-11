@@ -538,11 +538,11 @@ export function formatDataForTable(tabla) {
     bold: true,
     categoria: "Total Corregidos",
     prev: corregidosPrev,
-    // prevPct: safePct(corregidosPrev, totalPrev),
-    prevPct: safePct(corregidosPrev, corregidosPrev),
+    prevPct: safePct(corregidosPrev, totalPrev),
+    // prevPct: safePct(corregidosPrev, corregidosPrev),
     curr: corregidosCurr,
-    // currPct: safePct(corregidosCurr, totalCurr),
-    currPct: safePct(corregidosCurr, corregidosCurr),
+    currPct: safePct(corregidosCurr, totalCurr),
+    // currPct: safePct(corregidosCurr, corregidosCurr),
   });
 
   rows.push({
