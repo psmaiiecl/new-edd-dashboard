@@ -13,45 +13,54 @@ export function DashboardHeader({
 }) {
   const navigate = useNavigate();
   const { getTipoUsuario } = useContext(AuthContext);
+
   return (
-    <nav className="dashboard-header">
-      <BackButton />
-      <span className="roboto-bold dashboard-header__title">
-        Evaluación del Desempeño Docente
-      </span>
-      <Select
-        isDisabled={getTipoUsuario() === 5}
-        className="roboto-regular"
-        value={selectedModule}
-        onChange={(option) => {
-          setSelectedModule(option);
-          navigate(`/dashboard/${option.value}`);
-        }}
-        options={moduleOptions}
-        isSearchable={false}
-        noOptionsMessage={() => "Ningún módulo"}
-        placeholder="Seleccione una módulo"
-        styles={{
-          control: (base) => ({
-            ...base,
-            fontSize: "13px",
-            padding: "0px 10px ",
-          }),
-          option: (base) => ({
-            ...base,
-            fontSize: "13px",
-            color: "black",
-          }),
-        }}
-      />
-      <div className="dashboard-logout">
-        <Button
-          text={"Cerrar Sesión"}
-          action={() => {
-            navigate("/");
+    <header className="dashboard-header">
+      <div className="dashboard-header__left">
+        <BackButton />
+
+        <div className="dashboard-header__title-group roboto-bold">
+          <span className="dashboard-header__title">
+            Evaluación del Desempeño Docente
+          </span>
+          <span className="dashboard-header__subtitle">
+            Dashboard EDD - {selectedModule?.value}
+          </span>
+        </div>
+      </div>
+
+      <div className="dashboard-header__right roboto-regular">
+        <Select
+          isDisabled={getTipoUsuario() === 5}
+          value={selectedModule}
+          onChange={(option) => {
+            setSelectedModule(option);
+            navigate(`/dashboard/${option.value}`);
+          }}
+          options={moduleOptions}
+          isSearchable={false}
+          className="roboto-regular"
+          menuPosition="fixed"
+          styles={{
+            control: (base) => ({
+              ...base,
+              fontSize: "13px",
+              padding: "0px 10px ",
+            }),
+            option: (base) => ({
+              ...base,
+              fontSize: "13px",
+              color: "black",
+            }),
           }}
         />
+
+        <div className="dashboard-logout">
+          <Button text={"Cerrar Sesión"} action={() => navigate("/")} />
+        </div>
       </div>
-    </nav>
+
+      <div className="dashboard-header__accent" />
+    </header>
   );
 }

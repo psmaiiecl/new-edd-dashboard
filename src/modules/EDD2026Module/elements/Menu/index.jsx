@@ -2,7 +2,7 @@ import "./index.css";
 import { useNavigate } from "react-router";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import { useModules } from "../../hooks/useModules";
+import useModules from "../../hooks/useModules";
 import { ModuleCard } from "../../../../components/ModuleCard";
 import { useContext } from "react";
 import { AuthContext } from "../../../../context/AuthContext";
@@ -16,40 +16,53 @@ export function Menu() {
 
   const modules = [
     {
+      key: "representantes_legales",
+      title: "Representantes Legales",
+      action: () => navigate("representantes-legales"),
+      chartKey: "representantes_legales",
+      locked: true
+    },
+    {
       key: "inscripcion",
       title: "Inscripción",
       action: () => navigate("inscripcion"),
       chartKey: "inscripcion",
+      locked: true
     },
     {
       key: "validacion",
       title: "Validación",
       action: () => navigate("validacion"),
       chartKey: "validacion",
+      locked: true
     },
     {
       key: "resultados",
       title: "Entrega de Resultados",
       action: () => navigate("resultados"),
       chartKey: "resultados",
+      locked: true
     },
     {
       key: "portafolio",
       title: "Portafolio",
       action: () => navigate("portafolio"),
       chartKey: "portafolio",
+      locked: true
     },
     {
       key: "agendamiento",
       title: "Agendamiento de Grabaciones",
       action: () => navigate("agendamiento-grabaciones"),
       chartKey: "agendamiento",
+      locked: true
     },
     {
       key: "grabaciones",
       title: "Grabaciones",
       action: () => navigate("grabaciones"),
       chartKey: "grabaciones",
+      locked: true
     },
     {
       key: "recuperacion",
@@ -60,24 +73,28 @@ export function Menu() {
           "_blank"
         ),
       chartKey: "recuperacion",
+      locked: true
     },
     {
       key: "procesamiento",
       title: "Procesamiento de Grabaciones",
-      action: () => navigate("procesamiento-sd"),
+      action: () => navigate("procesamiento"),
       chartKey: "procesamiento",
+      locked: true
     },
     {
       key: "correccion_postulaciones",
       title: "Corrección Postulaciones",
       action: () => navigate("correccion-postulaciones"),
       chartKey: "correccion_postulaciones",
+      locked: true
     },
     {
       key: "correccion_portafolios",
       title: "Corrección Portafolios",
       action: () => navigate("correccion-portafolios"),
       chartKey: "correccion_portafolios",
+      locked: true
     },
     {
       key: "ayuda",
@@ -88,15 +105,16 @@ export function Menu() {
           "_blank"
         ),
       chartKey: "ayuda",
+      locked: true
     },
   ];
 
   return (
     <>
-      <div className="module-menu__title roboto-light">
+      {/* <div className="module-menu__title roboto-light">
         <span>Seleccione el módulo al que desea ingresar</span>
         <hr />
-      </div>
+      </div> */}
 
       <div className="module-menu">
         {modules
@@ -107,6 +125,7 @@ export function Menu() {
               title={m.title}
               action={m.action}
               loading={loadingStatus[m.key]}
+              locked={m.locked}
             >
               <HighchartsReact
                 options={cardCharts[m.chartKey]}

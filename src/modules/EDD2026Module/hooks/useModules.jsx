@@ -1,0 +1,227 @@
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../../context/AuthContext";
+import { useCustomFetch } from "../../../hooks/useCustomFetch";
+import { canSeeModule } from "../elements/Menu/helpers/moduleConfig";
+import { MODULE_CHART_SETUP } from "../../../constants/CONST";
+import { BASE_API_URL_2026 } from "../../../constants/BASE_API_URL.JS";
+
+export default function useModules(userType) {
+  const { getToken } = useContext(AuthContext);
+  const customFetch = useCustomFetch();
+  const shouldLoad = (moduleKey) => canSeeModule(userType, moduleKey);
+  const [cardCharts, setCardCharts] = useState({
+    inscripcion: { ...MODULE_CHART_SETUP },
+    validacion: { ...MODULE_CHART_SETUP },
+    ayuda: { ...MODULE_CHART_SETUP },
+    portafolio: { ...MODULE_CHART_SETUP },
+    resultados: { ...MODULE_CHART_SETUP },
+    agendamiento: { ...MODULE_CHART_SETUP },
+    grabaciones: { ...MODULE_CHART_SETUP },
+    procesamiento: { ...MODULE_CHART_SETUP },
+    recuperacion: { ...MODULE_CHART_SETUP },
+    correccion_postulaciones: { ...MODULE_CHART_SETUP },
+    correccion_portafolios: { ...MODULE_CHART_SETUP },
+  });
+  const [loadingStatus, setLoadingStatus] = useState({});
+  const changeLoadingStatus = (field, state) => {
+    setLoadingStatus((prev) => ({
+      ...prev,
+      [field]: state,
+    }));
+  };
+
+  useEffect(() => {
+    // if (shouldLoad("inscripcion")) {
+    //   changeLoadingStatus("inscripcion", true);
+    //   customFetch({
+    //     route: BASE_API_URL_2026 + "/2025-datos-inscripcion",
+    //     shouldCache: true,
+    //     hasLoadPanel: false,
+    //   })
+    //     .then((data) => {
+    //       setCardCharts((prev) => ({
+    //         ...prev,
+    //         inscripcion: buildInscripcionModuleChart(
+    //           data.inscripcion_general.docentes
+    //         ),
+    //       }));
+    //     })
+    //     .finally(() => changeLoadingStatus("inscripcion", false));
+    // }
+    // if (shouldLoad("validacion")) {
+    //   changeLoadingStatus("validacion", true);
+    //   customFetch({
+    //     route: BASE_API_URL_2026 + "/2025-validacion-general",
+    //     shouldCache: true,
+    //     hasLoadPanel: false,
+    //     formData: {
+    //       convocatoria: { value: "" },
+    //       estado: { value: "" },
+    //       nivel: { value: "" },
+    //       suspension: { value: "" },
+    //     },
+    //   })
+    //     .then((data) => {
+    //       setCardCharts((prev) => ({
+    //         ...prev,
+    //         validacion: buildValidationModuleChart(data.validacion),
+    //       }));
+    //     })
+    //     .finally(() => changeLoadingStatus("validacion", false));
+    // }
+    // if (shouldLoad("ayuda")) {
+    //   changeLoadingStatus("ayuda", true);
+    //   customFetch({
+    //     route: BASE_API_URL_2026 + "/2025-llamadas-zoho",
+    //     shouldCache: true,
+    //     hasLoadPanel: false,
+    //   })
+    //     .then((data) => {
+    //       setCardCharts((prev) => ({
+    //         ...prev,
+    //         ayuda: buildHelpModuleChart(data),
+    //       }));
+    //     })
+    //     .finally(() => changeLoadingStatus("ayuda", false));
+    // }
+
+    // if (shouldLoad("portafolio")) {
+    //   changeLoadingStatus("portafolio", true);
+    //   customFetch({
+    //     route: BASE_API_URL_2026 + "/2025-portafolio-avance-portafolio",
+    //     shouldCache: true,
+    //     hasLoadPanel: false,
+    //   })
+    //     .then((data) => {
+    //       setCardCharts((prev) => ({
+    //         ...prev,
+    //         portafolio: buildPortfolioModuleChart(data.docentes),
+    //       }));
+    //     })
+    //     .finally(() => changeLoadingStatus("portafolio", false));
+    // }
+    // if (shouldLoad("resultados")) {
+    //   changeLoadingStatus("resultados", true);
+    //   customFetch({
+    //     route: BASE_API_URL_2026 + "/2025-informes-resultados",
+    //     shouldCache: true,
+    //     hasLoadPanel: false,
+    //   })
+    //     .then((data) => {
+    //       setCardCharts((prev) => ({
+    //         ...prev,
+    //         resultados: buildResultModuleChart(data.ratios),
+    //       }));
+    //     })
+    //     .finally(() => changeLoadingStatus("resultados", false));
+    // }
+    // if (shouldLoad("agendamiento")) {
+    //   changeLoadingStatus("agendamiento", true);
+    //   customFetch({
+    //     route: BASE_API_URL_2026 + "/2025-agendamiento-grabaciones-tab-general",
+    //     shouldCache: true,
+    //     hasLoadPanel: false,
+    //   })
+    //     .then((data) => {
+    //       setCardCharts((prev) => ({
+    //         ...prev,
+    //         agendamiento: buildAgendamientoModuleChart(
+    //           data.agendamiento_docentes
+    //         ),
+    //       }));
+    //     })
+    //     .finally(() => changeLoadingStatus("agendamiento", false));
+    // }
+
+    // if (shouldLoad("grabaciones")) {
+    //   changeLoadingStatus("grabaciones", true);
+    //   customFetch({
+    //     route: BASE_API_URL_2026 + "/2025-grabaciones-tab-general",
+    //     shouldCache: true,
+    //     hasLoadPanel: false,
+    //   })
+    //     .then((data) => {
+    //       setCardCharts((prev) => ({
+    //         ...prev,
+    //         grabaciones: buildGrabacionesModuleChart(
+    //           data.docentes_estado_rinde
+    //         ),
+    //       }));
+    //     })
+    //     .finally(() => changeLoadingStatus("grabaciones", false));
+    // }
+
+    // if (shouldLoad("procesamiento")) {
+    //   changeLoadingStatus("procesamiento", true);
+    //   customFetch({
+    //     route: BASE_API_URL_2026 + "/2025-procesamiento-tab-general",
+    //     shouldCache: true,
+    //     hasLoadPanel: false,
+    //   })
+    //     .then((data) => {
+    //       setCardCharts((prev) => ({
+    //         ...prev,
+    //         procesamiento: buildProcesamientoModuleChart(
+    //           data.evolucion_diaria.normal
+    //         ),
+    //       }));
+    //     })
+    //     .finally(() => changeLoadingStatus("procesamiento", false));
+    // }
+
+    // if (shouldLoad("recuperacion")) {
+    //   changeLoadingStatus("recuperacion", true);
+    //   customFetch({
+    //     route: BASE_API_URL_2026 + "/2025-recuperacion-tab-general",
+    //     shouldCache: true,
+    //     hasLoadPanel: false,
+    //   })
+    //     .then((data) => {
+    //       setCardCharts((prev) => ({
+    //         ...prev,
+    //         recuperacion: buildRecuperacionModuleChart(data.recuperacion_menu),
+    //       }));
+    //     })
+    //     .finally(() => changeLoadingStatus("recuperacion", false));
+    // }
+    // if (shouldLoad("correccion_postulaciones")) {
+    //   changeLoadingStatus("correccion_postulaciones", true);
+    //   customFetch({
+    //     route: BASE_API_URL_2026 + "/2025-postulacion",
+    //     shouldCache: true,
+    //     hasLoadPanel: false,
+    //     method: "GET",
+    //   })
+    //     .then((data) => {
+    //       setCardCharts((prev) => ({
+    //         ...prev,
+    //         correccion_postulaciones: buildPostulacionModuleChart(data),
+    //       }));
+    //     })
+    //     .finally(() => changeLoadingStatus("correccion_postulaciones", false));
+    // }
+    // if (shouldLoad("correccion_portafolios")) {
+    //   changeLoadingStatus("correccion_portafolios", true);
+    //   customFetch({
+    //     route:
+    //       BASE_API_URL_2026 +
+    //       "/2025-cpf-distribucion-resultados",
+    //     shouldCache: true,
+    //     hasLoadPanel: false,
+    //     method: "GET",
+    //   })
+    //     .then((data) => {
+    //       setCardCharts((prev) => ({
+    //         ...prev,
+    //         correccion_portafolios: buildPortfolioCorrectionModuleChart(data),
+    //       }));
+    //     })
+    //     .finally(() => changeLoadingStatus("correccion_portafolios", false));
+    // }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [customFetch, getToken]);
+  return {
+    cardCharts,
+    loadingStatus,
+  };
+}
