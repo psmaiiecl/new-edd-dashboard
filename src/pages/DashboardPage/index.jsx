@@ -26,7 +26,8 @@ export function DashboardPage() {
     { label: "2024", value: "2024" },
   ];
   const [selectedModule, setSelectedModule] = useState(
-    () => moduleOptions.find((m) => m.value === year) || moduleOptions[0]
+    () => moduleOptions.find((m) => m.value === year)
+    // () => moduleOptions.find((m) => m.value === year) || moduleOptions[0]
   );
 
   return (
