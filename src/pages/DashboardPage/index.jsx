@@ -16,6 +16,7 @@ import { ProcessingSection2025 } from "../../modules/EDD2025Module/elements/Proc
 import { PostulationSection2025 } from "../../modules/EDD2025Module/elements/PostulationSection";
 import { RouteProtector } from "../../components/RouteProtector";
 import EDD2026Module from "../../modules/EDD2026Module";
+import LegalRepresentative2026 from "../../modules/EDD2026Module/elements/LegalRepresentative";
 
 export function DashboardPage() {
   const { year } = useParams();
@@ -135,6 +136,14 @@ export function DashboardPage() {
           )}
           {selectedModule.value === "2026" && (
             <Route path="/" element={<EDD2026Module />}>
+              <Route
+                path="representantes-legales"
+                element={
+                  <RouteProtector excludedRoles={[5, 6]}>
+                    <LegalRepresentative2026 />
+                  </RouteProtector>
+                }
+              />
               {/* <Route
                 path="inscripcion"
                 element={
