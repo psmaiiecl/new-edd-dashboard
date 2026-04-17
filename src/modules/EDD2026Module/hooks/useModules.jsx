@@ -6,6 +6,7 @@ import { MODULE_CHART_SETUP } from "../../../constants/CONST";
 import { BASE_API_URL_2026 } from "../../../constants/BASE_API_URL.JS";
 import { buildRepresentantesLegalesModuleChart } from "../elements/Menu/utils/menuChartMappers";
 import { useNavigate } from "react-router";
+import { Search } from "lucide-react";
 
 export default function useModules(userType) {
   const customFetch = useCustomFetch();
@@ -93,6 +94,16 @@ export default function useModules(userType) {
         ),
       locked: true,
     },
+    {
+      key: "busqueda-perfiles",
+      title: "Búsqueda de Perfiles",
+      action: () => navigate("busqueda-perfiles"),
+      render: () => (
+        <div className="module-card__render">
+          <Search size={100} strokeWidth={1.5} />
+        </div>
+      ),
+    },
   ];
 
   const [modulesState, setModulesState] = useState(
@@ -149,7 +160,7 @@ export default function useModules(userType) {
     );
 
     fetchMenuData();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return {

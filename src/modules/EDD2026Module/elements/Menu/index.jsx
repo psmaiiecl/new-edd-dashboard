@@ -30,9 +30,12 @@ export function Menu() {
               loading={m.loading}
               locked={m.locked}
             >
-              {!m.locked && (
-                <HighchartsReact options={m.chart} highcharts={Highcharts} />
-              )}
+              {!m.locked &&
+                (m.render ? (
+                  m.render()
+                ) : (
+                  <HighchartsReact options={m.chart} highcharts={Highcharts} />
+                ))}
             </ModuleCard>
           ))}
       </div>

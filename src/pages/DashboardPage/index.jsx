@@ -17,6 +17,7 @@ import { PostulationSection2025 } from "../../modules/EDD2025Module/elements/Pos
 import { RouteProtector } from "../../components/RouteProtector";
 import EDD2026Module from "../../modules/EDD2026Module";
 import LegalRepresentative2026 from "../../modules/EDD2026Module/elements/LegalRepresentative";
+import BusquedaPersona2026 from "../../modules/EDD2026Module/elements/BusquedaPersona";
 
 export function DashboardPage() {
   const { year } = useParams();
@@ -141,6 +142,14 @@ export function DashboardPage() {
                 element={
                   <RouteProtector excludedRoles={[5, 6]}>
                     <LegalRepresentative2026 />
+                  </RouteProtector>
+                }
+              />
+              <Route
+                path="busqueda-perfiles"
+                element={
+                  <RouteProtector excludedRoles={[5]}>
+                    <BusquedaPersona2026 />
                   </RouteProtector>
                 }
               />
