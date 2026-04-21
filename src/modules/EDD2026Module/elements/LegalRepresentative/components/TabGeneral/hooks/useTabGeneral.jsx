@@ -8,9 +8,13 @@ import { BASE_API_URL_2026 } from "../../../../../../../constants/BASE_API_URL.J
 export function useTabGeneral() {
   const customFetch = useCustomFetch();
   const [selectedFilter, setSelectedFilter] = useState(DEPENDENCY_LIST[0]);
-  const [entidadesSostenedoras, setEntidadesSostenedores] = useState(null);
-  const [sostenedoresParticipantes, setSostenedoresParticipantes] =
-    useState(null);
+
+  const [charts, setCharts] = useState({
+    entidades_sostenedoras: null,
+    representantes_participantes: null,
+    validacion_representantes: null,
+    encargados_sostenedor: null,
+  });
 
   useEffect(() => {
     customFetch({
@@ -22,13 +26,25 @@ export function useTabGeneral() {
       method: "GET",
     }).then((res) => {
       const { data } = res;
-
-      setEntidadesSostenedores(
-        mapPieData(data.totales, mappers.entidades_sostenedoras),
-      );
-      setSostenedoresParticipantes(
-        mapPieData(data.participacion, mappers.sostenedores_participantes),
-      );
+      setCharts((prev) => ({
+        ...prev,
+        entidades_sostenedoras: mapPieData(
+          data.totales,
+          mappers.entidades_sostenedoras,
+        ),
+        representantes_participantes: mapPieData(
+          data.participacion,
+          mappers.representantes_legales,
+        ),
+        validacion_representantes: mapPieData(
+          data.validacion,
+          mappers.validacion_representantes,
+        ),
+        encargados_sostenedor: mapPieData(
+          data.encargados,
+          mappers.sostenedor_encargados,
+        ),
+      }));
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedFilter]);
@@ -36,8 +52,7 @@ export function useTabGeneral() {
   return {
     selectedFilter,
     setSelectedFilter,
-    entidadesSostenedoras,
-    sostenedoresParticipantes,
+    charts
   };
 }
 

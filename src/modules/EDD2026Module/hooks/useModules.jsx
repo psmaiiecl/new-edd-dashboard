@@ -94,16 +94,16 @@ export default function useModules(userType) {
         ),
       locked: true,
     },
-    {
-      key: "busqueda-perfiles",
-      title: "Búsqueda de Perfiles",
-      action: () => navigate("busqueda-perfiles"),
-      render: () => (
-        <div className="module-card__render">
-          <Search size={100} strokeWidth={1.5} />
-        </div>
-      ),
-    },
+    // {
+    //   key: "busqueda-perfiles",
+    //   title: "Búsqueda de Perfiles",
+    //   action: () => navigate("busqueda-perfiles"),
+    //   render: () => (
+    //     <div className="module-card__render">
+    //       <Search size={100} strokeWidth={1.5} />
+    //     </div>
+    //   ),
+    // },
   ];
 
   const [modulesState, setModulesState] = useState(

@@ -6,6 +6,7 @@ import { tabList } from "./data/TabList";
 import { Button } from "../../../../components/Button";
 import { useCustomDownload } from "../../../../hooks/useCustomDownload";
 import { TabGeneral } from "./components/TabGeneral";
+import { BASE_API_URL_2026 } from "../../../../constants/BASE_API_URL.JS";
 
 export default function LegalRepresentative2026() {
   const customDownload = useCustomDownload();
@@ -17,19 +18,18 @@ export default function LegalRepresentative2026() {
         currentActive={activeTab}
         tabArray={tabList}
       >
-        {/* 
         <Button
-          text={"Excel Sostenedor"}
+          text={"Excel"}
           action={() => {
             customDownload({
               route:
-                BASE_API_URL_2025 +
-                "/2025-inscripcion-sostenedor-descarga-excel",
-              options: { method: "POST" },
-              filename: "inscripcion-sostenedores.csv",
+                BASE_API_URL_2026 +
+                "/representantes-legales/excel",
+              options: { method: "GET" },
+              filename: "representantes-legales.csv",
             });
           }}
-        /> */}
+        />
       </CustomTabs>
       <div style={{ display: activeTab === "tab1" ? "block" : "none" }}>
         <TabGeneral />

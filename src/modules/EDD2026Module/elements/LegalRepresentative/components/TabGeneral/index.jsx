@@ -7,12 +7,7 @@ import { CustomDotLineChart } from "../../../../../../components/CustomDotLineCh
 import { TabContent } from "../../../../../../components/Layout/TabContent";
 
 export function TabGeneral() {
-  const {
-    selectedFilter,
-    setSelectedFilter,
-    entidadesSostenedoras,
-    sostenedoresParticipantes,
-  } = useTabGeneral();
+  const { selectedFilter, setSelectedFilter, charts } = useTabGeneral();
 
   return (
     <TabContent>
@@ -44,11 +39,23 @@ export function TabGeneral() {
         <div className="pie-grid-2">
           <CustomPieChart
             subtitle={"TOTAL <b>ENTIDADES SOSTENEDORAS</b>"}
-            data={entidadesSostenedoras}
+            data={charts.entidades_sostenedoras}
           />
           <CustomPieChart
-            subtitle={"SOSTENEDORES <b>PARTICIPANTES</b>"}
-            data={sostenedoresParticipantes}
+            subtitle={"REPRESENTANTES LEGALES <b>PARTICIPANTES</b>"}
+            data={charts.representantes_participantes}
+          />
+        </div>
+        <div className="pie-grid-2">
+          <CustomPieChart
+            subtitle={"REPRESENTANTES LEGALES <b>VERIFICADOS</b>"}
+            data={charts.validacion_representantes}
+          />
+          <CustomPieChart
+            subtitle={
+              "ENTIDADES SOSTENEDORAS CON <b>ENCARGADOS DE EVALUACION</b>"
+            }
+            data={charts.encargados_sostenedor}
           />
         </div>
       </div>
