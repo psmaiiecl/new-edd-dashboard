@@ -4,7 +4,7 @@ import { useCustomFetch } from "../../../hooks/useCustomFetch";
 import { canSeeModule } from "../elements/Menu/helpers/moduleConfig";
 import { MODULE_CHART_SETUP } from "../../../constants/CONST";
 import { BASE_API_URL_2026 } from "../../../constants/BASE_API_URL.JS";
-import { buildRepresentantesLegalesModuleChart } from "../elements/Menu/utils/menuChartMappers";
+import { buildInscripcionModuleChart, buildRepresentantesLegalesModuleChart } from "../elements/Menu/utils/menuChartMappers";
 import { useNavigate } from "react-router";
 import { Search } from "lucide-react";
 
@@ -30,7 +30,8 @@ export default function useModules(userType) {
       key: "inscripcion",
       title: "Inscripción",
       action: () => navigate("inscripcion"),
-      locked: true,
+      dataKey: "inscripcion",
+      builder: buildInscripcionModuleChart,
     },
     {
       key: "validacion",

@@ -18,6 +18,7 @@ import { RouteProtector } from "../../components/RouteProtector";
 import EDD2026Module from "../../modules/EDD2026Module";
 import LegalRepresentative2026 from "../../modules/EDD2026Module/elements/LegalRepresentative";
 import BusquedaPersona2026 from "../../modules/EDD2026Module/elements/BusquedaPersona";
+import { InscriptionSection2026 } from "../../modules/EDD2026Module/elements/InscriptionSection";
 
 export function DashboardPage() {
   const { year } = useParams();
@@ -153,14 +154,15 @@ export function DashboardPage() {
                   </RouteProtector>
                 }
               />
-              {/* <Route
+              <Route
                 path="inscripcion"
                 element={
                   <RouteProtector excludedRoles={[5, 6]}>
-                    <InscriptionSection2025 />
+                    <InscriptionSection2026 />
                   </RouteProtector>
                 }
               />
+              {/* 
               <Route
                 path="validacion"
                 element={
