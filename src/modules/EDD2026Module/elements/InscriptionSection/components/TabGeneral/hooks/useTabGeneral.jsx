@@ -42,8 +42,8 @@ export function useTabGeneral() {
         ),
         docentes_inscritos: buildDocentesInscritos(data.inscripcion_docentes),
         avance_diario: buildAvanceDiario(
+          data.avance_diario.avance_2026,
           data.avance_diario.avance_2025,
-          data.avance_diario.avance_2024,
         ),
       }));
       // setAvanceDiario(buildAvanceDiario(data.avance_diario));

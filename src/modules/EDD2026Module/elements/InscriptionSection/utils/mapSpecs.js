@@ -39,40 +39,40 @@ export const mappers = {
       },
     ],
   },
-  // docentes_dependencia: {
-  //   series: [
-  //     {
-  //       name: "Inscritos en nómina",
-  //       table: "Inscritos",
-  //       key: "Inscrito",
-  //       color: "#65D9AB",
-  //     },
-  //     {
-  //       name: "En Revisión",
-  //       table: "En Revisión",
-  //       key: "En Revisión",
-  //       color: "#FF8E53",
-  //     },
-  //     {
-  //       name: "Desinscritos",
-  //       table: "Desinscritos",
-  //       key: "Desinscrito",
-  //       color: "#C1D9CA",
-  //     },
-  //     {
-  //       name: "Pendientes",
-  //       table: "Pendientes",
-  //       key: "Pendiente",
-  //       color: "#FFD153",
-  //     },
-  //     {
-  //       name: "Cancelados",
-  //       table: "Cancelados",
-  //       key: "Cancelado",
-  //       color: "#FF5880",
-  //     },
-  //   ],
-  // },
+  docentes_dependencia: {
+    series: [
+      {
+        name: "Inscritos en nómina",
+        table: "Inscritos",
+        key: "Inscrito",
+        color: "#65D9AB",
+      },
+      {
+        name: "En Revisión",
+        table: "En Revisión",
+        key: "En Revisión",
+        color: "#FF8E53",
+      },
+      {
+        name: "Desinscritos",
+        table: "Desinscritos",
+        key: "Desinscrito",
+        color: "#C1D9CA",
+      },
+      {
+        name: "Pendientes",
+        table: "Pendientes",
+        key: "Pendiente",
+        color: "#FFD153",
+      },
+      {
+        name: "Cancelados",
+        table: "Cancelados",
+        key: "Cancelado",
+        color: "#FF5880",
+      },
+    ],
+  },
   // sostenedores_dependencia: {
   //   series: [
   //     {

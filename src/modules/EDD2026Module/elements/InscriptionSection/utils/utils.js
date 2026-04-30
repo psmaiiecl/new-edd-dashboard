@@ -46,14 +46,14 @@ export function buildAvanceDiario(data, dataPrev) {
       if (arrAcumulado.includes(key)) {
         const index = arrAcumulado.indexOf(key);
         arrAcumulado.splice(index, 1, arrays.porcentaje);
-        arrAcumulado2023.splice(index, 1, dataPrev?.[key].porcentaje ?? 0);
+        arrAcumulado2023.splice(index, 1, dataPrev?.[key]?.porcentaje ?? 0);
         arrAcumulado2.splice(index, 1, arrays.porcentaje);
       }
 
       if (arrTotal.includes(key)) {
         const index = arrTotal.indexOf(key);
         arrTotal.splice(index, 1, arrays.total);
-        arrTotal2023.splice(index, 1, dataPrev?.[key].porcentaje ?? 0);
+        arrTotal2023.splice(index, 1, dataPrev?.[key]?.porcentaje ?? 0);
       }
     }
   });
