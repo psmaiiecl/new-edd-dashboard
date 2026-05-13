@@ -83,4 +83,20 @@ export const mappers = {
       },
     ],
   },
+  directores_inscritos: {
+    total_key: "totales",
+    series: [
+      {
+        name: "Registrados",
+        key: "registrados",
+        sliced: true,
+        color: "#FF5880",
+      },
+      {
+        name: "Por Registrar",
+        key: "por_registrar",
+        color: "#FF8E53",
+      },
+    ],
+  },
 };

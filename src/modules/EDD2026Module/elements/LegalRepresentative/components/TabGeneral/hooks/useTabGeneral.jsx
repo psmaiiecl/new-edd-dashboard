@@ -14,6 +14,7 @@ export function useTabGeneral() {
     representantes_participantes: null,
     validacion_representantes: null,
     encargados_sostenedor: null,
+    directores_inscritos: null,
   });
 
   useEffect(() => {
@@ -43,6 +44,10 @@ export function useTabGeneral() {
         encargados_sostenedor: mapPieData(
           data.encargados,
           mappers.sostenedor_encargados,
+        ),
+        directores_inscritos:  mapPieData(
+          data.directores,
+          mappers.directores_inscritos,
         ),
       }));
     });
