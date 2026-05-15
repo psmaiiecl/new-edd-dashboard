@@ -19,6 +19,7 @@ import EDD2026Module from "../../modules/EDD2026Module";
 import LegalRepresentative2026 from "../../modules/EDD2026Module/elements/LegalRepresentative";
 import BusquedaPersona2026 from "../../modules/EDD2026Module/elements/BusquedaPersona";
 import { InscriptionSection2026 } from "../../modules/EDD2026Module/elements/InscriptionSection";
+import { AutoGrabacion2026 } from "../../modules/EDD2026Module/elements/AutoGrabacion";
 
 export function DashboardPage() {
   const { year } = useParams();
@@ -159,6 +160,14 @@ export function DashboardPage() {
                 element={
                   <RouteProtector excludedRoles={[5, 6]}>
                     <InscriptionSection2026 />
+                  </RouteProtector>
+                }
+              />
+              <Route
+                path="entre-pares"
+                element={
+                  <RouteProtector excludedRoles={[5, 6]}>
+                    <AutoGrabacion2026/>
                   </RouteProtector>
                 }
               />

@@ -6,7 +6,7 @@ import { MODULE_CHART_SETUP } from "../../../constants/CONST";
 import { BASE_API_URL_2026 } from "../../../constants/BASE_API_URL.JS";
 import { buildInscripcionModuleChart, buildRepresentantesLegalesModuleChart } from "../elements/Menu/utils/menuChartMappers";
 import { useNavigate } from "react-router";
-import { Search } from "lucide-react";
+import { Search, SwitchCamera } from "lucide-react";
 
 export default function useModules(userType) {
   const customFetch = useCustomFetch();
@@ -44,6 +44,16 @@ export default function useModules(userType) {
       title: "Portafolio",
       action: () => navigate("portafolio"),
       locked: true,
+    },
+    {
+      key: "entre-pares",
+      title: "Grabación Entre Pares",
+      action: () => navigate("entre-pares"),
+      render: () => (
+        <div className="module-card__render">
+          <SwitchCamera size={100} strokeWidth={1.5} />
+        </div>
+      ),
     },
     {
       key: "agendamiento",
