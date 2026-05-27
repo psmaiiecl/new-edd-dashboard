@@ -3,7 +3,7 @@ import { DEPENDENCY_LIST } from "../../../data/DependencyList";
 import { useCustomFetch } from "../../../../../../../hooks/useCustomFetch";
 import { mapPieData } from "../../../../../../../utils/ChartMapperFactory";
 import { mappers } from "../../../utils/mapSpecs";
-import { BASE_API_URL_2026 } from "../../../../../../../constants/BASE_API_URL.JS";
+import { BASE_API_URL_2026 } from "../../../../../../../constants/BASE_API_URL";
 
 export function useTabGeneral() {
   const customFetch = useCustomFetch();

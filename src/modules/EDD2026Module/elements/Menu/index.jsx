@@ -14,11 +14,6 @@ export function Menu() {
 
   return (
     <>
-      {/* <div className="module-menu__title roboto-light">
-        <span>Seleccione el módulo al que desea ingresar</span>
-        <hr />
-      </div> */}
-
       <div className="module-menu">
         {modulesState
           .filter((m) => canSeeModule(tipoUsuario, m.key))

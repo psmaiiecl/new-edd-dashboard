@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useCustomFetch } from "../../../../../../../hooks/useCustomFetch";
 import { mapBarChartData } from "../../../utils/dependenciaTabUtils";
 import { mappers } from "../../../utils/mapSpecs";
-import { BASE_API_URL_2026 } from "../../../../../../../constants/BASE_API_URL.JS";
+import { BASE_API_URL_2026 } from "../../../../../../../constants/BASE_API_URL";
 
 export function useTabRegion() {
   const customFetch = useCustomFetch();

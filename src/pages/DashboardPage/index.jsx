@@ -20,6 +20,7 @@ import LegalRepresentative2026 from "../../modules/EDD2026Module/elements/LegalR
 import BusquedaPersona2026 from "../../modules/EDD2026Module/elements/BusquedaPersona";
 import { InscriptionSection2026 } from "../../modules/EDD2026Module/elements/InscriptionSection";
 import { AutoGrabacion2026 } from "../../modules/EDD2026Module/elements/AutoGrabacion";
+import { ValidationSection2026 } from "../../modules/EDD2026Module/elements/ValidationSection";
 
 export function DashboardPage() {
   const { year } = useParams();
@@ -171,15 +172,15 @@ export function DashboardPage() {
                   </RouteProtector>
                 }
               />
-              {/* 
               <Route
                 path="validacion"
                 element={
                   <RouteProtector excludedRoles={[5, 6]}>
-                    <ValidationSection2025 />
+                    <ValidationSection2026 />
                   </RouteProtector>
                 }
               />
+              {/* 
               <Route
                 path="portafolio"
                 element={

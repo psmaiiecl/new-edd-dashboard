@@ -9,7 +9,7 @@ import { TabGeneral } from "./components/TabGeneral";
 import { TabDependencia } from "./components/TabDependencia";
 import { TabConvocatoria } from "./components/TabConvocatoria";
 import { TabRegion } from "./components/TabRegion";
-import { BASE_API_URL_2026 } from "../../../../constants/BASE_API_URL.JS";
+import { BASE_API_URL_2026 } from "../../../../constants/BASE_API_URL";
 
 export function InscriptionSection2026() {
   const customDownload = useCustomDownload();

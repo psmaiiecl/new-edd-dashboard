@@ -3,7 +3,7 @@ import { AuthContext } from "../../../context/AuthContext";
 import { useCustomFetch } from "../../../hooks/useCustomFetch";
 import { canSeeModule } from "../elements/Menu/helpers/moduleConfig";
 import { MODULE_CHART_SETUP } from "../../../constants/CONST";
-import { BASE_API_URL_2026 } from "../../../constants/BASE_API_URL.JS";
+import { BASE_API_URL_2026 } from "../../../constants/BASE_API_URL";
 import { buildInscripcionModuleChart, buildRepresentantesLegalesModuleChart } from "../elements/Menu/utils/menuChartMappers";
 import { useNavigate } from "react-router";
 import { Search, SwitchCamera } from "lucide-react";
@@ -37,7 +37,7 @@ export default function useModules(userType) {
       key: "validacion",
       title: "Validación",
       action: () => navigate("validacion"),
-      locked: true,
+      // locked: true,
     },
     {
       key: "portafolio",

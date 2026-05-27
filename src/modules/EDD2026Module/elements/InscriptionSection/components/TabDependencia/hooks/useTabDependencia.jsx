@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { mapBarChartData } from "../../../utils/dependenciaTabUtils";
 import { useCustomFetch } from "../../../../../../../hooks/useCustomFetch";
 import { mappers } from "../../../utils/mapSpecs";
-import { BASE_API_URL_2026 } from "../../../../../../../constants/BASE_API_URL.JS";
+import { BASE_API_URL_2026 } from "../../../../../../../constants/BASE_API_URL";
 
 export function useTabDependencia() {
   const customFetch = useCustomFetch();

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useCustomFetch } from "../../../../hooks/useCustomFetch";
-import { BASE_API_URL_2026 } from "../../../../constants/BASE_API_URL.JS";
+import { BASE_API_URL_2026 } from "../../../../constants/BASE_API_URL";
 import { Button } from "../../../../components/Button";
 
 export default function BusquedaPersona2026() {

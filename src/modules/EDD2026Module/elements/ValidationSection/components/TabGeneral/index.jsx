@@ -1,0 +1,221 @@
+import "./index.css";
+import Select from "react-select";
+import {
+  CAMBIO_LIST,
+  CONVOCATORIA_LIST,
+  ESTADO_LIST,
+  SUSPENSION_LIST,
+} from "../../data/FilterList";
+import { useTabGeneral } from "./hooks/useTabGeneral";
+import { CustomPieChart } from "../../../../../../components/CustomPieChart";
+import { PIE_CONFIG } from "../../../../../../constants/CHART_CONFIGS";
+import { CustomDotLineChart } from "../../../../../../components/CustomDotLineChart";
+import { TabContent } from "../../../../../../components/Layout/TabContent";
+export function TabGeneral() {
+  const {
+    selectedFilter,
+    handleFilter,
+    charts
+  } = useTabGeneral();
+
+  return (
+    <TabContent>
+      <div className="tab-general-filter-row">
+        <div className="tab-general-filter">
+          <span>Convocatoria: </span>
+          <Select
+            value={selectedFilter.convocatoria}
+            onChange={(option) => handleFilter("convocatoria", option)}
+            options={CONVOCATORIA_LIST}
+            isSearchable
+            noOptionsMessage={() => "Ninguna convocatoria"}
+            placeholder="Seleccione una convocatoria"
+            styles={{
+              control: (base) => ({
+                ...base,
+                fontSize: "13px",
+                padding: "0px 10px ",
+              }),
+              option: (base) => ({
+                ...base,
+                fontSize: "13px",
+                color: "black",
+              }),
+            }}
+          />
+        </div>
+        <div className="tab-general-filter">
+          <span>Estado de Validación: </span>
+          <Select
+            value={selectedFilter.estado}
+            onChange={(option) => handleFilter("estado", option)}
+            options={ESTADO_LIST}
+            isSearchable
+            noOptionsMessage={() => "Ningun estado"}
+            placeholder="Seleccione un estado"
+            styles={{
+              control: (base) => ({
+                ...base,
+                fontSize: "13px",
+                padding: "0px 10px ",
+              }),
+              option: (base) => ({
+                ...base,
+                fontSize: "13px",
+                color: "black",
+              }),
+            }}
+          />
+        </div>
+        <div className="tab-general-filter">
+          <span>Cambio Agrupación/Asignatura: </span>
+          <Select
+            value={selectedFilter.nivel}
+            onChange={(option) => handleFilter("nivel", option)}
+            options={CAMBIO_LIST}
+            isSearchable
+            noOptionsMessage={() => "Ninguna agrupacion/asignatura"}
+            placeholder="Seleccione una agrupacion/asignatura"
+            styles={{
+              control: (base) => ({
+                ...base,
+                fontSize: "13px",
+                padding: "0px 10px ",
+              }),
+              option: (base) => ({
+                ...base,
+                fontSize: "13px",
+                color: "black",
+              }),
+            }}
+          />
+        </div>
+        <div className="tab-general-filter">
+          <span>Suspensión/Eximición: </span>
+          <Select
+            value={selectedFilter.suspension}
+            onChange={(option) => handleFilter("suspension", option)}
+            options={SUSPENSION_LIST}
+            isSearchable
+            noOptionsMessage={() => "Ninguna suspensión/eximición"}
+            placeholder="Seleccione una suspensión/eximición"
+            styles={{
+              control: (base) => ({
+                ...base,
+                fontSize: "13px",
+                padding: "0px 10px ",
+              }),
+              option: (base) => ({
+                ...base,
+                fontSize: "13px",
+                color: "black",
+              }),
+            }}
+          />
+        </div>
+      </div>
+      <div className="normal-container">
+        <div className="pie-grid-1">
+          <CustomPieChart
+            subtitle={"DOCENTES <b>INSCRITOS</b>"}
+            data={charts.docentes}
+            overrideConfig={docentesOverrideConfigs}
+          />
+        </div>
+        <div className="pie-grid-2">
+          <CustomPieChart
+            subtitle={
+              "SOLICITUDES DE CAMBIO <b>DE AGRUPACIÓN Y/O ASIGNATURA</b>"
+            }
+            data={charts.solicitudes_cambio_nivel}
+          />
+          <CustomPieChart
+            subtitle={"SOLICITUDES DE <b>SUSPENSIÓN Y/O EXIMICIÓN</b>"}
+            data={charts.solicitudes_suspension}
+          />
+        </div>
+        <div className="pie-grid-2">
+          <CustomPieChart
+            subtitle={"ESTADO DE <b>PARTICIPACIÓN</b> DE DOCENTES VALIDADOS"}
+            data={charts.estado_participacion}
+          />
+          <CustomPieChart
+            subtitle={"CAUSALES DE <b>NO EVALUACIÓN</b> DE DOCENTES INSCRITOS"}
+            data={charts.causales}
+          />
+        </div>
+      </div>
+      <hr />
+      <CustomDotLineChart
+        title={"AVANCE DIARIO <b>VALIDACION DE DOCENTES</b>"}
+        data={charts.avance_diario_validacion}
+        overrideConfig={axisOverrideConfig}
+      />
+      <hr />
+      
+      <CustomDotLineChart
+        title={
+          "EVOLUCIÓN DIARIA DE SOLICITUDES DE <b>CAMBIO DE AGRUPACIÓN Y ASIGNATURA</b>"
+        }
+        data={charts.avance_diario_sol_cambio_nivel}
+        overrideConfig={axisOverrideConfig}
+      />
+      <hr />
+      <CustomDotLineChart
+        title={"EVOLUCIÓN DIARIA DE SOLICITUDES DE <b>SUSPENSIÓN/EXIMICIÓN</b>"}
+        data={charts.avance_diario_sol_susp_exim}
+        overrideConfig={axisOverrideConfig}
+      />
+    </TabContent>
+  );
+}
+
+const docentesOverrideConfigs = {
+  plotOptions: {
+    ...PIE_CONFIG.plotOptions,
+    pie: {
+      ...PIE_CONFIG.plotOptions.pie,
+      size: "80%",
+    },
+  },
+  legend: {
+    layout: "vertical",
+    align: "right",
+    verticalAlign: "middle",
+    itemMarginBottom: 8,
+    itemStyle: {
+      fontSize: "12px",
+      whiteSpace: "normal",
+    },
+    x: -100,
+  },
+  responsive: {
+    rules: [
+      {
+        condition: {
+          maxWidth: 1000,
+        },
+        chartOptions: {
+          legend: {
+            layout: "horizontal",
+            align: "center",
+            verticalAlign: "bottom",
+            x: 0,
+            y: 0,
+          },
+        },
+      },
+    ],
+  },
+};
+
+const axisOverrideConfig = {
+  yAxis: {
+    title: {
+      enabled: false,
+    },
+    labels: {
+      format: "{value}",
+    },
+  },
+};
