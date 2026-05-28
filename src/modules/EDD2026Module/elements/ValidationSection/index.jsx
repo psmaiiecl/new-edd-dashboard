@@ -1,9 +1,9 @@
 import "./style.css";
 import { useState } from "react";
 import { TabGeneral } from "./components/TabGeneral";
-// import { TabDependencia } from "./components/TabDependencia";
-// import { TabConvocatoria } from "./components/TabConvocatoria";
-// import { TabRegion } from "./components/TabRegion";
+import { TabDependencia } from "./components/TabDependencia";
+import { TabConvocatoria } from "./components/TabConvocatoria";
+import { TabRegion } from "./components/TabRegion";
 import { ModulePageLayout } from "../../../../components/Layout/ModulePageLayout";
 import { CustomTabs } from "../../../../components/CustomTabs";
 import { tabList } from "./data/TabList";
@@ -21,12 +21,12 @@ export function ValidationSection2026() {
         currentActive={activeTab}
         tabArray={tabList}
       >
-        {/* <Button
+        <Button
           text={"Excel Docente"}
           action={() => {
             customDownload({
-              route: BASE_API_URL_2026 + "/2026-validacion-descarga-excel",
-              options: { method: "POST" },
+              route: BASE_API_URL_2026 + "/validacion/docente/excel",
+              options: { method: "GET" },
               filename: "validacion-docentes.csv",
             });
           }}
@@ -36,18 +36,17 @@ export function ValidationSection2026() {
           action={() => {
             customDownload({
               route:
-                BASE_API_URL_2026 +
-                "/2026-validacion-descarga-excel-sostenedor",
-              options: { method: "POST" },
+                BASE_API_URL_2026 + "/validacion/sostenedor/excel",
+              options: { method: "GET" },
               filename: "validacion-sostenedores.csv",
             });
           }}
-        /> */}
+        />
       </CustomTabs>
       <div style={{ display: activeTab === "tab1" ? "block" : "none" }}>
         <TabGeneral />
       </div>
-      {/* <div style={{ display: activeTab === "tab2" ? "block" : "none" }}>
+      <div style={{ display: activeTab === "tab2" ? "block" : "none" }}>
         <TabDependencia />
       </div>
       <div style={{ display: activeTab === "tab3" ? "block" : "none" }}>
@@ -55,7 +54,7 @@ export function ValidationSection2026() {
       </div>
       <div style={{ display: activeTab === "tab4" ? "block" : "none" }}>
         <TabRegion />
-      </div> */}
+      </div>
     </ModulePageLayout>
   );
 }

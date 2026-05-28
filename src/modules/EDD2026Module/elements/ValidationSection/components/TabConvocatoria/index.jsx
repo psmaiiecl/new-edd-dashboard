@@ -4,18 +4,14 @@ import { TabContent } from "../../../../../../components/Layout/TabContent";
 import { CustomBarChart } from "../../../../../../components/CustomBarChart";
 
 export function TabConvocatoria() {
-  const {
-    docentesConvocatoria,
-    agrupacionConvocatoria,
-    suspensionConvocatoria,
-  } = useTabConvocatoria();
+  const { charts } = useTabConvocatoria();
   return (
     <TabContent>
       <CustomBarChart
         subtitle={
           "ESTADO DE VALIDACIÓN DE DOCENTES DISTRIBUIDOS <b>POR CONVOCATORIA</b>"
         }
-        data={docentesConvocatoria}
+        data={charts.docentes}
         height={400}
       />
       <hr className="section-separator" />
@@ -23,14 +19,14 @@ export function TabConvocatoria() {
         subtitle={
           "ESTADO DE SOLICITUDES DE CAMBIO DE <b>AGRUPACIÓN/ASIGNATURA</b>"
         }
-        data={agrupacionConvocatoria}
+        data={charts.solicitudes_cambio_nivel}
         height={400}
       />
 
       <hr className="section-separator" />
       <CustomBarChart
         subtitle={"ESTADO DE SOLICITUDES DE <b>SUSPENSIÓN O EXIMICIÓN</b>"}
-        data={suspensionConvocatoria}
+        data={charts.solicitudes_suspension}
         height={400}
       />
     </TabContent>

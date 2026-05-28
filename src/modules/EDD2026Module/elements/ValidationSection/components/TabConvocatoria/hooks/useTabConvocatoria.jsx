@@ -1,58 +1,43 @@
 import { useEffect, useState } from "react";
 import { useCustomFetch } from "../../../../../../../hooks/useCustomFetch";
-import { BASE_API_URL_2025 } from "../../../../../data/BASE_API_URL";
 import { mapBarChartData } from "../../../../../../../utils/ChartMapperFactory";
 import { mappers } from "../../../utils/mapSpecs";
+import { BASE_API_URL_2026 } from "../../../../../../../constants/BASE_API_URL";
 
 export function useTabConvocatoria() {
   const customFetch = useCustomFetch();
-  const [docentesConvocatoria, setDocentesConvocatoria] = useState();
-  const [agrupacionConvocatoria, setAgrupacionConvocatoria] = useState();
-  const [suspensionConvocatoria, setSuspensionConvocatoria] = useState();
+  const [charts, setCharts] = useState({
+    docentes: null,
+    solicitudes_cambio_nivel: null,
+    solicitudes_suspension: null,
+  });
 
   useEffect(() => {
     customFetch({
-      route: BASE_API_URL_2025 + "/2025-validacion?endpoint=vista-convocatoria",
+      route: BASE_API_URL_2026 + "/validacion/tab-convocatoria/data",
       shouldCache: true,
-    }).then((data) => {
-      setDocentesConvocatoria(
-        mapBarChartData({
-          data: data.docentes,
+      method: "GET",
+    }).then((response) => {
+      setCharts((prev) => ({
+        ...prev,
+        docentes: mapBarChartData({
+          data: response.data.validacion,
           schema: mappers.estado_validacion.series,
-        })
-      );
-    });
-    customFetch({
-      route:
-        BASE_API_URL_2025 +
-        "/2025-validacion?endpoint=cambio-nivel-vista-convocatoria",
-      shouldCache: true,
-    }).then((data) => {
-      setAgrupacionConvocatoria(
-        mapBarChartData({
-          data: data.docentes,
+        }),
+        solicitudes_suspension: mapBarChartData({
+          data: response.data.solicitudes_suspension,
           schema: mappers.estado_solicitudes.series,
-        })
-      );
-    });
-    customFetch({
-      route:
-        BASE_API_URL_2025 +
-        "/2025-validacion?endpoint=solicita-suspender-vista-convocatoria",
-      shouldCache: true,
-    }).then((data) => {
-      setSuspensionConvocatoria(
-        mapBarChartData({
-          data: data.docentes,
+        }),
+        solicitudes_cambio_nivel: mapBarChartData({
+          data: response.data.solicitudes_cambio_nivel,
           schema: mappers.estado_solicitudes.series,
-        })
-      );
+        }),
+      }));
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return {
-    docentesConvocatoria,
-    agrupacionConvocatoria,
-    suspensionConvocatoria,
+    charts,
   };
 }

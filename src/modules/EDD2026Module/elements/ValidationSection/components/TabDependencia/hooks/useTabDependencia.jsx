@@ -1,58 +1,44 @@
 import { useEffect, useState } from "react";
 import { useCustomFetch } from "../../../../../../../hooks/useCustomFetch";
-import { BASE_API_URL_2025 } from "../../../../../data/BASE_API_URL";
 import { mapBarChartData } from "../../../../../../../utils/ChartMapperFactory";
 import { mappers } from "../../../utils/mapSpecs";
+import { BASE_API_URL_2026 } from "../../../../../../../constants/BASE_API_URL";
 
 export function useTabDependencia() {
   const customFetch = useCustomFetch();
-  const [docentesDependencia, setDocentesDependencia] = useState();
-  const [agrupacionDependencia, setAgrupacionDependencia] = useState();
-  const [suspensionDependencia, setSuspensionDependencia] = useState();
+
+  const [charts, setCharts] = useState({
+    docentes: null,
+    solicitudes_cambio_nivel: null,
+    solicitudes_suspension: null,
+  });
+
   useEffect(() => {
     customFetch({
-      route: BASE_API_URL_2025 + "/2025-validacion?endpoint=vista-dependencia",
+      route: BASE_API_URL_2026 + "/validacion/tab-dependencia/data",
       shouldCache: true,
-    }).then((data) =>
-      setDocentesDependencia(
-        mapBarChartData({
-          data: data.docentes,
+      method: "GET",
+    }).then((response) => {
+      setCharts((prev) => ({
+        ...prev,
+        docentes: mapBarChartData({
+          data: response.data.validacion,
           schema: mappers.estado_validacion.series,
-        })
-      )
-    );
-    customFetch({
-      route:
-        BASE_API_URL_2025 +
-        "/2025-validacion?endpoint=cambio-nivel-vista-dependencia",
-      shouldCache: true,
-    }).then((data) => {
-      setAgrupacionDependencia(
-        mapBarChartData({
-          data: data.docentes,
+        }),
+        solicitudes_suspension: mapBarChartData({
+          data: response.data.solicitudes_suspension,
           schema: mappers.estado_solicitudes.series,
-        })
-      );
-    });
-    customFetch({
-      route:
-        BASE_API_URL_2025 +
-        "/2025-validacion?endpoint=solicita-suspender-vista-dependencia",
-      shouldCache: true,
-    }).then((data) => {
-      setSuspensionDependencia(
-        mapBarChartData({
-          data: data.docentes,
+        }),
+        solicitudes_cambio_nivel: mapBarChartData({
+          data: response.data.solicitudes_cambio_nivel,
           schema: mappers.estado_solicitudes.series,
-        })
-      );
+        }),
+      }));
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return {
-    docentesDependencia,
-    agrupacionDependencia,
-    suspensionDependencia,
+    charts,
   };
 }
