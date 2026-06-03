@@ -127,36 +127,23 @@ export function buildEvolucion(data) {
 
   const arrIngresos = [];
 
-  Object.entries(data).forEach(([key, value]) => {
-    if (!arrFechas.includes(key)) {
-      arrFechas.push(key);
-      arrValidados.push(key);
-      arrPValidados.push(key);
-      arrNValidados.push(key);
-      arrPNValidados.push(key);
-      arrIngresos.push(key);
-    }
-    if (arrValidados.includes(key)) {
-      const index = arrValidados.indexOf(key);
-      arrValidados.splice(index, 1, value.validado);
-    }
+  const entriesOrdenadas = Object.entries(data).sort(([fechaA], [fechaB]) => {
+    const [diaA, mesA] = fechaA.split("-").map(Number);
+    const [diaB, mesB] = fechaB.split("-").map(Number);
 
-    if (arrNValidados.includes(key)) {
-      const index = arrNValidados.indexOf(key);
-      arrNValidados.splice(index, 1, value.nvalidado);
-    }
-    if (arrPValidados.includes(key)) {
-      const index = arrPValidados.indexOf(key);
-      arrPValidados.splice(index, 1, value.p_validado);
-    }
-    if (arrPNValidados.includes(key)) {
-      const index = arrPNValidados.indexOf(key);
-      arrPNValidados.splice(index, 1, value.p_nvalidado);
-    }
-    if (arrIngresos.includes(key)) {
-      const index = arrIngresos.indexOf(key);
-      arrIngresos.splice(index, 1, value.ingresos);
-    }
+    const dateA = new Date(2026, mesA - 1, diaA);
+    const dateB = new Date(2026, mesB - 1, diaB);
+
+    return dateA - dateB;
+  });
+
+  entriesOrdenadas.forEach(([key, value]) => {
+    arrFechas.push(key);
+    arrValidados.push(value.validado ?? 0);
+    arrPValidados.push(value.p_validado ?? 0);
+    arrNValidados.push(value.nvalidado ?? 0);
+    arrPNValidados.push(value.p_nvalidado ?? 0);
+    arrIngresos.push(value.ingresos ?? 0);
   });
 
   const res = {
