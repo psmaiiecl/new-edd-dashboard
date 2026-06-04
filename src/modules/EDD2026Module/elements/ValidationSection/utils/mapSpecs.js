@@ -18,8 +18,8 @@ export const mappers = {
         color: "#8fb8ff",
       },
       {
-        name: "No Validados",
-        key: "actualizado",
+        name: "En Proceso",
+        key: "en_proceso",
         color: "#ff8e53",
       },
       {
