@@ -101,10 +101,12 @@ export function buildInscripcionModuleChart(data) {
 }
 
 export function buildValidationModuleChart(data) {
-  const valid = data.validado ? data.validado : 0;
-  const notValid = data.no_validado ? data.no_validado : 0;
-  const notIn = data.sin_ingreso ? data.sin_ingreso : 0;
-  const total = valid + notValid + notIn;
+  const valid = data?.validado ?? 0;
+  const notValid = data?.no_validado ?? 0;
+  const notValidSusp = data?.no_validado_susp ?? 0;
+  const notIn = data?.sin_ingreso ?? 0;
+  const proceso = data?.en_proceso ?? 0;
+  const total = data?.total ?? 0;
 
   return {
     ...MODULE_CHART_SETUP,
@@ -114,7 +116,7 @@ export function buildValidationModuleChart(data) {
         data: [
           {
             name: "Validados",
-            color: "rgb(196, 255, 255)",
+            color: "#65D9AB",
             y: valid,
             drilldown: {
               categories: ["Validados"],
@@ -122,18 +124,36 @@ export function buildValidationModuleChart(data) {
             },
           },
           {
-            name: "No Validados",
+            name: "No Validados - Con Ingreso",
             y: notValid,
-            color: "rgb(67, 67, 72)",
+            color: "#ffd153",
             drilldown: {
-              categories: ["No Validados"],
+              categories: ["No Validados - Con Ingreso"],
               data: [(notValid / total) * 100],
+            },
+          },
+          {
+            name: "No Validados - Susp/Exim Aprobada",
+            y: notValidSusp,
+            color: "#8fb8ff",
+            drilldown: {
+              categories: ["No Validados - Susp/Exim Aprobada"],
+              data: [(notValidSusp / total) * 100],
+            },
+          },
+          {
+            name: "En proceso",
+            y: proceso,
+            color: "#ff8e53",
+            drilldown: {
+              categories: ["En proceso"],
+              data: [(proceso / total) * 100],
             },
           },
           {
             name: "Sin ingreso",
             y: notIn,
-            color: "rgb(94, 195, 194)",
+            color: "#ff5880",
             drilldown: {
               categories: ["Sin ingreso"],
               data: [(notIn / total) * 100],
