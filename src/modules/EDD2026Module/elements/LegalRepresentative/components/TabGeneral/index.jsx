@@ -58,10 +58,14 @@ export function TabGeneral() {
             data={charts.encargados_sostenedor}
           />
         </div>
-        <div className="pie-grid-1">
+        <div className="pie-grid-2">
           <CustomPieChart
             subtitle={"DIRECTORES <b>INSCRITOS</b>"}
             data={charts.directores_inscritos}
+          />
+          <CustomPieChart
+            subtitle={"COORDINADORES DE GRABACIONES <b>INSCRITOS</b>"}
+            data={charts.cg_inscritos}
           />
         </div>
       </div>

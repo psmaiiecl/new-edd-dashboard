@@ -21,7 +21,7 @@ export default function useModules(userType) {
     },
     {
       key: "representantes-legales",
-      title: "Representantes Legales",
+      title: "Actores",
       action: () => navigate("representantes-legales"),
       dataKey: "representantes-legales",
       builder: buildRepresentantesLegalesModuleChart,

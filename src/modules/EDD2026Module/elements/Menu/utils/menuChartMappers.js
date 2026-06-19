@@ -1,9 +1,9 @@
 import { MODULE_CHART_SETUP } from "../../../../../constants/CONST";
 
 export function buildRepresentantesLegalesModuleChart(data) {
-  const con_representantes = data.sostenedores_con_representante ?? 0;
-  const sin_representantes = data.sostenedores_sin_representante ?? 0;
-  const total = data.sostenedores ?? 0;
+  const por_registrar = data.por_registrar ?? 0;
+  const registrados = data.registrados ?? 0;
+  const total = data.total ?? 0;
 
   return {
     ...MODULE_CHART_SETUP,
@@ -12,21 +12,21 @@ export function buildRepresentantesLegalesModuleChart(data) {
         ...MODULE_CHART_SETUP.series[0],
         data: [
           {
-            name: "Sostenedores con R. L.",
+            name: "Registrados",
             color: "#65D9AB",
-            y: con_representantes,
+            y: registrados,
             drilldown: {
-              categories: ["Sostenedores con R. L."],
-              data: [(con_representantes / total) * 100],
+              categories: ["Registrados"],
+              data: [(registrados / total) * 100],
             },
           },
           {
-            name: "Sostenedores sin R. L.",
-            y: sin_representantes,
+            name: "Por Registrar",
             color: "#FFD153",
+            y: por_registrar,
             drilldown: {
-              categories: ["Sostenedores sin R. L."],
-              data: [(sin_representantes / total) * 100],
+              categories: ["Por Registrar"],
+              data: [(por_registrar / total) * 100],
             },
           },
         ],
