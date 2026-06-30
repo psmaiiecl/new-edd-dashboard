@@ -8,11 +8,15 @@ import { ModulePageLayout } from "../../../../components/Layout/ModulePageLayout
 import { CustomTabs } from "../../../../components/CustomTabs";
 import { tabList } from "./data/TabList";
 import { useCustomDownload } from "../../../../hooks/useCustomDownload";
+import { useQuickSightEmbed } from "../../../../hooks/useQuickSightEmbed";
 import { Button } from "../../../../components/Button";
 import { BASE_API_URL_2026 } from "../../../../constants/BASE_API_URL";
 
+const QUICKSIGHT_DASHBOARD_ID = "e5e5d6f9-549a-4460-83c3-4733da32b6a5";
+
 export function ValidationSection2026() {
   const customDownload = useCustomDownload();
+  const { openDashboard } = useQuickSightEmbed();
   const [activeTab, setActiveTab] = useState("tab1");
   return (
     <ModulePageLayout>
@@ -42,6 +46,12 @@ export function ValidationSection2026() {
             });
           }}
         />
+        {activeTab === "tab1" && (
+          <Button
+            text={"QuickSight"}
+            action={() => openDashboard(QUICKSIGHT_DASHBOARD_ID)}
+          />
+        )}
       </CustomTabs>
       <div style={{ display: activeTab === "tab1" ? "block" : "none" }}>
         <TabGeneral />
