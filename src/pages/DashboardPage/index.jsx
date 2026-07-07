@@ -21,6 +21,8 @@ import BusquedaPersona2026 from "../../modules/EDD2026Module/elements/BusquedaPe
 import { InscriptionSection2026 } from "../../modules/EDD2026Module/elements/InscriptionSection";
 import { AutoGrabacion2026 } from "../../modules/EDD2026Module/elements/AutoGrabacion";
 import { ValidationSection2026 } from "../../modules/EDD2026Module/elements/ValidationSection";
+import { PortfolioSection2026 } from "../../modules/EDD2026Module/elements/PortfolioSection";
+import { ResultSection2026 } from "../../modules/EDD2026Module/elements/ResultSection";
 
 export function DashboardPage() {
   const { year } = useParams();
@@ -180,12 +182,11 @@ export function DashboardPage() {
                   </RouteProtector>
                 }
               />
-              {/* 
               <Route
                 path="portafolio"
                 element={
                   <RouteProtector excludedRoles={[5, 6]}>
-                    <PortfolioSection2025 />
+                    <PortfolioSection2026 />
                   </RouteProtector>
                 }
               />
@@ -193,10 +194,11 @@ export function DashboardPage() {
                 path="resultados"
                 element={
                   <RouteProtector excludedRoles={[5, 6]}>
-                    <ResultSection2025 />
+                    <ResultSection2026 />
                   </RouteProtector>
                 }
               />
+              {/*
               <Route
                 path="agendamiento-grabaciones"
                 element={

@@ -4,7 +4,13 @@ import { useCustomFetch } from "../../../hooks/useCustomFetch";
 import { canSeeModule } from "../elements/Menu/helpers/moduleConfig";
 import { MODULE_CHART_SETUP } from "../../../constants/CONST";
 import { BASE_API_URL_2026 } from "../../../constants/BASE_API_URL";
-import { buildInscripcionModuleChart, buildRepresentantesLegalesModuleChart, buildValidationModuleChart } from "../elements/Menu/utils/menuChartMappers";
+import {
+  buildInscripcionModuleChart,
+  buildPortfolioModuleChart,
+  buildRepresentantesLegalesModuleChart,
+  buildResultModuleChart,
+  buildValidationModuleChart,
+} from "../elements/Menu/utils/menuChartMappers";
 import { useNavigate } from "react-router";
 import { Search, SwitchCamera } from "lucide-react";
 
@@ -17,7 +23,8 @@ export default function useModules(userType) {
       key: "resultados",
       title: "Entrega de Resultados",
       action: () => navigate("resultados"),
-      locked: true,
+      dataKey: "resultados",
+      builder: buildResultModuleChart,
     },
     {
       key: "representantes-legales",
@@ -45,7 +52,8 @@ export default function useModules(userType) {
       key: "portafolio",
       title: "Portafolio",
       action: () => navigate("portafolio"),
-      locked: true,
+      dataKey: "portafolio",
+      builder: buildPortfolioModuleChart,
     },
     {
       key: "entre-pares",

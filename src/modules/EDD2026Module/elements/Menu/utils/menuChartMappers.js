@@ -555,3 +555,107 @@ export function buildPortfolioCorrectionModuleChart(data) {
     ],
   };
 }
+
+export function buildPortfolioModuleChart(docentes) {
+  const portafolio_completado = docentes.portafolio_completado
+    ? docentes.portafolio_completado
+    : 0;
+  const portafolio_iniciado = docentes.portafolio_iniciado
+    ? docentes.portafolio_iniciado
+    : 0;
+  const portafolio_no_iniciado = docentes.portafolio_no_iniciado
+    ? docentes.portafolio_no_iniciado
+    : 0;
+  const portafolio_no_iniciado_se_pend = docentes.portafolio_no_iniciado_se_pend
+    ? docentes.portafolio_no_iniciado_se_pend
+    : 0;
+
+  const total = docentes.total;
+
+  return {
+    ...MODULE_CHART_SETUP,
+    series: [
+      {
+        ...MODULE_CHART_SETUP.series[0],
+        data: [
+          {
+            name: "Portafolio Respondido",
+            color: "#65d9ab",
+            y: portafolio_completado,
+            drilldown: {
+              categories: ["portafolio_completado"],
+              data: [(portafolio_completado / total) * 100],
+            },
+          },
+          {
+            name: "Portafolio en Proceso",
+            y: portafolio_iniciado,
+            color: "#ffd153",
+            drilldown: {
+              categories: ["portafolio_iniciado"],
+              data: [(portafolio_iniciado / total) * 100],
+            },
+          },
+          {
+            name: "Portafolio No Iniciado",
+            y: portafolio_no_iniciado,
+            color: "#ff8e53",
+            drilldown: {
+              categories: ["portafolio_no_iniciado"],
+              data: [(portafolio_no_iniciado / total) * 100],
+            },
+          },
+          {
+            name: "Portafolio No Iniciado Con Susp/Exim Pendiente",
+            y: portafolio_no_iniciado_se_pend,
+            color: "#ff5880",
+            drilldown: {
+              categories: ["portafolio_no_iniciado_se_pend"],
+              data: [(portafolio_no_iniciado_se_pend / total) * 100],
+            },
+          },
+        ],
+      },
+    ],
+  };
+}
+
+export function buildResultModuleChart(ratios) {
+  const individuales_descargados = ratios.informes_individuales_descargados
+    ? ratios.informes_individuales_descargados
+    : 0;
+  const individuales_no_descargados =
+    ratios.informes_individuales_no_descargados
+      ? ratios.informes_individuales_no_descargados
+      : 0;
+
+  const total = ratios.informes_individuales;
+  return {
+    ...MODULE_CHART_SETUP,
+    series: [
+      {
+        ...MODULE_CHART_SETUP.series[0],
+        data: [
+          {
+            name: "Informes Descargados",
+            color: "#65d9ab",
+            y: individuales_descargados,
+            drilldown: {
+              categories: ["Informes Descargados"],
+              data: [(individuales_descargados / total) * 100],
+            },
+          },
+          {
+            name: "Informes no Descargados",
+            y: individuales_no_descargados,
+            color: "#ff8e53",
+            drilldown: {
+              categories: ["Informes no Descargados"],
+              data: [(individuales_no_descargados / total) * 100],
+            },
+          },
+        ],
+      },
+    ],
+  };
+}
