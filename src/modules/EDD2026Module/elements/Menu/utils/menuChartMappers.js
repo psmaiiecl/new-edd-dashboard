@@ -620,7 +620,8 @@ export function buildPortfolioModuleChart(docentes) {
   };
 }
 
-export function buildResultModuleChart(ratios) {
+export function buildResultModuleChart(data) {
+  const ratios = data.ratios
   const individuales_descargados = ratios.informes_individuales_descargados
     ? ratios.informes_individuales_descargados
     : 0;
@@ -630,6 +631,7 @@ export function buildResultModuleChart(ratios) {
       : 0;
 
   const total = ratios.informes_individuales;
+  
   return {
     ...MODULE_CHART_SETUP,
     series: [
