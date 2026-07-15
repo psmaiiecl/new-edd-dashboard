@@ -69,13 +69,11 @@ export default function useModules(userType) {
       key: "agendamiento",
       title: "Agendamiento de Grabaciones",
       action: () => navigate("agendamiento-grabaciones"),
-      locked: true,
     },
     {
       key: "grabaciones",
       title: "Grabaciones",
       action: () => navigate("grabaciones"),
-      locked: true,
     },
     {
       key: "recuperacion",

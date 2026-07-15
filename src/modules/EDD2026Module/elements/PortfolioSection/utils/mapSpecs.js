@@ -92,13 +92,13 @@ export const mappers = {
     total_key: "total_m2",
     series: [
       {
-        name: "Respondido",
+        name: "Grabado",
         key: "m2_completado",
         sliced: true,
         color: "#65D9AB",
       },
       {
-        name: "No Iniciado",
+        name: "No Grabado",
         key: "m2_no_iniciado",
         color: "#ff5880",
       },

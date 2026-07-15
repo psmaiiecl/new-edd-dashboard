@@ -23,6 +23,8 @@ import { AutoGrabacion2026 } from "../../modules/EDD2026Module/elements/AutoGrab
 import { ValidationSection2026 } from "../../modules/EDD2026Module/elements/ValidationSection";
 import { PortfolioSection2026 } from "../../modules/EDD2026Module/elements/PortfolioSection";
 import { ResultSection2026 } from "../../modules/EDD2026Module/elements/ResultSection";
+import { RecordSchedulingSection2026 } from "../../modules/EDD2026Module/elements/RecordSchedulingSection";
+import { RecordSection2026 } from "../../modules/EDD2026Module/elements/RecordSection";
 
 export function DashboardPage() {
   const { year } = useParams();
@@ -198,12 +200,11 @@ export function DashboardPage() {
                   </RouteProtector>
                 }
               />
-              {/*
               <Route
                 path="agendamiento-grabaciones"
                 element={
                   <RouteProtector excludedRoles={[5, 6]}>
-                    <RecordSchedulingSection2025 />
+                    <RecordSchedulingSection2026 />
                   </RouteProtector>
                 }
               />
@@ -211,10 +212,11 @@ export function DashboardPage() {
                 path="grabaciones"
                 element={
                   <RouteProtector excludedRoles={[5, 6]}>
-                    <RecordSection2025 />
+                    <RecordSection2026 />
                   </RouteProtector>
                 }
               />
+              {/*
               <Route
                 path="recuperacion-sd"
                 element={
