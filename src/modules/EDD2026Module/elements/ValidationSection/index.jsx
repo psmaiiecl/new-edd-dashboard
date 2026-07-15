@@ -49,6 +49,7 @@ export function ValidationSection2026() {
         {activeTab === "tab1" && (
           <Button
             text={"QuickSight"}
+            variant="quicksight"
             action={() => openDashboard(QUICKSIGHT_DASHBOARD_ID)}
           />
         )}

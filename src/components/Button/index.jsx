@@ -1,6 +1,6 @@
 import "./index.css";
 
-export function Button({ text, action, disabled }) {
+export function Button({ text, action, disabled, variant = "primary" }) {
   return (
     <div
       onClick={() => {
@@ -8,7 +8,10 @@ export function Button({ text, action, disabled }) {
       }}
       title={text}
       className={
-        "button " + (disabled === true ? "disabled-button " : "enabled-button")
+        "button " +
+        (disabled === true
+          ? "disabled-button "
+          : `enabled-button enabled-button--${variant} `)
       }
     >
       <span className="roboto-regular">{text}</span>

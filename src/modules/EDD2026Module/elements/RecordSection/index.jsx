@@ -51,12 +51,14 @@ export function RecordSection2026() {
             <>
               <Button
                 text={"Quicksight Grabaciones"}
+                variant="quicksight"
                 action={() =>
                   openDashboard(QUICKSIGHT_DASHBOARD_ID_GRABACIONES)
                 }
               />
               <Button
                 text={"Quicksight Acreditación"}
+                variant="quicksight"
                 action={() =>
                   openDashboard(QUICKSIGHT_DASHBOARD_ID_ACREDITACION)
                 }

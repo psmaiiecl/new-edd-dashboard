@@ -15,8 +15,8 @@ import { AuthContext } from "../../../../context/AuthContext";
 import { canSeeByRole } from "../../../../utils/roleAccess";
 import BuildingPanel from "../../../../components/BuildingPanel";
 
-const QUICKSIGHT_DASHBOARD_ID_GRABACIONES = "PENDIENTE_ID_GRABACIONES";
-const QUICKSIGHT_DASHBOARD_ID_ACREDITACION = "PENDIENTE_ID_ACREDITACION";
+const QUICKSIGHT_DASHBOARD_ID_GRABACIONES =  "1335e849-813b-47b0-9b7f-4994aae32843";
+const QUICKSIGHT_DASHBOARD_ID_ACREDITACION = "f6723eac-7ddb-4382-8893-87005c4f5807";
 
 // Roles a excluir/permitir para los botones de QuickSight — completar cuando se defina la política de acceso
 const QUICKSIGHT_ROLE_ACCESS = { excludedRoles: [], permittedRoles: [1] };
@@ -51,12 +51,14 @@ export function RecordSchedulingSection2026() {
             <>
               <Button
                 text={"Quicksight Grabaciones"}
+                variant="quicksight"
                 action={() =>
                   openDashboard(QUICKSIGHT_DASHBOARD_ID_GRABACIONES)
                 }
               />
               <Button
                 text={"Quicksight Acreditación"}
+                variant="quicksight"
                 action={() =>
                   openDashboard(QUICKSIGHT_DASHBOARD_ID_ACREDITACION)
                 }
