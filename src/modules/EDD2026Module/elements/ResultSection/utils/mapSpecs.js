@@ -2,13 +2,13 @@ export const mappers = {
   entrega_informes_resultados: {
     series: [
       {
-        name: "Informes Descargados",
+        name: "Descargados",
         key: "informes_individuales_descargados",
         color: "#65D9AB",
         sliced: true,
       },
       {
-        name: "Informes no Descargados",
+        name: "No Descargados",
         key: "informes_individuales_no_descargados",
         color: "#FF8E53",
       },
@@ -18,20 +18,20 @@ export const mappers = {
     total_key: "informes_establecimiento",
     series: [
       {
-        name: "Informes con Acceso Descargados",
+        name: "Descargados",
         key: "informes_establecimiento_descargados",
         color: "#65D9AB",
         sliced: true,
       },
       {
-        name: "Informes sin Acceso",
-        key: "informes_establecimiento_no_descargados",
-        color: "#FF8E53",
-      },
-      {
-        name: "Informes con Acceso",
+        name: "Solo Acceso",
         key: "informes_establecimiento_acceso",
         color: "#ffd153",
+      },
+      {
+        name: "Sin Acceso",
+        key: "informes_establecimiento_no_descargados",
+        color: "#FF8E53",
       },
     ],
   },
@@ -39,20 +39,20 @@ export const mappers = {
     total_key: "informes_sostenedor",
     series: [
       {
-        name: "Informes con Acceso Descargados",
+        name: "Descargados",
         key: "informes_sostenedor_descargados",
         color: "#65D9AB",
         sliced: true,
       },
       {
-        name: "Informes sin Acceso",
-        key: "informes_sostenedor_no_descargados",
-        color: "#FF8E53",
-      },
-      {
-        name: "Informes con Acceso",
+        name: "Solo Acceso",
         key: "informes_sostenedor_acceso",
         color: "#ffd153",
+      },
+      {
+        name: "Sin Acceso",
+        key: "informes_sostenedor_no_descargados",
+        color: "#FF8E53",
       },
     ],
   },

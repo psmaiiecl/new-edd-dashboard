@@ -13,6 +13,7 @@ export function TabGeneralResultados() {
     AvanceDiarioDescargaDirector,
     AvanceDiarioDescargaSostenedor,
     AvanceDiarioDescargaNacional,
+    AvanceDiarioDescargaDeprov,
     ratiosNacionales,
   } = useTabGeneralResultados();
 
@@ -54,6 +55,10 @@ export function TabGeneralResultados() {
       <CustomDotLineChart
         title={"EVOLUCIÓN DIARIA DE DESCARGAS DE<b> INFORME NACIONAL</b>"}
         data={AvanceDiarioDescargaNacional}
+      />
+      <CustomDotLineChart
+        title={"EVOLUCIÓN DIARIA DE DESCARGAS DE<b> INFORME DEPROV</b>"}
+        data={AvanceDiarioDescargaDeprov}
       />
     </TabContent>
   );

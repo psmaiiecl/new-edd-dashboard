@@ -5,7 +5,7 @@ export function RatiosPanel({ ratiosNacionales }) {
     <div className="ratios-banner ratios-panel">
       <div className="ratio-item">
         <p>
-          Número de Accesos a Informe Nacional:{" "}
+          Accesos a Informe Nacional:{" "}
           <strong>
             {ratiosNacionales?.accesos !== null &&
             ratiosNacionales?.accesos !== undefined
@@ -16,11 +16,22 @@ export function RatiosPanel({ ratiosNacionales }) {
       </div>
       <div className="ratio-item">
         <p>
-          Número de Descargas del Informe Nacional:{" "}
+          Descargas del Informe Nacional:{" "}
           <strong>
             {ratiosNacionales?.descargas !== null &&
             ratiosNacionales?.descargas !== undefined
               ? ratiosNacionales.descargas
+              : "N/A"}
+          </strong>{" "}
+        </p>
+      </div>
+      <div className="ratio-item">
+        <p>
+           Accesos a Informe DEPROV:{" "}
+          <strong>
+            {ratiosNacionales?.deprov !== null &&
+            ratiosNacionales?.deprov !== undefined
+              ? ratiosNacionales.deprov
               : "N/A"}
           </strong>{" "}
         </p>

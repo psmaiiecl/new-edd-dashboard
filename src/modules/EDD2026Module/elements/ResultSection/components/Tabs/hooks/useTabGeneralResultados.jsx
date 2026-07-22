@@ -28,6 +28,8 @@ export function useTabGeneralResultados() {
     useState(null);
   const [AvanceDiarioDescargaNacional, setAvanceDiarioDescargaNacional] =
     useState(null);
+  const [AvanceDiarioDescargaDeprov, setAvanceDiarioDescargaDeprov] =
+    useState(null);
   const [ratiosNacionales, setRatiosNacionales] = useState({
     accesos: null,
     descargas: null,
@@ -55,6 +57,7 @@ export function useTabGeneralResultados() {
           accesos: numberFormatter(data.ratios.informes_nacional_accesos) || 0,
           descargas:
             numberFormatter(data.ratios.informes_nacional_descargados) || 0,
+          deprov: numberFormatter(data.ratios.informes_deprov_accesos) || 0,
         });
       }
     });
@@ -96,6 +99,13 @@ export function useTabGeneralResultados() {
         ],
       });
 
+      const deprovData = mapLineDataBuild(data, {
+        fechas: "fechas",
+        series: [
+          { name: "Accesos", color: "#00C49F", data: "deprov_acceso" },
+        ],
+      });
+
       setAvanceDiarioDescargaIndividual(
         buildInformesIndividualesDiario({
           fechas: individualesData.fechas,
@@ -122,6 +132,12 @@ export function useTabGeneralResultados() {
           series: nacionalData.series,
         })
       );
+      setAvanceDiarioDescargaDeprov(
+        buildInformesNacionalDiario({
+          fechas: deprovData.fechas,
+          series: deprovData.series,
+        })
+      );
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -134,6 +150,7 @@ export function useTabGeneralResultados() {
     AvanceDiarioDescargaDirector,
     AvanceDiarioDescargaSostenedor,
     AvanceDiarioDescargaNacional,
+    AvanceDiarioDescargaDeprov,
     ratiosNacionales,
   };
 }
