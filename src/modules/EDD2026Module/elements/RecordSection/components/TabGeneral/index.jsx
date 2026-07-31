@@ -14,6 +14,7 @@ export function TabGeneral() {
     avanceDiario,
     grabacionesSemanales,
     grabacionesAcumuladas,
+    agendamientoApilado
   } = useTabGeneral();
 
   return (
@@ -40,6 +41,12 @@ export function TabGeneral() {
           />
         </div>
       </div>
+      <CustomColumnChart
+        title={"AGENDAMIENTO <b>APILADO PARA CADA SEMANA</b>"}
+        data={agendamientoApilado}
+        type={"STACK"}
+      />
+      <hr />
       <CustomDotLineChart
         data={avanceDiario}
         title={"AVANCE DIARIO DEL PROCESO <b>DE GRABACIONES</b>"}
@@ -54,12 +61,26 @@ export function TabGeneral() {
             title: { text: null },
             labels: { format: "{value}" },
           },
+          plotOptions: {
+            column: {
+              dataLabels: {
+                enabled: true,
+                format: "{point.y:.,.0f}",
+                style: {
+                  fontSize: "12px",
+                  fontWeight: "400",
+                  color: "#666666",
+                  textOutline: "none",
+                },
+              },
+            },
+          },
         }}
       />
       <hr />
       <CustomDotLineChart
         data={grabacionesAcumuladas}
-        title={"GRABACIONES <b>ACUMULADAS</b>"}
+        title={"GRABACIONES SEMANALES <b>ACUMULADAS</b>"}
       />
     </TabContent>
   );

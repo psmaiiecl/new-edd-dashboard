@@ -5,6 +5,8 @@ import { canSeeModule } from "../elements/Menu/helpers/moduleConfig";
 import { MODULE_CHART_SETUP } from "../../../constants/CONST";
 import { BASE_API_URL_2026 } from "../../../constants/BASE_API_URL";
 import {
+  buildAutograbacionModuleChart,
+  buildGrabacionesModuleChart,
   buildInscripcionModuleChart,
   buildPortfolioModuleChart,
   buildRepresentantesLegalesModuleChart,
@@ -12,7 +14,7 @@ import {
   buildValidationModuleChart,
 } from "../elements/Menu/utils/menuChartMappers";
 import { useNavigate } from "react-router";
-import { Search, SwitchCamera } from "lucide-react";
+import { Search } from "lucide-react";
 
 export default function useModules(userType) {
   const customFetch = useCustomFetch();
@@ -59,21 +61,15 @@ export default function useModules(userType) {
       key: "entre-pares",
       title: "Grabación Entre Pares",
       action: () => navigate("entre-pares"),
-      render: () => (
-        <div className="module-card__render">
-          <SwitchCamera size={100} strokeWidth={1.5} />
-        </div>
-      ),
-    },
-    {
-      key: "agendamiento",
-      title: "Agendamiento de Grabaciones",
-      action: () => navigate("agendamiento-grabaciones"),
+      dataKey: "autograbacion",
+      builder: buildAutograbacionModuleChart,
     },
     {
       key: "grabaciones",
       title: "Grabaciones",
       action: () => navigate("grabaciones"),
+      dataKey: "grabaciones",
+      builder: buildGrabacionesModuleChart,
     },
     {
       key: "recuperacion",

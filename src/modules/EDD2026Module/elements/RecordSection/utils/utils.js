@@ -3,7 +3,7 @@ import { extractCTGInfo } from "../../../../../utils/StringUtils";
 
 export function buildAvanceDiarioGrabaciones(data) {
   const fechas = data?.fechas || [];
-  const aGrabar = data?.a_grabar || [];
+  const aGrabar = data?.pendientes || [];
   const agendados = data?.agendados || [];
   const grabados = data?.grabados || [];
   const pospuestos = data?.pospuestos || [];
@@ -80,7 +80,7 @@ export function buildGrabacionesSemanales(data) {
     },
     series: [
       { name: "Avance Real", data: avanceReal, color: "#b2de95" },
-      { name: "Avance Esperado", data: avanceEsperado, color: "#5b9bd5" },
+      { name: "Agendado", data: avanceEsperado, color: "#5b9bd5" },
       {
         name: "Proyección Grabaciones Necesarias",
         data: proyectado,
@@ -172,4 +172,57 @@ export function getColorForAvance(value) {
   if (num < 50) return "#FF4D4F";
   if (num < 100) return "#FFD153";
   return "#52C41A";
+}
+
+
+export function buildAgendamientoApilado(data) {
+  const semanas = data.semanas;
+  const datosLunes = data.lunes;
+  const datosMartes = data.martes;
+  const datosMiercoles = data.miercoles;
+  const datosJueves = data.jueves;
+  const datosViernes = data.viernes;
+  const datosSabado = data.sabado;
+  const datosDomingo = data.domingo;
+  const res = {
+    series: [
+      {
+        name: "Lunes",
+        data: datosLunes,
+      },
+      {
+        name: "Martes",
+        data: datosMartes,
+      },
+      {
+        name: "Miércoles",
+        data: datosMiercoles,
+      },
+      {
+        name: "Jueves",
+        data: datosJueves,
+      },
+      {
+        name: "Viernes",
+        data: datosViernes,
+      },
+      {
+        name: "Sábado",
+        data: datosSabado,
+      },
+      {
+        name: "Domingo",
+        data: datosDomingo,
+      },
+    ],
+    override: {
+      xAxis: {
+        title: {
+          text: "Semanas",
+        },
+        categories: semanas,
+      },
+    },
+  };
+  return res;
 }

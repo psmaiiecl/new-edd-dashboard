@@ -36,16 +36,16 @@ export function RecordSection2026() {
         // tabArray={tabList}
         tabArray={[]}
       >
-        {/* <Button
+        <Button
           text={"Excel Docente"}
           action={() => {
             customDownload({
-              route: BASE_API_URL_2026 + "/grabaciones/docente/excel",
+              route: BASE_API_URL_2026 + "/grabaciones/excel",
               options: { method: "GET" },
               filename: "grabacion-docentes.csv",
             });
           }}
-        /> */}
+        />
         {canSeeByRole(tipoUsuario, QUICKSIGHT_ROLE_ACCESS) &&
           activeTab === "tab1" && (
             <>
@@ -66,8 +66,8 @@ export function RecordSection2026() {
             </>
           )}
       </CustomTabs>
-      <BuildingPanel />
-      {/* <div style={{ display: activeTab === "tab1" ? "block" : "none" }}>
+      {/* <BuildingPanel /> */}
+      <div style={{ display: activeTab === "tab1" ? "block" : "none" }}>
         <TabGeneral />
       </div>
       <div style={{ display: activeTab === "tab2" ? "block" : "none" }}>
@@ -81,7 +81,7 @@ export function RecordSection2026() {
       </div>
       <div style={{ display: activeTab === "tab5" ? "block" : "none" }}>
         <TabRegion />
-      </div> */}
+      </div>
     </ModulePageLayout>
   );
 }

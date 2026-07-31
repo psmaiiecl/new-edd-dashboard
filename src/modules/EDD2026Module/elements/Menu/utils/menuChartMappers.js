@@ -227,7 +227,7 @@ export function buildGrabacionesModuleChart(data) {
   const pospuestos_na = data.pospuestos_na ?? 0;
   const grabados = data.grabados ?? 0;
   const noGrabados = data.no_grabados ?? 0;
-  const total = data.todos;
+  const total = data.total ?? data.todos;
 
   return {
     ...MODULE_CHART_SETUP,
@@ -287,6 +287,81 @@ export function buildGrabacionesModuleChart(data) {
             drilldown: {
               categories: ["Sin Agendar"],
               data: [(sinAgendar / total) * 100],
+            },
+          },
+        ],
+      },
+    ],
+  };
+}
+
+export function buildAutograbacionModuleChart(data) {
+  const conRespaldo = data.con_respaldo ?? 0;
+  const pendiente = data.pendiente ?? 0;
+  const listaEspera = data.lista_espera ?? 0;
+  const noParticipa = data.no_participa ?? 0;
+  const seleccionado = data.seleccionado ?? 0;
+  const preseleccionado = data.preseleccionado ?? 0;
+  const total = data.total;
+
+  return {
+    ...MODULE_CHART_SETUP,
+    series: [
+      {
+        ...MODULE_CHART_SETUP.series[0],
+        data: [
+          {
+            name: "Con Respaldo",
+            y: conRespaldo,
+            color: "#65D9AB",
+            drilldown: {
+              categories: ["Con Respaldo"],
+              data: [(conRespaldo / total) * 100],
+            },
+          },
+          {
+            name: "Seleccionado",
+            y: seleccionado,
+            color: "#C1D9CA",
+            drilldown: {
+              categories: ["Seleccionado"],
+              data: [(seleccionado / total) * 100],
+            },
+          },
+          {
+            name: "Preseleccionado",
+            y: preseleccionado,
+            color: "#5b9bd5",
+            drilldown: {
+              categories: ["Preseleccionado"],
+              data: [(preseleccionado / total) * 100],
+            },
+          },
+          {
+            name: "Pendiente",
+            y: pendiente,
+            color: "#FFD153",
+            drilldown: {
+              categories: ["Pendiente"],
+              data: [(pendiente / total) * 100],
+            },
+          },
+          {
+            name: "Lista de Espera",
+            y: listaEspera,
+            color: "#f3a239ff",
+            drilldown: {
+              categories: ["Lista de Espera"],
+              data: [(listaEspera / total) * 100],
+            },
+          },
+          {
+            name: "No Participa",
+            y: noParticipa,
+            color: "#FF5880",
+            drilldown: {
+              categories: ["No Participa"],
+              data: [(noParticipa / total) * 100],
             },
           },
         ],

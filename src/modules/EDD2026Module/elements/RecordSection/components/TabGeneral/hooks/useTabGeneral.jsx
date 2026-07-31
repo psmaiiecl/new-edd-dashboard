@@ -4,6 +4,7 @@ import { BASE_API_URL_2026 } from "../../../../../../../constants/BASE_API_URL";
 import { mapPieData } from "../../../../../../../utils/ChartMapperFactory";
 import { mappers } from "../../../utils/mapSpecs";
 import {
+  buildAgendamientoApilado,
   buildAvanceDiarioGrabaciones,
   buildGrabacionesSemanales,
 } from "../../../utils/utils";
@@ -18,6 +19,7 @@ export function useTabGeneral() {
   const [avanceDiario, setAvanceDiario] = useState(null);
   const [grabacionesSemanales, setGrabacionesSemanales] = useState(null);
   const [grabacionesAcumuladas, setGrabacionesAcumuladas] = useState(null);
+  const [agendamientoApilado, setAgendamientoApilado] = useState(null);
 
   useEffect(() => {
     customFetch({
@@ -27,34 +29,37 @@ export function useTabGeneral() {
     }).then((response) => {
       const { data } = response;
       setDocentesRinde(
-        mapPieData(data?.docentes_estado_rinde, mappers.docentes_rinde)
+        mapPieData(data?.docentes_estado_rinde, mappers.docentes_rinde),
       );
       setDocentesGrabados(
         mapPieData(
           data?.total_docentes_grabados,
-          mappers.total_docentes_grabados
-        )
+          mappers.total_docentes_grabados,
+        ),
       );
       setEstablecimientosAGrabar(
         mapPieData(
           mapEstablecimientsAGrabarResponse(data?.establecimientos_grabar),
-          mappers.establecimientos_a_grabar
-        )
+          mappers.establecimientos_a_grabar,
+        ),
       );
       setSostenedoresParticipantes(
         mapPieData(
           data?.sostenedores_participantes,
-          mappers.sostenedores_participantes
-        )
+          mappers.sostenedores_participantes,
+        ),
       );
       setAvanceDiario(
-        buildAvanceDiarioGrabaciones(data?.avance_diario_grabaciones)
+        buildAvanceDiarioGrabaciones(data?.avance_diario_grabaciones),
       );
       setGrabacionesSemanales(
-        buildGrabacionesSemanales(data?.grabaciones_semanales?.normal)
+        buildGrabacionesSemanales(data?.grabaciones_semanales?.normal),
       );
       setGrabacionesAcumuladas(
-        buildGrabacionesSemanales(data?.grabaciones_semanales?.acumulado)
+        buildGrabacionesSemanales(data?.grabaciones_semanales?.acumulado),
+      );
+      setAgendamientoApilado(
+        buildAgendamientoApilado(data?.agendamiento_semanal_apilado),
       );
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -68,6 +73,7 @@ export function useTabGeneral() {
     avanceDiario,
     grabacionesSemanales,
     grabacionesAcumuladas,
+    agendamientoApilado
   };
 }
 
