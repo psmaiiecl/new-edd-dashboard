@@ -71,16 +71,16 @@ export default function useModules(userType) {
       dataKey: "grabaciones",
       builder: buildGrabacionesModuleChart,
     },
-    {
-      key: "recuperacion",
-      title: "Recuperación de SD's",
-      action: () =>
-        window.open(
-          "https://analytics.zoho.com/open-view/2835166000007221945/7fbffad3f812038aa551fb6cea9cde8a",
-          "_blank",
-        ),
-      locked: true,
-    },
+    // {
+    //   key: "recuperacion",
+    //   title: "Recuperación de SD's",
+    //   action: () =>
+    //     window.open(
+    //       "https://analytics.zoho.com/open-view/2835166000007221945/7fbffad3f812038aa551fb6cea9cde8a",
+    //       "_blank",
+    //     ),
+    //   locked: true,
+    // },
     {
       key: "procesamiento",
       title: "Procesamiento de Grabaciones",

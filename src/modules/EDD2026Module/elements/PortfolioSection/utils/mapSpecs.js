@@ -42,12 +42,12 @@ export const mappers = {
       {
         name: "Sin Ingreso",
         key: "portafolio_sin_ingreso",
-        color: "#fe8e53",
+        color: "#ff5880",
       },
       {
         name: "No Iniciado (Susp/Exim Pend)",
         key: "portafolio_no_iniciado_se_pend",
-        color: "#ff5880",
+        color: "#b4bdd9",
       },
     ],
   },
